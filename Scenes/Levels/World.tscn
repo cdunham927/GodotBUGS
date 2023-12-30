@@ -1,0 +1,47 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scenes/PlayerScenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/EnemyScenes/Ant.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/GameController.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/EnemyScenes/TurtleAnt.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Weapons/Bullet.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Weapons/ObjectPool.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Weapons/ShotgunPellet.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Weapons/PiercingBullet.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/EnemyScenes/Beetle.tscn" type="PackedScene" id=10]
+
+[node name="World" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 4 )
+
+[node name="ObjectPool" parent="." instance=ExtResource( 7 )]
+objectToPool = ExtResource( 6 )
+numToPool = 15
+timeBetweenPrints = 5.0
+
+[node name="ShotgunPool" parent="." instance=ExtResource( 7 )]
+objectToPool = ExtResource( 8 )
+numToPool = 15
+timeBetweenPrints = 5.0
+
+[node name="SniperPool" parent="." instance=ExtResource( 7 )]
+objectToPool = ExtResource( 9 )
+numToPool = 15
+timeBetweenPrints = 5.0
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 661, 447 )
+
+[node name="UI" parent="." instance=ExtResource( 3 )]
+
+[node name="TurtleAnt" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1023, 231 )
+
+[node name="Ant" parent="." instance=ExtResource( 2 )]
+position = Vector2( 377, 181 )
+
+[node name="Enemy" parent="." instance=ExtResource( 10 )]
+position = Vector2( 659, 137 )
+
+[editable path="Player"]
