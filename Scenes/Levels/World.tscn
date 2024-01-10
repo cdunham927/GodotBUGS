@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/PlayerScenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/EnemyScenes/Ant.tscn" type="PackedScene" id=2]
@@ -7,26 +7,32 @@
 [ext_resource path="res://Scenes/EnemyScenes/TurtleAnt.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Weapons/Bullet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Weapons/ObjectPool.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Weapons/ShotgunPellet.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Weapons/PiercingBullet.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Weapons/NewPiercingBullet.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Weapons/NewShotgunPellet.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/EnemyScenes/Beetle.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Weapons/EnemyBullet.tscn" type="PackedScene" id=11]
 
 [node name="World" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 4 )
 
-[node name="ObjectPool" parent="." instance=ExtResource( 7 )]
+[node name="BulletPool" parent="." instance=ExtResource( 7 )]
 objectToPool = ExtResource( 6 )
 numToPool = 15
 timeBetweenPrints = 5.0
 
+[node name="EnemyBulletPool" parent="." instance=ExtResource( 7 )]
+objectToPool = ExtResource( 11 )
+numToPool = 15
+timeBetweenPrints = 5.0
+
 [node name="ShotgunPool" parent="." instance=ExtResource( 7 )]
-objectToPool = ExtResource( 8 )
+objectToPool = ExtResource( 9 )
 numToPool = 15
 timeBetweenPrints = 5.0
 
 [node name="SniperPool" parent="." instance=ExtResource( 7 )]
-objectToPool = ExtResource( 9 )
+objectToPool = ExtResource( 8 )
 numToPool = 15
 timeBetweenPrints = 5.0
 
@@ -39,9 +45,9 @@ position = Vector2( 661, 447 )
 position = Vector2( 1023, 231 )
 
 [node name="Ant" parent="." instance=ExtResource( 2 )]
-position = Vector2( 377, 181 )
+position = Vector2( 312, 179 )
 
-[node name="Enemy" parent="." instance=ExtResource( 10 )]
-position = Vector2( 659, 137 )
+[node name="Beetle" parent="." instance=ExtResource( 10 )]
+position = Vector2( 666, 1 )
 
 [editable path="Player"]
