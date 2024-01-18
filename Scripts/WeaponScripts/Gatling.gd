@@ -5,7 +5,6 @@ func Shoot():
 	b.start($Muzzle.global_position, $Muzzle.global_rotation)
 	ShowFlash()
 	#b.Setup()
-	world.add_child(b)
 	#b.transform = $Muzzle.global_transform
 	b.RandomizeSpeed()
 	b.show()

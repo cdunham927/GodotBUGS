@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Scripts/EnemyScripts/TurtleAnt.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Ant_5-Sheet.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Rectangle.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/EnemyScripts/BeetleB.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Round_Beetle_2.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14.5, 19 )
+extents = Vector2( 20, 19.5 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -41,34 +40,25 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 0 ), Vector2( 1, 0 ), Vector2( 2, 0 ), Vector2( 3, 0 ), Vector2( 4, 0 ), Vector2( 5, 0 ), Vector2( 6, 0 ), Vector2( 6, 0 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=5]
 radius = 357.56
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 25.5, 14.5 )
-
-[node name="TurtleAnt" type="KinematicBody2D" groups=["enemies"]]
+[node name="Beetle" type="KinematicBody2D" groups=["enemies"]]
 pause_mode = 1
 script = ExtResource( 1 )
-hp = 450.0
-spd = 125
-atk = 50
-timeBetweenAttacksSmall = 1.5
-timeBetweenAttacksBig = 2.0
-aimOffset = 1.0
-aimOffsetTimer = 5.0
+chaseCooldownSmall = 1.0
+chaseCooldownBig = 2.0
+walkTimeSmall = 1.0
+walkTimeBig = 2.0
+turnSpd = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.5, 11 )
+position = Vector2( 0, -0.5 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
-hframes = 8
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-enabled = true
-cast_to = Vector2( 0, -50 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
@@ -78,19 +68,6 @@ anims/move = SubResource( 4 )
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 6 )
-
-[node name="Head" type="Area2D" parent="."]
-
-[node name="Sprite" type="Sprite" parent="Head"]
-modulate = Color( 0.690196, 0.360784, 0.0941176, 1 )
-position = Vector2( 0.499999, -20.5 )
-scale = Vector2( 2.83333, 0.805556 )
-texture = ExtResource( 3 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
-pause_mode = 1
-position = Vector2( 0.5, -20.5 )
 shape = SubResource( 5 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

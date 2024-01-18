@@ -20,6 +20,9 @@ func _ready():
 	curAtk = atk
 	
 func start(pos, dir):
+	bulletPool.remove_child(self)
+	world.add_child(self)
+	
 	speed = rand_range(spdSlow, spdFast)
 	rotation = dir
 	position = pos

@@ -13,7 +13,8 @@ var inSight : bool = false
 enum States { idle, patrol, chase, attack, retreat, death }
 var curState : int = States.idle
 
-export(float) var timeBetweenAttacks
+export(float) var timeBetweenAttacksSmall
+export(float) var timeBetweenAttacksBig
 var attackCools : float
  
 #Stuff for projectile enemies
@@ -21,6 +22,20 @@ export var poolName = ""
 onready var bulletPool = get_node("/root/World/" + poolName)
 onready var world = get_node("/root/World")
 export(float) var accuracy
+
+export(float) var chaseCooldownSmall
+export(float) var chaseCooldownBig
+export(float) var walkTimeSmall
+export(float) var walkTimeBig
+var chaseCools : float
+var resetChaseCools : float
+
+#Make the enemies not aim directly at the player(more natural movement?)
+export(float) var aimOffset
+export(float) var aimOffsetTimer
+var curAimOffsetTimer : float
+var curAimOffset : float
+
 	
 func _ready():
 	add_to_group("enemies")
@@ -28,6 +43,10 @@ func _ready():
 	anim.play("move", 1, 2)
 	
 	rotation_degrees = rand_range(0, 360)
+	
+	chaseCools = rand_range(walkTimeSmall, walkTimeBig)
+	resetChaseCools = rand_range(chaseCooldownSmall, chaseCooldownBig)
+	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
  
 func _physics_process(delta):
 	if player == null:
@@ -36,20 +55,26 @@ func _physics_process(delta):
 	if attackCools > 0:
 		attackCools -= delta
 		
+	if curAimOffsetTimer > 0:
+		curAimOffsetTimer -= delta
+		
+	if curAimOffsetTimer <= 0:
+		curAimOffsetTimer = aimOffsetTimer
+		curAimOffset = rand_range(-aimOffset, aimOffset)
+		
 	match (curState):
 		States.idle:
-			pass
+			Idle(delta)
 		States.patrol:
-			pass
+			Patrol(delta)
 		States.chase:
 			Chase(delta)
-			pass
 		States.attack:
-			pass
+			Attack()
 		States.retreat:
-			pass
+			Retreat(delta)
 		States.death:
-			pass
+			Death()
 	
 	#if inSight:
 	#	var vec_to_player = player.global_position - global_position
@@ -61,13 +86,13 @@ func _physics_process(delta):
 		var coll = raycast.get_collider()
 		if coll.name == "Player" and player.iframes <= 0 and attackCools <= 0:
 			#print("Hitting player")
-			attackCools = timeBetweenAttacks
+			attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 			coll.Damage(atk)
  
 func Patrol(d):
 	pass
 	
-func Idle():
+func Idle(d):
 	pass
 	
 func Retreat(d):

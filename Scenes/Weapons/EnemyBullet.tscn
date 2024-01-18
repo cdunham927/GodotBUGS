@@ -9,6 +9,7 @@ radius = 8.0
 [node name="EnemyBullet" type="Area2D"]
 pause_mode = 1
 script = ExtResource( 2 )
+atk = 40.0
 spdSlow = 150.0
 spdFast = 300.0
 
