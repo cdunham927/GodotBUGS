@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Ant_5-Sheet.png-f0b6c1a6bd6a384b7dfcf8ac8b6d362b.stex"
+path="res://.import/smoke_01.png-4f8391c433abeb23b683def245f3df96.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Ant_5-Sheet.png"
-dest_files=[ "res://.import/Ant_5-Sheet.png-f0b6c1a6bd6a384b7dfcf8ac8b6d362b.stex" ]
+source_file="res://Sprites/Particles/smoke_01.png"
+dest_files=[ "res://.import/smoke_01.png-4f8391c433abeb23b683def245f3df96.stex" ]
 
 [params]
 

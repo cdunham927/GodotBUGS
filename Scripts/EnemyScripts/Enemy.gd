@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
-export(float) var hp = 4
+export(float) var maxHp = 4
+var hp = 4
 export var spd = 200
 export var atk = 5
  
@@ -36,11 +37,20 @@ export(float) var aimOffsetTimer
 var curAimOffsetTimer : float
 var curAimOffset : float
 
+var blood = load("res://Scenes/Blood.tscn")
 	
 func _ready():
+	Setup()
+	
+func Setup():
+	curState = States.idle
+	set_player()
+	hp = maxHp
 	add_to_group("enemies")
 	#params: name, blend, play speed
-	anim.play("move", 1, 2)
+	
+	if (anim != null):
+		anim.play("move", 1, 2)
 	
 	rotation_degrees = rand_range(0, 360)
 	
@@ -114,22 +124,46 @@ func SwitchState(newState):
 	curState = newState
 
 func Damage(amt):
+	BloodSpray()
 	hp -= amt
 	
 	if hp <= 0:
+		SpawnBlood()
 		kill()
+
+func Knockback(kick, dir):
+	move_and_collide(dir * kick)
+
+func BloodSpray():
+	#$BloodSpray.restart()
+	#$BloodSpray.emitting = false
+	
+	#emit then stop emitting after 0.1 seconds or so
+	#$BloodSpray.emitting = true
+	#$BloodSpray/Timer.start()
+	pass
+
+func SpawnBlood():
+	#blood particles
+	var blood_instance = blood.instance()
+	blood_instance.emitting = true
+	get_tree().current_scene.add_child(blood_instance)
+	blood_instance.global_position = global_position
+	if (player != null):
+		blood_instance.rotation = global_position.angle_to_point(player.global_position)
+	#blood_instance.emitting = true
 
 func kill():
 	queue_free()
  
-func set_player(p):
-	player = p
+func set_player():
+	#player = p
+	player = get_node("/root/World/Player") 
 
 func play_anim(name):
 	if anim.current_animation == name:
 		return
 	anim.play(name)
-
 
 #func _on_Head_body_entered(body):
 	#Damage(body.atk / 3)

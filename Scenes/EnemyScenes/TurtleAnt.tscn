@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/EnemyScripts/TurtleAnt.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Ant_5-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Enemies/Ant_5-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Rectangle.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -50,7 +50,7 @@ extents = Vector2( 25.5, 14.5 )
 [node name="TurtleAnt" type="KinematicBody2D" groups=["enemies"]]
 pause_mode = 1
 script = ExtResource( 1 )
-hp = 450.0
+maxHp = 575.0
 spd = 125
 atk = 50
 timeBetweenAttacksSmall = 1.5

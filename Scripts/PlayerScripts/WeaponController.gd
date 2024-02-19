@@ -30,6 +30,8 @@ export(Color) var overheatColor
 
 export(float) var tilNotShootingMin = 0.25
 
+export(float) var accuracy
+
 var active := false
 
 func _ready():

@@ -2,21 +2,12 @@ extends "res://Scripts/EnemyScripts/Enemy.gd"
 
 export(int) var numShots = 3
 
-func _ready():
-	add_to_group("enemies")
-	#params: name, blend, play speed
-	#anim.play("move", 1, 2)
-	
-	curAimOffsetTimer = aimOffsetTimer
-	curAimOffset = rand_range(-aimOffset, aimOffset)
-	
-	rotation_degrees = rand_range(0, 360)
-	
-	chaseCools = rand_range(walkTimeSmall, walkTimeBig)
-	resetChaseCools = rand_range(chaseCooldownSmall, chaseCooldownBig)
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
-	
+export var turnSpd : float = 5
+var curTurn : float
+
 func Chase(d):
+	rotation_degrees += curTurn * d
+	
 	if chaseCools > 0:
 		var vec_to_player = global_position - player.global_position
 		vec_to_player = vec_to_player.normalized()
@@ -36,6 +27,7 @@ func Chase(d):
 		
 func Idle(d):
 	if resetChaseCools <= 0:
+		curTurn = rand_range(-turnSpd, turnSpd)
 		#print("Resetting chase timer")
 		chaseCools = rand_range(walkTimeSmall, walkTimeBig)
 		ChangeState(States.chase)

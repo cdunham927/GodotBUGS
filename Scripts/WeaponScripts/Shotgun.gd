@@ -2,10 +2,11 @@ extends "res://Scripts/PlayerScripts/WeaponController.gd"
 
 onready var muzzles = $MuzzleParent
 
+
 func Shoot():
 	for i in muzzles.get_children():
 		var b = bulletPool.GetPoolObject()
-		b.start($Muzzle.global_position, $Muzzle.global_rotation)
+		b.start(muzzles.global_position, muzzles.global_rotation, accuracy)
 		#b.transform = i.global_transform
 		#b.RandomizeSpeed()
 		#b.global_rotation = i.global_rotation

@@ -2,7 +2,7 @@ extends "res://Scripts/PlayerScripts/WeaponController.gd"
 
 func Shoot():	
 	var b = bulletPool.GetPoolObject()
-	b.start($Muzzle.global_position, $Muzzle.global_rotation)
+	b.start($Muzzle.global_position, $Muzzle.global_rotation, accuracy)
 	ShowFlash()
 	#b.Setup()
 	#b.transform = $Muzzle.global_transform

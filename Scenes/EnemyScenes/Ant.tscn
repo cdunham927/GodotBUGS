@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Sprites/Ant_5-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Enemies/Ant_5-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/EnemyScripts/Ant.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/BloodSpray.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.5, 27.5 )
@@ -46,7 +47,7 @@ radius = 357.56
 [node name="Ant" type="KinematicBody2D" groups=["enemies"]]
 pause_mode = 1
 script = ExtResource( 2 )
-hp = 400.0
+maxHp = 500.0
 spd = 150
 atk = 60
 timeBetweenAttacksSmall = 1.0
@@ -75,6 +76,10 @@ anims/move = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 5 )
+
+[node name="BloodSpray" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 0 )
+emitting = false
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

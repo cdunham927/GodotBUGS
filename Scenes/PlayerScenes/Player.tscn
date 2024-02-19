@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/PlayerScripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Circle.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Rectangle.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/PlayerScripts/MechController.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/WeaponScripts/Sniper.gd" type="Script" id=5]
@@ -9,9 +9,11 @@
 [ext_resource path="res://Scripts/WeaponScripts/Shotgun.gd" type="Script" id=7]
 [ext_resource path="res://Scripts/WeaponScripts/Gatling.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/RedDot.gd" type="Script" id=9]
+[ext_resource path="res://Sprites/CircleHollowSmol2.png" type="Texture" id=10]
+[ext_resource path="res://Scripts/PlayerScripts/MechLegRotation.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 25, 25 )
+extents = Vector2( 35.5, 29 )
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.728571, 0.427273 ), -2.86364, -2.86364, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -20,22 +22,59 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.728571, 0.427273 ), -2.863
 pause_mode = 1
 script = ExtResource( 1 )
 maxHp = 1000.0
+forwardSpd = 450
+backwardSpd = 200
+sideSpd = 250
+boostSpd = 800
+timeBetweenBoosts = 3.0
 maxStamina = 50.0
 staminaDecAmt = 10.0
 staminaRecAmt = 5.0
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
+position = Vector2( 1.5, -4 )
 shape = SubResource( 1 )
 
-[node name="MechBody" type="Sprite" parent="."]
+[node name="MechLegsL" type="Sprite" parent="."]
+position = Vector2( -18, -6 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 3 )
+script = ExtResource( 11 )
+rotSpd = 0.01
+
+[node name="LookOffset" type="Sprite" parent="MechLegsL"]
+position = Vector2( 12, 4 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 10 )
+
+[node name="MechLegsR" type="Sprite" parent="."]
+position = Vector2( 23, -6 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 3 )
+script = ExtResource( 11 )
+rotSpd = 0.01
+
+[node name="LookOffset" type="Sprite" parent="MechLegsR"]
+position = Vector2( -15.3333, 4 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 10 )
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="MechBody" type="Sprite" parent="Node2D"]
+position = Vector2( -2.5, 0 )
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
 script = ExtResource( 4 )
 offsetZ = 89.5
 rotationConstraint = 10.0
+rotSpd = 0.03
 
-[node name="WeaponsLeft" type="Node2D" parent="MechBody"]
+[node name="WeaponsLeft" type="Node2D" parent="Node2D/MechBody"]
+position = Vector2( -125, 125 )
+scale = Vector2( 10, 10 )
 
-[node name="GatlingL" type="Sprite" parent="MechBody/WeaponsLeft"]
+[node name="GatlingL" type="Sprite" parent="Node2D/MechBody/WeaponsLeft"]
 position = Vector2( -18, -24 )
 rotation = 0.0401426
 texture = ExtResource( 3 )
@@ -49,16 +88,17 @@ recoverTime = 3.0
 goodColor = Color( 0.87451, 0.870588, 0, 1 )
 overheatColor = Color( 0.454902, 0.105882, 0.109804, 1 )
 tilNotShootingMin = 0.2
+accuracy = 5.0
 
-[node name="Muzzle" type="Position2D" parent="MechBody/WeaponsLeft/GatlingL"]
+[node name="Muzzle" type="Position2D" parent="Node2D/MechBody/WeaponsLeft/GatlingL"]
 position = Vector2( 0.196556, -20.024 )
 
-[node name="Flash" type="Sprite" parent="MechBody/WeaponsLeft/GatlingL"]
+[node name="Flash" type="Sprite" parent="Node2D/MechBody/WeaponsLeft/GatlingL"]
 visible = false
 position = Vector2( -0.284048, -17.9978 )
 texture = ExtResource( 6 )
 
-[node name="ShotgunL" type="Sprite" parent="MechBody/WeaponsLeft"]
+[node name="ShotgunL" type="Sprite" parent="Node2D/MechBody/WeaponsLeft"]
 visible = false
 position = Vector2( -18, -24 )
 rotation = 0.0401426
@@ -73,36 +113,37 @@ recoverTime = 1.75
 goodColor = Color( 0.87451, 0.870588, 0, 1 )
 overheatColor = Color( 0.454902, 0.105882, 0.109804, 1 )
 tilNotShootingMin = 2.0
+accuracy = 10.0
 
-[node name="MuzzleParent" type="Position2D" parent="MechBody/WeaponsLeft/ShotgunL"]
+[node name="MuzzleParent" type="Position2D" parent="Node2D/MechBody/WeaponsLeft/ShotgunL"]
 position = Vector2( 0, -18 )
 
-[node name="Position2D" type="Position2D" parent="MechBody/WeaponsLeft/ShotgunL/MuzzleParent"]
+[node name="Position2D" type="Position2D" parent="Node2D/MechBody/WeaponsLeft/ShotgunL/MuzzleParent"]
 
-[node name="Position2D2" type="Position2D" parent="MechBody/WeaponsLeft/ShotgunL/MuzzleParent"]
+[node name="Position2D2" type="Position2D" parent="Node2D/MechBody/WeaponsLeft/ShotgunL/MuzzleParent"]
 rotation = -0.0623551
 
-[node name="Position2D3" type="Position2D" parent="MechBody/WeaponsLeft/ShotgunL/MuzzleParent"]
+[node name="Position2D3" type="Position2D" parent="Node2D/MechBody/WeaponsLeft/ShotgunL/MuzzleParent"]
 rotation = 0.0760072
 
-[node name="Position2D4" type="Position2D" parent="MechBody/WeaponsLeft/ShotgunL/MuzzleParent"]
+[node name="Position2D4" type="Position2D" parent="Node2D/MechBody/WeaponsLeft/ShotgunL/MuzzleParent"]
 rotation = -0.151199
 
-[node name="Position2D5" type="Position2D" parent="MechBody/WeaponsLeft/ShotgunL/MuzzleParent"]
+[node name="Position2D5" type="Position2D" parent="Node2D/MechBody/WeaponsLeft/ShotgunL/MuzzleParent"]
 rotation = 0.15766
 
-[node name="Position2D6" type="Position2D" parent="MechBody/WeaponsLeft/ShotgunL/MuzzleParent"]
+[node name="Position2D6" type="Position2D" parent="Node2D/MechBody/WeaponsLeft/ShotgunL/MuzzleParent"]
 rotation = -0.225753
 
-[node name="Position2D7" type="Position2D" parent="MechBody/WeaponsLeft/ShotgunL/MuzzleParent"]
+[node name="Position2D7" type="Position2D" parent="Node2D/MechBody/WeaponsLeft/ShotgunL/MuzzleParent"]
 rotation = 0.263406
 
-[node name="Flash" type="Sprite" parent="MechBody/WeaponsLeft/ShotgunL"]
+[node name="Flash" type="Sprite" parent="Node2D/MechBody/WeaponsLeft/ShotgunL"]
 visible = false
 position = Vector2( -0.284048, -17.9978 )
 texture = ExtResource( 6 )
 
-[node name="SniperL" type="Sprite" parent="MechBody/WeaponsLeft"]
+[node name="SniperL" type="Sprite" parent="Node2D/MechBody/WeaponsLeft"]
 visible = false
 position = Vector2( -18, -24 )
 rotation = 0.0401426
@@ -119,24 +160,26 @@ goodColor = Color( 0.87451, 0.870588, 0, 1 )
 overheatColor = Color( 0.454902, 0.105882, 0.109804, 1 )
 tilNotShootingMin = 0.825
 
-[node name="Muzzle" type="Position2D" parent="MechBody/WeaponsLeft/SniperL"]
+[node name="Muzzle" type="Position2D" parent="Node2D/MechBody/WeaponsLeft/SniperL"]
 position = Vector2( 0, -18 )
 
-[node name="Flash" type="Sprite" parent="MechBody/WeaponsLeft/SniperL"]
+[node name="Flash" type="Sprite" parent="Node2D/MechBody/WeaponsLeft/SniperL"]
 visible = false
 position = Vector2( -0.284048, -17.9978 )
 texture = ExtResource( 6 )
 
-[node name="Line2D" type="Line2D" parent="MechBody/WeaponsLeft/SniperL"]
+[node name="Line2D" type="Line2D" parent="Node2D/MechBody/WeaponsLeft/SniperL"]
 points = PoolVector2Array( 0, -18, 0, -401.406 )
 width = 3.0
 width_curve = SubResource( 2 )
 default_color = Color( 0.768627, 0.129412, 0.137255, 0.54902 )
 script = ExtResource( 9 )
 
-[node name="WeaponsRight" type="Node2D" parent="MechBody"]
+[node name="WeaponsRight" type="Node2D" parent="Node2D/MechBody"]
+position = Vector2( 185, 125 )
+scale = Vector2( 10, 10 )
 
-[node name="GatlingR" type="Sprite" parent="MechBody/WeaponsRight"]
+[node name="GatlingR" type="Sprite" parent="Node2D/MechBody/WeaponsRight"]
 position = Vector2( 18, -24 )
 rotation = -0.0397606
 texture = ExtResource( 3 )
@@ -149,17 +192,18 @@ recoverTime = 3.0
 goodColor = Color( 0.87451, 0.870588, 0, 1 )
 overheatColor = Color( 0.454902, 0.105882, 0.109804, 1 )
 tilNotShootingMin = 0.2
+accuracy = 5.0
 
-[node name="Muzzle" type="Position2D" parent="MechBody/WeaponsRight/GatlingR"]
+[node name="Muzzle" type="Position2D" parent="Node2D/MechBody/WeaponsRight/GatlingR"]
 position = Vector2( -0.204206, -20.0239 )
 
-[node name="Flash" type="Sprite" parent="MechBody/WeaponsRight/GatlingR"]
+[node name="Flash" type="Sprite" parent="Node2D/MechBody/WeaponsRight/GatlingR"]
 visible = false
 position = Vector2( 0.755255, -18.985 )
 rotation = 0.0555417
 texture = ExtResource( 6 )
 
-[node name="ShotgunR" type="Sprite" parent="MechBody/WeaponsRight"]
+[node name="ShotgunR" type="Sprite" parent="Node2D/MechBody/WeaponsRight"]
 visible = false
 position = Vector2( 18, -24 )
 rotation = -0.0401426
@@ -173,36 +217,37 @@ recoverTime = 1.75
 goodColor = Color( 0.87451, 0.870588, 0, 1 )
 overheatColor = Color( 0.454902, 0.105882, 0.109804, 1 )
 tilNotShootingMin = 2.0
+accuracy = 10.0
 
-[node name="MuzzleParent" type="Position2D" parent="MechBody/WeaponsRight/ShotgunR"]
+[node name="MuzzleParent" type="Position2D" parent="Node2D/MechBody/WeaponsRight/ShotgunR"]
 position = Vector2( 0, -18 )
 
-[node name="Position2D" type="Position2D" parent="MechBody/WeaponsRight/ShotgunR/MuzzleParent"]
+[node name="Position2D" type="Position2D" parent="Node2D/MechBody/WeaponsRight/ShotgunR/MuzzleParent"]
 
-[node name="Position2D2" type="Position2D" parent="MechBody/WeaponsRight/ShotgunR/MuzzleParent"]
+[node name="Position2D2" type="Position2D" parent="Node2D/MechBody/WeaponsRight/ShotgunR/MuzzleParent"]
 rotation = -0.0623551
 
-[node name="Position2D3" type="Position2D" parent="MechBody/WeaponsRight/ShotgunR/MuzzleParent"]
+[node name="Position2D3" type="Position2D" parent="Node2D/MechBody/WeaponsRight/ShotgunR/MuzzleParent"]
 rotation = 0.0760072
 
-[node name="Position2D4" type="Position2D" parent="MechBody/WeaponsRight/ShotgunR/MuzzleParent"]
+[node name="Position2D4" type="Position2D" parent="Node2D/MechBody/WeaponsRight/ShotgunR/MuzzleParent"]
 rotation = -0.151199
 
-[node name="Position2D5" type="Position2D" parent="MechBody/WeaponsRight/ShotgunR/MuzzleParent"]
+[node name="Position2D5" type="Position2D" parent="Node2D/MechBody/WeaponsRight/ShotgunR/MuzzleParent"]
 rotation = 0.15766
 
-[node name="Position2D6" type="Position2D" parent="MechBody/WeaponsRight/ShotgunR/MuzzleParent"]
+[node name="Position2D6" type="Position2D" parent="Node2D/MechBody/WeaponsRight/ShotgunR/MuzzleParent"]
 rotation = -0.225753
 
-[node name="Position2D7" type="Position2D" parent="MechBody/WeaponsRight/ShotgunR/MuzzleParent"]
+[node name="Position2D7" type="Position2D" parent="Node2D/MechBody/WeaponsRight/ShotgunR/MuzzleParent"]
 rotation = 0.263406
 
-[node name="Flash" type="Sprite" parent="MechBody/WeaponsRight/ShotgunR"]
+[node name="Flash" type="Sprite" parent="Node2D/MechBody/WeaponsRight/ShotgunR"]
 visible = false
 position = Vector2( -0.284048, -17.9978 )
 texture = ExtResource( 6 )
 
-[node name="SniperR" type="Sprite" parent="MechBody/WeaponsRight"]
+[node name="SniperR" type="Sprite" parent="Node2D/MechBody/WeaponsRight"]
 visible = false
 position = Vector2( 18, -24 )
 rotation = -0.0401426
@@ -218,15 +263,15 @@ goodColor = Color( 0.87451, 0.870588, 0, 1 )
 overheatColor = Color( 0.454902, 0.105882, 0.109804, 1 )
 tilNotShootingMin = 0.825
 
-[node name="Muzzle" type="Position2D" parent="MechBody/WeaponsRight/SniperR"]
+[node name="Muzzle" type="Position2D" parent="Node2D/MechBody/WeaponsRight/SniperR"]
 position = Vector2( 0, -18 )
 
-[node name="Flash" type="Sprite" parent="MechBody/WeaponsRight/SniperR"]
+[node name="Flash" type="Sprite" parent="Node2D/MechBody/WeaponsRight/SniperR"]
 visible = false
 position = Vector2( -0.284048, -17.9978 )
 texture = ExtResource( 6 )
 
-[node name="Line2D" type="Line2D" parent="MechBody/WeaponsRight/SniperR"]
+[node name="Line2D" type="Line2D" parent="Node2D/MechBody/WeaponsRight/SniperR"]
 points = PoolVector2Array( 0, -18, 0, -401.406 )
 width = 3.0
 width_curve = SubResource( 2 )

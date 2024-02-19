@@ -11,6 +11,8 @@ var speed = 75
 export var spdSlow : float = 50
 export var spdFast : float = 100
 
+export(float) var knockback
+
 #var velocity = Vector2()
 
 func RandomizeSpeed():
@@ -19,12 +21,13 @@ func RandomizeSpeed():
 func _ready():
 	curAtk = atk
 	
-func start(pos, dir):
+func start(pos, dir, acc):
 	bulletPool.remove_child(self)
 	world.add_child(self)
 	
 	speed = rand_range(spdSlow, spdFast)
 	rotation = dir
+	rotation_degrees += rand_range(-acc, acc)
 	position = pos
 	#velocity = Vector2(0, speed).rotated(rotation)
 
@@ -66,6 +69,7 @@ func Disable():
 func _on_Bullet_body_entered(body):
 	#print(body.name)
 	if body.is_in_group("enemies"):
+		body.Knockback(knockback, -transform.y)
 		body.Damage(curAtk)
 		curAtk -= 1
 		hp -= 1

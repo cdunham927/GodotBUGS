@@ -8,6 +8,7 @@ hp = 99.0
 atk = 100.0
 spdSlow = 1450.0
 spdFast = 1750.0
+knockback = 17.0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

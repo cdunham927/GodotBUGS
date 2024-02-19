@@ -5,20 +5,6 @@ var dir : int = 1
 export var turnSpd : float = 5
 var curTurn : float
 var canShoot : bool = true
-
-func _ready():
-	add_to_group("enemies")
-	#params: name, blend, play speed
-	#anim.play("move", 1, 2)
-	
-	curAimOffsetTimer = aimOffsetTimer
-	curAimOffset = rand_range(-aimOffset, aimOffset)
-	
-	rotation_degrees = rand_range(0, 360)
-	
-	chaseCools = rand_range(walkTimeSmall, walkTimeBig)
-	resetChaseCools = rand_range(chaseCooldownSmall, chaseCooldownBig)
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 	
 func Chase(d):
 	pass
@@ -51,7 +37,6 @@ func Idle(d):
 func Attack():
 	for i in range(numShots):
 		Shoot()
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 
 func Shoot():
 	var b = bulletPool.GetPoolObject()

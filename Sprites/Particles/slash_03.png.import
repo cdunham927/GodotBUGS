@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Round_Beetle_2.png-1b5ef20f326d05642d154b7a3ed3d838.stex"
+path="res://.import/slash_03.png-a5d9fc6ca70f23acbe034eddfd02153b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Round_Beetle_2.png"
-dest_files=[ "res://.import/Round_Beetle_2.png-1b5ef20f326d05642d154b7a3ed3d838.stex" ]
+source_file="res://Sprites/Particles/slash_03.png"
+dest_files=[ "res://.import/slash_03.png-a5d9fc6ca70f23acbe034eddfd02153b.stex" ]
 
 [params]
 

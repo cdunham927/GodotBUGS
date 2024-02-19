@@ -14,6 +14,8 @@ var curRight := 0
 var lastWeaponLeft := 0
 var lastWeaponRight := 0
 
+export var rotSpd : float = 15
+
 func _ready():
 	curLeft = 0
 	curRight = 0
@@ -48,7 +50,7 @@ func SwitchWeaponRight():
 
 func _process(delta):
 	var look_vec = get_global_mouse_position() - global_position
-	global_rotation = atan2(look_vec.y, look_vec.x) + offsetZ
+	global_rotation = lerp_angle(global_rotation, atan2(look_vec.y, look_vec.x) + offsetZ, rotSpd)
 	
 	if Input.is_action_just_pressed("switch_left"):
 		if curLeft + 1 < unlockedLeft.size():

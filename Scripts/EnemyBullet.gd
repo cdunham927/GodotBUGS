@@ -22,7 +22,7 @@ func _ready():
 func start(pos, dir, acc):
 	speed = rand_range(spdSlow, spdFast)
 	rotation = dir
-	rotate(rand_range(-acc, acc))
+	rotation_degrees += rand_range(-acc, acc)
 	position = pos
 
 func _physics_process(delta):

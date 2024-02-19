@@ -12,6 +12,7 @@ script = ExtResource( 2 )
 atk = 30.0
 spdSlow = 500.0
 spdFast = 1000.0
+knockback = 4.0
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
