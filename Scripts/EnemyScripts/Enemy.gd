@@ -43,9 +43,9 @@ func _ready():
 	Setup()
 	
 func Setup():
+	hp = maxHp
 	curState = States.idle
 	set_player()
-	hp = maxHp
 	add_to_group("enemies")
 	#params: name, blend, play speed
 	
@@ -124,11 +124,11 @@ func SwitchState(newState):
 	curState = newState
 
 func Damage(amt):
+	print("Damaged")
 	BloodSpray()
 	hp -= amt
 	
 	if hp <= 0:
-		SpawnBlood()
 		kill()
 
 func Knockback(kick, dir):
@@ -144,6 +144,7 @@ func BloodSpray():
 	pass
 
 func SpawnBlood():
+	#print("Spawned by: " + self.name)
 	#blood particles
 	var blood_instance = blood.instance()
 	blood_instance.emitting = true
@@ -152,8 +153,10 @@ func SpawnBlood():
 	if (player != null):
 		blood_instance.rotation = global_position.angle_to_point(player.global_position)
 	#blood_instance.emitting = true
+	pass
 
 func kill():
+	SpawnBlood()
 	queue_free()
  
 func set_player():

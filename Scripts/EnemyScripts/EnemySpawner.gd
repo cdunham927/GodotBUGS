@@ -34,23 +34,22 @@ func _ready():
  
 func _process(delta):
 	#Check if player is in range too
-	
-	if curSpawns > 0:
-		curSpawns -= delta
+	if inSight:
+		if curSpawns > 0:
+			curSpawns -= delta
 		
-	if curSpawns <= 0:
-		curSpawns = rand_range(spawnTimeLow, spawnTimeBig)
+		if curSpawns <= 0:
+			curSpawns = rand_range(spawnTimeLow, spawnTimeBig)
 		
-		var toSpawnNow = (randi() % maxToSpawn)
-		for i in toSpawnNow:
-			SpawnEnemy()
+			var toSpawnNow = (randi() % maxToSpawn)
+			for i in toSpawnNow:
+				SpawnEnemy()
 	
 func Damage(amt):
 	BloodSpray()
 	hp -= amt
 	
 	if hp <= 0:
-		SpawnBlood()
 		kill()
 
 func Knockback(kick, dir):
@@ -76,8 +75,20 @@ func SpawnBlood():
 	var blood_instance = blood.instance()
 	get_tree().current_scene.add_child(blood_instance)
 	blood_instance.global_position = global_position
+	
 	#blood_instance.rotation = global_position.angle_to_point(player.global_position)
 
 func kill():
+	SpawnBlood()
 	queue_free()
  
+
+
+func _on_Area2D_body_entered(body):
+	if body.name == "Player":
+		inSight = true
+
+
+func _on_Area2D_body_exited(body):
+	if body.name == "Player":
+		inSight = false

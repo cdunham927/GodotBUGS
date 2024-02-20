@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/PlayerScenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/EnemyScenes/Ant.tscn" type="PackedScene" id=2]
-[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/UI/UI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/GameController.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/EnemyScenes/TurtleAnt.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Weapons/Bullet.tscn" type="PackedScene" id=6]
@@ -42,13 +42,13 @@ position = Vector2( 661, 447 )
 [node name="UI" parent="." instance=ExtResource( 3 )]
 
 [node name="TurtleAnt" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1023, 231 )
+position = Vector2( 1379, 87 )
 
 [node name="Ant" parent="." instance=ExtResource( 2 )]
-position = Vector2( 312, 179 )
+position = Vector2( 165, 121 )
 
 [node name="Beehive" parent="." instance=ExtResource( 10 )]
-position = Vector2( 670, 70 )
+position = Vector2( 663, 9 )
 spawnTimeLow = 3.0
 spawnTimeBig = 8.0
 

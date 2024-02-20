@@ -32,8 +32,8 @@ func _on_VisibilityNotifier2D_viewport_exited(viewport):
 	Disable()
 	
 func Disable():
-	world.remove_child(self)
-	bulletPool.add_child(self)
+#	world.remove_child(self)
+#	bulletPool.add_child(self)
 	self.hide()
 
 func _on_Bullet_body_entered(body):

@@ -51,12 +51,21 @@ func _process(delta):
 	active = self.is_visible_in_tree()
 
 	if active:
-		if Input.is_action_pressed("attack") and curShotTime <= 0 and recover <= 0:
+		#Left weapon start shooting
+		if leftWeapon and Input.is_action_pressed("attack") and curShotTime <= 0 and recover <= 0:
 			#shooting = true
 			tilNotShooting = tilNotShootingMin
 			Shoot()
-		
-		if Input.is_action_just_released("attack"):
+		#Left weapon stop shooting
+		if leftWeapon and Input.is_action_just_released("attack"):
+			tilNotShooting = tilNotShootingMin
+		#Right weapon start shooting
+		if leftWeapon == false and Input.is_action_pressed("attacktwo") and curShotTime <= 0 and recover <= 0:
+			#shooting = true
+			tilNotShooting = tilNotShootingMin
+			Shoot()
+		#Right weapon stop shooting
+		if leftWeapon == false and Input.is_action_just_released("attacktwo"):
 			tilNotShooting = tilNotShootingMin
 		
 	#if tilNotShooting <= 0:

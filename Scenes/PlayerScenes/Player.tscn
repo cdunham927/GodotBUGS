@@ -22,14 +22,17 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.728571, 0.427273 ), -2.863
 pause_mode = 1
 script = ExtResource( 1 )
 maxHp = 1000.0
-forwardSpd = 450
-backwardSpd = 200
-sideSpd = 250
-boostSpd = 800
-timeBetweenBoosts = 3.0
 maxStamina = 50.0
 staminaDecAmt = 10.0
 staminaRecAmt = 5.0
+spdToLerpTo = 0.0
+spdLerpSpd = 5.0
+forwardSpd = 450
+backwardSpd = 200
+sideSpd = 250
+boostSpd = 1500
+timeBetweenBoosts = 3.0
+timeWeBoost = 0.33
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
 position = Vector2( 1.5, -4 )
