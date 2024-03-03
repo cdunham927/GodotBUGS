@@ -9,7 +9,7 @@ extents = Vector2( 4, 8 )
 [node name="Bullet" type="Area2D"]
 pause_mode = 1
 script = ExtResource( 2 )
-atk = 30.0
+atk = 10.0
 spdSlow = 500.0
 spdFast = 1000.0
 knockback = 4.0

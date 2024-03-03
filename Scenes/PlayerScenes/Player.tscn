@@ -75,6 +75,7 @@ rotSpd = 0.03
 
 [node name="WeaponsLeft" type="Node2D" parent="Node2D/MechBody"]
 position = Vector2( -125, 125 )
+rotation = 0.049658
 scale = Vector2( 10, 10 )
 
 [node name="GatlingL" type="Sprite" parent="Node2D/MechBody/WeaponsLeft"]
@@ -83,11 +84,12 @@ rotation = 0.0401426
 texture = ExtResource( 3 )
 script = ExtResource( 8 )
 poolName = "BulletPool"
-timeBetweenShots = 0.15
+timeBetweenShots = 0.05
 leftWeapon = true
-overheatTotal = 15.0
+overheatTotal = 30.0
+incAmt = 0.3
 recoveryModifier = 2.0
-recoverTime = 3.0
+recoverTime = 2.5
 goodColor = Color( 0.87451, 0.870588, 0, 1 )
 overheatColor = Color( 0.454902, 0.105882, 0.109804, 1 )
 tilNotShootingMin = 0.2
@@ -180,6 +182,7 @@ script = ExtResource( 9 )
 
 [node name="WeaponsRight" type="Node2D" parent="Node2D/MechBody"]
 position = Vector2( 185, 125 )
+rotation = -0.0599855
 scale = Vector2( 10, 10 )
 
 [node name="GatlingR" type="Sprite" parent="Node2D/MechBody/WeaponsRight"]
@@ -188,10 +191,11 @@ rotation = -0.0397606
 texture = ExtResource( 3 )
 script = ExtResource( 8 )
 poolName = "BulletPool"
-timeBetweenShots = 0.15
-overheatTotal = 15.0
+timeBetweenShots = 0.05
+overheatTotal = 30.0
+incAmt = 0.3
 recoveryModifier = 2.0
-recoverTime = 3.0
+recoverTime = 2.5
 goodColor = Color( 0.87451, 0.870588, 0, 1 )
 overheatColor = Color( 0.454902, 0.105882, 0.109804, 1 )
 tilNotShootingMin = 0.2
