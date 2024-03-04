@@ -79,7 +79,6 @@ shape = SubResource( 5 )
 
 [node name="BloodSpray" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 0 )
-emitting = false
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
