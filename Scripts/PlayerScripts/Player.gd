@@ -52,7 +52,6 @@ func _ready():
 	curSpd = regSpd
 	#SetPlayer()
 	
-	
 #func SetPlayer():
 	#get_tree().call_group("enemies", "set_player", self)
 

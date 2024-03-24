@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CircleHollowSmol.png-bbdb95afc14265bab33987ca29d7117f.stex"
+path="res://.import/bullet.png-0c0a4bb13a40f7c0713d60993679c1d9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/CircleHollowSmol.png"
-dest_files=[ "res://.import/CircleHollowSmol.png-bbdb95afc14265bab33987ca29d7117f.stex" ]
+source_file="res://Sprites/Weapons/bullet.png"
+dest_files=[ "res://.import/bullet.png-0c0a4bb13a40f7c0713d60993679c1d9.stex" ]
 
 [params]
 

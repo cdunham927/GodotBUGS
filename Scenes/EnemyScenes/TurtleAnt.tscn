@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/EnemyScripts/TurtleAnt.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Enemies/Ant_5-Sheet.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Rectangle.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Etc/Rectangle.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.5, 19 )
@@ -50,7 +50,7 @@ extents = Vector2( 25.5, 14.5 )
 [node name="TurtleAnt" type="KinematicBody2D" groups=["enemies"]]
 pause_mode = 1
 script = ExtResource( 1 )
-maxHp = 575.0
+maxHp = 500.0
 spd = 125
 atk = 50
 timeBetweenAttacksSmall = 1.5
@@ -80,7 +80,7 @@ anims/move = SubResource( 4 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 6 )
 
-[node name="Head" type="Area2D" parent="."]
+[node name="Head" type="Area2D" parent="." groups=["turtle"]]
 
 [node name="Sprite" type="Sprite" parent="Head"]
 modulate = Color( 0.690196, 0.360784, 0.0941176, 1 )

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Circle.png-0c45e21435093ae348e4b37cb96ba5fa.stex"
+path="res://.import/BUGS_HUD_Blue.png-c42a7e4e50c0b138b7453022bbaf62ac.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Circle.png"
-dest_files=[ "res://.import/Circle.png-0c45e21435093ae348e4b37cb96ba5fa.stex" ]
+source_file="res://Sprites/Etc/BUGS_HUD_Blue.png"
+dest_files=[ "res://.import/BUGS_HUD_Blue.png-c42a7e4e50c0b138b7453022bbaf62ac.stex" ]
 
 [params]
 

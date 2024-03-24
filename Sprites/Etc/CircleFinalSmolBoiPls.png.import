@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Flash.png-bd0574df5ea8a40399e8583fbbb84c4c.stex"
+path="res://.import/CircleFinalSmolBoiPls.png-9904f5914395b20e0bab1e38276a89ed.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Flash.png"
-dest_files=[ "res://.import/Flash.png-bd0574df5ea8a40399e8583fbbb84c4c.stex" ]
+source_file="res://Sprites/Etc/CircleFinalSmolBoiPls.png"
+dest_files=[ "res://.import/CircleFinalSmolBoiPls.png-9904f5914395b20e0bab1e38276a89ed.stex" ]
 
 [params]
 

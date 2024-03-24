@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BUGS_GUNS_Right.png-bd395c01894dd6543a81892691e141e1.stex"
+path="res://.import/Rectangle.png-b6e3ba0fcdfe8e7de64ddbe5e6ed4178.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/BUGS_GUNS_Right.png"
-dest_files=[ "res://.import/BUGS_GUNS_Right.png-bd395c01894dd6543a81892691e141e1.stex" ]
+source_file="res://Sprites/Etc/Rectangle.png"
+dest_files=[ "res://.import/Rectangle.png-b6e3ba0fcdfe8e7de64ddbe5e6ed4178.stex" ]
 
 [params]
 

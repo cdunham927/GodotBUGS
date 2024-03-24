@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Rectangle.png-42d790a0b94068be24a673e173121bde.stex"
+path="res://.import/AmmoSprites.png-9f3dda3acf5779c16e1e48c126a5ddad.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Rectangle.png"
-dest_files=[ "res://.import/Rectangle.png-42d790a0b94068be24a673e173121bde.stex" ]
+source_file="res://Sprites/Weapons/AmmoSprites.png"
+dest_files=[ "res://.import/AmmoSprites.png-9f3dda3acf5779c16e1e48c126a5ddad.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

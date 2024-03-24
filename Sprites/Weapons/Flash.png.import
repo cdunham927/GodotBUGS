@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BUGS_Energy.png-81eed2fc6af4cb34c59e31c3692dbe3f.stex"
+path="res://.import/Flash.png-0f4874fafbbc2cf406a18d0d876edef4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/BUGS_Energy.png"
-dest_files=[ "res://.import/BUGS_Energy.png-81eed2fc6af4cb34c59e31c3692dbe3f.stex" ]
+source_file="res://Sprites/Weapons/Flash.png"
+dest_files=[ "res://.import/Flash.png-0f4874fafbbc2cf406a18d0d876edef4.stex" ]
 
 [params]
 

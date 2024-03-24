@@ -15,6 +15,7 @@
 
 [node name="World" type="Node2D"]
 pause_mode = 2
+position = Vector2( 1, -7 )
 script = ExtResource( 4 )
 
 [node name="PauseRoot" parent="." instance=ExtResource( 12 )]

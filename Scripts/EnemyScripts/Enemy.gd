@@ -115,16 +115,18 @@ func Attack():
 	pass
 
 func Chase(d):
-		var vec_to_player = player.global_position - global_position
-		vec_to_player = vec_to_player.normalized()
-		global_rotation = atan2(vec_to_player.y, vec_to_player.x) + 89.5
-		move_and_collide(vec_to_player * spd * d)
+	var vec_to_player = player.global_position - global_position
+	vec_to_player = vec_to_player.normalized()
+	global_rotation = atan2(vec_to_player.y, vec_to_player.x) + 89.5
+	move_and_collide(vec_to_player * spd * d)
 
 func SwitchState(newState):
 	curState = newState
 
 func Damage(amt):
-	print("Damaged")
+	#print("Damaged")
+	if curState == States.idle or curState == States.patrol:
+		ChangeState(States.chase)
 	BloodSpray()
 	hp -= amt
 	
@@ -156,7 +158,7 @@ func SpawnBlood():
 	pass
 
 func kill():
-	SpawnBlood()
+	#SpawnBlood()
 	queue_free()
  
 func set_player():

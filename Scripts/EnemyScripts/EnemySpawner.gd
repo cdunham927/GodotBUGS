@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Area2D
 
 export(float) var hp = 4
  
@@ -19,9 +19,15 @@ export var enemy: PackedScene
 #onready var world = get_node("/root/World")
 #export(float) var accuracy
 
+export var spawnsOnDeath = false
+var hasSpawned = false
+export var deathEnemy: PackedScene
+
+
 var blood = load("res://Scenes/Blood.tscn")
 	
 func _ready():
+	hasSpawned = false
 	add_to_group("enemies")
 	#params: name, blend, play speed
 	#anim.play("move", 1, 2)
@@ -44,16 +50,14 @@ func _process(delta):
 			var toSpawnNow = (randi() % maxToSpawn)
 			for i in toSpawnNow:
 				SpawnEnemy()
-	
+
 func Damage(amt):
+	inSight = true
 	BloodSpray()
 	hp -= amt
 	
 	if hp <= 0:
 		kill()
-
-func Knockback(kick, dir):
-	pass
 
 func BloodSpray():
 	#$BloodSpray.restart()
@@ -79,10 +83,14 @@ func SpawnBlood():
 	#blood_instance.rotation = global_position.angle_to_point(player.global_position)
 
 func kill():
-	SpawnBlood()
+	#SpawnBlood()
+	if spawnsOnDeath and !hasSpawned:
+		var e = deathEnemy.instance()
+		e.Setup()
+		get_tree().current_scene.add_child(e)
+		e.global_position = global_position
+		hasSpawned = true
 	queue_free()
- 
-
 
 func _on_Area2D_body_entered(body):
 	if body.name == "Player":
@@ -90,5 +98,6 @@ func _on_Area2D_body_entered(body):
 
 
 func _on_Area2D_body_exited(body):
-	if body.name == "Player":
-		inSight = false
+	#if body.name == "Player":
+		#inSight = false
+		pass

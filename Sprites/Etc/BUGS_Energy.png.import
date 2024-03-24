@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AmmoSprites.png-e2d1922998ebd3e3f7246cdf9f65a9b5.stex"
+path="res://.import/BUGS_Energy.png-5f398c929e13a78265ade4b3d2a10268.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/AmmoSprites.png"
-dest_files=[ "res://.import/AmmoSprites.png-e2d1922998ebd3e3f7246cdf9f65a9b5.stex" ]
+source_file="res://Sprites/Etc/BUGS_Energy.png"
+dest_files=[ "res://.import/BUGS_Energy.png-5f398c929e13a78265ade4b3d2a10268.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

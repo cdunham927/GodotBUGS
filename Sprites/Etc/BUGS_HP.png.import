@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mechconcept.jpg-3b59379c4eb8e05a109cca0d3d75f76b.stex"
+path="res://.import/BUGS_HP.png-7712d3f0f6120455f4e588a465abd9c3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/mechconcept.jpg"
-dest_files=[ "res://.import/mechconcept.jpg-3b59379c4eb8e05a109cca0d3d75f76b.stex" ]
+source_file="res://Sprites/Etc/BUGS_HP.png"
+dest_files=[ "res://.import/BUGS_HP.png-7712d3f0f6120455f4e588a465abd9c3.stex" ]
 
 [params]
 

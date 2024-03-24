@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CircleFinalSmolBoiPls.png-c7c50819d2733f4d17763dc4055cb450.stex"
+path="res://.import/BUGS_GUNS_Left.png-230f823c668ecbc949589e59944c6911.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/CircleFinalSmolBoiPls.png"
-dest_files=[ "res://.import/CircleFinalSmolBoiPls.png-c7c50819d2733f4d17763dc4055cb450.stex" ]
+source_file="res://Sprites/Etc/BUGS_GUNS_Left.png"
+dest_files=[ "res://.import/BUGS_GUNS_Left.png-230f823c668ecbc949589e59944c6911.stex" ]
 
 [params]
 

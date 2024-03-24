@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Sprites/Circle.png" type="Texture" id=1]
-[ext_resource path="res://Sprites/Rectangle.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Etc/Circle.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Etc/Rectangle.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/PlayerScripts/CharacterFollower2D.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/PlayerScenes/OverworldPlayer.tscn" type="PackedScene" id=4]
 

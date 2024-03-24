@@ -11,6 +11,8 @@ var speed = 75
 export var spdSlow : float = 50
 export var spdFast : float = 100
 
+var damaged = false
+
 export(float) var knockback
 
 #var velocity = Vector2()
@@ -22,6 +24,7 @@ func _ready():
 	curAtk = atk
 	
 func start(pos, dir, acc):
+	damaged = false
 	bulletPool.remove_child(self)
 	world.add_child(self)
 	
@@ -68,16 +71,36 @@ func Disable():
 
 func _on_Bullet_body_entered(body):
 	#print(body.name)
-	if body.is_in_group("enemies"):
-		body.Knockback(knockback, -transform.y)
-		body.Damage(curAtk)
+	if body.is_in_group("enemies") and !damaged:
+		#print("Damaged by: ", curAtk)
+		if body.has_method("Knockback"):
+			body.Knockback(knockback, -transform.y)
+		if body.has_method("Damage"):
+			body.Damage(curAtk)
 		curAtk -= 1
 		hp -= 1
+		damaged = true
 		if hp <= 0:
 			Disable()
-	if body.is_in_group("turtle"):
-		body.Damage(curAtk / 3)
+
+
+func _on_Bullet_area_entered(area):
+	if area.is_in_group("turtle") and !damaged:
+		#print("Damaged by: ", curAtk / 4)
+		area.get_parent().Damage(curAtk / 4)
 		curAtk -= 1
 		hp -= 1
+		damaged = true
+		if hp <= 0:
+			Disable()
+	#Hit static enemies
+	if area.is_in_group("enemies") and !damaged:
+		if area.has_method("Knockback"):
+			area.Knockback(knockback, -transform.y)
+		if area.has_method("Damage"):
+			area.Damage(curAtk)
+		curAtk -= 1
+		hp -= 1
+		damaged = true
 		if hp <= 0:
 			Disable()

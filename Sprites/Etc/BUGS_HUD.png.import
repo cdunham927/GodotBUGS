@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BUGS_HUD.png-a8e389a85ef8321e45a77d6dd78b766d.stex"
+path="res://.import/BUGS_HUD.png-d4365b25759169d3402f88c9d42f33e6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/BUGS_HUD.png"
-dest_files=[ "res://.import/BUGS_HUD.png-a8e389a85ef8321e45a77d6dd78b766d.stex" ]
+source_file="res://Sprites/Etc/BUGS_HUD.png"
+dest_files=[ "res://.import/BUGS_HUD.png-d4365b25759169d3402f88c9d42f33e6.stex" ]
 
 [params]
 

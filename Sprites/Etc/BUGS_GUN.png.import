@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BUGS_HP.png-a49341082f71a4741d54b899eab53e01.stex"
+path="res://.import/BUGS_GUN.png-8b157177178d60868ed0b2f390799c1a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/BUGS_HP.png"
-dest_files=[ "res://.import/BUGS_HP.png-a49341082f71a4741d54b899eab53e01.stex" ]
+source_file="res://Sprites/Etc/BUGS_GUN.png"
+dest_files=[ "res://.import/BUGS_GUN.png-8b157177178d60868ed0b2f390799c1a.stex" ]
 
 [params]
 
