@@ -1,0 +1,94 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/mechconcept.jpg" type="Texture" id=1]
+[ext_resource path="res://Fonts/BrokenFontTitle.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Scripts/PauseController.gd" type="Script" id=3]
+
+[node name="PauseRoot" type="MarginContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -162.5
+margin_top = -233.0
+margin_right = 162.5
+margin_bottom = 233.0
+size_flags_horizontal = 5
+script = ExtResource( 3 )
+
+[node name="BG" type="ColorRect" parent="."]
+margin_right = 325.0
+margin_bottom = 466.0
+color = Color( 1, 0, 0, 0.270588 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 12.0
+margin_right = 312.0
+margin_bottom = 466.0
+rect_min_size = Vector2( 250, 0 )
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="PauseText" type="Label" parent="VBoxContainer"]
+margin_top = 14.0
+margin_right = 300.0
+margin_bottom = 46.0
+custom_fonts/font = ExtResource( 2 )
+text = "Paused"
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 50.0
+margin_right = 300.0
+margin_bottom = 148.0
+size_flags_horizontal = 5
+size_flags_vertical = 5
+
+[node name="EmptyLabel" type="Label" parent="VBoxContainer/VBoxContainer"]
+margin_right = 300.0
+margin_bottom = 14.0
+
+[node name="ContinueButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 300.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 200, 20 )
+size_flags_horizontal = 5
+text = "Resume"
+
+[node name="EmptyLabel2" type="Label" parent="VBoxContainer/VBoxContainer"]
+margin_top = 42.0
+margin_right = 300.0
+margin_bottom = 56.0
+
+[node name="SaveAndQuitButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_top = 60.0
+margin_right = 300.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 200, 20 )
+size_flags_horizontal = 5
+text = "Save and Quit"
+
+[node name="EmptyLabel3" type="Label" parent="VBoxContainer/VBoxContainer"]
+margin_top = 84.0
+margin_right = 300.0
+margin_bottom = 98.0
+
+[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
+margin_top = 152.0
+margin_right = 300.0
+margin_bottom = 452.0
+size_flags_horizontal = 3
+
+[node name="Characters" type="TextureRect" parent="VBoxContainer/CenterContainer2"]
+margin_right = 300.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 300, 300 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 5
+
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/ContinueButton" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/SaveAndQuitButton" to="." method="_on_Button2_pressed"]

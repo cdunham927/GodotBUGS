@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/Particles/twirl_02.png" type="Texture" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.670807, 0.510227 ), -3.03986, -3.03986, 0, 0, Vector2( 0.981366, 0.0284091 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.120401, 0.83612, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.432536, 0.432536, 0.432536, 0, 0.339986, 0.339986, 0.339986, 1, 0.355611, 0.355611, 0.355611, 0.388235 )
+
+[node name="Vacuum" type="CPUParticles2D"]
+amount = 55
+randomness = 0.1
+lifetime_randomness = 0.05
+texture = ExtResource( 1 )
+emission_shape = 1
+emission_sphere_radius = 90.0
+flag_align_y = true
+gravity = Vector2( 0, 0 )
+radial_accel = -1.0
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
