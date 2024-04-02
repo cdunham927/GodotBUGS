@@ -18,10 +18,6 @@ export(float) var timeBetweenAttacksSmall
 export(float) var timeBetweenAttacksBig
 var attackCools : float
  
-#Stuff for projectile enemies
-export var poolName = ""
-onready var bulletPool = get_node("/root/World/" + poolName)
-onready var world = get_node("/root/World")
 export(float) var accuracy
 
 export(float) var chaseCooldownSmall
@@ -37,7 +33,7 @@ export(float) var aimOffsetTimer
 var curAimOffsetTimer : float
 var curAimOffset : float
 
-var blood = load("res://Scenes/Blood.tscn")
+var blood = load("res://Scenes/Particles/Blood.tscn")
 	
 func _ready():
 	Setup()

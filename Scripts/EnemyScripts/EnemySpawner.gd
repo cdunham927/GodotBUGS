@@ -29,6 +29,7 @@ var blood = load("res://Scenes/Blood.tscn")
 func _ready():
 	hasSpawned = false
 	add_to_group("enemies")
+	player = get_node("/root/World/Player") 
 	#params: name, blend, play speed
 	#anim.play("move", 1, 2)
 	

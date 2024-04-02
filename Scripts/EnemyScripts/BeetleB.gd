@@ -1,5 +1,6 @@
 extends "res://Scripts/EnemyScripts/Enemy.gd"
 
+export(PackedScene) var bullet
 export(int) var numShots = 3
 var dir : int = 1
 export var turnSpd : float = 5
@@ -39,11 +40,10 @@ func Attack():
 		Shoot()
 
 func Shoot():
-	var b = bulletPool.GetPoolObject()
-	b.atk = atk
+	var b = bullet.instance()
 	b.start(global_position, global_rotation, accuracy)
-	world.add_child(b)
-	b.show()
+	b.atk = atk
+	get_tree().current_scene.add_child(b)
 	
 func _on_Area2D_body_entered(body):
 	pass

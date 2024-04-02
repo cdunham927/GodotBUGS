@@ -3,13 +3,16 @@
 [ext_resource path="res://Scenes/Weapons/Bullet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Etc/Ball.png" type="Texture" id=2]
 
-
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.0
 
 [node name="Bullet" instance=ExtResource( 1 )]
 priority = 7.0
-atk = 35.0
+atk = 70.0
+lowDmgPercent = 0.5
+damageFalloff = true
+spdSlow = 800.0
+spdFast = 1400.0
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.3, 0.3 )
@@ -22,3 +25,9 @@ shape = SubResource( 1 )
 [node name="VisibilityNotifier2D" parent="." index="2"]
 position = Vector2( 0, -2.38419e-07 )
 scale = Vector2( 0.5, 0.5 )
+
+[node name="Timer" type="Timer" parent="." index="3"]
+wait_time = 1.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

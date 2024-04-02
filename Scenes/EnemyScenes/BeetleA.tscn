@@ -45,13 +45,13 @@ radius = 357.56
 
 [node name="Beetle" type="KinematicBody2D" groups=["enemies"]]
 pause_mode = 1
+z_index = 1
 script = ExtResource( 3 )
 maxHp = 400.0
 spd = 150
 atk = 20
 timeBetweenAttacksSmall = 1.25
 timeBetweenAttacksBig = 2.25
-poolName = "EnemyBulletPool"
 accuracy = 35.0
 chaseCooldownSmall = 0.75
 chaseCooldownBig = 1.25

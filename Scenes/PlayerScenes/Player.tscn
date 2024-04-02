@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/PlayerScripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player/Player.png" type="Texture" id=2]
@@ -14,6 +14,14 @@
 [ext_resource path="res://Sprites/Player/Weapons/Minigun_left.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/Player/Weapons/Minigun_right.png" type="Texture" id=13]
 [ext_resource path="res://Scenes/Weapons/Pellet.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scripts/WeaponScripts/GrenadeLauncher.gd" type="Script" id=15]
+[ext_resource path="res://Sprites/Particles/muzzle_01.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Particles/muzzle_04.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Particles/muzzle_03.png" type="Texture" id=18]
+[ext_resource path="res://Scenes/Weapons/NewShotgunPellet.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Weapons/Bullet.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Weapons/NewPiercingBullet.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/Weapons/Grenade.tscn" type="PackedScene" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 35.5, 29 )
@@ -23,6 +31,7 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.728571, 0.427273 ), -2.863
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 pause_mode = 1
+z_index = 2
 script = ExtResource( 1 )
 maxHp = 1000.0
 maxStamina = 50.0
@@ -70,10 +79,13 @@ texture = ExtResource( 10 )
 [node name="MechBody" type="Sprite" parent="Node2D"]
 position = Vector2( -2.5, 0 )
 scale = Vector2( 0.1, 0.1 )
+z_index = 1
 texture = ExtResource( 2 )
 script = ExtResource( 4 )
 offsetZ = 89.5
 rotationConstraint = 10.0
+unlockedLeft = [ true, true, true, true ]
+unlockedRight = [ true, true, true, true ]
 rotSpd = 0.03
 
 [node name="WeaponsLeft" type="Node2D" parent="Node2D/MechBody"]
@@ -85,9 +97,10 @@ scale = Vector2( 10, 10 )
 position = Vector2( -21.0426, -20.4807 )
 rotation = 0.0401426
 scale = Vector2( 0.125, 0.125 )
+z_index = 1
 texture = ExtResource( 12 )
 script = ExtResource( 8 )
-poolName = "BulletPool"
+bullet = ExtResource( 20 )
 timeBetweenShots = 0.05
 leftWeapon = true
 overheatTotal = 30.0
@@ -105,7 +118,7 @@ position = Vector2( 11.7828, -225.967 )
 [node name="Flash" type="Sprite" parent="Node2D/MechBody/WeaponsLeft/GatlingL"]
 visible = false
 position = Vector2( 11.7828, -225.967 )
-scale = Vector2( 7, 7 )
+scale = Vector2( 5.5, 5.5 )
 texture = ExtResource( 6 )
 
 [node name="ShotgunL" type="Sprite" parent="Node2D/MechBody/WeaponsLeft"]
@@ -113,9 +126,10 @@ visible = false
 position = Vector2( -21.043, -20.481 )
 rotation = 0.0401426
 scale = Vector2( 0.125, 0.125 )
+z_index = 1
 texture = ExtResource( 12 )
 script = ExtResource( 7 )
-poolName = "ShotgunPool"
+bullet = ExtResource( 19 )
 timeBetweenShots = 1.0
 leftWeapon = true
 overheatTotal = 6.0
@@ -152,17 +166,20 @@ rotation = 0.263406
 
 [node name="Flash" type="Sprite" parent="Node2D/MechBody/WeaponsLeft/ShotgunL"]
 visible = false
-position = Vector2( 11.7864, -225.965 )
-texture = ExtResource( 6 )
+self_modulate = Color( 0.862745, 0.784314, 0, 1 )
+position = Vector2( 8.50574, -349.848 )
+scale = Vector2( 1.125, 0.75 )
+texture = ExtResource( 16 )
 
 [node name="SniperL" type="Sprite" parent="Node2D/MechBody/WeaponsLeft"]
 visible = false
 position = Vector2( -21.043, -20.481 )
 rotation = 0.0401426
 scale = Vector2( 0.125, 0.125 )
+z_index = 1
 texture = ExtResource( 12 )
 script = ExtResource( 5 )
-poolName = "SniperPool"
+bullet = ExtResource( 21 )
 timeBetweenShots = 1.125
 leftWeapon = true
 overheatTotal = 20.0
@@ -178,8 +195,9 @@ position = Vector2( 0, -18 )
 
 [node name="Flash" type="Sprite" parent="Node2D/MechBody/WeaponsLeft/SniperL"]
 visible = false
-position = Vector2( 11.0689, -233.933 )
-texture = ExtResource( 6 )
+self_modulate = Color( 0.831373, 0.827451, 0, 1 )
+position = Vector2( 12.6557, -394.723 )
+texture = ExtResource( 17 )
 
 [node name="Line2D" type="Line2D" parent="Node2D/MechBody/WeaponsLeft/SniperL"]
 position = Vector2( 11.7104, -137.602 )
@@ -190,6 +208,29 @@ width_curve = SubResource( 2 )
 default_color = Color( 0.768627, 0.129412, 0.137255, 0.54902 )
 script = ExtResource( 9 )
 
+[node name="GrenadeL" type="Sprite" parent="Node2D/MechBody/WeaponsLeft"]
+visible = false
+position = Vector2( -21.043, -20.481 )
+rotation = 0.0401426
+scale = Vector2( 0.125, 0.125 )
+z_index = 1
+texture = ExtResource( 12 )
+script = ExtResource( 15 )
+bullet = ExtResource( 22 )
+timeBetweenShots = 0.85
+leftWeapon = true
+overheatTotal = 24.0
+incAmt = 6.0
+
+[node name="Muzzle" type="Position2D" parent="Node2D/MechBody/WeaponsLeft/GrenadeL"]
+position = Vector2( 0, -18 )
+
+[node name="Flash" type="Sprite" parent="Node2D/MechBody/WeaponsLeft/GrenadeL"]
+visible = false
+self_modulate = Color( 0.85098, 0.807843, 0, 1 )
+position = Vector2( 13.3731, -386.755 )
+texture = ExtResource( 18 )
+
 [node name="WeaponsRight" type="Node2D" parent="Node2D/MechBody"]
 position = Vector2( 185, 125 )
 rotation = -0.0599855
@@ -199,9 +240,10 @@ scale = Vector2( 10, 10 )
 position = Vector2( 18.2583, -20.4422 )
 rotation = -0.0397606
 scale = Vector2( 0.125, 0.125 )
+z_index = 1
 texture = ExtResource( 13 )
 script = ExtResource( 8 )
-poolName = "BulletPool"
+bullet = ExtResource( 20 )
 timeBetweenShots = 0.05
 overheatTotal = 30.0
 incAmt = 0.3
@@ -219,7 +261,7 @@ position = Vector2( 7.18224, -232.44 )
 visible = false
 position = Vector2( 7.18226, -232.44 )
 rotation = 0.0555417
-scale = Vector2( 7, 7 )
+scale = Vector2( 5.5, 5.5 )
 texture = ExtResource( 6 )
 
 [node name="ShotgunR" type="Sprite" parent="Node2D/MechBody/WeaponsRight"]
@@ -227,9 +269,10 @@ visible = false
 position = Vector2( 18.258, -20.442 )
 rotation = -0.0401426
 scale = Vector2( 0.125, 0.125 )
+z_index = 1
 texture = ExtResource( 13 )
 script = ExtResource( 7 )
-poolName = "ShotgunPool"
+bullet = ExtResource( 19 )
 timeBetweenShots = 1.0
 overheatTotal = 6.0
 incAmt = 1.0
@@ -264,17 +307,21 @@ rotation = -0.225753
 rotation = 0.263406
 
 [node name="Flash" type="Sprite" parent="Node2D/MechBody/WeaponsRight/ShotgunR"]
-position = Vector2( 7.27381, -232.439 )
-texture = ExtResource( 6 )
+visible = false
+self_modulate = Color( 0.862745, 0.784314, 0, 1 )
+position = Vector2( 9.25073, -348.719 )
+scale = Vector2( 1.125, 0.75 )
+texture = ExtResource( 16 )
 
 [node name="SniperR" type="Sprite" parent="Node2D/MechBody/WeaponsRight"]
 visible = false
 position = Vector2( 18.258, -20.442 )
 rotation = -0.0401426
 scale = Vector2( 0.125, 0.125 )
+z_index = 1
 texture = ExtResource( 13 )
 script = ExtResource( 5 )
-poolName = "SniperPool"
+bullet = ExtResource( 21 )
 timeBetweenShots = 1.125
 overheatTotal = 20.0
 incAmt = 5.0
@@ -289,8 +336,10 @@ position = Vector2( 7.2738, -232.439 )
 
 [node name="Flash" type="Sprite" parent="Node2D/MechBody/WeaponsRight/SniperR"]
 visible = false
-position = Vector2( 7.27381, -232.439 )
-texture = ExtResource( 6 )
+self_modulate = Color( 0.831373, 0.827451, 0, 1 )
+position = Vector2( 7.34778, -393.237 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 17 )
 
 [node name="Line2D" type="Line2D" parent="Node2D/MechBody/WeaponsRight/SniperR"]
 position = Vector2( 6.43719, -144.08 )
@@ -301,7 +350,27 @@ width_curve = SubResource( 2 )
 default_color = Color( 0.768627, 0.129412, 0.137255, 0.54902 )
 script = ExtResource( 9 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 1.5, 1.5 )
-smoothing_enabled = true
+[node name="GrenadeR" type="Sprite" parent="Node2D/MechBody/WeaponsRight"]
+visible = false
+position = Vector2( 18.258, -20.442 )
+rotation = -0.0401426
+scale = Vector2( 0.125, 0.125 )
+z_index = 1
+texture = ExtResource( 13 )
+script = ExtResource( 15 )
+bullet = ExtResource( 22 )
+timeBetweenShots = 0.85
+overheatTotal = 24.0
+incAmt = 6.0
+
+[node name="Muzzle" type="Position2D" parent="Node2D/MechBody/WeaponsRight/GrenadeR"]
+position = Vector2( 7.2738, -232.439 )
+
+[node name="Flash" type="Sprite" parent="Node2D/MechBody/WeaponsRight/GrenadeR"]
+visible = false
+self_modulate = Color( 0.85098, 0.807843, 0, 1 )
+position = Vector2( 8.14737, -401.197 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 18 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]

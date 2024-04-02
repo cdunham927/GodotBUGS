@@ -2,10 +2,8 @@ extends Node2D
 
 #enum weapons { gatlinggun, flamethrower, teslacannon, revolver, canonball, shotgun }
 #export var state = weapons[0]
+export(PackedScene) var bullet
 
-export var poolName = ""
-onready var bulletPool = get_node("/root/World/" + poolName)
-onready var world = get_node("/root/World")
 export(float) var timeBetweenShots = 0.2
 var curShotTime : float = 0
 onready var flash = $Flash
@@ -16,14 +14,14 @@ var tilNotShooting : float = 0.1
 export(bool) var leftWeapon = false
 onready var overheatUI = get_node("/root/World/UI/Overheat")
 onready var overheatUI2 = get_node("/root/World/UI/Overheat2")
-export(float) var overheatTotal = 25
+export(float) var overheatTotal = 25.0
 export(float) var incAmt = 0.5
-export(float) var recoveryModifier = 3
-var overheat : float = 0
+export(float) var recoveryModifier = 3.0
+var overheat : float = 0.0
 export(float) var recoverTime
-var recover : float = 0
+var recover : float = 0.0
 
-export(float) var lerpSpd = 15
+export(float) var lerpSpd = 15.0
 
 export(Color) var goodColor
 export(Color) var overheatColor

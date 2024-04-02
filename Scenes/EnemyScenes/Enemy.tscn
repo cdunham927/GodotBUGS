@@ -45,6 +45,7 @@ radius = 357.56
 
 [node name="Enemy" type="KinematicBody2D" groups=["enemies"]]
 pause_mode = 1
+z_index = 1
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

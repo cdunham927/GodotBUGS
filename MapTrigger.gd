@@ -1,0 +1,28 @@
+extends Node2D
+
+var hasActivated = false
+export(NodePath) var nextArea
+export(NodePath) var previousArea
+#export(Array, NodePath) var walls := []
+var next
+var prev
+
+func _ready():
+	hasActivated = false
+	next = get_node(nextArea)
+	prev = get_node(previousArea)
+
+func _on_Area2D_area_entered(area):
+	if area.is_in_group("Player") and !hasActivated:
+		print("activating")
+		next.show()
+		prev.hide()
+		hasActivated = true
+
+
+func _on_Area2D_body_entered(body):
+	if body.is_in_group("Player") and !hasActivated:
+		print("activating")
+		next.show()
+		prev.hide()
+		hasActivated = true

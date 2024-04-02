@@ -1,62 +1,74 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/PlayerScenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/EnemyScenes/Ant.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/UI/UI.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scripts/GameController.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Controllers/GameController.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/EnemyScenes/TurtleAnt.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Weapons/Bullet.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Weapons/ObjectPool.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Weapons/NewPiercingBullet.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Weapons/NewShotgunPellet.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scripts/Etc/CameraShake.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/EnemyScenes/Beehive.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Weapons/EnemyBullet.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Menus/PauseRoot.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Levels/MapTrigger.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Levels/Wall.tscn" type="PackedScene" id=14]
+
+[sub_resource type="TileSet" id=1]
 
 [node name="World" type="Node2D"]
 pause_mode = 2
 position = Vector2( 1, -7 )
 script = ExtResource( 4 )
 
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 1 )
+format = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 661, 447 )
+current = true
+zoom = Vector2( 1.5, 1.5 )
+smoothing_enabled = true
+script = ExtResource( 6 )
+maxTrauma = 0.15
+
 [node name="PauseRoot" parent="." instance=ExtResource( 12 )]
 visible = false
 margin_right = 16.0
 margin_bottom = 16.0
 
-[node name="BulletPool" parent="." instance=ExtResource( 7 )]
-objectToPool = ExtResource( 6 )
-numToPool = 15
-timeBetweenPrints = 5.0
-
-[node name="EnemyBulletPool" parent="." instance=ExtResource( 7 )]
-objectToPool = ExtResource( 11 )
-numToPool = 15
-timeBetweenPrints = 5.0
-
-[node name="ShotgunPool" parent="." instance=ExtResource( 7 )]
-objectToPool = ExtResource( 9 )
-numToPool = 15
-timeBetweenPrints = 5.0
-
-[node name="SniperPool" parent="." instance=ExtResource( 7 )]
-objectToPool = ExtResource( 8 )
-numToPool = 15
-timeBetweenPrints = 5.0
+[node name="MapTrigger" parent="." instance=ExtResource( 13 )]
+position = Vector2( 621, -68 )
+scale = Vector2( 92.9408, 1.6977 )
+nextArea = NodePath("../MapPart2")
+previousArea = NodePath("../MapPart1")
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 661, 447 )
 
+[node name="RemoteTransform2D" parent="Player" index="4"]
+remote_path = NodePath("../../Camera2D")
+
 [node name="UI" parent="." instance=ExtResource( 3 )]
 
-[node name="TurtleAnt" parent="." instance=ExtResource( 5 )]
+[node name="MapPart2" type="Node2D" parent="."]
+visible = false
+position = Vector2( -107, -505 )
+
+[node name="TurtleAnt" parent="MapPart2" instance=ExtResource( 5 )]
 position = Vector2( 1379, 87 )
 
-[node name="Ant" parent="." instance=ExtResource( 2 )]
+[node name="Ant" parent="MapPart2" instance=ExtResource( 2 )]
 position = Vector2( 165, 121 )
 
-[node name="Beehive" parent="." instance=ExtResource( 10 )]
+[node name="Beehive" parent="MapPart2" instance=ExtResource( 10 )]
 position = Vector2( 663, 9 )
 spawnTimeLow = 3.0
 spawnTimeBig = 8.0
+
+[node name="MapPart1" type="Node2D" parent="."]
+position = Vector2( -91, -713 )
+
+[node name="Wall" parent="." instance=ExtResource( 14 )]
+position = Vector2( 621, -26 )
+scale = Vector2( 13.36, 1.52 )
 
 [editable path="Player"]

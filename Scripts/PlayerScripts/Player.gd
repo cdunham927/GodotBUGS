@@ -7,7 +7,7 @@ var hp = 100
 #Stamina vars
 var stamina : float = 0
 export(float) var maxStamina
-export(float) var boostStaminaVal = 15
+export(float) var boostStaminaVal = 15.0
 export(float) var staminaDecAmt
 export(float) var staminaRecAmt
 
@@ -31,7 +31,7 @@ export(float) var timeWeBoost
 var boosting : bool = false
 
 #UI
-export(float) var lerpSpd = 15
+export(float) var lerpSpd = 15.0
 onready var healthbar = get_node("/root/World/UI/Health")
 onready var staminabar = get_node("/root/World/UI/Stamina2/Stamina")
 

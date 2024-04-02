@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/WeaponScripts/Pellet.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Weapons/Explosion.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/Weapons/bullet.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.0
+height = 8.0
+
+[node name="Grenade" type="Node2D"]
+script = ExtResource( 1 )
+yspd = 625
+xspd = 0
+objToSpawn = ExtResource( 2 )
+hitString = "enemies"
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

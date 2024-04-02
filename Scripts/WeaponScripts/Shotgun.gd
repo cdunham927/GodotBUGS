@@ -6,13 +6,16 @@ export var pellet: PackedScene
 
 func Shoot():
 	for i in muzzles.get_children():
-		var b = bulletPool.GetPoolObject()
+		var b = bullet.instance()
+		get_tree().current_scene.add_child(b)
 		b.start(muzzles.global_position, muzzles.global_rotation, accuracy)
 		#b.transform = i.global_transform
 		#b.RandomizeSpeed()
 		#b.global_rotation = i.global_rotation
 		b.show()
 		
+	get_tree().current_scene.get_node("Camera2D").add_trauma(0.2)
+	
 	#Spawn a pellet
 	var p = pellet.instance()
 	p.lPel = leftWeapon
@@ -26,3 +29,8 @@ func Shoot():
 	
 	if overheat >= overheatTotal + incAmt:
 		recover = recoverTime
+
+func ShowFlash():
+	#flash.rotation_degrees = rand_range(0, 360)
+	flash.show()
+	flashTimer = 0.05

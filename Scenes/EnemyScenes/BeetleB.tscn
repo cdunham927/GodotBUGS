@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/EnemyScripts/BeetleB.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Enemies/Round_Beetle_2.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Weapons/EnemyBullet.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 19.5 )
@@ -45,16 +46,17 @@ radius = 357.56
 
 [node name="Beetle" type="KinematicBody2D" groups=["enemies"]]
 pause_mode = 1
+z_index = 1
 script = ExtResource( 1 )
 maxHp = 300.0
 timeBetweenAttacksSmall = 2.0
 timeBetweenAttacksBig = 3.5
-poolName = "EnemyBulletPool"
 accuracy = 180.0
 chaseCooldownSmall = 1.0
 chaseCooldownBig = 2.0
 walkTimeSmall = 1.0
 walkTimeBig = 2.0
+bullet = ExtResource( 3 )
 numShots = 8
 turnSpd = 50.0
 

@@ -9,7 +9,7 @@ export var rotSpd : float = 0.03
 
 func _ready():
 	self.remove_child(lookOff)
-	world.add_child(lookOff)
+	owner.add_child(lookOff)
 
 func _process(delta):
 	move_vec = Vector2()

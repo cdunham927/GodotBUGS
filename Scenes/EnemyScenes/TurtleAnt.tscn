@@ -49,6 +49,7 @@ extents = Vector2( 25.5, 14.5 )
 
 [node name="TurtleAnt" type="KinematicBody2D" groups=["enemies"]]
 pause_mode = 1
+z_index = 1
 script = ExtResource( 1 )
 maxHp = 500.0
 spd = 125
