@@ -39,13 +39,23 @@ func _process(delta):
 	position -= transform.y * curYSpd * delta
 	position -= transform.x * curXSpd * delta * xDir
 	#position -= moveDir * delta
+	
+	if curYSpd <= 0 and spawnsObj:
+		SpawnObj()
+		queue_free()
 
 func _on_Timer_timeout():
+	SpawnObj()
 	queue_free()
 	#pass # Replace with function body.
 
 func _on_Area2D_area_entered(area):
 	if area.is_in_group(hitString) and spawnsObj:
-		var o = objToSpawn.instance
-		o.hitString = hitString
-		get_tree().current_scene.add_child(o)
+		SpawnObj()
+		queue_free()
+
+func SpawnObj():
+	var o = objToSpawn.instance()
+	o.hitString = hitString
+	o.global_position = global_position
+	get_tree().current_scene.add_child(o)
