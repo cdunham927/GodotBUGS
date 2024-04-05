@@ -18,7 +18,9 @@ colors = PoolColorArray( 0.92218, 1, 0.00390625, 0.995811, 0.898831, 0.874976, 0
 radius = 41.0122
 
 [node name="Explosion" type="Node2D"]
+scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 1 )
+atk = 165.0
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false
@@ -52,4 +54,5 @@ shape = SubResource( 1 )
 [node name="Timer" type="Timer" parent="."]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

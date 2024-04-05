@@ -10,6 +10,7 @@ yspd = 0
 lerpSpd = 5
 xspd = 125
 rotSpd = 200
+hitString = "xxx"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

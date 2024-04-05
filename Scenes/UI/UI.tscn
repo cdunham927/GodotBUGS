@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Fonts/BrokenFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Themes/HpTheme.tres" type="StyleBox" id=2]
 [ext_resource path="res://Sprites/Etc/CircleHollowSmol2.png" type="Texture" id=3]
 [ext_resource path="res://Themes/StaminaTheme.tres" type="StyleBox" id=4]
 [ext_resource path="res://Themes/ProgressBarBG.tres" type="StyleBox" id=5]
-
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.145098, 0.145098, 0.145098, 1 )
@@ -35,7 +34,14 @@ corner_radius_bottom_left = 3
 shadow_size = 3
 shadow_offset = Vector2( -2, 2 )
 
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.87451, 0.870588, 0, 0.168627 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 0.6 )
+
 [node name="UI" type="CanvasLayer"]
+layer = 2
 
 [node name="Health" type="ProgressBar" parent="."]
 margin_left = 14.0
@@ -121,3 +127,31 @@ texture_progress = ExtResource( 3 )
 fill_mode = 4
 tint_under = Color( 0, 0, 0, 1 )
 tint_progress = Color( 0.87451, 0.870588, 0, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+visible = false
+margin_left = 19.0
+margin_top = 600.0
+margin_right = 144.0
+margin_bottom = 760.0
+rect_rotation = -89.9999
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+margin_right = 71.0
+margin_bottom = 160.0
+
+[node name="NewOverheat" type="ProgressBar" parent="HBoxContainer/CenterContainer"]
+margin_right = 71.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 71, 160 )
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+max_value = 10.0
+value = 4.84
+percent_visible = false
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+margin_left = 75.0
+margin_right = 125.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 50, 45 )

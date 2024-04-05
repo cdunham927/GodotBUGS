@@ -8,6 +8,8 @@ export var rotLerpSpd = 3
 var curRot = 3
 export var xspd = 5
 export var rotSpd = 15
+export var randRot = false
+var randDir = 1
 
 export var lPel = false
 
@@ -20,6 +22,11 @@ func _ready():
 	curXSpd = xspd
 	curYSpd = yspd
 	curRot = rotSpd
+	
+	if randf() > 0.5:
+		randDir = 1
+	else:
+		randDir = -1
 
 func _process(delta):
 	curYSpd = lerp(curYSpd, 0, lerpSpd * delta)
@@ -31,21 +38,27 @@ func _process(delta):
 	if lPel:
 		#position.x -= curXSpd * delta
 		xDir = -1
-		rotation_degrees -= curRot * delta
+		#$Sprite.rotation_degrees -= curRot * delta
 	else:
 		xDir = 1
 		#position.x += curXSpd * delta
-		rotation_degrees += curRot * delta
+		#$Sprite.rotation_degrees += curRot * delta
+	if randRot:
+		$Sprite.rotation_degrees += curRot * delta * randDir
+	else:
+		$Sprite.rotation_degrees += curRot * delta
 	position -= transform.y * curYSpd * delta
 	position -= transform.x * curXSpd * delta * xDir
 	#position -= moveDir * delta
 	
-	if curYSpd <= 0 and spawnsObj:
-		SpawnObj()
-		queue_free()
+	#if curYSpd <= 0:
+	#	if spawnsObj:
+	#		SpawnObj()
+		#queue_free()
 
 func _on_Timer_timeout():
-	SpawnObj()
+	if spawnsObj:
+		SpawnObj()
 	queue_free()
 	#pass # Replace with function body.
 
@@ -59,3 +72,13 @@ func SpawnObj():
 	o.hitString = hitString
 	o.global_position = global_position
 	get_tree().current_scene.add_child(o)
+
+
+func _on_Area2D_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	pass # Replace with function body.
+
+
+func _on_Area2D_body_entered(body):
+	if body.is_in_group(hitString) and spawnsObj:
+		SpawnObj()
+		queue_free()

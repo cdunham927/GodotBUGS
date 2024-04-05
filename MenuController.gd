@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 #onready var menu = load("res://menu.tscn").instance()
 onready var world = load("res://Scenes/Levels/World.tscn")
