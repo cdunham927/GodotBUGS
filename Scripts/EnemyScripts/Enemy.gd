@@ -34,6 +34,9 @@ var curAimOffsetTimer : float
 var curAimOffset : float
 
 var blood = load("res://Scenes/Particles/Blood.tscn")
+
+var stunDur = 0.0
+
 	
 func _ready():
 	Setup()
@@ -67,6 +70,9 @@ func _physics_process(delta):
 	if curAimOffsetTimer <= 0:
 		curAimOffsetTimer = aimOffsetTimer
 		curAimOffset = rand_range(-aimOffset, aimOffset)
+		
+	if stunDur > 0:
+		stunDur -= delta
 		
 	match (curState):
 		States.idle:
@@ -168,6 +174,10 @@ func play_anim(name):
 
 #func _on_Head_body_entered(body):
 	#Damage(body.atk / 3)
+	
+func Stun(amt):
+	stunDur += amt
+	pass
 
 func ChangeState(newState):
 	curState = newState
