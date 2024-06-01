@@ -4,6 +4,7 @@ export(int) var numShots = 3
 
 export var turnSpd : float = 5
 var curTurn : float
+export(PackedScene) var bullet
 
 func Chase(d):
 	rotation_degrees += curTurn * d
@@ -44,9 +45,9 @@ func Attack():
 	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 
 func Shoot():
-	var b = bulletPool.GetPoolObject()
-	b.atk = atk
+	var b = bullet.instance()
 	b.start(global_position, global_rotation, accuracy)
-	world.add_child(b)
+	b.atk = atk
+	get_tree().current_scene.add_child(b)
 	b.show()
 	

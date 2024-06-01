@@ -23,6 +23,7 @@ export var spawnsOnDeath = false
 var hasSpawned = false
 export var deathEnemy: PackedScene
 
+onready var anim = $AnimationPlayer
 
 var blood = load("res://Scenes/Blood.tscn")
 	
@@ -52,7 +53,13 @@ func _process(delta):
 			for i in toSpawnNow:
 				SpawnEnemy()
 
+func play_anim(name):
+	if anim.current_animation == name:
+		return
+	anim.play(name)
+	
 func Damage(amt):
+	play_anim("Hit")
 	inSight = true
 	BloodSpray()
 	hp -= amt

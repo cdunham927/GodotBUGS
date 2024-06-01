@@ -37,11 +37,46 @@ var blood = load("res://Scenes/Particles/Blood.tscn")
 
 var stunDur = 0.0
 
-	
+#procedural animation stuff
+onready var leg = $Legs/Leg
+onready var leg2 = $Legs/Leg2
+onready var leg3 = $Legs/Leg3
+onready var leg4 = $Legs/Leg4
+onready var leg5 = $Legs/Leg5
+onready var leg6 = $Legs/Leg6
+onready var legUpd = $LegUpdaters/LegUpd
+onready var legUpd2 = $LegUpdaters/LegUpd2
+onready var legUpd3 = $LegUpdaters/LegUpd3
+onready var legUpd4 = $LegUpdaters/LegUpd4
+onready var legUpd5 = $LegUpdaters/LegUpd5
+onready var legUpd6 = $LegUpdaters/LegUpd6
+
+var upd1 : Vector2
+var upd2 : Vector2
+var upd3 : Vector2
+var upd4 : Vector2
+var upd5 : Vector2
+var upd6 : Vector2
+
+export var maxLegDist : float = 2
+
 func _ready():
 	Setup()
 	
 func Setup():
+	if legUpd != null:
+		upd1 = legUpd.global_position
+	if legUpd2 != null:
+		upd2 = legUpd2.global_position
+	if legUpd3 != null:
+		upd3 = legUpd3.global_position
+	if legUpd4 != null:
+		upd4 = legUpd4.global_position
+	if legUpd5 != null:
+		upd5 = legUpd5.global_position
+	if legUpd6 != null:
+		upd6 = legUpd6.global_position
+	
 	hp = maxHp
 	curState = States.idle
 	set_player()
@@ -49,7 +84,7 @@ func Setup():
 	#params: name, blend, play speed
 	
 	if (anim != null):
-		anim.play("move", 1, 2)
+		anim.play("idle", 1, 2)
 	
 	rotation_degrees = rand_range(0, 360)
 	
@@ -127,6 +162,7 @@ func SwitchState(newState):
 
 func Damage(amt):
 	#print("Damaged")
+	play_anim("Hit")
 	if curState == States.idle or curState == States.patrol:
 		ChangeState(States.chase)
 	BloodSpray()
@@ -158,6 +194,16 @@ func SpawnBlood():
 		blood_instance.rotation = global_position.angle_to_point(player.global_position)
 	#blood_instance.emitting = true
 	pass
+	
+#func _process(delta):
+#	if leg != null and legUpd != null:
+#		leg.step(legUpd.global_position)
+#	if leg2 != null and legUpd2 != null:
+#		leg2.step(legUpd2.global_position)
+#	if leg3 != null and legUpd3 != null:
+#		leg3.step(legUpd3.global_position)
+#	if leg4 != null and legUpd4 != null:
+#		leg4.step(legUpd4.global_position)
 
 func kill():
 	#SpawnBlood()
