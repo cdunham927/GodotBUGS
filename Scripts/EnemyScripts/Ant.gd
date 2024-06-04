@@ -1,6 +1,6 @@
 extends "res://Scripts/EnemyScripts/Enemy.gd"
 
-func _process(delta):
+func Animate():
 	if leg != null and legUpd != null:
 		leg.step(upd1)
 		if leg.global_position.distance_to(upd1) > maxLegDist:
@@ -26,13 +26,3 @@ func _process(delta):
 		leg6.step(upd6)
 		if leg6.global_position.distance_to(upd6) > maxLegDist:
 			upd6 = legUpd6.global_position
-
-func _on_Timer_timeout():
-	#upd1 = legUpd.global_position
-	#upd2 = legUpd2.global_position
-	#upd3 = legUpd3.global_position
-	#upd4 = legUpd4.global_position
-	#upd5 = legUpd5.global_position
-	#upd6= legUpd6.global_position
-	
-	pass

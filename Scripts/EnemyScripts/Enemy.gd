@@ -63,6 +63,12 @@ export var maxLegDist : float = 2
 func _ready():
 	Setup()
 	
+func Animate():
+	pass
+	
+func _process(delta):
+	Animate()
+	
 func Setup():
 	if legUpd != null:
 		upd1 = legUpd.global_position

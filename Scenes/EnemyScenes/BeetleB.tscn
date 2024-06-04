@@ -95,9 +95,10 @@ chaseCooldownSmall = 1.0
 chaseCooldownBig = 2.0
 walkTimeSmall = 1.0
 walkTimeBig = 2.0
+maxLegDist = 42.0
 bullet = ExtResource( 3 )
 numShots = 8
-turnSpd = 50.0
+turnSpd = 17.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -0.5 )
@@ -142,16 +143,16 @@ flipped = false
 [node name="LegUpdaters" type="Node2D" parent="."]
 
 [node name="LegUpd" type="Position2D" parent="LegUpdaters"]
-position = Vector2( 20, -15 )
+position = Vector2( 18, -22 )
 
 [node name="LegUpd2" type="Position2D" parent="LegUpdaters"]
-position = Vector2( 20, 17 )
+position = Vector2( -22, 36 )
 
 [node name="LegUpd3" type="Position2D" parent="LegUpdaters"]
-position = Vector2( -22, -15 )
+position = Vector2( -18, -22 )
 
 [node name="LegUpd4" type="Position2D" parent="LegUpdaters"]
-position = Vector2( -22, 17 )
+position = Vector2( 18, 36 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

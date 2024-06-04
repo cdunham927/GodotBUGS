@@ -182,10 +182,5 @@ position = Vector2( -90, 8 )
 [node name="LegUpd6" type="Position2D" parent="LegUpdaters"]
 position = Vector2( -25, 32 )
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
-
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
