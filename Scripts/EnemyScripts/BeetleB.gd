@@ -23,7 +23,7 @@ func Animate():
 	if leg != null and legUpd != null:
 		leg.step(upd1)
 		if leg.global_position.distance_to(upd1) > maxLegDist:
-			print(leg.global_position.distance_to(upd1))
+			#print(leg.global_position.distance_to(upd1))
 			upd1 = legUpd.global_position
 	if leg2 != null and legUpd2 != null:
 		leg2.step(upd2)

@@ -15,6 +15,7 @@ var lastWeaponLeft := 0
 var lastWeaponRight := 0
 
 export var rotSpd : float = 15
+var controller : bool = false
 
 func _ready():
 	curLeft = 0
@@ -49,8 +50,15 @@ func SwitchWeaponRight():
 	#	weaponChildren[curRight].Activate()
 
 func _process(delta):
-	var look_vec = get_global_mouse_position() - global_position
-	global_rotation = lerp_angle(global_rotation, atan2(look_vec.y, look_vec.x) + offsetZ, rotSpd)
+	#Controller aiming
+	if controller:
+		var aim_dir = Vector2(Input.get_axis("aim_left", "aim_right"), Input.get_axis("aim_up", "aim_down")) 
+		if aim_dir != Vector2.ZERO:
+			rotation = lerp_angle(rotation, aim_dir.angle(), 0.5)
+	else:
+		#Mouse aiming
+		var look_vec = get_global_mouse_position() - global_position
+		global_rotation = lerp_angle(global_rotation, atan2(look_vec.y, look_vec.x) + offsetZ, rotSpd)
 	
 	if Input.is_action_just_pressed("switch_left"):
 		if curLeft + 1 < unlockedLeft.size():

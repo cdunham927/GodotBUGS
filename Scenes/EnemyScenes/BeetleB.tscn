@@ -36,6 +36,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ ExtResource( 5 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Legs:material")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 5 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "idle"
@@ -47,6 +59,18 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Legs:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ ExtResource( 5 ) ]
@@ -121,6 +145,7 @@ anims/move = SubResource( 4 )
 shape = SubResource( 5 )
 
 [node name="Legs" type="Node2D" parent="."]
+material = ExtResource( 5 )
 
 [node name="Leg" parent="Legs" instance=ExtResource( 6 )]
 position = Vector2( 20, -4 )

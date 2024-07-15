@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Animations/Hit.tres" type="Animation" id=1]
 [ext_resource path="res://Sprites/Enemies/Round_Beetle_1.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/EnemyScripts/BeetleA.gd" type="Script" id=3]
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=4]
+[ext_resource path="res://Scenes/Weapons/EnemyBullet.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/EnemyScenes/Legs/BeetleBLeg.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.5, 27.5 )
@@ -34,6 +36,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ ExtResource( 4 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Legs:material")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 4 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "idle"
@@ -45,6 +59,18 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Legs:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ ExtResource( 4 ) ]
@@ -97,7 +123,9 @@ walkTimeSmall = 1.5
 walkTimeBig = 3.0
 aimOffset = 3.0
 aimOffsetTimer = 5.0
+maxLegDist = 42.0
 numShots = 5
+bullet = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 2.5 )
@@ -118,6 +146,44 @@ anims/move = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 5 )
+
+[node name="Legs" type="Node2D" parent="."]
+material = ExtResource( 4 )
+scale = Vector2( 0.65, 0.65 )
+
+[node name="Leg" parent="Legs" instance=ExtResource( 6 )]
+position = Vector2( 23.3333, -1.66667 )
+z_index = -1
+
+[node name="Leg2" parent="Legs" instance=ExtResource( 6 )]
+position = Vector2( 16.9231, 21.5385 )
+scale = Vector2( 0.3, 0.3 )
+z_index = -1
+
+[node name="Leg3" parent="Legs" instance=ExtResource( 6 )]
+position = Vector2( -23.0769, -1.53846 )
+z_index = -1
+flipped = false
+
+[node name="Leg4" parent="Legs" instance=ExtResource( 6 )]
+position = Vector2( -16.9231, 21.5385 )
+scale = Vector2( 0.3, 0.3 )
+z_index = -1
+flipped = false
+
+[node name="LegUpdaters" type="Node2D" parent="."]
+
+[node name="LegUpd" type="Position2D" parent="LegUpdaters"]
+position = Vector2( 30, -29 )
+
+[node name="LegUpd2" type="Position2D" parent="LegUpdaters"]
+position = Vector2( -30, 50 )
+
+[node name="LegUpd3" type="Position2D" parent="LegUpdaters"]
+position = Vector2( -28, -29 )
+
+[node name="LegUpd4" type="Position2D" parent="LegUpdaters"]
+position = Vector2( 27, 51 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

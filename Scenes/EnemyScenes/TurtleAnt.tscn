@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/EnemyScripts/TurtleAnt.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Enemies/Ant_5-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Etc/Rectangle.png" type="Texture" id=3]
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=4]
 [ext_resource path="res://Animations/Hit.tres" type="Animation" id=5]
+[ext_resource path="res://Scenes/EnemyScenes/Legs/AntLeg.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.5, 19 )
@@ -47,6 +48,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [ ExtResource( 4 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Head:material")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Legs:material")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 4 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "idle"
@@ -58,6 +83,30 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Legs:material")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ ExtResource( 4 ) ]
@@ -108,6 +157,7 @@ timeBetweenAttacksSmall = 1.5
 timeBetweenAttacksBig = 2.0
 aimOffset = 1.0
 aimOffsetTimer = 5.0
+maxLegDist = 117.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, 11 )
@@ -134,10 +184,12 @@ anims/move = SubResource( 4 )
 shape = SubResource( 6 )
 
 [node name="Head" type="Area2D" parent="." groups=["turtle"]]
+material = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Head"]
 modulate = Color( 0.690196, 0.360784, 0.0941176, 1 )
 material = ExtResource( 4 )
+use_parent_material = true
 position = Vector2( 0.499999, -20.5 )
 scale = Vector2( 2.83333, 0.805556 )
 texture = ExtResource( 3 )
@@ -146,6 +198,56 @@ texture = ExtResource( 3 )
 pause_mode = 1
 position = Vector2( 0.5, -20.5 )
 shape = SubResource( 5 )
+
+[node name="Legs" type="Node2D" parent="."]
+material = ExtResource( 4 )
+
+[node name="Leg" parent="Legs" instance=ExtResource( 6 )]
+material = ExtResource( 4 )
+position = Vector2( 6, -3 )
+
+[node name="Leg2" parent="Legs" instance=ExtResource( 6 )]
+material = ExtResource( 4 )
+position = Vector2( 3, 3 )
+flipped = false
+
+[node name="Leg3" parent="Legs" instance=ExtResource( 6 )]
+material = ExtResource( 4 )
+position = Vector2( 8, 23 )
+
+[node name="Leg4" parent="Legs" instance=ExtResource( 6 )]
+material = ExtResource( 4 )
+position = Vector2( -6, -3 )
+flipped = false
+
+[node name="Leg5" parent="Legs" instance=ExtResource( 6 )]
+material = ExtResource( 4 )
+position = Vector2( -3, 3 )
+
+[node name="Leg6" parent="Legs" instance=ExtResource( 6 )]
+material = ExtResource( 4 )
+position = Vector2( -8, 23 )
+flipped = false
+
+[node name="LegUpdaters" type="Node2D" parent="."]
+
+[node name="LegUpd" type="Position2D" parent="LegUpdaters"]
+position = Vector2( 30, -17 )
+
+[node name="LegUpd2" type="Position2D" parent="LegUpdaters"]
+position = Vector2( 89, 8 )
+
+[node name="LegUpd3" type="Position2D" parent="LegUpdaters"]
+position = Vector2( 22, 32 )
+
+[node name="LegUpd4" type="Position2D" parent="LegUpdaters"]
+position = Vector2( -25, -17 )
+
+[node name="LegUpd5" type="Position2D" parent="LegUpdaters"]
+position = Vector2( -90, 8 )
+
+[node name="LegUpd6" type="Position2D" parent="LegUpdaters"]
+position = Vector2( -25, 32 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

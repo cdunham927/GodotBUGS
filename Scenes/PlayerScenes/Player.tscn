@@ -263,7 +263,6 @@ position = Vector2( 37.8384, -204.216 )
 [node name="Area2D" type="Area2D" parent="Node2D/MechBody/WeaponsLeft/FlamesL"]
 position = Vector2( 313.807, -1064.43 )
 rotation = -0.189929
-scale = Vector2( 1, 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/MechBody/WeaponsLeft/FlamesL/Area2D"]
 position = Vector2( -387.815, 833.265 )
