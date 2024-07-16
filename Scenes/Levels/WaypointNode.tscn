@@ -11,7 +11,7 @@ _data = {
 
 [sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 1, -3, -38.4222, 15.8807, 38.4222, -15.8807, 102, -19, -139.298, -6.12263, 139.298, 6.12263, 278, -70 )
+"points": PoolVector2Array( 0, 0, 0, 0, 1, -3, -38.4222, 15.8807, 38.4222, -15.8807, 102, -19, -139.298, -6.12263, 139.298, 6.12263, 303, -84 )
 }
 
 [sub_resource type="Curve2D" id=3]
@@ -24,8 +24,8 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 1, -3, -19.5228, -78.6184, 19.5228, 78.6184, 11, 100, 0.192132, -9.88335, -0.192132, 9.88335, 47, 193, 10.3023, -38.0159, -10.3023, 38.0159, 51, 287 )
 }
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 44.5, 35 )
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 21.5, 18.5 )
 
 [node name="WaypointNode" type="Node2D"]
 script = ExtResource( 1 )
@@ -86,8 +86,8 @@ runSpd = 150
 [node name="Area2D" type="Area2D" parent="." groups=["waypoint"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0.5, 0 )
-shape = SubResource( 5 )
+position = Vector2( 0.5, -0.5 )
+shape = SubResource( 10 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

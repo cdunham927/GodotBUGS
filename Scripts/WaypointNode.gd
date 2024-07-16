@@ -11,6 +11,8 @@ export var currentWaypoint = false
 
 export(PackedScene) var levelToLoad
 
+export var moving : bool = false
+
 func _ready():
 	player = get_node("/root/World/OverworldPlayer")
 	
@@ -29,6 +31,7 @@ func _process(delta):
 		player.get_parent().remove_child(player)
 		leftWaypoint.add_child(player)
 		leftWaypoint.active = true
+		moving = true
 		currentWaypoint = false
 	
 	if player != null and !rightWaypoint.active and currentWaypoint and Input.is_action_just_pressed("move_right"):
@@ -37,6 +40,7 @@ func _process(delta):
 		player.get_parent().remove_child(player)
 		rightWaypoint.add_child(player)
 		rightWaypoint.active = true
+		moving = true
 		currentWaypoint = false
 	
 	if player != null and !upperWaypoint.active and currentWaypoint and Input.is_action_just_pressed("move_up"):
@@ -45,6 +49,7 @@ func _process(delta):
 		player.get_parent().remove_child(player)
 		upperWaypoint.add_child(player)
 		upperWaypoint.active = true
+		moving = true
 		currentWaypoint = false
 	
 	if player != null and !lowerWaypoint.active and currentWaypoint and Input.is_action_just_pressed("move_down"):
@@ -53,15 +58,16 @@ func _process(delta):
 		player.get_parent().remove_child(player)
 		lowerWaypoint.add_child(player)
 		lowerWaypoint.active = true
+		moving = true
 		currentWaypoint = false
 		
-	if player != null and currentWaypoint == true and Input.is_action_just_pressed("select"):
+	if player != null and currentWaypoint and Input.is_action_just_pressed("select"):
 		print("Loading level")
 		LoadLevel()
 
 
 func _on_Area2D_body_entered(body):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") and currentWaypoint == false and moving == false:
 		#print("Damaged by: ", curAtk)
 		print("Setting new waypoint")
 		currentWaypoint = true
@@ -72,7 +78,7 @@ func LoadLevel():
 	var w = get_node("/root/World")
 	w.queue_free()
 
-#func _on_Area2D_body_exited(body):
-#	if body.is_in_group("Player"):
-#		#print("Damaged by: ", curAtk)
-#		pass
+func _on_Area2D_body_exited(body):
+	if body.is_in_group("Player"):
+		#currentWaypoint = false
+		pass

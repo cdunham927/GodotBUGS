@@ -168,7 +168,8 @@ func SwitchState(newState):
 
 func Damage(amt):
 	#print("Damaged")
-	play_anim("Hit")
+	if $AnimationPlayer.current_animation != "AttackIndicator":
+		play_anim("Hit")
 	if curState == States.idle or curState == States.patrol:
 		ChangeState(States.chase)
 	BloodSpray()

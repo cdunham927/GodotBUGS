@@ -7,17 +7,19 @@ var parentWaypoint
 
 func _ready():
 	parentWaypoint = get_parent().get_parent()
-	player = get_node("/root/World/TopDownPlayer")
+	player = get_node("/root/World/OverworldPlayer")
 
 func _process(delta):
 	if player == null:
-		player = get_node("/root/World/TopDownPlayer")
+		player = get_node("/root/World/OverworldPlayer")
 	
 	if player != null and active:
 		set_offset(get_offset() + runSpd * delta)
 		
 		if unit_offset == 1:
-			parentWaypoint.currentWaypoint = null
+			parentWaypoint.moving = false
+			#parentWaypoint.currentWaypoint = null
+			active = false
 			pass
 	#progress += runSpd * delta
 	
