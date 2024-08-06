@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/EnemyScripts/TurtleAnt.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Enemies/Ant_5-Sheet.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=4]
 [ext_resource path="res://Animations/Hit.tres" type="Animation" id=5]
 [ext_resource path="res://Scenes/EnemyScenes/Legs/AntLeg.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Particles/BloodSpray.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Particles/Stun.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.5, 19 )
@@ -150,14 +152,16 @@ extents = Vector2( 25.5, 14.5 )
 pause_mode = 1
 z_index = 1
 script = ExtResource( 1 )
-maxHp = 500.0
-spd = 125
-atk = 50
+maxHp = 750.0
+spd = 85
+atk = 40
 timeBetweenAttacksSmall = 1.5
 timeBetweenAttacksBig = 2.0
-aimOffset = 1.0
-aimOffsetTimer = 5.0
+stunParts = ExtResource( 8 )
 maxLegDist = 117.0
+closestDistance = 150.0
+lookAtSpd = 0.625
+fireDmg = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, 11 )
@@ -248,6 +252,9 @@ position = Vector2( -90, 8 )
 
 [node name="LegUpd6" type="Position2D" parent="LegUpdaters"]
 position = Vector2( -25, 32 )
+
+[node name="BloodSpray" parent="." instance=ExtResource( 7 )]
+emitting = false
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

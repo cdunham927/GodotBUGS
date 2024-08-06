@@ -37,12 +37,17 @@ func _ready():
 		Activate()
 
 func Activate():
-	if leftWeapon:
+	if leftWeapon and overheatUI != null:
 		overheatUI.max_value = overheatTotal
 	else:
-		overheatUI2.max_value = overheatTotal
+		if overheatUI2 != null:
+			overheatUI2.max_value = overheatTotal
 
 func _process(delta):
+	if overheatUI == null:
+		overheatUI = get_node("/root/World2/UI/Overheat")
+	if overheatUI2 == null:
+		overheatUI2 = get_node("/root/World2/UI/Overheat2")
 	#var look_vec = get_global_mouse_position() - global_position
 	#rotation_degrees = clamp(atan2(look_vec.y, look_vec.x), -rotationConstraint, rotationConstraint)
 	#rotation_degrees = atan2(look_vec.y, look_vec.x)
@@ -69,31 +74,33 @@ func _process(delta):
 	#if tilNotShooting <= 0:
 	#	shooting = false
 	
-		if overheat <= 0:
+		if overheat <= 0 and overheatUI != null and overheatUI2 != null:
 			if leftWeapon:
 				overheatUI.hide()
 			else:
 				overheatUI2.hide()
 		else:
-			if leftWeapon:
-				overheatUI.show()
-			else:
-				overheatUI2.show()
+			if overheatUI != null and overheatUI2 != null:
+				if leftWeapon:
+					overheatUI.show()
+				else:
+					overheatUI2.show()
 
 		if recover <= 0 and tilNotShooting <= 0 and overheat > 0:
 			overheat -= delta * recoveryModifier
 	#Decrement nums
-		if recover > 0:
+		if recover > 0 and overheatUI != null and overheatUI2 != null:
 			if leftWeapon:
 				overheatUI.tint_progress = overheatColor
 			else:
 				overheatUI2.tint_progress = overheatColor
 			recover -= delta
 		else:
-			if leftWeapon:
-				overheatUI.tint_progress = goodColor
-			else:
-				overheatUI2.tint_progress = goodColor
+			if overheatUI != null and overheatUI2 != null:
+				if leftWeapon:
+					overheatUI.tint_progress = goodColor
+				else:
+					overheatUI2.tint_progress = goodColor
 		if tilNotShooting > 0:
 			tilNotShooting -= delta
 		if curShotTime > 0:
@@ -103,10 +110,11 @@ func _process(delta):
 		else:
 			flash.hide()
 	
-		if leftWeapon:
+		if leftWeapon and overheatUI != null:
 			 overheatUI.value = lerp(overheatUI.value, overheat, lerpSpd * delta)
 		else:
-			 overheatUI2.value = lerp(overheatUI2.value, overheat, lerpSpd * delta)
+			if overheatUI2 != null:
+				overheatUI2.value = lerp(overheatUI2.value, overheat, lerpSpd * delta)
 
 func Shoot():
 	pass

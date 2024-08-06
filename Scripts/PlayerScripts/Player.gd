@@ -39,16 +39,36 @@ export var iframesTime : float = 0.3
 var iframes : float = 0
 
 var move_vec : Vector2
+var controller_aim : Vector2
 var boost_vec : Vector2
 
+#Spark hit particles
+export(PackedScene) var sparkParts
+
+#Animation
+onready var anim = $AnimationPlayer
+
+#Status effects
+var inFire : bool = false
+export(float) var fireDmg = 1.75
+export(float) var fireThreshold
+var curFire : float = 0.0
+
 func _ready():
+	if healthbar == null:
+		healthbar = get_node("/root/World2/UI/Health")
+	if staminabar == null:
+		staminabar = get_node("/root/World2/UI/Stamina2/Stamina")
+	
 	hp = maxHp
 	stamina = maxStamina
 	#yield(get_tree(), "idle_frame")
-	healthbar.value = maxHp
-	healthbar.max_value = maxHp
-	staminabar.max_value = maxStamina
-	staminabar.value = maxStamina
+	if healthbar != null:
+		healthbar.value = maxHp
+		healthbar.max_value = maxHp
+	if staminabar != null:
+		staminabar.max_value = maxStamina
+		staminabar.value = maxStamina
 	curSpd = regSpd
 	#SetPlayer()
 	
@@ -57,15 +77,19 @@ func _ready():
 
 func _physics_process(delta):
 	move_vec = Vector2()
-	if Input.is_action_pressed("move_up"):
-		move_vec.y -= 1
-	if Input.is_action_pressed("move_down"):
-		move_vec.y += 1
-	if Input.is_action_pressed("move_left"):
-		move_vec.x -= 1
-	if Input.is_action_pressed("move_right"):
-		move_vec.x += 1
-
+	#if Input.is_action_pressed("move_up"):
+	#	move_vec.y -= 1
+	#if Input.is_action_pressed("move_down"):
+	#	move_vec.y += 1
+	#if Input.is_action_pressed("move_left"):
+	#	move_vec.x -= 1
+	#if Input.is_action_pressed("move_right"):
+	#	move_vec.x += 1
+		
+	#controller_move_vec = Vector2()
+	move_vec.x = Input.get_axis("move_left", "move_right")
+	move_vec.y = Input.get_axis("move_up", "move_down")
+		
 	move_vec = move_vec.normalized()
 	
 	#var lastMove = 
@@ -110,10 +134,12 @@ func _physics_process(delta):
 	if iframes > 0:
 		iframes -= delta
 
-	healthbar.value = lerp(healthbar.value, hp, lerpSpd * delta)
-	staminabar.value = lerp(staminabar.value, stamina, lerpSpd * delta)
+	if healthbar != null:
+		healthbar.value = lerp(healthbar.value, hp, lerpSpd * delta)
+	if staminabar != null:
+		staminabar.value = lerp(staminabar.value, stamina, lerpSpd * delta)
 	
-	if staminabar.value > boostStaminaVal:
+	if staminabar != null and staminabar.value > boostStaminaVal:
 		pass
 	
 	#if Engine.is_editor_hint() == true:
@@ -131,6 +157,20 @@ func _physics_process(delta):
 		move_and_collide(move_vec * curSpd * delta)
 	if boost_vec != Vector2(0, 0):
 		 move_and_collide(boost_vec * boostSpd * delta)
+		
+	#Fire status effect
+	#############
+	#######
+	##
+	######
+	#############
+	if inFire and curFire <= fireThreshold:
+		curFire += delta
+		
+		FireDamage()
+		
+	if curFire > 0 and !inFire:
+		curFire -= delta
 
 func Boost():
 	#move_and_collide(move_vec * boostSpd)
@@ -140,13 +180,48 @@ func Boost():
 	boostTimer = timeBetweenBoosts + timeWeBoost
 	curBoostTimer = timeWeBoost
 
-func Damage(amt):
+func Damage(amt, pos = global_position):
 	if iframes <= 0:
 		hp -= amt
 		iframes = iframesTime
+		
+		play_anim("hit")
+		SpawnPart(pos)
 	
 	if hp <= 0:
 		Kill()
+
+#Fire damage should start to overheat our weapons too
+################
+############
+######
+##
+#####
+###########
+###############
+func FireDamage():
+	#if iframes <= 0:
+	hp -= fireDmg
+		#iframes = iframesTime
+		
+		#play_anim("hit")
+	
+	if hp <= 0:
+		Kill()
+		
+
+func play_anim(name):
+	if anim.current_animation == name:
+		return
+	anim.play(name)
+
+func SpawnPart(pos):
+	#Spawn particles
+	var s = sparkParts.instance()
+	s.emitting = true
+	get_tree().current_scene.add_child(s)
+	s.global_position = pos
+	#s.get_node("Timer").wait_time = stunTime
 
 func Heal(amt):
 	#Make sure we dont overheal

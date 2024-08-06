@@ -35,7 +35,19 @@ var curAimOffset : float
 
 var blood = load("res://Scenes/Particles/Blood.tscn")
 
+#Current stun time
+var curStun = 0.0
+#How long we're stunned
+export(float) var stunTime = 7.0
+#How many hits we're at currently
 var stunDur = 0.0
+#How many hits we take before we get stunned
+export(float) var stunThreshold = 3.0
+#Stun particles
+export(PackedScene) var stunParts
+
+
+export(float) var flashMinDmg = 5.0
 
 #procedural animation stuff
 onready var leg = $Legs/Leg
@@ -59,6 +71,13 @@ var upd5 : Vector2
 var upd6 : Vector2
 
 export var maxLegDist : float = 2
+
+export(float) var closestDistance = 10.0
+export(float) var lookAtSpd = 10.0
+
+#Status effects
+var inFire : bool = false
+export(float) var fireDmg = 1.75
 
 func _ready():
 	Setup()
@@ -102,7 +121,7 @@ func _physics_process(delta):
 	if player == null:
 		return
 		
-	if attackCools > 0:
+	if attackCools > 0 and curStun <= 0:
 		attackCools -= delta
 		
 	if curAimOffsetTimer > 0:
@@ -112,8 +131,21 @@ func _physics_process(delta):
 		curAimOffsetTimer = aimOffsetTimer
 		curAimOffset = rand_range(-aimOffset, aimOffset)
 		
-	if stunDur > 0:
-		stunDur -= delta
+	if curStun > 0:
+		curStun -= delta
+		#Stop enemy from moving or attacking
+		
+	if stunDur >= stunThreshold:
+		
+		#Spawn particles
+		var s = stunParts.instance()
+		s.emitting = true
+		get_tree().current_scene.add_child(s)
+		s.global_position = global_position
+		s.get_node("Timer").wait_time = stunTime
+		
+		curStun = stunTime
+		stunDur = 0
 		
 	match (curState):
 		States.idle:
@@ -140,7 +172,10 @@ func _physics_process(delta):
 		if coll.name == "Player" and player.iframes <= 0 and attackCools <= 0:
 			#print("Hitting player")
 			attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
-			coll.Damage(atk)
+			coll.Damage(atk, coll.global_position)
+			
+	if inFire:
+		FireDamage()
  
 func Patrol(d):
 	pass
@@ -158,37 +193,43 @@ func Attack():
 	pass
 
 func Chase(d):
-	var vec_to_player = player.global_position - global_position
-	vec_to_player = vec_to_player.normalized()
-	global_rotation = atan2(vec_to_player.y, vec_to_player.x) + 89.5
-	move_and_collide(vec_to_player * spd * d)
+	if curStun <= 0:
+		var vec_to_player = player.global_position - global_position
+		vec_to_player = vec_to_player.normalized()
+		#global_rotation = atan2(vec_to_player.y, vec_to_player.x) + 89.5
+		global_rotation = lerp_angle(global_rotation, atan2(vec_to_player.y, vec_to_player.x) + 89.5, lookAtSpd * d)
+	
+		var dis = global_position.distance_to(player.global_position)
+		if dis >= closestDistance:
+			move_and_collide(vec_to_player * spd * d)
 
 func SwitchState(newState):
 	curState = newState
 
 func Damage(amt):
 	#print("Damaged")
+	if $AnimationPlayer.current_animation != "AttackIndicator" and amt >= flashMinDmg:
+		play_anim("Hit")
+	if curState == States.idle or curState == States.patrol:
+		ChangeState(States.chase)
+	hp -= amt
+	
+	if hp <= 0:
+		kill()
+
+func FireDamage():
+	#print("Damaged")
 	if $AnimationPlayer.current_animation != "AttackIndicator":
 		play_anim("Hit")
 	if curState == States.idle or curState == States.patrol:
 		ChangeState(States.chase)
-	BloodSpray()
-	hp -= amt
+	hp -= fireDmg
 	
 	if hp <= 0:
 		kill()
 
 func Knockback(kick, dir):
 	move_and_collide(dir * kick)
-
-func BloodSpray():
-	#$BloodSpray.restart()
-	#$BloodSpray.emitting = false
-	
-	#emit then stop emitting after 0.1 seconds or so
-	#$BloodSpray.emitting = true
-	#$BloodSpray/Timer.start()
-	pass
 
 func SpawnBlood():
 	#print("Spawned by: " + self.name)
@@ -213,7 +254,7 @@ func SpawnBlood():
 #		leg4.step(legUpd4.global_position)
 
 func kill():
-	#SpawnBlood()
+	SpawnBlood()
 	queue_free()
  
 func set_player():
@@ -229,8 +270,10 @@ func play_anim(name):
 	#Damage(body.atk / 3)
 	
 func Stun(amt):
-	stunDur += amt
-	pass
+	if curStun <= 0:
+		stunDur += amt
+		
+		print(stunDur)
 
 func ChangeState(newState):
 	curState = newState

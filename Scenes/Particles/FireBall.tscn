@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Particles/Fire.tscn" type="PackedScene" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0.00310559, 0.254545 ), 0.0, 0.0, 0, 0, Vector2( 0.145963, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.456522, 0.32268 ), -1.38921, -1.38921, 0, 0, Vector2( 0.993789, 0.0408616 ), -0.922727, 0.0, 0, 0 ]
+
+[node name="FireBall" instance=ExtResource( 1 )]
+amount = 5
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2( 0, 0 )
+spread = 180.0
+initial_velocity = 15.0
+scale_amount = 0.05
+scale_amount_curve = SubResource( 1 )

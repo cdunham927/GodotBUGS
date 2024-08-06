@@ -16,6 +16,8 @@ var damaged = false
 
 export(float) var knockback
 
+export(PackedScene) var bloodSpray
+
 #var velocity = Vector2()
 
 func RandomizeSpeed():
@@ -90,17 +92,23 @@ func _on_Bullet_body_entered(body):
 		#curAtk -= 1
 		hp -= 1
 		damaged = true
+		SpawnBlood()
 		if hp <= 0:
 			Disable()
 
 
 func _on_Bullet_area_entered(area):
-	if area.is_in_group("turtle") and !damaged:
-		#print("Damaged by: ", curAtk / 4)
-		area.get_parent().Damage(curAtk / 4)
-		#curAtk -= 1
-		hp -= 1
-		damaged = true
+	if area.is_in_group("turtle"):
+		#deflect bullet
+		rotation_degrees += rand_range(140, 210)
+		if !damaged:
+			#print("Damaged by: ", curAtk / 4)
+			area.get_parent().Damage(curAtk / 4)
+			SpawnBlood()
+		
+			#curAtk -= 1
+			hp -= 1
+			damaged = true
 		if hp <= 0:
 			Disable()
 	#Hit static enemies
@@ -111,10 +119,22 @@ func _on_Bullet_area_entered(area):
 			area.Damage(curAtk)
 		#curAtk -= 1
 		hp -= 1
+		SpawnBlood()
 		damaged = true
 		if hp <= 0:
 			Disable()
 
+func SpawnBlood():
+	#print("Spawned by: " + self.name)
+	#blood particles
+	var blood_instance = bloodSpray.instance()
+	blood_instance.emitting = true
+	get_tree().current_scene.add_child(blood_instance)
+	blood_instance.global_position = global_position
+	#if (player != null):
+	#	blood_instance.rotation = global_position.angle_to_point(player.global_position)
+	#blood_instance.emitting = true
+	#pass
 
 func _on_Timer_timeout():
 	Disable()

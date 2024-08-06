@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/WeaponScripts/Explosion.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Particles/smoke_04.png" type="Texture" id=2]
 [ext_resource path="res://Gradients/ExplosionGradient.tres" type="Gradient" id=3]
+[ext_resource path="res://Scenes/Particles/BloodSpray.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CanvasItemMaterial" id=5]
 blend_mode = 1
@@ -20,7 +21,8 @@ radius = 41.0122
 [node name="Explosion" type="Node2D"]
 scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 1 )
-atk = 165.0
+atk = 120.0
+bloodSpray = ExtResource( 4 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 material = SubResource( 5 )

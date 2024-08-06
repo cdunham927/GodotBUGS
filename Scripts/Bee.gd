@@ -27,8 +27,9 @@ func _ready():
 	midpoint = (closestRangedDistance + farthestRangedDistance) / 2
 
 func _process(delta):
-	curDistance = global_position.distance_to(player.global_position)
-	if attackCools > 0:
+	if player != null:
+		curDistance = global_position.distance_to(player.global_position)
+	if attackCools > 0 and curStun <= 0:
 		attackCools -= delta
 		
 	if lunging:
@@ -40,7 +41,7 @@ func _process(delta):
 		$CollisionShape2D.disabled = false
 		#move_and_slide(-transform.y * lungeSpd)
 		
-	if aiming:
+	if aiming and curStun <= 0:
 		var vec_to_player = player.global_position - global_position
 		vec_to_player = vec_to_player.normalized()
 		global_rotation = atan2(vec_to_player.y, vec_to_player.x) + 89.5 
@@ -59,7 +60,7 @@ func Idle(d):
 		ChangeState(States.idle)
 
 func Chase(d):
-	if !lunging:
+	if !lunging and curStun <= 0:
 		var vec_to_player = player.global_position - global_position
 		vec_to_player = vec_to_player.normalized()
 		global_rotation = atan2(vec_to_player.y, vec_to_player.x) + 89.5 
@@ -67,7 +68,7 @@ func Chase(d):
 		if curDistance > midpoint:
 			move_and_collide(vec_to_player * spd * d)
 		
-	if curDistance < farthestRangedDistance and attackCools <= 0:
+	if curDistance < farthestRangedDistance and attackCools <= 0 and curStun <= 0:
 		ChangeState(States.attack)
 
 func RangedAttack():

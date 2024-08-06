@@ -1,14 +1,15 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Scripts/EnemyScripts/BeetleB.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Enemies/Round_Beetle_2NoLegs.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/Weapons/EnemyBullet.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Animations/Hit.tres" type="Animation" id=4]
-[ext_resource path="res://Materials/NoOutline.tres" type="Material" id=5]
+[ext_resource path="res://Animations/Hit.tres" type="Animation" id=1]
+[ext_resource path="res://Sprites/Enemies/Round_Beetle_1.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/EnemyScripts/BeetleA.gd" type="Script" id=3]
+[ext_resource path="res://Materials/NoOutline.tres" type="Material" id=4]
+[ext_resource path="res://Scenes/Weapons/EnemyBullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/EnemyScenes/Legs/BeetleBLeg.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Particles/Stun.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 20, 19.5 )
+extents = Vector2( 14.5, 27.5 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -34,7 +35,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ ExtResource( 5 ) ]
+"values": [ ExtResource( 4 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Legs:material")
@@ -46,7 +47,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ ExtResource( 5 ) ]
+"values": [ ExtResource( 4 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -61,7 +62,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 5 ) ]
+"values": [ ExtResource( 4 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Legs:material")
@@ -73,7 +74,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 5 ) ]
+"values": [ ExtResource( 4 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -101,7 +102,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 5 ) ]
+"values": [ ExtResource( 4 ) ]
 }
 
 [sub_resource type="CircleShape2D" id=5]
@@ -110,31 +111,35 @@ radius = 357.56
 [node name="Beetle" type="KinematicBody2D" groups=["enemies"]]
 pause_mode = 1
 z_index = 1
-script = ExtResource( 1 )
-maxHp = 300.0
-timeBetweenAttacksSmall = 2.0
-timeBetweenAttacksBig = 3.5
-accuracy = 180.0
-chaseCooldownSmall = 1.0
-chaseCooldownBig = 2.0
-walkTimeSmall = 1.0
-walkTimeBig = 2.0
+script = ExtResource( 3 )
+maxHp = 400.0
+spd = 150
+atk = 20
+timeBetweenAttacksSmall = 1.25
+timeBetweenAttacksBig = 2.25
+accuracy = 35.0
+chaseCooldownSmall = 0.75
+chaseCooldownBig = 1.25
+walkTimeSmall = 1.5
+walkTimeBig = 3.0
+aimOffset = 3.0
+aimOffsetTimer = 5.0
+stunParts = ExtResource( 7 )
 maxLegDist = 42.0
-bullet = ExtResource( 3 )
-numShots = 8
-turnSpd = 17.0
+numShots = 5
+bullet = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -0.5 )
+position = Vector2( 0.5, 2.5 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = ExtResource( 5 )
+material = ExtResource( 4 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Hit = ExtResource( 4 )
+anims/Hit = ExtResource( 1 )
 anims/RESET = SubResource( 2 )
 anims/idle = SubResource( 3 )
 anims/move = SubResource( 4 )
@@ -145,39 +150,42 @@ anims/move = SubResource( 4 )
 shape = SubResource( 5 )
 
 [node name="Legs" type="Node2D" parent="."]
-material = ExtResource( 5 )
+material = ExtResource( 4 )
+scale = Vector2( 0.65, 0.65 )
 
 [node name="Leg" parent="Legs" instance=ExtResource( 6 )]
-position = Vector2( 20, -4 )
+position = Vector2( 23.3333, -1.66667 )
 z_index = -1
 
 [node name="Leg2" parent="Legs" instance=ExtResource( 6 )]
-position = Vector2( 15, 14 )
+position = Vector2( 16.9231, 21.5385 )
+scale = Vector2( 0.3, 0.3 )
 z_index = -1
 
 [node name="Leg3" parent="Legs" instance=ExtResource( 6 )]
-position = Vector2( -20, -4 )
+position = Vector2( -23.0769, -1.53846 )
 z_index = -1
 flipped = false
 
 [node name="Leg4" parent="Legs" instance=ExtResource( 6 )]
-position = Vector2( -15, 14 )
+position = Vector2( -16.9231, 21.5385 )
+scale = Vector2( 0.3, 0.3 )
 z_index = -1
 flipped = false
 
 [node name="LegUpdaters" type="Node2D" parent="."]
 
 [node name="LegUpd" type="Position2D" parent="LegUpdaters"]
-position = Vector2( 18, -22 )
+position = Vector2( 30, -29 )
 
 [node name="LegUpd2" type="Position2D" parent="LegUpdaters"]
-position = Vector2( -22, 36 )
+position = Vector2( -30, 50 )
 
 [node name="LegUpd3" type="Position2D" parent="LegUpdaters"]
-position = Vector2( -18, -22 )
+position = Vector2( -28, -29 )
 
 [node name="LegUpd4" type="Position2D" parent="LegUpdaters"]
-position = Vector2( 18, 36 )
+position = Vector2( 27, 51 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

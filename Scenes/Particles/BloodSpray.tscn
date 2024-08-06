@@ -2,18 +2,15 @@
 
 [ext_resource path="res://Sprites/Etc/Circle.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/ParticleScripts/BloodSpray.gd" type="Script" id=2]
+[ext_resource path="res://Gradients/BloodColorRamp.tres" type="Gradient" id=3]
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.627119, 0.508598 ), -3.03252, -3.03252, 0, 0, Vector2( 0.912833, 0.199507 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0, 0.989744 )
-colors = PoolColorArray( 0.678431, 0.160784, 0.160784, 1, 0.678431, 0.160784, 0.160784, 0 )
-
 [node name="BloodSpray" type="CPUParticles2D"]
+pause_mode = 1
 position = Vector2( 661, 272 )
-emitting = false
-amount = 16
+amount = 2
 lifetime = 0.38
 explosiveness = 1.0
 randomness = 0.15
@@ -25,18 +22,28 @@ gravity = Vector2( 0, 0 )
 initial_velocity = 200.0
 initial_velocity_random = 0.68
 damping = 12.75
-scale_amount = 0.2
+scale_amount = 0.15
 scale_amount_random = 0.08
 scale_amount_curve = SubResource( 2 )
-color_ramp = SubResource( 1 )
+color = Color( 0.250337, 0.470588, 0.113725, 1 )
+color_ramp = ExtResource( 3 )
 script = ExtResource( 2 )
 __meta__ = {
 "_editor_description_": ""
 }
+colorLerp = 0.225
+endColor = Color( 0.427451, 0.470588, 0.113725, 0 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 7.0
 one_shot = true
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]

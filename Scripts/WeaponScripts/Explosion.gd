@@ -4,8 +4,10 @@ export var hitString = ""
 export var atk = 10.0
 export var stunAmt = 1.5
 
+export(PackedScene) var bloodSpray
+
 func _ready():
-	get_tree().current_scene.get_node("Camera2D").add_trauma(0.0375)
+	#get_tree().current_scene.get_node("Camera2D").add_trauma(0.0375)
 	$CPUParticles2D.restart()
 
 func _on_Area2D_area_entered(area):
@@ -17,6 +19,17 @@ func _on_Area2D_area_entered(area):
 func _on_Timer_timeout():
 	queue_free()
 
+func SpawnBlood():
+	#print("Spawned by: " + self.name)
+	#blood particles
+	var blood_instance = bloodSpray.instance()
+	blood_instance.emitting = true
+	get_tree().current_scene.add_child(blood_instance)
+	blood_instance.global_position = global_position
+	#if (player != null):
+	#	blood_instance.rotation = global_position.angle_to_point(player.global_position)
+	#blood_instance.emitting = true
+	#pass
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group(hitString):

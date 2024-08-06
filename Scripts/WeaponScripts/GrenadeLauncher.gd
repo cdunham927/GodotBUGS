@@ -19,3 +19,7 @@ func ShowFlash():
 	#flash.rotation_degrees = rand_range(0, 360)
 	flash.show()
 	flashTimer = 0.05
+
+
+func _on_Area2D_area_entered(area):
+	pass # Replace with function body.

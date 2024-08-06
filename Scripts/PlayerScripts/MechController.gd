@@ -51,11 +51,18 @@ func SwitchWeaponRight():
 
 func _process(delta):
 	#Controller aiming
-	if controller:
-		var aim_dir = Vector2(Input.get_axis("aim_left", "aim_right"), Input.get_axis("aim_up", "aim_down")) 
-		if aim_dir != Vector2.ZERO:
-			rotation = lerp_angle(rotation, aim_dir.angle(), 0.5)
-	else:
+	var aim_dir = Vector2(Input.get_axis("aim_left", "aim_right"), Input.get_axis("aim_up", "aim_down")) 
+	if aim_dir != Vector2.ZERO:
+		controller = true
+		
+	#if Input.is_key_pressed(key):
+	#	controller = false
+	
+	
+	if controller and aim_dir != Vector2.ZERO:
+		rotation = lerp_angle(rotation, aim_dir.angle() + offsetZ, 0.5)
+	
+	if !controller:
 		#Mouse aiming
 		var look_vec = get_global_mouse_position() - global_position
 		global_rotation = lerp_angle(global_rotation, atan2(look_vec.y, look_vec.x) + offsetZ, rotSpd)
