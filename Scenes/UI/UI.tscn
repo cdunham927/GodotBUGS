@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Fonts/BrokenFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Themes/HpTheme.tres" type="StyleBox" id=2]
 [ext_resource path="res://Sprites/Etc/CircleHollowSmol2.png" type="Texture" id=3]
 [ext_resource path="res://Themes/StaminaTheme.tres" type="StyleBox" id=4]
 [ext_resource path="res://Themes/ProgressBarBG.tres" type="StyleBox" id=5]
+[ext_resource path="res://Sprites/UI/metalPanel.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.145098, 0.145098, 0.145098, 1 )
@@ -33,12 +34,6 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 shadow_size = 3
 shadow_offset = Vector2( -2, 2 )
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.87451, 0.870588, 0, 0.168627 )
-
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0, 0, 0, 0.6 )
 
 [node name="UI" type="CanvasLayer"]
 layer = 2
@@ -128,30 +123,61 @@ fill_mode = 4
 tint_under = Color( 0, 0, 0, 1 )
 tint_progress = Color( 0.87451, 0.870588, 0, 1 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-visible = false
-margin_left = 19.0
-margin_top = 600.0
-margin_right = 144.0
-margin_bottom = 760.0
-rect_rotation = -89.9999
+[node name="EquippedWeaponLeftActualBichPls" type="TextureProgress" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -498.0
+margin_top = 259.0
+margin_right = -314.0
+margin_bottom = 290.0
+max_value = 1000.0
+step = 0.1
+value = 13.2
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 7 )
+tint_under = Color( 0, 0, 0, 0.737255 )
+tint_progress = Color( 1, 0.996078, 0, 0.862745 )
+nine_patch_stretch = true
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
-margin_right = 71.0
-margin_bottom = 160.0
+[node name="EquippedLabel" type="Label" parent="EquippedWeaponLeftActualBichPls"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Gyattling"
+align = 1
+valign = 1
+uppercase = true
 
-[node name="NewOverheat" type="ProgressBar" parent="HBoxContainer/CenterContainer"]
-margin_right = 71.0
-margin_bottom = 160.0
-rect_min_size = Vector2( 71, 160 )
-custom_styles/fg = SubResource( 3 )
-custom_styles/bg = SubResource( 4 )
-max_value = 10.0
-value = 4.84
-percent_visible = false
+[node name="EquippedWeaponRightActualBichPls" type="TextureProgress" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 315.0
+margin_top = 259.0
+margin_right = 499.0
+margin_bottom = 290.0
+max_value = 1000.0
+step = 0.1
+value = 13.2
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 7 )
+fill_mode = 1
+tint_under = Color( 0, 0, 0, 0.737255 )
+tint_progress = Color( 1, 0.996078, 0, 0.862745 )
+nine_patch_stretch = true
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
-margin_left = 75.0
-margin_right = 125.0
-margin_bottom = 160.0
-rect_min_size = Vector2( 50, 45 )
+[node name="EquippedLabel" type="Label" parent="EquippedWeaponRightActualBichPls"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Gyattling"
+align = 1
+valign = 1
+uppercase = true

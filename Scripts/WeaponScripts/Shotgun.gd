@@ -24,10 +24,17 @@ func Shoot():
 	
 	ShowFlash()
 	curShotTime = timeBetweenShots
-	overheat += incAmt
+	if leftWeapon:
+		mech.overheatL += incAmt
+	else:
+		mech.overheatR += incAmt
 	#gatlingOverheat += 1
 	
-	if overheat >= overheatTotal + incAmt:
+	#Old overheat
+	#if overheat >= overheatTotal + incAmt:
+	#	recover = recoverTime
+	
+	if overheatUI.value >= overheatUI.max_value:
 		recover = recoverTime
 
 func ShowFlash():

@@ -17,37 +17,37 @@ var lastWeaponRight := 0
 export var rotSpd : float = 15
 var controller : bool = false
 
+var overheatL : float = 0.0
+var overheatR : float = 0.0
+
+onready var weaponLeftLabel = get_node("/root/World/UI/EquippedWeaponLeftActualBichPls/EquippedLabel")
+onready var weaponRightLabel = get_node("/root/World/UI/EquippedWeaponRightActualBichPls/EquippedLabel")
+
 func _ready():
 	curLeft = 0
 	curRight = 0
 	lastWeaponLeft = curLeft
 	lastWeaponRight = curRight
+	
+	#Name UI weapon shit bich
+	weaponLeftLabel.text = weaponChildrenLeft[curLeft].weaponName
+	weaponRightLabel.text = weaponChildrenRight[curRight].weaponName
 
 func SwitchWeaponLeft():
 	weaponChildrenLeft[lastWeaponLeft].hide()
 	weaponChildrenLeft[curLeft].show()
 	weaponChildrenLeft[curLeft].Activate()
-	#if curLeft == 0:
-	#	weaponChildren[weaponSize / 2 - 1].hide()
-	#	weaponChildren[0].show()
-	#	weaponChildren[0].Activate()
-	#else:
-	#	weaponChildren[curLeft - 1].hide()
-	#	weaponChildren[curLeft].show()
-	#	weaponChildren[curLeft].Activate()
+	
+	var text = weaponChildrenLeft[curLeft].weaponName
+	weaponLeftLabel.text = text
 
 func SwitchWeaponRight():
 	weaponChildrenRight[lastWeaponRight].hide()
 	weaponChildrenRight[curRight].show()
 	weaponChildrenRight[curRight].Activate()
-	#if curRight == weaponSize / 2:
-	#	weaponChildren[weaponSize - 1].hide()
-	#	weaponChildren[weaponSize / 2].show()
-	#	weaponChildren[weaponSize / 2].Activate()
-	#else:
-	#	weaponChildren[curRight - 1].hide()
-	#	weaponChildren[curRight].show()
-	#	weaponChildren[curRight].Activate()
+	
+	var text = weaponChildrenRight[curRight].weaponName
+	weaponRightLabel.text = text
 
 func _process(delta):
 	#Controller aiming

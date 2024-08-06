@@ -5,11 +5,14 @@ func Shoot():
 	$FlamethrowerFire2.emitting = true
 	#ShowFlash()
 	#curShotTime = timeBetweenShots
-	overheat += incAmt
+	if leftWeapon:
+		mech.overheatL += incAmt
+	else:
+		mech.overheatR += incAmt
 	
 	get_tree().current_scene.get_node("Camera2D").add_trauma(0.01)
 	
-	if overheat >= overheatTotal + incAmt:
+	if overheatUI.value >= overheatUI.max_value:
 		recover = recoverTime
 
 func _on_Area2D_body_entered(body):
@@ -57,21 +60,11 @@ func _process(delta):
 		
 	#if tilNotShooting <= 0:
 	#	shooting = false
-	
-		if overheat <= 0 and overheatUI != null and overheatUI2 != null:
-			if leftWeapon:
-				overheatUI.hide()
-			else:
-				overheatUI2.hide()
-		else:
-			if overheatUI != null and overheatUI2 != null:
-				if leftWeapon:
-					overheatUI.show()
-				else:
-					overheatUI2.show()
 
-		if recover <= 0 and tilNotShooting <= 0 and overheat > 0:
-			overheat -= delta * recoveryModifier
+		if recover <= 0 and tilNotShooting <= 0 and mech.overheatL > 0 and leftWeapon:
+			mech.overheatL -= delta * recoveryModifier
+		if recover <= 0 and tilNotShooting <= 0 and mech.overheatR > 0 and !leftWeapon:
+			mech.overheatR -= delta * recoveryModifier
 	#Decrement nums
 		if recover > 0 and overheatUI != null and overheatUI2 != null:
 			if leftWeapon:
@@ -95,7 +88,7 @@ func _process(delta):
 			flash.hide()
 	
 		if leftWeapon and overheatUI != null:
-			 overheatUI.value = lerp(overheatUI.value, overheat, lerpSpd * delta)
+			 overheatUI.value = lerp(overheatUI.value, mech.overheatL, lerpSpd * delta)
 		else:
 			if overheatUI2 != null:
-				overheatUI2.value = lerp(overheatUI2.value, overheat, lerpSpd * delta)
+				overheatUI2.value = lerp(overheatUI2.value, mech.overheatR, lerpSpd * delta)

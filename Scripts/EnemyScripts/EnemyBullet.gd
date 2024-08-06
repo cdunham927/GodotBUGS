@@ -20,11 +20,20 @@ var damaged = false
 
 export(float) var knockback
 
+export(bool) var shrink = false
+export(float) var shrinkRate = 5.0
+export(float) var scaledRate = 5.0
+var startScale
+
+onready var timer = $Timer
+
 #var velocity = Vector2()
 
 func _ready():
 	lowDmgLimit = atk * lowDmgPercent
 	curAtk = atk
+	
+	startScale = Vector2(scale.x, scale.y)
 	
 func start(pos, dir, acc):
 	damaged = false
@@ -49,7 +58,23 @@ func _physics_process(delta):
 		
 	if speed <= 0:
 		Disable()
+	
+	#Biggy smol
+	if timer != null:
+		if !shrink and !speedFalloff:
+			scale.x += scaledRate * delta
+			scale.y += scaledRate * delta
+	
+		if !shrink and speedFalloff and scale.x >= startScale.x:
+			scale.x -= shrinkRate * delta
+			scale.y -= shrinkRate * delta
 		
+		#Shrink to destroy
+		if shrink:
+			scale.x -= delta * shrinkRate
+			scale.y -= delta * shrinkRate
+			if  scale.x <= 0.05:
+				queue_free()
 	
 #var velocity = Vector2()
 
@@ -76,3 +101,7 @@ func _on_Bullet_body_entered(body):
 
 func _on_Timer_timeout():
 	speedFalloff = true
+
+
+func _on_DisableTimer_timeout():
+	shrink = true

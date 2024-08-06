@@ -21,7 +21,8 @@ radius = 41.0122
 [node name="Explosion" type="Node2D"]
 scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 1 )
-atk = 120.0
+atk = 175.0
+stunAmt = 2.0
 bloodSpray = ExtResource( 4 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]

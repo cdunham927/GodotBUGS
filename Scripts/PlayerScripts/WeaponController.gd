@@ -2,6 +2,7 @@ extends Node2D
 
 #enum weapons { gatlinggun, flamethrower, teslacannon, revolver, canonball, shotgun }
 #export var state = weapons[0]
+export(String) var weaponName = "" 
 export(PackedScene) var bullet
 
 export(float) var timeBetweenShots = 0.2
@@ -11,13 +12,14 @@ var flashTimer : float = 0
 var shooting : bool = false
 var tilNotShooting : float = 0.1
 
+onready var mech = get_parent().get_parent()
 export(bool) var leftWeapon = false
-onready var overheatUI = get_node("/root/World/UI/Overheat")
-onready var overheatUI2 = get_node("/root/World/UI/Overheat2")
-export(float) var overheatTotal = 25.0
+onready var overheatUI = get_node("/root/World/UI/EquippedWeaponLeftActualBichPls")
+onready var overheatUI2 = get_node("/root/World/UI/EquippedWeaponRightActualBichPls")
+#export(float) var overheatTotal = 25.0
 export(float) var incAmt = 0.5
 export(float) var recoveryModifier = 3.0
-var overheat : float = 0.0
+#var overheat : float = 0.0
 export(float) var recoverTime
 var recover : float = 0.0
 
@@ -37,11 +39,12 @@ func _ready():
 		Activate()
 
 func Activate():
-	if leftWeapon and overheatUI != null:
-		overheatUI.max_value = overheatTotal
-	else:
-		if overheatUI2 != null:
-			overheatUI2.max_value = overheatTotal
+	#if leftWeapon and overheatUI != null:
+	#	overheatUI.max_value = overheatTotal
+	#else:
+	#	if overheatUI2 != null:
+	#		overheatUI2.max_value = overheatTotal
+	pass
 
 func _process(delta):
 	if overheatUI == null:
@@ -74,21 +77,32 @@ func _process(delta):
 	#if tilNotShooting <= 0:
 	#	shooting = false
 	
-		if overheat <= 0 and overheatUI != null and overheatUI2 != null:
-			if leftWeapon:
-				overheatUI.hide()
-			else:
-				overheatUI2.hide()
-		else:
-			if overheatUI != null and overheatUI2 != null:
-				if leftWeapon:
-					overheatUI.show()
-				else:
-					overheatUI2.show()
+	
+		#Hide UI when overheat is less than 0
+		##############
+		######
+		###
+		##
+		###
+		######
+		##############
+		#if overheat <= 0 and overheatUI != null and overheatUI2 != null:
+		#	if leftWeapon:
+		#		overheatUI.hide()
+		#	else:
+		#		overheatUI2.hide()
+		#else:
+		#	if overheatUI != null and overheatUI2 != null:
+		#		if leftWeapon:
+		#			overheatUI.show()
+		#		else:
+		#			overheatUI2.show()
 
-		if recover <= 0 and tilNotShooting <= 0 and overheat > 0:
-			overheat -= delta * recoveryModifier
-	#Decrement nums
+		if recover <= 0 and tilNotShooting <= 0 and mech.overheatL > 0 and leftWeapon:
+			mech.overheatL -= delta * recoveryModifier
+		if recover <= 0 and tilNotShooting <= 0 and mech.overheatR > 0 and !leftWeapon:
+			mech.overheatR -= delta * recoveryModifier
+		#Decrement nums
 		if recover > 0 and overheatUI != null and overheatUI2 != null:
 			if leftWeapon:
 				overheatUI.tint_progress = overheatColor
@@ -111,10 +125,10 @@ func _process(delta):
 			flash.hide()
 	
 		if leftWeapon and overheatUI != null:
-			 overheatUI.value = lerp(overheatUI.value, overheat, lerpSpd * delta)
+			 overheatUI.value = lerp(overheatUI.value, mech.overheatL, lerpSpd * delta)
 		else:
 			if overheatUI2 != null:
-				overheatUI2.value = lerp(overheatUI2.value, overheat, lerpSpd * delta)
+				overheatUI2.value = lerp(overheatUI2.value, mech.overheatR, lerpSpd * delta)
 
 func Shoot():
 	pass

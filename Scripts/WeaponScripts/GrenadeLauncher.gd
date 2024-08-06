@@ -7,12 +7,15 @@ func Shoot():
 	get_tree().current_scene.add_child(b)
 	ShowFlash()
 	curShotTime = timeBetweenShots
-	overheat += incAmt
+	if leftWeapon:
+		mech.overheatL += incAmt
+	else:
+		mech.overheatR += incAmt
 	#gatlingOverheat += 1
 	
 	get_tree().current_scene.get_node("Camera2D").add_trauma(0.325)
 	
-	if overheat >= overheatTotal + incAmt:
+	if overheatUI.value >= overheatUI.max_value:
 		recover = recoverTime
 
 func ShowFlash():
