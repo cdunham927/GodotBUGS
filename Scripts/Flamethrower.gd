@@ -12,9 +12,6 @@ func Shoot():
 	
 	get_tree().current_scene.get_node("Camera2D").add_trauma(0.01)
 	
-	if overheatUI.value >= overheatUI.max_value:
-		recover = recoverTime
-
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("enemies"):
 		if body.has_method("Damage"):
@@ -38,48 +35,26 @@ func _process(delta):
 
 	if active:
 		#Left weapon start shooting
-		if leftWeapon and Input.is_action_pressed("attack") and curShotTime <= 0 and recover <= 0:
+		if leftWeapon and Input.is_action_pressed("attack") and curShotTime <= 0 and mech.recoverL <= 0:
 			#shooting = true
-			tilNotShooting = tilNotShootingMin
+			mech.tilNotShootingL = tilNotShootingMin
 			Shoot()
 		#Left weapon stop shooting
 		if leftWeapon and Input.is_action_just_released("attack"):
 			$Area2D.monitoring = false
 			$FlamethrowerFire2.emitting = false
-			tilNotShooting = tilNotShootingMin
+			mech.tilNotShootingL = tilNotShootingMin
 		#Right weapon start shooting
-		if leftWeapon == false and Input.is_action_pressed("attacktwo") and curShotTime <= 0 and recover <= 0:
+		if leftWeapon == false and Input.is_action_pressed("attacktwo") and curShotTime <= 0 and mech.recoverR <= 0:
 			#shooting = true
-			tilNotShooting = tilNotShootingMin
+			mech.tilNotShootingR = tilNotShootingMin
 			Shoot()
 		#Right weapon stop shooting
 		if leftWeapon == false and Input.is_action_just_released("attacktwo"):
 			$Area2D.monitoring = false
 			$FlamethrowerFire2.emitting = false
-			tilNotShooting = tilNotShootingMin
+			mech.tilNotShootingR = tilNotShootingMin
 		
-	#if tilNotShooting <= 0:
-	#	shooting = false
-
-		if recover <= 0 and tilNotShooting <= 0 and mech.overheatL > 0 and leftWeapon:
-			mech.overheatL -= delta * recoveryModifier
-		if recover <= 0 and tilNotShooting <= 0 and mech.overheatR > 0 and !leftWeapon:
-			mech.overheatR -= delta * recoveryModifier
-	#Decrement nums
-		if recover > 0 and overheatUI != null and overheatUI2 != null:
-			if leftWeapon:
-				overheatUI.tint_progress = overheatColor
-			else:
-				overheatUI2.tint_progress = overheatColor
-			recover -= delta
-		else:
-			if overheatUI != null and overheatUI2 != null:
-				if leftWeapon:
-					overheatUI.tint_progress = goodColor
-				else:
-					overheatUI2.tint_progress = goodColor
-		if tilNotShooting > 0:
-			tilNotShooting -= delta
 		if curShotTime > 0:
 			curShotTime -= delta
 		if flashTimer > 0:
@@ -87,8 +62,8 @@ func _process(delta):
 		else:
 			flash.hide()
 	
-		if leftWeapon and overheatUI != null:
-			 overheatUI.value = lerp(overheatUI.value, mech.overheatL, lerpSpd * delta)
-		else:
-			if overheatUI2 != null:
-				overheatUI2.value = lerp(overheatUI2.value, mech.overheatR, lerpSpd * delta)
+		#if leftWeapon and overheatUI != null:
+		#	 overheatUI.value = lerp(overheatUI.value, mech.overheatL, lerpSpd * delta)
+		#else:
+		#	if overheatUI2 != null:
+		#		overheatUI2.value = lerp(overheatUI2.value, mech.overheatR, lerpSpd * delta)

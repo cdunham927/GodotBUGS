@@ -14,9 +14,6 @@ func Shoot():
 	#gatlingOverheat += 1
 	
 	get_tree().current_scene.get_node("Camera2D").add_trauma(0.325)
-	
-	if overheatUI.value >= overheatUI.max_value:
-		recover = recoverTime
 
 func ShowFlash():
 	#flash.rotation_degrees = rand_range(0, 360)

@@ -9,3 +9,7 @@ func _on_EnemyFireArea_body_exited(body):
 	if body.name == "Player":
 		body.inFire = false
 		#print("Player exiting fire")
+
+
+func _on_DisableTimer_timeout():
+	queue_free()

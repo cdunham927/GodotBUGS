@@ -10,7 +10,6 @@ var curShotTime : float = 0
 onready var flash = $Flash
 var flashTimer : float = 0
 var shooting : bool = false
-var tilNotShooting : float = 0.1
 
 onready var mech = get_parent().get_parent()
 export(bool) var leftWeapon = false
@@ -18,15 +17,8 @@ onready var overheatUI = get_node("/root/World/UI/EquippedWeaponLeftActualBichPl
 onready var overheatUI2 = get_node("/root/World/UI/EquippedWeaponRightActualBichPls")
 #export(float) var overheatTotal = 25.0
 export(float) var incAmt = 0.5
-export(float) var recoveryModifier = 3.0
-#var overheat : float = 0.0
-export(float) var recoverTime
-var recover : float = 0.0
 
 export(float) var lerpSpd = 15.0
-
-export(Color) var goodColor
-export(Color) var overheatColor
 
 export(float) var tilNotShootingMin = 0.25
 
@@ -58,26 +50,22 @@ func _process(delta):
 
 	if active:
 		#Left weapon start shooting
-		if leftWeapon and Input.is_action_pressed("attack") and curShotTime <= 0 and recover <= 0:
+		if leftWeapon and Input.is_action_pressed("attack") and curShotTime <= 0 and mech.recoverL <= 0:
 			#shooting = true
-			tilNotShooting = tilNotShootingMin
+			mech.tilNotShootingL = tilNotShootingMin
 			Shoot()
 		#Left weapon stop shooting
 		if leftWeapon and Input.is_action_just_released("attack"):
-			tilNotShooting = tilNotShootingMin
+			mech.tilNotShootingL = tilNotShootingMin
 		#Right weapon start shooting
-		if leftWeapon == false and Input.is_action_pressed("attacktwo") and curShotTime <= 0 and recover <= 0:
+		if !leftWeapon and Input.is_action_pressed("attacktwo") and curShotTime <= 0 and mech.recoverR <= 0:
 			#shooting = true
-			tilNotShooting = tilNotShootingMin
+			mech.tilNotShootingR = tilNotShootingMin
 			Shoot()
 		#Right weapon stop shooting
 		if leftWeapon == false and Input.is_action_just_released("attacktwo"):
-			tilNotShooting = tilNotShootingMin
-		
-	#if tilNotShooting <= 0:
-	#	shooting = false
-	
-	
+			mech.tilNotShootingR = tilNotShootingMin
+
 		#Hide UI when overheat is less than 0
 		##############
 		######
@@ -97,26 +85,7 @@ func _process(delta):
 		#			overheatUI.show()
 		#		else:
 		#			overheatUI2.show()
-
-		if recover <= 0 and tilNotShooting <= 0 and mech.overheatL > 0 and leftWeapon:
-			mech.overheatL -= delta * recoveryModifier
-		if recover <= 0 and tilNotShooting <= 0 and mech.overheatR > 0 and !leftWeapon:
-			mech.overheatR -= delta * recoveryModifier
-		#Decrement nums
-		if recover > 0 and overheatUI != null and overheatUI2 != null:
-			if leftWeapon:
-				overheatUI.tint_progress = overheatColor
-			else:
-				overheatUI2.tint_progress = overheatColor
-			recover -= delta
-		else:
-			if overheatUI != null and overheatUI2 != null:
-				if leftWeapon:
-					overheatUI.tint_progress = goodColor
-				else:
-					overheatUI2.tint_progress = goodColor
-		if tilNotShooting > 0:
-			tilNotShooting -= delta
+		
 		if curShotTime > 0:
 			curShotTime -= delta
 		if flashTimer > 0:

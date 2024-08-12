@@ -17,6 +17,3 @@ func Shoot():
 	#gatlingOverheat += 1
 	
 	get_tree().current_scene.get_node("Camera2D").add_trauma(0.0375)
-	
-	if overheatUI.value >= overheatUI.max_value:
-		recover = recoverTime

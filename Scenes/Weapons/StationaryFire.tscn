@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Particles/FireBall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/EnemyFire.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.0
+
+[node name="StationaryFire" type="Area2D"]
+pause_mode = 1
+scale = Vector2( 3, 3 )
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="FireBall" parent="." instance=ExtResource( 2 )]
+amount = 100
+explosiveness = 0.1
+emission_sphere_radius = 3.0
+
+[node name="DisableTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_Bullet_body_exited"]
+[connection signal="timeout" from="DisableTimer" to="." method="_on_DisableTimer_timeout"]

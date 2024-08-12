@@ -290,6 +290,10 @@ rotationConstraint = 10.0
 unlockedLeft = [ true, true, true, true, true ]
 unlockedRight = [ true, true, true, true, true ]
 rotSpd = 0.03
+recoveryModifier = 75.0
+recoverTime = 2.5
+goodColor = Color( 1, 1, 0.243137, 1 )
+overheatColor = Color( 0.726563, 0.0737915, 0.0737915, 1 )
 
 [node name="WeaponsLeft" type="Node2D" parent="Node2D/MechBody"]
 material = ExtResource( 27 )
@@ -311,10 +315,6 @@ bullet = ExtResource( 20 )
 timeBetweenShots = 0.05
 leftWeapon = true
 incAmt = 7.0
-recoveryModifier = 2.0
-recoverTime = 2.5
-goodColor = Color( 0.87451, 0.870588, 0, 1 )
-overheatColor = Color( 0.454902, 0.105882, 0.109804, 1 )
 tilNotShootingMin = 0.2
 accuracy = 5.0
 
@@ -341,10 +341,7 @@ bullet = ExtResource( 19 )
 timeBetweenShots = 1.0
 leftWeapon = true
 incAmt = 75.0
-recoverTime = 1.75
-goodColor = Color( 0.87451, 0.870588, 0, 1 )
-overheatColor = Color( 0.454902, 0.105882, 0.109804, 1 )
-tilNotShootingMin = 2.0
+tilNotShootingMin = 1.825
 accuracy = 10.0
 pellet = ExtResource( 14 )
 
@@ -392,11 +389,7 @@ bullet = ExtResource( 21 )
 timeBetweenShots = 1.125
 leftWeapon = true
 incAmt = 13.0
-recoveryModifier = 4.0
-recoverTime = 4.0
-goodColor = Color( 0.87451, 0.870588, 0, 1 )
-overheatColor = Color( 0.454902, 0.105882, 0.109804, 1 )
-tilNotShootingMin = 0.825
+tilNotShootingMin = 1.5
 
 [node name="Muzzle" type="Position2D" parent="Node2D/MechBody/WeaponsLeft/SniperL"]
 position = Vector2( 0, -18 )
@@ -430,8 +423,7 @@ bullet = ExtResource( 22 )
 timeBetweenShots = 1.5
 leftWeapon = true
 incAmt = 200.0
-goodColor = Color( 1, 1, 0.243137, 1 )
-overheatColor = Color( 0.726563, 0.0737915, 0.0737915, 1 )
+tilNotShootingMin = 2.125
 
 [node name="Muzzle" type="Position2D" parent="Node2D/MechBody/WeaponsLeft/GrenadeL"]
 position = Vector2( 0, -18 )
@@ -454,8 +446,6 @@ weaponName = "Flamethrower"
 timeBetweenShots = 0.0
 leftWeapon = true
 incAmt = 0.7
-goodColor = Color( 1, 1, 0.243137, 1 )
-overheatColor = Color( 0.726563, 0.0737915, 0.0737915, 1 )
 
 [node name="Muzzle" type="Position2D" parent="Node2D/MechBody/WeaponsLeft/FlamesL"]
 position = Vector2( 0, -18 )
@@ -501,10 +491,6 @@ weaponName = "Gatling"
 bullet = ExtResource( 20 )
 timeBetweenShots = 0.05
 incAmt = 7.0
-recoveryModifier = 2.0
-recoverTime = 2.5
-goodColor = Color( 0.87451, 0.870588, 0, 1 )
-overheatColor = Color( 0.454902, 0.105882, 0.109804, 1 )
 tilNotShootingMin = 0.2
 accuracy = 5.0
 
@@ -531,10 +517,7 @@ weaponName = "Shotgun"
 bullet = ExtResource( 19 )
 timeBetweenShots = 1.0
 incAmt = 75.0
-recoverTime = 1.75
-goodColor = Color( 0.87451, 0.870588, 0, 1 )
-overheatColor = Color( 0.454902, 0.105882, 0.109804, 1 )
-tilNotShootingMin = 2.0
+tilNotShootingMin = 1.825
 accuracy = 10.0
 pellet = ExtResource( 14 )
 
@@ -581,11 +564,7 @@ weaponName = "Sniper"
 bullet = ExtResource( 21 )
 timeBetweenShots = 1.125
 incAmt = 13.0
-recoveryModifier = 4.0
-recoverTime = 4.0
-goodColor = Color( 0.87451, 0.870588, 0, 1 )
-overheatColor = Color( 0.454902, 0.105882, 0.109804, 1 )
-tilNotShootingMin = 0.825
+tilNotShootingMin = 1.5
 
 [node name="Muzzle" type="Position2D" parent="Node2D/MechBody/WeaponsRight/SniperR"]
 position = Vector2( 7.2738, -232.439 )
@@ -619,8 +598,7 @@ weaponName = "Grenade Launcher"
 bullet = ExtResource( 22 )
 timeBetweenShots = 1.5
 incAmt = 200.0
-goodColor = Color( 1, 1, 0.243137, 1 )
-overheatColor = Color( 0.726563, 0.0737915, 0.0737915, 1 )
+tilNotShootingMin = 2.125
 
 [node name="Muzzle" type="Position2D" parent="Node2D/MechBody/WeaponsRight/GrenadeR"]
 position = Vector2( 7.2738, -232.439 )
@@ -643,8 +621,6 @@ script = ExtResource( 26 )
 weaponName = "Flamethrower"
 timeBetweenShots = 0.0
 incAmt = 0.7
-goodColor = Color( 1, 1, 0.243137, 1 )
-overheatColor = Color( 0.726563, 0.0737915, 0.0737915, 1 )
 
 [node name="Muzzle" type="Position2D" parent="Node2D/MechBody/WeaponsRight/FlamesR"]
 position = Vector2( 0, -18 )

@@ -54,6 +54,9 @@ export(float) var fireDmg = 1.75
 export(float) var fireThreshold
 var curFire : float = 0.0
 
+#Charge dash variables
+var chargeTime : float = 0.0
+
 func _ready():
 	if healthbar == null:
 		healthbar = get_node("/root/World2/UI/Health")
@@ -115,7 +118,7 @@ func _physics_process(delta):
 	
 	if (move_vec.x != 0 or move_vec.y != 0):
 		if Input.is_action_just_pressed("sprint") and boostTimer <= 0 and stamina >= boostStaminaVal:
-			Boost()
+			chargeTime += delta
 		
 		if Input.is_action_pressed("sprint") and stamina > 0 and !boosting:
 			stamina -= delta * staminaDecAmt

@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/EnemyScripts/TurtleAnt.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Enemies/Ant_5-Sheet.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Etc/Rectangle.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Enemies/Turtle_Ant.png" type="Texture" id=2]
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=4]
 [ext_resource path="res://Animations/Hit.tres" type="Animation" id=5]
 [ext_resource path="res://Scenes/EnemyScenes/Legs/AntLeg.tscn" type="PackedScene" id=6]
@@ -10,7 +9,7 @@
 [ext_resource path="res://Scenes/Particles/Stun.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14.5, 19 )
+extents = Vector2( 11.5, 21 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -27,7 +26,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Head/Sprite:material")
+tracks/1/path = NodePath("Sprite:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -39,7 +38,7 @@ tracks/1/keys = {
 "values": [ ExtResource( 4 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:material")
+tracks/2/path = NodePath("Head:material")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -51,24 +50,12 @@ tracks/2/keys = {
 "values": [ ExtResource( 4 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Head:material")
+tracks/3/path = NodePath("Legs:material")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ ExtResource( 4 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Legs:material")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -146,7 +133,7 @@ tracks/1/keys = {
 radius = 357.56
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 25.5, 14.5 )
+extents = Vector2( 20.5, 12 )
 
 [node name="TurtleAnt" type="KinematicBody2D" groups=["enemies"]]
 pause_mode = 1
@@ -164,13 +151,13 @@ lookAtSpd = 0.625
 fireDmg = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.5, 11 )
+position = Vector2( -0.5, 13 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 4 )
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
-hframes = 8
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
@@ -190,17 +177,9 @@ shape = SubResource( 6 )
 [node name="Head" type="Area2D" parent="." groups=["turtle"]]
 material = ExtResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="Head"]
-modulate = Color( 0.690196, 0.360784, 0.0941176, 1 )
-material = ExtResource( 4 )
-use_parent_material = true
-position = Vector2( 0.499999, -20.5 )
-scale = Vector2( 2.83333, 0.805556 )
-texture = ExtResource( 3 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
 pause_mode = 1
-position = Vector2( 0.5, -20.5 )
+position = Vector2( -0.5, -24 )
 shape = SubResource( 5 )
 
 [node name="Legs" type="Node2D" parent="."]

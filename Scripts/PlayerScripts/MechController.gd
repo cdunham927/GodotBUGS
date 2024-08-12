@@ -20,8 +20,21 @@ var controller : bool = false
 var overheatL : float = 0.0
 var overheatR : float = 0.0
 
+export(float) var recoveryModifier = 3.0
+export(float) var recoverTime
+var recoverL : float = 0.0
+var recoverR : float = 0.0
+
+onready var overheatUI = get_node("/root/World/UI/EquippedWeaponLeftActualBichPls")
+onready var overheatUI2 = get_node("/root/World/UI/EquippedWeaponRightActualBichPls")
 onready var weaponLeftLabel = get_node("/root/World/UI/EquippedWeaponLeftActualBichPls/EquippedLabel")
 onready var weaponRightLabel = get_node("/root/World/UI/EquippedWeaponRightActualBichPls/EquippedLabel")
+
+export(Color) var goodColor
+export(Color) var overheatColor
+
+var tilNotShootingL : float = 0.1
+var tilNotShootingR : float = 0.1
 
 func _ready():
 	curLeft = 0
@@ -50,6 +63,33 @@ func SwitchWeaponRight():
 	weaponRightLabel.text = text
 
 func _process(delta):
+	if recoverL > 0:
+		overheatUI.tint_progress = overheatColor
+		recoverL -= delta
+	else:
+		overheatUI.tint_progress = goodColor
+	if recoverR > 0:
+		overheatUI2.tint_progress = overheatColor
+		recoverR -= delta
+	else:
+		overheatUI2.tint_progress = goodColor
+		
+	if overheatL >= overheatUI.max_value and recoverL <= 0:
+		recoverL = recoverTime
+	if overheatR >= overheatUI2.max_value and recoverR <= 0:
+		recoverR = recoverTime
+
+	if tilNotShootingL <= 0 and overheatL > 0:
+		overheatL -= delta * recoveryModifier
+	if tilNotShootingR <= 0 and overheatR > 0:
+		overheatR -= delta * recoveryModifier
+	
+	if tilNotShootingL > 0:
+		tilNotShootingL -= delta
+	if tilNotShootingR > 0:
+		tilNotShootingR -= delta
+
+	
 	#Controller aiming
 	var aim_dir = Vector2(Input.get_axis("aim_left", "aim_right"), Input.get_axis("aim_up", "aim_down")) 
 	if aim_dir != Vector2.ZERO:

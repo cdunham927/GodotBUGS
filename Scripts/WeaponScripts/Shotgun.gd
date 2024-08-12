@@ -24,6 +24,7 @@ func Shoot():
 	
 	ShowFlash()
 	curShotTime = timeBetweenShots
+	
 	if leftWeapon:
 		mech.overheatL += incAmt
 	else:
@@ -33,9 +34,6 @@ func Shoot():
 	#Old overheat
 	#if overheat >= overheatTotal + incAmt:
 	#	recover = recoverTime
-	
-	if overheatUI.value >= overheatUI.max_value:
-		recover = recoverTime
 
 func ShowFlash():
 	#flash.rotation_degrees = rand_range(0, 360)

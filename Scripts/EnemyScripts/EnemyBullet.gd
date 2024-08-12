@@ -23,9 +23,16 @@ export(float) var knockback
 export(bool) var shrink = false
 export(float) var shrinkRate = 5.0
 export(float) var scaledRate = 5.0
+export(float) var scaledRate2 = 5.0
 var startScale
 
 onready var timer = $Timer
+
+export var hitString = ""
+export var spawnsObj =  false
+export(PackedScene) var objToSpawn
+export var spawnsSecondObj =  false
+export(PackedScene) var secondObj
 
 #var velocity = Vector2()
 
@@ -66,8 +73,8 @@ func _physics_process(delta):
 			scale.y += scaledRate * delta
 	
 		if !shrink and speedFalloff and scale.x >= startScale.x:
-			scale.x -= shrinkRate * delta
-			scale.y -= shrinkRate * delta
+			scale.x -= scaledRate2 * delta
+			scale.y -= scaledRate2 * delta
 		
 		#Shrink to destroy
 		if shrink:
@@ -88,8 +95,12 @@ func _on_VisibilityNotifier2D_viewport_exited(viewport):
 func Disable():
 #	world.remove_child(self)
 #	bulletPool.add_child(self)
-	self.hide()
-
+	if spawnsObj:
+		SpawnObj()
+	if spawnsSecondObj:
+		SpawnSecondObj()
+	queue_free()
+	
 func _on_Bullet_body_entered(body):
 	if body.name == "Player":
 		body.Damage(curAtk, global_position)
@@ -98,6 +109,16 @@ func _on_Bullet_body_entered(body):
 		if hp <= 0:
 			Disable()
 
+func SpawnObj():
+	var o = objToSpawn.instance()
+	o.hitString = hitString
+	o.global_position = global_position
+	get_tree().current_scene.add_child(o)
+
+func SpawnSecondObj():
+	var o = secondObj.instance()
+	o.global_position = global_position
+	get_tree().current_scene.add_child(o)
 
 func _on_Timer_timeout():
 	speedFalloff = true
