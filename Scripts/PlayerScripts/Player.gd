@@ -22,18 +22,11 @@ export var forwardSpd = 300
 export var backwardSpd = 300
 export var sideSpd = 300
 
-#Boosting
-export var boostSpd = 500
-var boostTimer : float = 0
-var curBoostTimer : float = 0
-export(float) var timeBetweenBoosts
-export(float) var timeWeBoost
-var boosting : bool = false
-
 #UI
 export(float) var lerpSpd = 15.0
 onready var healthbar = get_node("/root/World/UI/Health")
 onready var staminabar = get_node("/root/World/UI/Stamina2/Stamina")
+onready var dashBar = get_node("/root/World/UI/DashBich")
 
 export var iframesTime : float = 0.3
 var iframes : float = 0
@@ -55,7 +48,17 @@ export(float) var fireThreshold
 var curFire : float = 0.0
 
 #Charge dash variables
+onready var tim = $Node2D/MechBody/Timer
+export var boostSpd = 500
 var chargeTime : float = 0.0
+var boostTimer : float = 0.0
+export(float) var maxCharge = 3.0
+export(float) var timeBetweenDashes = 3.0
+export(float) var curInBetweenDashTime = 3.0
+var boostAddition : float = 0.0
+export(float) var timeToCharge = 33.34
+var boosting : bool = false
+var curBoostTimer : float = 0
 
 func _ready():
 	if healthbar == null:
@@ -102,29 +105,51 @@ func _physics_process(delta):
 		
 	if boostTimer > 0:
 		boostTimer -= delta
-	
-	if boosting:
-		spdToLerpTo = boostSpd
 		
 	#if curBoostTimer <= 0:
 	#	boosting = false
 	
+	curLerpSpd = spdLerpSpd
+		
 	if curBoostTimer <= 0:
 		boost_vec = Vector2(0, 0)
 	
 	#curLerpSpd = boostLerpSpd if boosting == true else spdLerpSpd
-	curLerpSpd = spdLerpSpd
 	boosting = true if curBoostTimer > 0 else false
 	
 	if (move_vec.x != 0 or move_vec.y != 0):
-		if Input.is_action_just_pressed("sprint") and boostTimer <= 0 and stamina >= boostStaminaVal:
-			chargeTime += delta
-		
-		if Input.is_action_pressed("sprint") and stamina > 0 and !boosting:
-			stamina -= delta * staminaDecAmt
-			spdToLerpTo = forwardSpd
+		if Input.is_action_pressed("sprint") and boostTimer <= 0 and stamina >= boostStaminaVal:
+			if chargeTime < maxCharge:
+				chargeTime += delta * timeToCharge
+			
+				boostAddition = -backwardSpd
+
+		if Input.is_action_just_released("sprint") and boostTimer <= 0 and stamina >= boostStaminaVal and chargeTime > 0:
+			Boost(chargeTime)
+	
+	dashBar.value = lerp(dashBar.value, chargeTime, lerpSpd * delta)
+	
+	
+	spdToLerpTo = regSpd + boostAddition
+	#spdToLerpTo = backwardSpd
+	
+	if chargeTime <= 0:
+		dashBar.hide()
+	else:
+		dashBar.show()
+	
+	#Might need to be indented 1 more
+	#if boosting:
+	#	spdToLerpTo = forwardSpd
+	
+	if !boosting:
+		boostAddition = 0
+	
+		#if Input.is_action_pressed("sprint") and stamina > 0 and !boosting:
+		#	stamina -= delta * staminaDecAmt
+		#	spdToLerpTo = forwardSpd
 		if Input.is_action_pressed("sprint") == false and !boosting:
-			spdToLerpTo = regSpd
+			#spdToLerpTo = regSpd
 			#Restore stamina
 			if stamina < maxStamina:
 				stamina += delta * staminaRecAmt
@@ -160,7 +185,7 @@ func _physics_process(delta):
 		move_and_collide(move_vec * curSpd * delta)
 	if boost_vec != Vector2(0, 0):
 		 move_and_collide(boost_vec * boostSpd * delta)
-		
+
 	#Fire status effect
 	#############
 	#######
@@ -175,13 +200,15 @@ func _physics_process(delta):
 	if curFire > 0 and !inFire:
 		curFire -= delta
 
-func Boost():
+func Boost(charge = 0.1):
 	#move_and_collide(move_vec * boostSpd)
 	#boosting = true
 	stamina -= boostStaminaVal
 	boost_vec = move_vec
-	boostTimer = timeBetweenBoosts + timeWeBoost
-	curBoostTimer = timeWeBoost
+	boostAddition = charge * forwardSpd
+	boostTimer = timeBetweenDashes + tim.wait_time
+	chargeTime = 0
+	tim.start()
 
 func Damage(amt, pos = global_position):
 	if iframes <= 0:
@@ -237,4 +264,12 @@ func Heal(amt):
 func Kill():
 	#get_tree().reload_current_scene()
 	#queue_free()
+	
+	#Play death animation
+	#Load gameover menu after x seconds
+	#Button to retry level/load checkpoint
 	pass
+
+
+func _on_Timer_timeout():
+	boosting = false

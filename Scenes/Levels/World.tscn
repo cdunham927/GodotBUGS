@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/PlayerScenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/EnemyScenes/Ants/Ant.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scenes/EnemyScenes/Bees/Bee.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/EnemyScenes/Ants/ThrowerAnt.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/EnemyScenes/Bees/Beehive.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/EnemyScenes/Bees/SwarmBees.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Menus/PauseRoot.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Levels/MapTrigger.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Levels/Wall.tscn" type="PackedScene" id=14]
@@ -91,12 +92,15 @@ position = Vector2( 358, 68 )
 position = Vector2( 927, 105 )
 
 [node name="ThrowerAnt" parent="." instance=ExtResource( 9 )]
-position = Vector2( 1051, 316 )
+position = Vector2( 1037, 353 )
 
 [node name="TurtleAnt" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1056, 720 )
 
 [node name="Ant" parent="." instance=ExtResource( 2 )]
 position = Vector2( 359, 598 )
+
+[node name="SwarmBees" parent="." instance=ExtResource( 11 )]
+position = Vector2( 639, 703 )
 
 [editable path="Player"]

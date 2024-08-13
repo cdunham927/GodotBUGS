@@ -7,7 +7,7 @@
 resource_name = "Hit"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:material")
+tracks/0/path = NodePath("SpriteParent/Sprite:material")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -27,7 +27,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ ExtResource( 1 ), ExtResource( 2 ) ]
 }
 tracks/2/type = "value"

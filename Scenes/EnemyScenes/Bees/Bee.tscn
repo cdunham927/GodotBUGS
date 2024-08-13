@@ -236,6 +236,6 @@ one_shot = true
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="LungeStart" to="." method="_on_LungeStart_timeout"]
 [connection signal="timeout" from="LungeStart" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="LungeStart" to="." method="_on_LungeStart_timeout"]
 [connection signal="body_entered" from="LungeArea" to="." method="_on_LungeArea_body_entered"]
