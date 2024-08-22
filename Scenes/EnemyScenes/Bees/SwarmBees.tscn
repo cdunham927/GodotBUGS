@@ -1,14 +1,19 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/EnemyScenes/Legs/AntLeg.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=2]
-[ext_resource path="res://Sprites/Enemies/Ant_5-Sheet.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Enemies/Bee_1_colored.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/EnemyScripts/SwarmBees.gd" type="Script" id=4]
 [ext_resource path="res://Animations/Hit.tres" type="Animation" id=5]
-[ext_resource path="res://Scenes/EnemyScenes/Bees/SwarmBeeFollower.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/EnemyScripts/SwarmBeeFollower.gd" type="Script" id=6]
+[ext_resource path="res://Materials/Outline.tres" type="Material" id=7]
+[ext_resource path="res://Scenes/Particles/Stun.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/CircularMovement.gd" type="Script" id=9]
 
-[sub_resource type="CircleShape2D" id=6]
-radius = 20.5061
+[sub_resource type="RectangleShape2D" id=9]
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 20, 30 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -83,83 +88,159 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=5]
 radius = 357.56
 
+[sub_resource type="CircleShape2D" id=8]
+radius = 20.0
+
 [node name="SwarmBees" type="KinematicBody2D" groups=["enemies"]]
 pause_mode = 1
+position = Vector2( 62, 37 )
 z_index = 1
 script = ExtResource( 4 )
+maxHp = 0.0
+spd = 100
+atk = 15
+stunParts = ExtResource( 8 )
+spdIncrease = 15.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.5, 2.5 )
-shape = SubResource( 6 )
+shape = SubResource( 9 )
+disabled = true
 
 [node name="SpriteParent" type="Node2D" parent="."]
+material = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="SpriteParent"]
 material = ExtResource( 2 )
+use_parent_material = true
 position = Vector2( 2.38419e-07, 5.96046e-08 )
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.01, 0.01 )
 texture = ExtResource( 3 )
-hframes = 8
+script = ExtResource( 9 )
+dis = 1.25
+speedVariability = 10.0
+distanceVariability = 0.5
+
+[node name="LilBeeBich" type="Area2D" parent="SpriteParent/Sprite" groups=["enemies"]]
+scale = Vector2( 10, 10 )
 script = ExtResource( 6 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpriteParent/Sprite/LilBeeBich"]
+position = Vector2( 5.96042e-07, 1.78814e-06 )
+shape = SubResource( 7 )
+
 [node name="Sprite2" type="Sprite" parent="SpriteParent"]
-material = ExtResource( 2 )
-position = Vector2( 14, -4 )
-scale = Vector2( 0.1, 0.1 )
+material = ExtResource( 7 )
+use_parent_material = true
+position = Vector2( -10, 3 )
+scale = Vector2( 0.01, 0.01 )
 texture = ExtResource( 3 )
-hframes = 8
+script = ExtResource( 9 )
+
+[node name="LilBeeBich" type="Area2D" parent="SpriteParent/Sprite2" groups=["enemies"]]
+scale = Vector2( 10, 10 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpriteParent/Sprite2/LilBeeBich"]
+position = Vector2( 5.96042e-07, 1.78814e-06 )
+shape = SubResource( 7 )
 
 [node name="Sprite3" type="Sprite" parent="SpriteParent"]
-material = ExtResource( 2 )
-position = Vector2( 13, 9 )
-scale = Vector2( 0.1, 0.1 )
+material = ExtResource( 7 )
+use_parent_material = true
+position = Vector2( -4, 12 )
+scale = Vector2( 0.01, 0.01 )
 texture = ExtResource( 3 )
-hframes = 8
+script = ExtResource( 9 )
+
+[node name="LilBeeBich" type="Area2D" parent="SpriteParent/Sprite3" groups=["enemies"]]
+scale = Vector2( 10, 10 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpriteParent/Sprite3/LilBeeBich"]
+position = Vector2( 5.96042e-07, 1.78814e-06 )
+shape = SubResource( 7 )
 
 [node name="Sprite4" type="Sprite" parent="SpriteParent"]
-material = ExtResource( 2 )
-position = Vector2( 3, 15 )
-scale = Vector2( 0.1, 0.1 )
+material = ExtResource( 7 )
+use_parent_material = true
+position = Vector2( 6, 15 )
+scale = Vector2( 0.01, 0.01 )
 texture = ExtResource( 3 )
-hframes = 8
+script = ExtResource( 9 )
+
+[node name="LilBeeBich" type="Area2D" parent="SpriteParent/Sprite4" groups=["enemies"]]
+scale = Vector2( 10, 10 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpriteParent/Sprite4/LilBeeBich"]
+position = Vector2( 5.96042e-07, 1.78814e-06 )
+shape = SubResource( 7 )
 
 [node name="Sprite5" type="Sprite" parent="SpriteParent"]
-material = ExtResource( 2 )
-position = Vector2( -2, -13 )
-scale = Vector2( 0.1, 0.1 )
+material = ExtResource( 7 )
+use_parent_material = true
+position = Vector2( 15, 5 )
+scale = Vector2( 0.01, 0.01 )
 texture = ExtResource( 3 )
-hframes = 8
+script = ExtResource( 9 )
+
+[node name="LilBeeBich" type="Area2D" parent="SpriteParent/Sprite5" groups=["enemies"]]
+scale = Vector2( 10, 10 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpriteParent/Sprite5/LilBeeBich"]
+position = Vector2( 5.96042e-07, 1.78814e-06 )
+shape = SubResource( 7 )
 
 [node name="Sprite6" type="Sprite" parent="SpriteParent"]
-material = ExtResource( 2 )
-position = Vector2( -7, 2 )
-scale = Vector2( 0.1, 0.1 )
+material = ExtResource( 7 )
+use_parent_material = true
+position = Vector2( 11, -7 )
+scale = Vector2( 0.01, 0.01 )
 texture = ExtResource( 3 )
-hframes = 8
+script = ExtResource( 9 )
+
+[node name="LilBeeBich" type="Area2D" parent="SpriteParent/Sprite6" groups=["enemies"]]
+scale = Vector2( 10, 10 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpriteParent/Sprite6/LilBeeBich"]
+position = Vector2( 5.96042e-07, 1.78814e-06 )
+shape = SubResource( 7 )
 
 [node name="Sprite7" type="Sprite" parent="SpriteParent"]
-material = ExtResource( 2 )
-position = Vector2( -11, 14 )
-scale = Vector2( 0.1, 0.1 )
+material = ExtResource( 7 )
+use_parent_material = true
+position = Vector2( -4, -13 )
+scale = Vector2( 0.01, 0.01 )
 texture = ExtResource( 3 )
-hframes = 8
+script = ExtResource( 9 )
+
+[node name="LilBeeBich" type="Area2D" parent="SpriteParent/Sprite7" groups=["enemies"]]
+scale = Vector2( 10, 10 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpriteParent/Sprite7/LilBeeBich"]
+position = Vector2( 5.96042e-07, 1.78814e-06 )
+shape = SubResource( 7 )
 
 [node name="Sprite8" type="Sprite" parent="SpriteParent"]
-material = ExtResource( 2 )
-position = Vector2( -13, -7 )
-scale = Vector2( 0.1, 0.1 )
+material = ExtResource( 7 )
+use_parent_material = true
+position = Vector2( -15, -5 )
+scale = Vector2( 0.01, 0.01 )
 texture = ExtResource( 3 )
-hframes = 8
+script = ExtResource( 9 )
 
-[node name="Sprite9" type="Sprite" parent="SpriteParent"]
-material = ExtResource( 2 )
-position = Vector2( 7, -10 )
-scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 3 )
-hframes = 8
+[node name="LilBeeBich" type="Area2D" parent="SpriteParent/Sprite8" groups=["enemies"]]
+scale = Vector2( 10, 10 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpriteParent/Sprite8/LilBeeBich"]
+position = Vector2( 5.96042e-07, 1.78814e-06 )
+shape = SubResource( 7 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-enabled = true
 cast_to = Vector2( 0, -50 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -175,7 +256,7 @@ shape = SubResource( 5 )
 
 [node name="Legs" type="Node2D" parent="."]
 visible = false
-material = ExtResource( 2 )
+material = ExtResource( 7 )
 
 [node name="Leg" parent="Legs" instance=ExtResource( 1 )]
 material = ExtResource( 2 )
@@ -210,5 +291,11 @@ position = Vector2( -40, -24 )
 [node name="LegUpd4" type="Position2D" parent="LegUpdaters"]
 position = Vector2( -40, 8 )
 
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource( 8 )
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Area2D2" to="." method="_on_Area2D2_body_entered"]

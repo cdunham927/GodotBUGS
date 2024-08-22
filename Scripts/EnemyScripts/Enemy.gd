@@ -46,7 +46,6 @@ export(float) var stunThreshold = 3.0
 #Stun particles
 export(PackedScene) var stunParts
 
-
 export(float) var flashMinDmg = 5.0
 
 #procedural animation stuff
@@ -56,12 +55,16 @@ onready var leg3 = $Legs/Leg3
 onready var leg4 = $Legs/Leg4
 onready var leg5 = $Legs/Leg5
 onready var leg6 = $Legs/Leg6
+onready var leg7 = $Legs/Leg7
+onready var leg8 = $Legs/Leg8
 onready var legUpd = $LegUpdaters/LegUpd
 onready var legUpd2 = $LegUpdaters/LegUpd2
 onready var legUpd3 = $LegUpdaters/LegUpd3
 onready var legUpd4 = $LegUpdaters/LegUpd4
 onready var legUpd5 = $LegUpdaters/LegUpd5
 onready var legUpd6 = $LegUpdaters/LegUpd6
+onready var legUpd7 = $LegUpdaters/LegUpd7
+onready var legUpd8 = $LegUpdaters/LegUpd8
 
 var upd1 : Vector2
 var upd2 : Vector2
@@ -69,6 +72,8 @@ var upd3 : Vector2
 var upd4 : Vector2
 var upd5 : Vector2
 var upd6 : Vector2
+var upd7 : Vector2
+var upd8 : Vector2
 
 export var maxLegDist : float = 2
 
@@ -101,6 +106,10 @@ func Setup():
 		upd5 = legUpd5.global_position
 	if legUpd6 != null:
 		upd6 = legUpd6.global_position
+	if legUpd7 != null:
+		upd7 = legUpd7.global_position
+	if legUpd8 != null:
+		upd8 = legUpd8.global_position
 	
 	hp = maxHp
 	curState = States.idle

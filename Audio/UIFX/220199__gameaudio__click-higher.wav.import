@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/220199__gameaudio__click-higher.wav-25b1b568ce882a1ea18436f82b5a2a55.sample"
+
+[deps]
+
+source_file="res://Audio/UIFX/220199__gameaudio__click-higher.wav"
+dest_files=[ "res://.import/220199__gameaudio__click-higher.wav-25b1b568ce882a1ea18436f82b5a2a55.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

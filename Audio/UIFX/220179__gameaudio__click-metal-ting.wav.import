@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/220179__gameaudio__click-metal-ting.wav-70d74a0b468a8a406698a8704bfbdf36.sample"
+
+[deps]
+
+source_file="res://Audio/UIFX/220179__gameaudio__click-metal-ting.wav"
+dest_files=[ "res://.import/220179__gameaudio__click-metal-ting.wav-70d74a0b468a8a406698a8704bfbdf36.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -11,8 +11,12 @@ config_version=4
 [application]
 
 config/name="BUGS"
-run/main_scene="res://Scenes/Levels/World.tscn"
+run/main_scene="res://Scenes/Levels/AntWorld.tscn"
 config/icon="res://Sprites/Etc/icon.png"
+
+[audio]
+
+default_bus_layout=""
 
 [autoload]
 

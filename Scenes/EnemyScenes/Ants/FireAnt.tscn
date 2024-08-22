@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Animations/Hit.tres" type="Animation" id=1]
-[ext_resource path="res://Scripts/FireAnt.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/EnemyScripts/FireAnt.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/Enemies/Ant_5-Sheet.png" type="Texture" id=3]
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=4]
 [ext_resource path="res://Scenes/EnemyScenes/Legs/AntLeg.tscn" type="PackedScene" id=5]

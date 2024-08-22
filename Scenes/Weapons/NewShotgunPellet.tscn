@@ -8,7 +8,7 @@ radius = 5.0
 
 [node name="Bullet" instance=ExtResource( 1 )]
 priority = 7.0
-atk = 55.0
+atk = 45.0
 lowDmgPercent = 0.5
 damageFalloff = true
 spdSlow = 800.0

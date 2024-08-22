@@ -1,10 +1,14 @@
 extends CanvasLayer
 
 #onready var menu = load("res://menu.tscn").instance()
-onready var world = load("res://Scenes/Levels/World.tscn")
+onready var world = load("res://Scenes/Levels/Overworld.tscn")
 
 func _on_ContinueButton_pressed():
 	#Load save file
+	
+	
+	
+	
 	
 	#For now, load main level
 	
@@ -21,10 +25,20 @@ func _on_ContinueButton_pressed():
 	
 
 func _on_NewGameButton_pressed():
+	#Replace save data
+	
+	
+	
+	
 	pass # Replace with function body.
 
 
 func _on_OptionsButton_pressed():
+	#Open options menu
+	
+	
+	
+	
 	pass # Replace with function body.
 
 #func _ready():

@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/220208__gameaudio__click-pop-two-part.wav-1adc1b2b3da49f3e97b9c8397ed916a3.sample"
+
+[deps]
+
+source_file="res://Audio/UIFX/220208__gameaudio__click-pop-two-part.wav"
+dest_files=[ "res://.import/220208__gameaudio__click-pop-two-part.wav-1adc1b2b3da49f3e97b9c8397ed916a3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,120 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Scenes/PlayerScenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/EnemyScenes/Ants/Ant.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/UI/UI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/Controllers/GameController.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/EnemyScenes/Ants/TurtleAnt.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/Etc/CameraShake.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/EnemyScenes/Ants/FireAnt.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/EnemyScenes/Bees/Bee.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/EnemyScenes/Ants/ThrowerAnt.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/EnemyScenes/Bees/Beehive.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/EnemyScenes/Bees/SwarmBees.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Menus/PauseRoot.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Levels/MapTrigger.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Levels/Wall.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/EnemyScenes/Spiders/Spiderling.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/EnemyScenes/Spiders/Cocoon.tscn" type="PackedScene" id=16]
+
+[sub_resource type="TileSet" id=1]
+
+[node name="World" type="Node2D"]
+pause_mode = 2
+position = Vector2( 1, -7 )
+script = ExtResource( 4 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 1 )
+format = 1
+
+[node name="UI" parent="." instance=ExtResource( 3 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 661, 447 )
+current = true
+zoom = Vector2( 1.5, 1.5 )
+smoothing_enabled = true
+script = ExtResource( 6 )
+maxTrauma = 0.15
+
+[node name="PauseRoot" parent="." instance=ExtResource( 12 )]
+visible = false
+
+[node name="MapTrigger" parent="." instance=ExtResource( 13 )]
+position = Vector2( 621, -68 )
+scale = Vector2( 92.9408, 1.6977 )
+nextArea = NodePath("../MapPart2")
+previousArea = NodePath("../MapPart1")
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 661, 447 )
+
+[node name="GatlingL" parent="Player/Node2D/MechBody/WeaponsLeft" index="0"]
+visible = true
+
+[node name="FlamesL" parent="Player/Node2D/MechBody/WeaponsLeft" index="4"]
+visible = false
+
+[node name="GatlingR" parent="Player/Node2D/MechBody/WeaponsRight" index="0"]
+visible = true
+
+[node name="FlamesR" parent="Player/Node2D/MechBody/WeaponsRight" index="4"]
+visible = false
+
+[node name="RemoteTransform2D" parent="Player" index="4"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="MapPart2" type="Node2D" parent="."]
+visible = false
+position = Vector2( -107, -505 )
+
+[node name="TurtleAnt" parent="MapPart2" instance=ExtResource( 5 )]
+position = Vector2( 1379, 87 )
+
+[node name="Ant" parent="MapPart2" instance=ExtResource( 2 )]
+position = Vector2( 165, 121 )
+
+[node name="Beehive" parent="MapPart2" instance=ExtResource( 10 )]
+position = Vector2( 663, 9 )
+spawnTimeLow = 3.0
+spawnTimeBig = 8.0
+
+[node name="MapPart1" type="Node2D" parent="."]
+position = Vector2( -91, -713 )
+
+[node name="Wall" parent="." instance=ExtResource( 14 )]
+position = Vector2( 621, -26 )
+scale = Vector2( 13.36, 1.52 )
+
+[node name="Bee" parent="." instance=ExtResource( 8 )]
+position = Vector2( 182, 60 )
+
+[node name="FireAnt" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1037, -37 )
+
+[node name="ThrowerAnt" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1247, 289 )
+
+[node name="TurtleAnt" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1206, 770 )
+
+[node name="Ant" parent="." instance=ExtResource( 2 )]
+position = Vector2( 121, 728 )
+
+[node name="SwarmBees" parent="." instance=ExtResource( 11 )]
+position = Vector2( 651, 911 )
+
+[node name="Spiderling" parent="." instance=ExtResource( 15 )]
+position = Vector2( 401, 895 )
+
+[node name="Spiderling2" parent="." instance=ExtResource( 15 )]
+position = Vector2( 929, 783 )
+
+[node name="Spiderling3" parent="." instance=ExtResource( 15 )]
+position = Vector2( 434, 721 )
+
+[node name="Cocoon" parent="." instance=ExtResource( 16 )]
+position = Vector2( 905, 324 )
+
+[editable path="Player"]

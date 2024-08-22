@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/MenuController.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/UI/dotBlue.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Sprites/UI/dotGreen.png" type="Texture" id=6]
 [ext_resource path="res://Fonts/BrokenFontTitle.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Fonts/BrokenFontSmall.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Sprites/UI/dotYellow.png" type="Texture" id=9]
 
 [node name="MenuRoot" type="CanvasLayer"]
 layer = 2
@@ -70,42 +71,57 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="ContinueButton" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions"]
-margin_top = 94.0
+margin_top = 46.0
 margin_right = 172.0
-margin_bottom = 133.0
+margin_bottom = 85.0
 rect_min_size = Vector2( 50, 39 )
 text = "Continue"
-icon = ExtResource( 2 )
+icon = ExtResource( 6 )
 align = 0
 
 [node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions"]
-margin_top = 137.0
+margin_top = 89.0
 margin_right = 172.0
-margin_bottom = 187.0
+margin_bottom = 139.0
 rect_min_size = Vector2( 0, 50 )
 
 [node name="NewGameButton" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions"]
-margin_top = 191.0
+margin_top = 143.0
 margin_right = 172.0
-margin_bottom = 230.0
+margin_bottom = 182.0
 rect_min_size = Vector2( 50, 39 )
 text = "NewGame"
-icon = ExtResource( 5 )
+icon = ExtResource( 9 )
 align = 0
 
 [node name="Label2" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions"]
-margin_top = 234.0
+margin_top = 186.0
 margin_right = 172.0
-margin_bottom = 284.0
+margin_bottom = 236.0
 rect_min_size = Vector2( 0, 50 )
 
 [node name="OptionsButton" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions"]
-margin_top = 288.0
+margin_top = 240.0
 margin_right = 172.0
-margin_bottom = 327.0
+margin_bottom = 279.0
 rect_min_size = Vector2( 50, 39 )
 text = "Options"
-icon = ExtResource( 6 )
+icon = ExtResource( 2 )
+align = 0
+
+[node name="Label3" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions"]
+margin_top = 283.0
+margin_right = 172.0
+margin_bottom = 333.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="QuitButton" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions"]
+margin_top = 337.0
+margin_right = 172.0
+margin_bottom = 376.0
+rect_min_size = Vector2( 50, 39 )
+text = "Quit"
+icon = ExtResource( 5 )
 align = 0
 
 [node name="Version" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer2"]
@@ -142,3 +158,4 @@ stretch_mode = 5
 [connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions/ContinueButton" to="." method="_on_ContinueButton_pressed"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions/NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions/QuitButton" to="." method="_on_OptionsButton_pressed"]
