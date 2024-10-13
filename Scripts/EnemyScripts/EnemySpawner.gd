@@ -19,6 +19,7 @@ export var enemy: PackedScene
 #onready var world = get_node("/root/World")
 #export(float) var accuracy
 
+export(bool) var paused = false
 export var spawnsOnDeath = false
 var hasSpawned = false
 export var deathEnemy: PackedScene
@@ -42,7 +43,7 @@ func _ready():
  
 func _process(delta):
 	#Check if player is in range too
-	if inSight:
+	if inSight and !paused:
 		if curSpawns > 0:
 			curSpawns -= delta
 		

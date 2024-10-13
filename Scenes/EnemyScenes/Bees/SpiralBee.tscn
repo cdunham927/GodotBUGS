@@ -83,7 +83,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=5]
-radius = 357.56
+radius = 703.003
 
 [node name="SpiralBee" type="KinematicBody2D" groups=["enemies"]]
 pause_mode = 1

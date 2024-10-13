@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Controllers/GameController.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI/UI.tscn" type="PackedScene" id=2]
@@ -9,9 +9,14 @@
 [ext_resource path="res://Scenes/Effects/HoneySplat.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Menus/VictoryRoot.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Menus/GameOverRoot.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/EnemyScenes/Bees/Bee.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/EnemyScenes/Bees/Beehive.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/EnemyScenes/Bees/SuicideBee.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/EnemyScenes/Bees/SpiralBee.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/EnemyScenes/Bees/QueenBee.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/UI/BossUI.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Tiles/AntTiles.tres" type="TileSet" id=16]
+[ext_resource path="res://Scenes/EnemyScenes/Bees/SwarmBees.tscn" type="PackedScene" id=17]
 
 [node name="World" type="Node2D"]
 pause_mode = 2
@@ -55,7 +60,7 @@ visible = false
 
 [node name="MapTrigger" parent="." instance=ExtResource( 3 )]
 position = Vector2( 642, 388 )
-scale = Vector2( 114.701, 1.6977 )
+scale = Vector2( 120.56, 1 )
 nextArea = NodePath("../MapPart1")
 previousArea = NodePath("../MapPart1")
 
@@ -69,61 +74,61 @@ previousArea = NodePath("../MapPart1")
 [node name="MapTrigger3" parent="." instance=ExtResource( 3 )]
 position = Vector2( -1920, -2943 )
 scale = Vector2( 97.4208, 1.6977 )
-nextArea = NodePath("../MapPart2")
+nextArea = NodePath("../MapPart3")
 previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger4" parent="." instance=ExtResource( 3 )]
 position = Vector2( -3250, -2139 )
 rotation = -1.19426
 scale = Vector2( 92.9408, 1.6977 )
-nextArea = NodePath("../MapPart2")
+nextArea = NodePath("../MapPart4")
 previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger5" parent="." instance=ExtResource( 3 )]
 position = Vector2( -4425, -4057 )
 scale = Vector2( 95.7808, 1.6977 )
-nextArea = NodePath("../MapPart2")
+nextArea = NodePath("../MapPart5")
 previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger6" parent="." instance=ExtResource( 3 )]
 position = Vector2( -3380, -6117 )
 rotation = 0.984156
 scale = Vector2( 92.9408, 1.6977 )
-nextArea = NodePath("../MapPart2")
+nextArea = NodePath("../MapPart6")
 previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger7" parent="." instance=ExtResource( 3 )]
 position = Vector2( -707, -5983 )
 rotation = -1.12825
 scale = Vector2( 69.5031, 1.6977 )
-nextArea = NodePath("../MapPart2")
+nextArea = NodePath("../MapPart7")
 previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger8" parent="." instance=ExtResource( 3 )]
 position = Vector2( 2045, -5794 )
 rotation = 1.02344
 scale = Vector2( 92.9408, 1.6977 )
-nextArea = NodePath("../MapPart2")
+nextArea = NodePath("../MapPart8")
 previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger9" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1912, -7500 )
 rotation = -1.178
 scale = Vector2( 92.9408, 1.6977 )
-nextArea = NodePath("../MapPart2")
+nextArea = NodePath("../MapPart9")
 previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger10" parent="." instance=ExtResource( 3 )]
 position = Vector2( 4311, -6015 )
 rotation = -1.14782
 scale = Vector2( 92.9408, 1.6977 )
-nextArea = NodePath("../MapPart2")
+nextArea = NodePath("../MapPart10")
 previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger11" parent="." instance=ExtResource( 3 )]
 position = Vector2( 5667, -4237 )
 scale = Vector2( 92.9408, 1.6977 )
-nextArea = NodePath("../MapPart2")
+nextArea = NodePath("../MapPart11")
 previousArea = NodePath("../MapPart1")
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
@@ -145,51 +150,495 @@ visible = false
 remote_path = NodePath("../../Camera2D")
 
 [node name="MapPart1" type="Node2D" parent="."]
+visible = false
 position = Vector2( -91, -713 )
+
+[node name="Bee" parent="MapPart1" instance=ExtResource( 10 )]
+position = Vector2( -219, 346 )
+
+[node name="Bee2" parent="MapPart1" instance=ExtResource( 10 )]
+position = Vector2( 485, 1 )
+
+[node name="Bee3" parent="MapPart1" instance=ExtResource( 10 )]
+position = Vector2( 1317, 336 )
 
 [node name="MapPart2" type="Node2D" parent="."]
+visible = false
 position = Vector2( -107, -505 )
 
+[node name="Beehive" parent="MapPart2" instance=ExtResource( 11 )]
+position = Vector2( -2080, 43 )
+
+[node name="Beehive2" parent="MapPart2" instance=ExtResource( 11 )]
+position = Vector2( -749, -1856 )
+
+[node name="SpiralBee" parent="MapPart2" instance=ExtResource( 13 )]
+position = Vector2( -1815, -629 )
+
+[node name="SpiralBee2" parent="MapPart2" instance=ExtResource( 13 )]
+position = Vector2( -1371, -1291 )
+
+[node name="SuicideBee" parent="MapPart2" instance=ExtResource( 12 )]
+position = Vector2( -2391, -1349 )
+
 [node name="MapPart3" type="Node2D" parent="."]
+visible = false
 position = Vector2( -91, -713 )
+
+[node name="Beehive" parent="MapPart3" instance=ExtResource( 11 )]
+position = Vector2( -1828, -3472 )
+
+[node name="Bee" parent="MapPart3" instance=ExtResource( 10 )]
+position = Vector2( -2588, -2948 )
+
+[node name="Bee2" parent="MapPart3" instance=ExtResource( 10 )]
+position = Vector2( -1164, -3924 )
+
+[node name="SuicideBee" parent="MapPart3" instance=ExtResource( 12 )]
+position = Vector2( -2400, -3844 )
+
+[node name="SwarmBees" parent="MapPart3" instance=ExtResource( 17 )]
+position = Vector2( -1050, -2967 )
 
 [node name="MapPart4" type="Node2D" parent="."]
+visible = false
 position = Vector2( -91, -713 )
+
+[node name="SwarmBees" parent="MapPart4" instance=ExtResource( 17 )]
+position = Vector2( -4834, -1178 )
+
+[node name="SwarmBees2" parent="MapPart4" instance=ExtResource( 17 )]
+position = Vector2( -3790, -1889 )
+
+[node name="Beehive" parent="MapPart4" instance=ExtResource( 11 )]
+position = Vector2( -4603, -2132 )
+
+[node name="SuicideBee" parent="MapPart4" instance=ExtResource( 12 )]
+position = Vector2( -3616, -2787 )
+
+[node name="SuicideBee2" parent="MapPart4" instance=ExtResource( 12 )]
+position = Vector2( -4780, -2636 )
+
+[node name="Bee" parent="MapPart4" instance=ExtResource( 10 )]
+position = Vector2( -5279, -2223 )
 
 [node name="MapPart5" type="Node2D" parent="."]
+visible = false
 position = Vector2( -91, -713 )
+
+[node name="Beehive" parent="MapPart5" instance=ExtResource( 11 )]
+position = Vector2( -5414, -3708 )
+
+[node name="Beehive2" parent="MapPart5" instance=ExtResource( 11 )]
+position = Vector2( -3321, -3849 )
+
+[node name="Beehive3" parent="MapPart5" instance=ExtResource( 11 )]
+position = Vector2( -4985, -5173 )
+
+[node name="SpiralBee" parent="MapPart5" instance=ExtResource( 13 )]
+position = Vector2( -5109, -4364 )
+
+[node name="SuicideBee" parent="MapPart5" instance=ExtResource( 12 )]
+position = Vector2( -4181, -4551 )
 
 [node name="MapPart6" type="Node2D" parent="."]
+visible = false
 position = Vector2( -91, -713 )
+
+[node name="SwarmBees" parent="MapPart6" instance=ExtResource( 17 )]
+position = Vector2( -2918, -5803 )
+
+[node name="SwarmBees2" parent="MapPart6" instance=ExtResource( 17 )]
+position = Vector2( -2267, -6289 )
+
+[node name="SwarmBees3" parent="MapPart6" instance=ExtResource( 17 )]
+position = Vector2( -1107, -5740 )
+
+[node name="SwarmBees4" parent="MapPart6" instance=ExtResource( 17 )]
+position = Vector2( -1801, -4965 )
+
+[node name="SuicideBee" parent="MapPart6" instance=ExtResource( 12 )]
+position = Vector2( -1873, -5643 )
 
 [node name="MapPart7" type="Node2D" parent="."]
+visible = false
 position = Vector2( -91, -713 )
+
+[node name="SpiralBee" parent="MapPart7" instance=ExtResource( 13 )]
+position = Vector2( -355, -4406 )
+
+[node name="SuicideBee" parent="MapPart7" instance=ExtResource( 12 )]
+position = Vector2( 238, -4024 )
+
+[node name="SwarmBees" parent="MapPart7" instance=ExtResource( 17 )]
+position = Vector2( 982, -4252 )
+
+[node name="Beehive" parent="MapPart7" instance=ExtResource( 11 )]
+position = Vector2( 664, -4891 )
+
+[node name="SwarmBees2" parent="MapPart7" instance=ExtResource( 17 )]
+position = Vector2( 807, -5244 )
 
 [node name="MapPart8" type="Node2D" parent="."]
+visible = false
 position = Vector2( -91, -713 )
+
+[node name="Beehive" parent="MapPart8" instance=ExtResource( 11 )]
+position = Vector2( 3203, -5070 )
+
+[node name="SpiralBee" parent="MapPart8" instance=ExtResource( 13 )]
+position = Vector2( 2520, -6257 )
+
+[node name="SpiralBee2" parent="MapPart8" instance=ExtResource( 13 )]
+position = Vector2( 3191, -6538 )
+
+[node name="SwarmBees" parent="MapPart8" instance=ExtResource( 17 )]
+position = Vector2( 3769, -5602 )
+
+[node name="Bee" parent="MapPart8" instance=ExtResource( 10 )]
+position = Vector2( 2880, -5370 )
 
 [node name="MapPart9" type="Node2D" parent="."]
+visible = false
 position = Vector2( -91, -713 )
+
+[node name="Beehive" parent="MapPart9" instance=ExtResource( 11 )]
+position = Vector2( 33, -6215 )
+
+[node name="Beehive2" parent="MapPart9" instance=ExtResource( 11 )]
+position = Vector2( 1867, -7563 )
+
+[node name="Beehive3" parent="MapPart9" instance=ExtResource( 11 )]
+position = Vector2( 758, -8085 )
+
+[node name="Beehive4" parent="MapPart9" instance=ExtResource( 11 )]
+position = Vector2( 81, -7539 )
 
 [node name="MapPart10" type="Node2D" parent="."]
+visible = false
 position = Vector2( -91, -713 )
+
+[node name="Bee" parent="MapPart10" instance=ExtResource( 10 )]
+position = Vector2( 4743, -4141 )
+
+[node name="Bee2" parent="MapPart10" instance=ExtResource( 10 )]
+position = Vector2( 4946, -4916 )
+
+[node name="Bee3" parent="MapPart10" instance=ExtResource( 10 )]
+position = Vector2( 5416, -5508 )
+
+[node name="Bee4" parent="MapPart10" instance=ExtResource( 10 )]
+position = Vector2( 6142, -5540 )
+
+[node name="SpiralBee" parent="MapPart10" instance=ExtResource( 13 )]
+position = Vector2( 6628, -5070 )
+
+[node name="SuicideBee" parent="MapPart10" instance=ExtResource( 12 )]
+position = Vector2( 6281, -4638 )
+
+[node name="SwarmBees" parent="MapPart10" instance=ExtResource( 17 )]
+position = Vector2( 5873, -4291 )
 
 [node name="MapPart11" type="Node2D" parent="."]
+visible = false
 position = Vector2( -91, -713 )
-
-[node name="HoneySplat" parent="." instance=ExtResource( 7 )]
-position = Vector2( 472, 448 )
-
-[node name="HoneySplat2" parent="." instance=ExtResource( 7 )]
-position = Vector2( 758, 684 )
 
 [node name="EnemySrc" type="AudioStreamPlayer2D" parent="."]
 bus = "Sounds"
 
 [node name="QueenBee" parent="." instance=ExtResource( 14 )]
-visible = false
 position = Vector2( 596, -193 )
 stunThreshold = 15.0
+
+[node name="HoneyParent" type="Node2D" parent="."]
+
+[node name="HoneySplat" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 4264, -2968 )
+
+[node name="HoneySplat2" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 4916, -3662 )
+
+[node name="HoneySplat3" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 5364, -2717 )
+
+[node name="HoneySplat4" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 5481, -3208 )
+
+[node name="HoneySplat5" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 6085, -3720 )
+
+[node name="HoneySplat6" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 6613, -3507 )
+
+[node name="HoneySplat7" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 6592, -2759 )
+
+[node name="HoneySplat8" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 6485, -2380 )
+
+[node name="HoneySplat9" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 6293, -2065 )
+
+[node name="HoneySplat10" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 5193, -2252 )
+
+[node name="HoneySplat11" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 5332, -3913 )
+
+[node name="HoneySplat12" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 4563, -2444 )
+
+[node name="HoneySplat13" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 4809, -4505 )
+
+[node name="HoneySplat14" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 5327, -5039 )
+
+[node name="HoneySplat15" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 6672, -5338 )
+
+[node name="HoneySplat16" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 6037, -5707 )
+
+[node name="HoneySplat17" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 5113, -6273 )
+
+[node name="HoneySplat18" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 5044, -5910 )
+
+[node name="HoneySplat19" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 6411, -6177 )
+
+[node name="HoneySplat20" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -549, -346 )
+
+[node name="HoneySplat21" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -327, -1206 )
+
+[node name="HoneySplat22" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 4, -1428 )
+
+[node name="HoneySplat23" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 817, -1485 )
+
+[node name="HoneySplat24" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 487, -435 )
+
+[node name="HoneySplat25" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 1545, -1267 )
+
+[node name="HoneySplat26" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 1772, -648 )
+
+[node name="HoneySplat27" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 1285, -270 )
+
+[node name="HoneySplat28" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 827, -204 )
+
+[node name="HoneySplat29" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -5, -100 )
+
+[node name="HoneySplat30" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -2389, -608 )
+
+[node name="HoneySplat31" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -1461, -651 )
+
+[node name="HoneySplat32" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -2056, -1169 )
+
+[node name="HoneySplat33" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -1951, -1650 )
+
+[node name="HoneySplat34" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -1937, -2183 )
+
+[node name="HoneySplat35" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -2507, -2183 )
+
+[node name="HoneySplat36" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -1052, -1878 )
+
+[node name="HoneySplat37" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -1123, -1241 )
+
+[node name="HoneySplat38" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -2643, -3413 )
+
+[node name="HoneySplat39" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -1783, -4073 )
+
+[node name="HoneySplat40" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -2167, -3537 )
+
+[node name="HoneySplat41" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -1559, -3381 )
+
+[node name="HoneySplat42" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -1031, -3477 )
+
+[node name="HoneySplat43" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -2779, -4933 )
+
+[node name="HoneySplat44" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -2303, -5057 )
+
+[node name="HoneySplat45" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -1695, -4901 )
+
+[node name="HoneySplat46" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -1167, -4997 )
+
+[node name="HoneySplat47" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -2495, -4145 )
+
+[node name="HoneySplat48" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -2019, -4269 )
+
+[node name="HoneySplat49" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -1411, -4113 )
+
+[node name="HoneySplat50" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -883, -4209 )
+
+[node name="HoneySplat51" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -5156, -2021 )
+
+[node name="HoneySplat52" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -4057, -1865 )
+
+[node name="HoneySplat53" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -3775, -2182 )
+
+[node name="HoneySplat54" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -3417, -2777 )
+
+[node name="HoneySplat55" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -4148, -3069 )
+
+[node name="HoneySplat56" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -4692, -2479 )
+
+[node name="HoneySplat57" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -5085, -3437 )
+
+[node name="HoneySplat58" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -4974, -4440 )
+
+[node name="HoneySplat59" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -3846, -4586 )
+
+[node name="HoneySplat60" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -4138, -5100 )
+
+[node name="HoneySplat61" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -4591, -5533 )
+
+[node name="HoneySplat62" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -4075, -6033 )
+
+[node name="HoneySplat63" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -3314, -5339 )
+
+[node name="HoneySplat64" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -2620, -6287 )
+
+[node name="HoneySplat65" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -2569, -7164 )
+
+[node name="HoneySplat66" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -1395, -7255 )
+
+[node name="HoneySplat67" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -816, -6317 )
+
+[node name="HoneySplat68" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -1249, -5511 )
+
+[node name="HoneySplat69" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -1637, -6030 )
+
+[node name="HoneySplat70" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -226, -5294 )
+
+[node name="HoneySplat71" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 137, -5950 )
+
+[node name="HoneySplat72" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 742, -6131 )
+
+[node name="HoneySplat73" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 1356, -5864 )
+
+[node name="HoneySplat74" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 434, -4947 )
+
+[node name="HoneySplat75" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 1593, -4992 )
+
+[node name="HoneySplat76" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 1336, -4327 )
+
+[node name="HoneySplat77" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 2707, -5819 )
+
+[node name="HoneySplat78" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 2329, -6413 )
+
+[node name="HoneySplat79" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 2400, -7230 )
+
+[node name="HoneySplat80" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 3891, -7245 )
+
+[node name="HoneySplat81" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 4113, -6554 )
+
+[node name="HoneySplat82" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 3896, -5808 )
+
+[node name="HoneySplat83" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 3327, -6464 )
+
+[node name="HoneySplat84" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 2768, -6706 )
+
+[node name="HoneySplat85" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 1266, -6806 )
+
+[node name="HoneySplat86" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 822, -6952 )
+
+[node name="HoneySplat87" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 308, -7492 )
+
+[node name="HoneySplat88" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -40, -7366 )
+
+[node name="HoneySplat89" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -115, -7930 )
+
+[node name="HoneySplat90" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 444, -8389 )
+
+[node name="HoneySplat91" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 868, -7789 )
+
+[node name="HoneySplat92" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 1442, -7547 )
+
+[node name="HoneySplat93" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 1442, -8217 )
+
+[node name="HoneySplat94" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 1125, -8636 )
+
+[node name="HoneySplat95" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( 228, -8807 )
+
+[node name="HoneySplat96" parent="HoneyParent" instance=ExtResource( 7 )]
+position = Vector2( -161, -8737 )
 
 [editable path="PauseRoot"]
 [editable path="Player"]
