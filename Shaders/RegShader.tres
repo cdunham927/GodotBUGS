@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://Shaders/RegShaderExtra.tres" type="Shader" id=1]
+[ext_resource path="res://Shaders/RegShaderGrad.tres" type="Gradient" id=2]
+
+[sub_resource type="GradientTexture" id=2]
+gradient = ExtResource( 2 )
+width = 256
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/mix_amount = 0.0
+shader_param/gradient = SubResource( 2 )

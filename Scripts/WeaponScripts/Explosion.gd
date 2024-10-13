@@ -4,6 +4,9 @@ export var hitString = ""
 export var atk = 10.0
 export var stunAmt = 1.5
 
+export(float) var colorLerp
+export(Color) var endColor
+
 export(PackedScene) var bloodSpray
 
 #export var spawnsObj =  false
@@ -16,12 +19,11 @@ func _ready():
 func _on_Area2D_area_entered(area):
 	if area.is_in_group(hitString):
 		area.Damage(atk)
-		area.Stun(stunAmt)
-
+		if area.has_method("Stun"):
+			 area.Stun(stunAmt)
 
 func _on_Timer_timeout():
-	#if spawnsObj:
-	#	SpawnObj()
+	#emitting = false
 	queue_free()
 
 #func SpawnObj():

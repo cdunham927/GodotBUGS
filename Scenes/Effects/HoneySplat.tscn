@@ -1,20 +1,22 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Sprites/Splats/splat04.png" type="Texture" id=1]
-[ext_resource path="res://Shaders/HoneySplat.gdshader" type="Shader" id=2]
-[ext_resource path="res://Gradients/Honey.tres" type="Texture" id=3]
+[ext_resource path="res://Shaders/HoneyShader.tres" type="Material" id=2]
+[ext_resource path="res://Scripts/HoneySplat.gd" type="Script" id=3]
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 2 )
-shader_param/mix_amount = 1.0
-shader_param/gradient = ExtResource( 3 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 108.074
 
 [node name="HoneySplat" type="Area2D"]
 position = Vector2( 456, 272 )
 scale = Vector2( 0.25, 0.25 )
+script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = ExtResource( 2 )
 texture = ExtResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_HoneySplat_body_entered"]

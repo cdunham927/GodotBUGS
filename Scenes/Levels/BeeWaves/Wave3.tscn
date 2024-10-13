@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/EnemyScenes/Bees/Bee.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/EnemyScenes/Bees/SpiralBee.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/EnemyScenes/Bees/SuicideBee.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/EnemyScenes/Bees/SwarmBees.tscn" type="PackedScene" id=4]
+
+[node name="Wave3" type="Node2D"]
+
+[node name="SuicideBee" parent="." instance=ExtResource( 3 )]
+position = Vector2( -185, -82 )
+
+[node name="SuicideBee2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 117, 101 )
+
+[node name="SpiralBee" parent="." instance=ExtResource( 2 )]
+position = Vector2( 135, -91 )
+
+[node name="SpiralBee2" parent="." instance=ExtResource( 2 )]
+position = Vector2( -171, 93 )
+
+[node name="SwarmBees" parent="." instance=ExtResource( 4 )]
+position = Vector2( 57, -153 )
+
+[node name="Bee" parent="." instance=ExtResource( 1 )]
+position = Vector2( -2, 207 )

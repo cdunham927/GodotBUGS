@@ -37,15 +37,26 @@ var boost_vec : Vector2
 
 #Spark hit particles
 export(PackedScene) var sparkParts
+export(PackedScene) var honeyParts
 
 #Animation
 onready var anim = $AnimationPlayer
 
 #Status effects
+#Fire
 var inFire : bool = false
 export(float) var fireDmg = 1.75
+export(float) var overheatAmt = 1
 export(float) var fireThreshold
 var curFire : float = 0.0
+#Honey
+var honeyed : float = 0.0
+export(float) var honeyRed = 1.0
+export(float) var honeyShotRed = 10.0
+export(float) var maxHoney = 100.0
+onready var honeySpriteL = $Node2D/MechBody/HoneyL
+onready var honeySpriteR = $Node2D/MechBody/HoneyR
+onready var honeyVision = $Node2D/HoneyVision
 
 #Charge dash variables
 onready var tim = $Node2D/MechBody/Timer
@@ -60,7 +71,18 @@ export(float) var timeToCharge = 33.34
 var boosting : bool = false
 var curBoostTimer : float = 0
 
+var gameoverRoot
+
+
+export(String) var soundName = "MetalHit"
+var snd
+
 func _ready():
+	honeySpriteL.hide()
+	honeySpriteR.hide()
+	snd = load("res://Audio/SFX/" + soundName + ".wav")
+	gameoverRoot = get_node("/root/World/GameOverRoot")
+	
 	if healthbar == null:
 		healthbar = get_node("/root/World2/UI/Health")
 	if staminabar == null:
@@ -199,6 +221,14 @@ func _physics_process(delta):
 		
 	if curFire > 0 and !inFire:
 		curFire -= delta
+		
+	#Honey status effect
+	if honeyed > 0:
+		honeyed -= honeyRed * delta
+		
+	if honeyed <= 0:
+		honeySpriteL.hide()
+		honeySpriteR.hide()
 
 func Boost(charge = 0.1):
 	#move_and_collide(move_vec * boostSpd)
@@ -212,6 +242,7 @@ func Boost(charge = 0.1):
 
 func Damage(amt, pos = global_position):
 	if iframes <= 0:
+		play_sound(snd, true)
 		hp -= amt
 		iframes = iframesTime
 		
@@ -220,6 +251,21 @@ func Damage(amt, pos = global_position):
 	
 	if hp <= 0:
 		Kill()
+		
+func GetHoneyed(amt = 25):
+	var newH = honeyed + amt
+	if newH > maxHoney:
+		honeyed = maxHoney
+	else:
+		honeyed = newH
+		
+	if honeySpriteL.is_visible_in_tree() or honeySpriteR.is_visible_in_tree():
+		return
+	var rand = rand_range(0, 1)
+	if rand > 0.5:
+		honeySpriteL.show()
+	else:
+		honeySpriteR.show()
 
 #Fire damage should start to overheat our weapons too
 ################
@@ -232,18 +278,31 @@ func Damage(amt, pos = global_position):
 func FireDamage():
 	#if iframes <= 0:
 	hp -= fireDmg
+	$Node2D/MechBody.overheatL += overheatAmt
+	$Node2D/MechBody.overheatR += overheatAmt
+	
 		#iframes = iframesTime
 		
 		#play_anim("hit")
 	
 	if hp <= 0:
 		Kill()
-		
+	
+func HoneyShot(pos, red = honeyShotRed):
+	honeyed -= red
+	SpawnHoneyPart(pos)
 
 func play_anim(name):
 	if anim.current_animation == name:
 		return
 	anim.play(name)
+	
+func SpawnHoneyPart(pos):
+	var s = honeyParts.instance()
+	s.emitting = true
+	get_tree().current_scene.add_child(s)
+	s.global_position = pos
+	
 
 func SpawnPart(pos):
 	#Spawn particles
@@ -268,8 +327,24 @@ func Kill():
 	#Play death animation
 	#Load gameover menu after x seconds
 	#Button to retry level/load checkpoint
+	gameoverRoot.show()
+	var con = get_node("/root/World/GameOverRoot/CenterContainer/VBoxContainer/VBoxContainer/ContinueButton")
+	con.grab_focus()
+	get_tree().paused = true
+	
 	pass
 
 
 func _on_Timer_timeout():
 	boosting = false
+	
+export(float) var pitchLow = 0.8
+export(float) var pitchHigh = 1.3
+func play_sound(s = snd, pitched = false):
+	#if !canPlay:
+	#	canPlay = true
+	#	return
+	if pitched:
+		$PlayerSounds.pitch_scale = rand_range(pitchLow, pitchHigh)
+	$PlayerSounds.stream = s
+	$PlayerSounds.play()

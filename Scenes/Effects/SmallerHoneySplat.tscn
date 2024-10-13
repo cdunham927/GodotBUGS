@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/HoneySplat.gd" type="Script" id=1]
+[ext_resource path="res://Shaders/HoneyShader.tres" type="Material" id=2]
+[ext_resource path="res://Sprites/Splats/splat04.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 108.074
+
+[node name="SmallerHoneySplat" type="Area2D"]
+position = Vector2( 456, 272 )
+scale = Vector2( 0.1, 0.1 )
+script = ExtResource( 1 )
+honeyAmt = 10.0
+spd = 150.0
+moves = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 2 )
+texture = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.35
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_HoneySplat_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

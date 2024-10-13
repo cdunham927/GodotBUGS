@@ -19,6 +19,18 @@ func Chase(d):
 	if chaseCools > 0:
 		chaseCools -= d
 
+func Patrol(d):
+	rotation_degrees += curTurn * d
+	move_and_collide(-global_transform.y * spd * d)
+		
+	if chaseCools <= 0:
+		resetChaseCools = rand_range(chaseCooldownSmall, chaseCooldownBig)
+		canShoot = true
+		ChangeState(States.idle)
+		
+	if chaseCools > 0:
+		chaseCools -= d
+		
 func Animate():
 	if leg != null and legUpd != null:
 		leg.step(upd1)
@@ -37,18 +49,6 @@ func Animate():
 		leg4.step(upd4)
 		if leg4.global_position.distance_to(upd4) > maxLegDist:
 			upd4 = legUpd4.global_position
-
-func Patrol(d):
-	rotation_degrees += curTurn * d
-	move_and_collide(-global_transform.y * spd * d)
-		
-	if chaseCools <= 0:
-		resetChaseCools = rand_range(chaseCooldownSmall, chaseCooldownBig)
-		canShoot = true
-		ChangeState(States.idle)
-		
-	if chaseCools > 0:
-		chaseCools -= d
 
 func Idle(d):
 	if canShoot:

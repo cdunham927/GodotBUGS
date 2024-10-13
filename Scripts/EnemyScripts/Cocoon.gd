@@ -1,6 +1,7 @@
 extends Area2D
 
-export(float) var hp = 250
+export(float) var maxHp = 250
+var hp = 250
  
 var player = null
 var inSight : bool = false
@@ -11,9 +12,10 @@ export var enemy: PackedScene
 
 var hasSpawned = false
 onready var anim = $AnimationPlayer
-var blood = load("res://Scenes/Blood.tscn")
+var blood = load("res://Scenes/Particles/Blood.tscn")
 	
 func _ready():
+	hp = maxHp
 	hasSpawned = false
 	add_to_group("enemies")
 	player = get_node("/root/World/Player") 
@@ -27,12 +29,13 @@ func _ready():
 	#attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
  
 func play_anim(name):
-	if anim.current_animation == name:
+	if anim != null and anim.current_animation == name:
 		return
-	anim.play(name)
+		anim.play(name)
 	
 func Damage(amt):
-	play_anim("Hit")
+	if anim != null:
+		play_anim("Hit")
 	inSight = true
 	BloodSpray()
 	hp -= amt
@@ -49,6 +52,14 @@ func BloodSpray():
 	#$BloodSpray/Timer.start()
 	pass
 	
+func _process(delta):
+	#if inSight and !hasSpawned:
+	#	$Timer.start()
+	
+	if inSight:
+		$ShakeAndGlow.spd += delta * $ShakeAndGlow.spdIncrease
+	pass
+	
 func SpawnEnemy():
 	var e = enemy.instance()
 	e.Setup()
@@ -56,14 +67,22 @@ func SpawnEnemy():
 	e.global_position = global_position
 
 func SpawnBlood():
+	#print("Spawned by: " + self.name)
 	#blood particles
 	var blood_instance = blood.instance()
+	blood_instance.emitting = true
 	get_tree().current_scene.add_child(blood_instance)
 	blood_instance.global_position = global_position
+	if (player != null):
+		blood_instance.rotation = global_position.angle_to_point(player.global_position)
+	#blood_instance.emitting = true
+	pass
 	
-	#blood_instance.rotation = global_position.angle_to_point(player.global_position)
-
 func kill():
+	SpawnBlood()
+	queue_free()
+	
+func spawn_and_kill():
 	#SpawnBlood()
 	if !hasSpawned:
 		for i in spawnAmount:
@@ -84,11 +103,11 @@ func _on_Area2D_body_entered(body):
 
 
 func _on_Area2D_body_exited(body):
-	#if body.name == "Player":
+	if body.name == "Player":
 		#inSight = false
 		pass
 
 
 func _on_Timer_timeout():
-	kill()
+	spawn_and_kill()
 	pass # Replace with function body.

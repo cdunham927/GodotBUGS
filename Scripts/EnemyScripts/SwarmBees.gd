@@ -7,6 +7,9 @@ func _ready():
 	
 	hp = $SpriteParent/Sprite/LilBeeBich.maxHp * $SpriteParent.get_child_count()
 
+func Animate():
+	pass
+
 func Damage(amt):
 	spd += spdIncrease
 	

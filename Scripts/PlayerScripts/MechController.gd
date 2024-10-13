@@ -21,6 +21,10 @@ var overheatL : float = 0.0
 var overheatR : float = 0.0
 
 export(float) var recoveryModifier = 3.0
+export(float) var recoveryModifierIncrease = 2
+export(float) var recovModLerp = 0.5
+export(float) var curRecovMod = 0.25
+export(float) var curRecovModR = 0.25
 export(float) var recoverTime
 var recoverL : float = 0.0
 var recoverR : float = 0.0
@@ -36,7 +40,13 @@ export(Color) var overheatColor
 var tilNotShootingL : float = 0.1
 var tilNotShootingR : float = 0.1
 
+onready var src = $MechSounds
+export(String) var overheatSnd = "SteamOverheat"
+var snd
+var playedOverheat : bool = false
+
 func _ready():
+	snd = load("res://Audio/SFX/" + overheatSnd + ".wav")
 	curLeft = 0
 	curRight = 0
 	lastWeaponLeft = curLeft
@@ -76,19 +86,25 @@ func _process(delta):
 		
 	if overheatL >= overheatUI.max_value and recoverL <= 0:
 		recoverL = recoverTime
+		curRecovMod = 0.0
+		play_sound(snd)
 	if overheatR >= overheatUI2.max_value and recoverR <= 0:
 		recoverR = recoverTime
+		curRecovModR = 0.0
+		play_sound(snd)
 
 	if tilNotShootingL <= 0 and overheatL > 0:
-		overheatL -= delta * recoveryModifier
+		overheatL -= delta * (recoveryModifier + curRecovMod)
 	if tilNotShootingR <= 0 and overheatR > 0:
-		overheatR -= delta * recoveryModifier
+		overheatR -= delta * (recoveryModifier + curRecovModR)
 	
 	if tilNotShootingL > 0:
 		tilNotShootingL -= delta
 	if tilNotShootingR > 0:
 		tilNotShootingR -= delta
 
+	curRecovMod = lerp(curRecovMod, recoveryModifierIncrease, recovModLerp * delta)
+	curRecovModR = lerp(curRecovMod, recoveryModifierIncrease, recovModLerp * delta)
 	
 	#Controller aiming
 	var aim_dir = Vector2(Input.get_axis("aim_left", "aim_right"), Input.get_axis("aim_up", "aim_down")) 
@@ -151,3 +167,14 @@ func _process(delta):
 		
 	#mechArm1.rotation_degrees = clamp(atan2(look_vec.y, look_vec.x), global_rotation - rotationConstraint, global_rotation + rotationConstraint)
 	#mechArm2.rotation_degrees = clamp(atan2(look_vec.y, look_vec.x), global_rotation - rotationConstraint, global_rotation + rotationConstraint)
+
+export(float) var pitchLow = 0.8
+export(float) var pitchHigh = 1.3
+func play_sound(s = snd, pitched = false):
+	#if !canPlay:
+	#	canPlay = true
+	#	return
+	if pitched:
+		src.pitch_scale = rand_range(pitchLow, pitchHigh)
+	src.stream = s
+	src.play()

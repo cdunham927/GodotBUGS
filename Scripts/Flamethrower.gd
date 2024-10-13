@@ -17,7 +17,6 @@ func _on_Area2D_body_entered(body):
 		if body.has_method("Damage"):
 			body.inFire = true
 
-
 func _on_Area2D_body_exited(body):
 	if body.is_in_group("enemies"):
 		if body.has_method("Damage"):
@@ -38,7 +37,10 @@ func _process(delta):
 		if leftWeapon and Input.is_action_pressed("attack") and curShotTime <= 0 and mech.recoverL <= 0:
 			#shooting = true
 			mech.tilNotShootingL = tilNotShootingMin
-			Shoot()
+			if !honeyL.is_visible_in_tree():
+				Shoot()
+			else:
+				ShootHoney()
 		#Left weapon stop shooting
 		if leftWeapon and Input.is_action_just_released("attack"):
 			$Area2D.monitoring = false
@@ -48,7 +50,10 @@ func _process(delta):
 		if leftWeapon == false and Input.is_action_pressed("attacktwo") and curShotTime <= 0 and mech.recoverR <= 0:
 			#shooting = true
 			mech.tilNotShootingR = tilNotShootingMin
-			Shoot()
+			if !honeyR.is_visible_in_tree():
+				Shoot()
+			else:
+				ShootHoney()
 		#Right weapon stop shooting
 		if leftWeapon == false and Input.is_action_just_released("attacktwo"):
 			$Area2D.monitoring = false

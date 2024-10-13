@@ -1,13 +1,19 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://Sprites/Enemies/Ant_5-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Enemies/Suicibee.png" type="Texture" id=1]
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=2]
 [ext_resource path="res://Animations/Hit.tres" type="Animation" id=3]
 [ext_resource path="res://Scenes/EnemyScenes/Legs/AntLeg.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/EnemyScripts/SuicideBee.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Particles/Stun.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Weapons/ExplosionEnemy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Effects/HoneySplat.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Effects/SmallerHoneySplat.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Weapons/HoneyBullet.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scripts/CircularMovement.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14.5, 27.5 )
+extents = Vector2( 10, 11.5 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -80,21 +86,50 @@ tracks/1/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=5]
-radius = 357.56
+radius = 857.001
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 10, 12.5 )
 
 [node name="SuicideBee" type="KinematicBody2D" groups=["enemies"]]
 pause_mode = 1
 z_index = 1
 script = ExtResource( 5 )
+maxHp = 150.0
+timeBetweenAttacksSmall = 2.0
+timeBetweenAttacksBig = 4.0
+accuracy = 50.0
+chaseCooldownSmall = 1.0
+chaseCooldownBig = 2.0
+walkTimeSmall = 1.0
+walkTimeBig = 2.0
+stunParts = ExtResource( 6 )
+explosion = ExtResource( 7 )
+honeySplat = ExtResource( 8 )
+smallerSplats = ExtResource( 9 )
+honeyBullet = ExtResource( 10 )
+farthestRangedDistance = 400.0
+closestRangedDistance = 225.0
+rangedCoolsSmall = 0.75
+rangedCoolsBig = 1.5
+sideSpeed = 275.0
+sideVariability = 100.0
+dashTime = 0.313
+dashTimeVariability = 0.15
+waitTimeLow = 1.5
+waitTimeHigh = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.5, 2.5 )
+position = Vector2( 0, -12.5 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 2 )
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
-hframes = 8
+script = ExtResource( 11 )
+speedVariability = 10.0
+distanceVariability = 0.5
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
@@ -112,6 +147,7 @@ anims/move = SubResource( 4 )
 shape = SubResource( 5 )
 
 [node name="Legs" type="Node2D" parent="."]
+visible = false
 material = ExtResource( 2 )
 
 [node name="Leg" parent="Legs" instance=ExtResource( 4 )]
@@ -133,6 +169,7 @@ position = Vector2( -6, -3 )
 flipped = false
 
 [node name="LegUpdaters" type="Node2D" parent="."]
+visible = false
 
 [node name="LegUpd" type="Position2D" parent="LegUpdaters"]
 position = Vector2( 30, -14 )
@@ -146,5 +183,16 @@ position = Vector2( -40, -24 )
 [node name="LegUpd4" type="Position2D" parent="LegUpdaters"]
 position = Vector2( -40, 8 )
 
+[node name="BeeBody" type="Area2D" parent="." groups=["Exploder"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BeeBody"]
+position = Vector2( 0, 12.5 )
+shape = SubResource( 6 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

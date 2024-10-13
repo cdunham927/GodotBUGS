@@ -1,14 +1,14 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Animations/Hit.tres" type="Animation" id=1]
-[ext_resource path="res://Sprites/Enemies/Spiderling.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Enemies/Spiderling (1).png" type="Texture" id=2]
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=3]
 [ext_resource path="res://Scripts/EnemyScripts/Spiderling.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/EnemyScenes/Legs/AntLeg.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Particles/Stun.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3, 6 )
+extents = Vector2( 2, 5 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -119,6 +119,7 @@ anims/move = SubResource( 4 )
 shape = SubResource( 5 )
 
 [node name="Legs" type="Node2D" parent="."]
+visible = false
 material = ExtResource( 3 )
 scale = Vector2( 0.25, 0.25 )
 
@@ -157,6 +158,7 @@ material = ExtResource( 3 )
 position = Vector2( -8, 12 )
 
 [node name="LegUpdaters" type="Node2D" parent="."]
+visible = false
 scale = Vector2( 0.25, 0.25 )
 
 [node name="LegUpd" type="Position2D" parent="LegUpdaters"]

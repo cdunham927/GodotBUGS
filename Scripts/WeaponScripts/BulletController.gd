@@ -18,6 +18,9 @@ export(float) var knockback
 
 export(PackedScene) var bloodSpray
 
+#Spark hit particles
+export(PackedScene) var sparkParts
+
 #var velocity = Vector2()
 
 func RandomizeSpeed():
@@ -80,9 +83,20 @@ func Disable():
 #	bulletPool.add_child(self)
 	queue_free()
 	#self.hide()
+	
+func SpawnPart(pos):
+	#Spawn particles
+	var s = sparkParts.instance()
+	s.emitting = true
+	get_tree().current_scene.add_child(s)
+	s.global_position = pos
+	#s.get_node("Timer").wait_time = stunTime
 
 func _on_Bullet_body_entered(body):
 	#print(body.name)
+	if body.is_in_group("Wall"):
+		SpawnPart(global_position)
+		Disable()
 	if body.is_in_group("enemies") and !damaged:
 		#print("Damaged by: ", curAtk)
 		if body.has_method("Knockback"):
@@ -109,6 +123,20 @@ func _on_Bullet_area_entered(area):
 			#curAtk -= 1
 			hp -= 1
 			damaged = true
+		if hp <= 0:
+			Disable()
+	if area.is_in_group("Exploder"):
+		#deflect bullet
+		#rotation_degrees += rand_range(140, 210)
+		if !damaged:
+			#print("Damaged by: ", curAtk / 4)
+			#area.get_parent().Damage(curAtk / 4)
+			SpawnBlood()
+		
+			#curAtk -= 1
+			hp -= 999
+			damaged = true
+			area.get_parent().Explode()
 		if hp <= 0:
 			Disable()
 	#Hit static enemies

@@ -63,6 +63,10 @@ func _on_Timer_timeout():
 	#pass # Replace with function body.
 
 func _on_Area2D_area_entered(area):
+	if area.is_in_group("Wall"):
+		if spawnsObj:
+			SpawnObj()
+		queue_free()
 	if area.is_in_group(hitString) and spawnsObj:
 		SpawnObj()
 		queue_free()
@@ -79,6 +83,10 @@ func _on_Area2D_area_shape_entered(area_rid, area, area_shape_index, local_shape
 
 
 func _on_Area2D_body_entered(body):
+	if body.is_in_group("Wall"):
+		if spawnsObj:
+			SpawnObj()
+		queue_free()
 	if body.is_in_group(hitString) and spawnsObj:
 		SpawnObj()
 		queue_free()

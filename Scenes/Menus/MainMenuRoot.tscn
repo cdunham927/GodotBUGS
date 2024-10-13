@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/MenuController.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/UI/dotBlue.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/UI/Kenney1/dotBlue.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Etc/mechconcept.jpg" type="Texture" id=3]
 [ext_resource path="res://Sprites/Etc/icon.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/UI/dotRed.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/UI/dotGreen.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/UI/Kenney1/dotRed.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/UI/Kenney1/dotGreen.png" type="Texture" id=6]
 [ext_resource path="res://Fonts/BrokenFontTitle.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Fonts/BrokenFontSmall.tres" type="DynamicFont" id=8]
-[ext_resource path="res://Sprites/UI/dotYellow.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/UI/Kenney1/dotYellow.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/ContinueButton.gd" type="Script" id=10]
 
 [node name="MenuRoot" type="CanvasLayer"]
 layer = 2
@@ -78,6 +79,7 @@ rect_min_size = Vector2( 50, 39 )
 text = "Continue"
 icon = ExtResource( 6 )
 align = 0
+script = ExtResource( 10 )
 
 [node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions"]
 margin_top = 89.0
@@ -155,7 +157,14 @@ texture = ExtResource( 3 )
 expand = true
 stretch_mode = 5
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="focus_entered" from="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions/ContinueButton" to="." method="_on_ContinueButton_focus_entered"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions/ContinueButton" to="." method="_on_ContinueButton_pressed"]
+[connection signal="focus_entered" from="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions/NewGameButton" to="." method="_on_NewGameButton_focus_entered"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions/NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="focus_entered" from="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions/OptionsButton" to="." method="_on_OptionsButton_focus_entered"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="focus_entered" from="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions/QuitButton" to="." method="_on_QuitButton_focus_entered"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions/QuitButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer2/MenuOptions/QuitButton" to="." method="_on_QuitButton_pressed"]

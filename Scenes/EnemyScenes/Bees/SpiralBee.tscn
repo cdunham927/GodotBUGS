@@ -1,0 +1,174 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Scripts/SpiralBee.gd" type="Script" id=1]
+[ext_resource path="res://Animations/Hit.tres" type="Animation" id=2]
+[ext_resource path="res://Materials/NoOutline.tres" type="Material" id=3]
+[ext_resource path="res://Scenes/EnemyScenes/Legs/AntLeg.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sprites/Enemies/Bee_2.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Particles/Stun.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Weapons/BeeStinger.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/CircularMovement.gd" type="Script" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 14.5, 27.5 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "move"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0 ), Vector2( 1, 0 ), Vector2( 2, 0 ), Vector2( 3, 0 ), Vector2( 4, 0 ), Vector2( 5, 0 ), Vector2( 6, 0 ), Vector2( 6, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 357.56
+
+[node name="SpiralBee" type="KinematicBody2D" groups=["enemies"]]
+pause_mode = 1
+z_index = 1
+script = ExtResource( 1 )
+maxHp = 400.0
+timeBetweenAttacksSmall = 2.5
+timeBetweenAttacksBig = 4.75
+chaseCooldownSmall = 1.0
+chaseCooldownBig = 2.0
+walkTimeSmall = 1.0
+walkTimeBig = 3.0
+stunParts = ExtResource( 6 )
+bullet = ExtResource( 7 )
+spinCooldown = 0.125
+spinSpd = 500.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, 2.5 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 3 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 5 )
+script = ExtResource( 8 )
+speedVariability = 10.0
+distanceVariability = 0.5
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, -50 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Hit = ExtResource( 2 )
+anims/RESET = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/move = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 5 )
+disabled = true
+
+[node name="Legs" type="Node2D" parent="."]
+visible = false
+material = ExtResource( 3 )
+
+[node name="Leg" parent="Legs" instance=ExtResource( 4 )]
+material = ExtResource( 3 )
+position = Vector2( 6, -3 )
+
+[node name="Leg2" parent="Legs" instance=ExtResource( 4 )]
+material = ExtResource( 3 )
+position = Vector2( 3, 3 )
+flipped = false
+
+[node name="Leg3" parent="Legs" instance=ExtResource( 4 )]
+material = ExtResource( 3 )
+position = Vector2( 8, 23 )
+
+[node name="Leg4" parent="Legs" instance=ExtResource( 4 )]
+material = ExtResource( 3 )
+position = Vector2( -6, -3 )
+flipped = false
+
+[node name="LegUpdaters" type="Node2D" parent="."]
+visible = false
+
+[node name="LegUpd" type="Position2D" parent="LegUpdaters"]
+position = Vector2( 30, -14 )
+
+[node name="LegUpd2" type="Position2D" parent="LegUpdaters"]
+position = Vector2( 30, 18 )
+
+[node name="LegUpd3" type="Position2D" parent="LegUpdaters"]
+position = Vector2( -40, -24 )
+
+[node name="LegUpd4" type="Position2D" parent="LegUpdaters"]
+position = Vector2( -40, 8 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

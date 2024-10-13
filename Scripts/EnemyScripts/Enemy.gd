@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+export(bool) var paused = false
 export(float) var maxHp = 4
 var hp = 4
 export var spd = 200
@@ -84,7 +85,12 @@ export(float) var lookAtSpd = 10.0
 var inFire : bool = false
 export(float) var fireDmg = 1.75
 
+onready var src = get_node("/root/World/EnemySrc")
+export(String) var soundName = "Splat"
+var snd
+
 func _ready():
+	snd = load("res://Audio/SFX/" + soundName + ".mp3")
 	Setup()
 	
 func Animate():
@@ -127,6 +133,9 @@ func Setup():
 	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
  
 func _physics_process(delta):
+	if paused:
+		return
+	
 	if player == null:
 		return
 		
@@ -149,7 +158,8 @@ func _physics_process(delta):
 		#Spawn particles
 		var s = stunParts.instance()
 		s.emitting = true
-		get_tree().current_scene.add_child(s)
+		add_child(s)
+		#get_tree().current_scene.add_child(s)
 		s.global_position = global_position
 		s.get_node("Timer").wait_time = stunTime
 		
@@ -216,6 +226,9 @@ func SwitchState(newState):
 	curState = newState
 
 func Damage(amt):
+	if paused:
+		return
+		
 	#print("Damaged")
 	if $AnimationPlayer.current_animation != "AttackIndicator" and amt >= flashMinDmg:
 		play_anim("Hit")
@@ -227,6 +240,9 @@ func Damage(amt):
 		kill()
 
 func FireDamage():
+	if paused:
+		return
+		
 	#print("Damaged")
 	if $AnimationPlayer.current_animation != "AttackIndicator":
 		play_anim("Hit")
@@ -263,6 +279,7 @@ func SpawnBlood():
 #		leg4.step(legUpd4.global_position)
 
 func kill():
+	play_sound(snd, true)
 	SpawnBlood()
 	queue_free()
  
@@ -297,3 +314,14 @@ func _on_Area2D_body_exited(body):
 	if body.name == "Player":
 		ChangeState(States.patrol)
 		inSight = false
+	
+export(float) var pitchLow = 0.8
+export(float) var pitchHigh = 1.3
+func play_sound(s = snd, pitched = false):
+	#if !canPlay:
+	#	canPlay = true
+	#	return
+	if pitched:
+		src.pitch_scale = rand_range(pitchLow, pitchHigh)
+	src.stream = s
+	src.play()

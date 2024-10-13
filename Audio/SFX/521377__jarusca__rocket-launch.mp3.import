@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/521377__jarusca__rocket-launch.mp3-da8d3af6d2807acdd9645fb18ab931ce.mp3str"
+
+[deps]
+
+source_file="res://Audio/SFX/521377__jarusca__rocket-launch.mp3"
+dest_files=[ "res://.import/521377__jarusca__rocket-launch.mp3-da8d3af6d2807acdd9645fb18ab931ce.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -2,6 +2,7 @@ extends Node2D
 
 #enum weapons { gatlinggun, flamethrower, teslacannon, revolver, canonball, shotgun }
 #export var state = weapons[0]
+var playerParent
 export(String) var weaponName = "" 
 export(PackedScene) var bullet
 
@@ -26,7 +27,25 @@ export(float) var accuracy
 
 var active := false
 
+onready var soundL = get_node("/root/World/Player/Node2D/MechBody/WeaponsLSounds")
+onready var soundR = get_node("/root/World/Player/Node2D/MechBody/WeaponsRSounds")
+export(String) var soundName = "minigun2"
+#export(String) var overheatSnd = "SteamOverheat"
+export(String) var squirt = "Squirt"
+var snd
+#var snd2
+var snd3
+var playedOverheat : bool = false
+
+#Honey sprites
+onready var honeyL = get_node("/root/World/Player/Node2D/MechBody/HoneyL")
+onready var honeyR = get_node("/root/World/Player/Node2D/MechBody/HoneyR")
+export(float) var honeyRed = 20.0
+
 func _ready():
+	playerParent = get_parent().get_parent().get_parent().get_parent()
+	snd = load("res://Audio/SFX/" + soundName + ".wav")
+	snd3 = load("res://Audio/SFX/" + squirt + ".wav")
 	if self.is_visible_in_tree():
 		Activate()
 
@@ -53,7 +72,10 @@ func _process(delta):
 		if leftWeapon and Input.is_action_pressed("attack") and curShotTime <= 0 and mech.recoverL <= 0:
 			#shooting = true
 			mech.tilNotShootingL = tilNotShootingMin
-			Shoot()
+			if !honeyL.is_visible_in_tree():
+				Shoot()
+			else:
+				ShootHoney()
 		#Left weapon stop shooting
 		if leftWeapon and Input.is_action_just_released("attack"):
 			mech.tilNotShootingL = tilNotShootingMin
@@ -61,7 +83,10 @@ func _process(delta):
 		if !leftWeapon and Input.is_action_pressed("attacktwo") and curShotTime <= 0 and mech.recoverR <= 0:
 			#shooting = true
 			mech.tilNotShootingR = tilNotShootingMin
-			Shoot()
+			if !honeyR.is_visible_in_tree():
+				Shoot()
+			else:
+				ShootHoney()
 		#Right weapon stop shooting
 		if leftWeapon == false and Input.is_action_just_released("attacktwo"):
 			mech.tilNotShootingR = tilNotShootingMin
@@ -101,9 +126,27 @@ func _process(delta):
 
 func Shoot():
 	pass
+	
+func ShootHoney():
+	if leftWeapon:
+		play_sound(snd3, true, soundL)
+	else:
+		play_sound(snd3, true, soundR)
+	curShotTime = timeBetweenShots
+	playerParent.HoneyShot(flash.global_position, honeyRed)
 
 func ShowFlash():
 	flash.rotation_degrees = rand_range(0, 360)
 	flash.show()
 	flashTimer = 0.05
 	
+export(float) var pitchLow = 0.8
+export(float) var pitchHigh = 1.3
+func play_sound(s = snd, pitched = false, player = soundL):
+	#if !canPlay:
+	#	canPlay = true
+	#	return
+	if pitched:
+		player.pitch_scale = rand_range(pitchLow, pitchHigh)
+	player.stream = s
+	player.play()
