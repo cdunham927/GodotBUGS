@@ -142,9 +142,10 @@ scale = Vector2( 2.5, 2.5 )
 z_index = 1
 script = ExtResource( 8 )
 maxHp = 8000.0
-spd = 150
-timeBetweenAttacksSmall = 3.0
-timeBetweenAttacksBig = 6.0
+spd = 100
+atk = 10
+timeBetweenAttacksSmall = 3.25
+timeBetweenAttacksBig = 5.75
 accuracy = 90.0
 chaseCooldownSmall = 1.5
 chaseCooldownBig = 3.0
@@ -157,9 +158,9 @@ honeySplat = ExtResource( 9 )
 smallerSplats = ExtResource( 12 )
 honeyBullet = ExtResource( 10 )
 numShots = 7
-minShots = 7
-maxShots = 5
-farthestRangedDistance = 425.0
+minShots = 4
+maxShots = 7
+farthestRangedDistance = 575.0
 closestRangedDistance = 245.0
 rangedCoolsBig = 2.0
 sideSpeed = 275.0
@@ -255,6 +256,32 @@ shape = SubResource( 7 )
 [node name="BloodSpray" parent="." instance=ExtResource( 4 )]
 emitting = false
 one_shot = true
+
+[node name="HoneyPositions" type="Node2D" parent="."]
+
+[node name="Position2D" type="Position2D" parent="HoneyPositions"]
+position = Vector2( 32.4, -2.98023e-08 )
+
+[node name="Position2D2" type="Position2D" parent="HoneyPositions"]
+position = Vector2( 16.8, -22 )
+
+[node name="Position2D3" type="Position2D" parent="HoneyPositions"]
+position = Vector2( 0, -34.4 )
+
+[node name="Position2D4" type="Position2D" parent="HoneyPositions"]
+position = Vector2( -18.4, -20.8 )
+
+[node name="Position2D5" type="Position2D" parent="HoneyPositions"]
+position = Vector2( -35.2, -0.400002 )
+
+[node name="Position2D6" type="Position2D" parent="HoneyPositions"]
+position = Vector2( -18, 15.6 )
+
+[node name="Position2D7" type="Position2D" parent="HoneyPositions"]
+position = Vector2( -1.90735e-06, 29.2 )
+
+[node name="Position2D8" type="Position2D" parent="HoneyPositions"]
+position = Vector2( 21.6, 19.6 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

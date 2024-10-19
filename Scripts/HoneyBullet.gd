@@ -91,8 +91,8 @@ func RandomizeSpeed():
 	startSpd = rand_range(spdSlow, spdFast)
 	speed = startSpd
 	
-func _on_VisibilityNotifier2D_viewport_exited(viewport):
-	Disable()
+#func _on_VisibilityNotifier2D_viewport_exited(viewport):
+#	Disable()
 	
 func Disable():
 #	world.remove_child(self)
@@ -124,8 +124,7 @@ func SpawnSecondObj():
 	get_tree().current_scene.add_child(o)
 
 func _on_Timer_timeout():
-	speedFalloff = true
-
+	Disable()
 
 func _on_DisableTimer_timeout():
 	shrink = true

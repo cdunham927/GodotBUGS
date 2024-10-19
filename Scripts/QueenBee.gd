@@ -110,12 +110,11 @@ func _process(delta):
 
 func Attack():
 	numShots = (randi() % (maxShots - minShots)) + minShots
-	print("Shots: ", numShots)
+	#print("Shots: ", numShots)
 
 	for i in range(numShots):
 		Shoot()
 	attackCools = rand_range(rangedCoolsSmall, rangedCoolsBig)
-	pass
 	
 func DoubleAttack():
 	if curRanged < curRangedAttacks:
@@ -127,13 +126,16 @@ func DoubleAttack():
 		HoneyAttack()
 		curRangedAttacks = (randi() % (numRangedAttacksBig - numRangedAttacksSmall)) + numRangedAttacksSmall
 		curRanged = 0
-		attackCools = $Timer.wait_time + $LungeStart.wait_time + rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 	
 func HoneyAttack():
 	#Spawn honey
-	var h = honeySplat.instance()
-	get_tree().current_scene.add_child(h)
-	h.global_position = global_position
+	for x in $HoneyPositions.get_children():
+		var h = honeySplat.instance()
+		get_tree().current_scene.add_child(h)
+		h.global_position = x.global_position
+		var sh = smallerSplats.instance()
+		get_tree().current_scene.add_child(sh)
+		sh.global_position = x.global_position
 	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 	
 func Idle(d):
@@ -177,7 +179,7 @@ func Chase(d):
 		
 	#if curDistance < farthestRangedDistance and attackCools <= 0 and curStun <= 0:
 	if attackCools <= 0 and curStun <= 0:
-		RangedAttack()
+		DoubleAttack()
 		
 	#if actualDashTime > 0:
 	#	actualDashTime -= d
@@ -238,24 +240,24 @@ func Patrol(d):
 	
 #	Damage(999)
 
-func _on_Timer_timeout():
-	if curDistance > midpoint:
-		dir2 = 1
-	else:
-		dir2 = -1
-		
-	var dif = farthestRangedDistance - closestRangedDistance
-	midpoint = closestRangedDistance + rand_range(0, dif)
-	
-	if dir > 0.5:
-		dir = -1
-	else:
-		dir = 1
-		
-	curSpd = sideSpeed + rand_range(0, sideVariability)
-	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
-	
-	$Timer.wait_time = rand_range(waitTimeLow, waitTimeHigh)
+#func _on_Timer_timeout():
+#	if curDistance > midpoint:
+#		dir2 = 1
+#	else:
+#		dir2 = -1
+#		
+#	var dif = farthestRangedDistance - closestRangedDistance
+#	midpoint = closestRangedDistance + rand_range(0, dif)
+#	
+#	if dir > 0.5:
+#		dir = -1
+#	else:
+#		dir = 1
+#		
+#	curSpd = sideSpeed + rand_range(0, sideVariability)
+#	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
+#	
+#	$Timer.wait_time = rand_range(waitTimeLow, waitTimeHigh)
 	
 	pass
 
