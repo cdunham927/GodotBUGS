@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Controllers/GameController.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI/UI.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Scenes/PlayerScenes/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Menus/PauseRoot.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/Etc/CameraShake.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Menus/GameOverRoot.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Menus/VictoryRoot.tscn" type="PackedScene" id=8]
 
 [sub_resource type="TileSet" id=1]
 
@@ -13,6 +15,8 @@
 pause_mode = 2
 position = Vector2( 1, -7 )
 script = ExtResource( 1 )
+curState = 3
+numSpiders = 20
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = 2
@@ -31,6 +35,12 @@ script = ExtResource( 6 )
 maxTrauma = 0.15
 
 [node name="PauseRoot" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="VictoryRoot" parent="." instance=ExtResource( 8 )]
+visible = false
+
+[node name="GameOverRoot" parent="." instance=ExtResource( 7 )]
 visible = false
 
 [node name="MapTrigger" parent="." instance=ExtResource( 3 )]
@@ -64,5 +74,9 @@ position = Vector2( -107, -505 )
 [node name="MapPart1" type="Node2D" parent="."]
 position = Vector2( -91, -713 )
 
+[node name="EnemySrc" type="AudioStreamPlayer2D" parent="."]
+bus = "Sounds"
+
 [editable path="PauseRoot"]
 [editable path="Player"]
+[editable path="Player/Node2D/HoneyVision"]

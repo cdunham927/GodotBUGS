@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Scripts/DungHeap.gd" type="Script" id=1]
+[ext_resource path="res://Materials/NoOutline.tres" type="Material" id=2]
+[ext_resource path="res://Scenes/EnemyScenes/Beetles/BeetleB.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/Etc/Circle.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/EnemyScenes/Beetles/DungBeetle.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/EnemyScenes/Beetles/BeetleA.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Animations/Hit.tres" type="Animation" id=7]
+[ext_resource path="res://Scenes/EnemyScenes/Beetles/StagBeetle.tscn" type="PackedScene" id=8]
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 25.005
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 2 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 1366.18
+
+[node name="DungHeap" type="Area2D" groups=["enemies"]]
+pause_mode = 1
+script = ExtResource( 1 )
+hp = 12500.0
+maxToSpawn = 3
+spawnTimeLow = 5.0
+spawnTimeBig = 10.0
+dungBeetle = ExtResource( 5 )
+beetleA = ExtResource( 6 )
+beetleB = ExtResource( 3 )
+spawnChanceD = 0.15
+stagBeetle = ExtResource( 8 )
+shrinkAmt = 0.001
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -0.5 )
+scale = Vector2( 3, 3 )
+shape = SubResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="."]
+self_modulate = Color( 0.324219, 0.195325, 0.144889, 1 )
+material = ExtResource( 2 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Hit = ExtResource( 7 )
+anims/RESET = SubResource( 7 )
+anims/idle = SubResource( 8 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 5 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

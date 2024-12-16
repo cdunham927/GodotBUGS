@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/ShitTrail.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0.854545 ), 0.0, 0.0, 0, 0, Vector2( 0.362805, 0.563636 ), 0.0, 0.0, 0, 0, Vector2( 0.7, 0.9 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.8 ), 0.0, 0.0, 0, 0 ]
+
+[node name="ShitTrail" type="Line2D"]
+show_behind_parent = true
+width_curve = SubResource( 1 )
+default_color = Color( 0.324219, 0.195325, 0.144889, 1 )
+script = ExtResource( 1 )
+length = 150.0

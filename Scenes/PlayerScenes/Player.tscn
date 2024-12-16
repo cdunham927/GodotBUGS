@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Scripts/PlayerScripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player/Player.png" type="Texture" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://Shaders/HoneyShader.tres" type="Material" id=30]
 [ext_resource path="res://Scenes/Particles/HoneySpray.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Scenes/Effects/HoneyVision.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Sprites/Web.png" type="Texture" id=33]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 25, 26 )
@@ -240,6 +241,7 @@ staminaDecAmt = 10.0
 staminaRecAmt = 5.0
 spdToLerpTo = 0.0
 spdLerpSpd = 5.0
+shitSpd = 75
 forwardSpd = 450
 backwardSpd = 200
 sideSpd = 250
@@ -250,10 +252,20 @@ overheatAmt = 5.0
 fireThreshold = 3.5
 boostSpd = 1500
 maxCharge = 100.0
+minShit = 2.5
+timeBetweenShitDmg = 2.5
+webMove = 6
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
 shape = SubResource( 1 )
+
+[node name="WebSprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -4 )
+scale = Vector2( 2.25, 2.25 )
+z_index = 4
+texture = ExtResource( 33 )
 
 [node name="MechLegsL" type="Sprite" parent="."]
 material = ExtResource( 27 )
@@ -705,9 +717,13 @@ anims/idle = SubResource( 4 )
 [node name="PlayerSounds" type="AudioStreamPlayer2D" parent="."]
 bus = "Sounds"
 
+[node name="ShitTimer" type="Timer" parent="."]
+wait_time = 10.0
+
 [connection signal="body_entered" from="Node2D/MechBody/WeaponsLeft/FlamesL/Area2D" to="Node2D/MechBody/WeaponsLeft/FlamesL" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Node2D/MechBody/WeaponsLeft/FlamesL/Area2D" to="Node2D/MechBody/WeaponsLeft/FlamesL" method="_on_Area2D_body_exited"]
 [connection signal="area_entered" from="Node2D/MechBody/WeaponsRight/FlamesR/Area2D" to="Node2D/MechBody/WeaponsRight/FlamesR" method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="Node2D/MechBody/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="ShitTimer" to="." method="_on_ShitTimer_timeout"]
 
 [editable path="Node2D/HoneyVision"]

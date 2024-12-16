@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/Spiderweb.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Web.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 108.074
+
+[node name="Spiderweb" type="Area2D" groups=["web"]]
+position = Vector2( 456, 272 )
+scale = Vector2( 0.25, 0.25 )
+script = ExtResource( 1 )
+sprites = [ ExtResource( 2 ) ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 6, 6 )
+texture = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_HoneySplat_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

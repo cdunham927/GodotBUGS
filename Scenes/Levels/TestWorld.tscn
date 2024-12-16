@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Scenes/PlayerScenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/EnemyScenes/Bees/SpiralBee.tscn" type="PackedScene" id=2]
@@ -6,12 +6,25 @@
 [ext_resource path="res://Scripts/Controllers/GameController.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/EnemyScenes/Bees/SuicideBee.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/Etc/CameraShake.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/EnemyScenes/Spiders/WebSpider.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/EnemyScenes/Bees/Bee.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/EnemyScenes/Beetles/StagBeetle.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/EnemyScenes/Spiders/Spiderling.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/EnemyScenes/Bees/SwarmBees.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Menus/PauseRoot.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/EnemyScenes/Beetles/BeetleA.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/EnemyScenes/Beetles/BeetleB.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/EnemyScenes/Beetles/DungBeetle.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/EnemyScenes/Spiders/Cocoon.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Menus/VictoryRoot.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Menus/GameOverRoot.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/EnemyScenes/Ants/TurtleAnt.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/EnemyScenes/Ants/ThrowerAnt.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/EnemyScenes/Ants/Ant.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/EnemyScenes/Ants/FireAnt.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/Weapons/EnemyBullet.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/Effects/Spiderweb.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/EnemyScenes/Spiders/ArmoredSpider.tscn" type="PackedScene" id=25]
 
 [sub_resource type="TileSet" id=1]
 
@@ -59,27 +72,75 @@ visible = true
 [node name="FlamesR" parent="Player/Node2D/MechBody/WeaponsRight" index="4"]
 visible = false
 
-[node name="RemoteTransform2D" parent="Player" index="4"]
+[node name="RemoteTransform2D" parent="Player" index="5"]
 remote_path = NodePath("../../Camera2D")
-
-[node name="Bee" parent="." instance=ExtResource( 8 )]
-position = Vector2( -16, 164 )
-
-[node name="SwarmBees" parent="." instance=ExtResource( 11 )]
-position = Vector2( 215, 841 )
-
-[node name="Cocoon" parent="." instance=ExtResource( 16 )]
-position = Vector2( 772, -153 )
-
-[node name="SpiralBee" parent="." instance=ExtResource( 2 )]
-position = Vector2( 925, 871 )
-
-[node name="SuicideBee" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1253, 271 )
 
 [node name="EnemySrc" type="AudioStreamPlayer2D" parent="."]
 bus = "Sounds"
 
+[node name="BeeParent" type="Node2D" parent="."]
+
+[node name="Bee" parent="BeeParent" instance=ExtResource( 8 )]
+position = Vector2( -301, 260 )
+
+[node name="SwarmBees" parent="BeeParent" instance=ExtResource( 11 )]
+position = Vector2( -297, 793 )
+
+[node name="SpiralBee" parent="BeeParent" instance=ExtResource( 2 )]
+position = Vector2( -589, 558 )
+
+[node name="SuicideBee" parent="BeeParent" instance=ExtResource( 5 )]
+position = Vector2( -616, 39 )
+
+[node name="BeetleParent" type="Node2D" parent="."]
+
+[node name="Beetle" parent="BeetleParent" instance=ExtResource( 13 )]
+position = Vector2( 250, 1157 )
+
+[node name="Beetle2" parent="BeetleParent" instance=ExtResource( 14 )]
+position = Vector2( 1101, 1178 )
+
+[node name="DungBeetle" parent="BeetleParent" instance=ExtResource( 15 )]
+position = Vector2( 473, 1302 )
+
+[node name="StagBeetle" parent="BeetleParent" instance=ExtResource( 9 )]
+position = Vector2( 906, 1347 )
+
+[node name="EnemyBullet" parent="BeetleParent" instance=ExtResource( 23 )]
+position = Vector2( 1048, 1169 )
+
+[node name="AntParent" type="Node2D" parent="."]
+
+[node name="Ant" parent="AntParent" instance=ExtResource( 21 )]
+position = Vector2( 1179, -337 )
+
+[node name="FireAnt" parent="AntParent" instance=ExtResource( 22 )]
+position = Vector2( 190, -428 )
+
+[node name="ThrowerAnt" parent="AntParent" instance=ExtResource( 20 )]
+position = Vector2( 914, -526 )
+
+[node name="TurtleAnt" parent="AntParent" instance=ExtResource( 19 )]
+position = Vector2( 699, -837 )
+
+[node name="SpiderParent" type="Node2D" parent="."]
+
+[node name="Spiderling" parent="SpiderParent" instance=ExtResource( 10 )]
+position = Vector2( 1526, 730 )
+
+[node name="WebSpider" parent="SpiderParent" instance=ExtResource( 7 )]
+position = Vector2( 1363, 195 )
+
+[node name="Cocoon" parent="SpiderParent" instance=ExtResource( 16 )]
+position = Vector2( 1786, 414 )
+
+[node name="Spiderweb" parent="." instance=ExtResource( 24 )]
+position = Vector2( 915, 509 )
+
+[node name="ArmoredSpider" parent="." instance=ExtResource( 25 )]
+position = Vector2( 1320, 443 )
+
 [editable path="PauseRoot"]
 [editable path="Player"]
-[editable path="Cocoon"]
+[editable path="Player/Node2D/HoneyVision"]
+[editable path="SpiderParent/Cocoon"]

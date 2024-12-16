@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/ContextMap.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Player/Player.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 44, 36 )
+
+[node name="SteeringParent" type="KinematicBody2D"]
+scale = Vector2( 0.7, 0.7 )
+collision_layer = 3
+collision_mask = 2
+script = ExtResource( 1 )
+max_speed = 150
+look_ahead = 200
+num_rays = 18
+weight = 100.0
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 1.5708
+scale = Vector2( 0.125, 0.125 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 3, 0 )
+shape = SubResource( 1 )

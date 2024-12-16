@@ -60,7 +60,11 @@ export var numRangedAttacksBig : int = 4
 export var curRangedAttacks : int = 2
 var curRanged : int = 0
 
+var gc
+
 func _ready():
+	gc = get_parent()
+	
 	if bossUI == null:
 		bossUI = get_node("/root/World2/BossUI")
 	bossUI.show()
@@ -288,6 +292,8 @@ func kill():
 	if bossUI == null:
 		bossUI = get_node("/root/World2/BossUI")
 	bossUI.hide()
+	
+	gc.Victory()
 	
 	queue_free()
 	

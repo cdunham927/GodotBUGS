@@ -51,7 +51,7 @@ func Animate():
 			upd4 = legUpd4.global_position
 
 func Idle(d):
-	if canShoot:
+	if canShoot and attackCools <= 0:
 		canShoot = false
 		Attack()
 	
@@ -66,6 +66,7 @@ func Idle(d):
 func Attack():
 	for i in range(numShots):
 		Shoot()
+	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 
 func Shoot():
 	var b = bullet.instance()

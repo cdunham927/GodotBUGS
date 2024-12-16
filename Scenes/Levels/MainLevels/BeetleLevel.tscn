@@ -1,16 +1,25 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Controllers/GameController.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/AntTiles.tres" type="TileSet" id=2]
+[ext_resource path="res://Scenes/EnemyScenes/Beetles/BeetleA.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/EnemyScenes/Beetles/BeetleB.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Menus/VictoryRoot.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Menus/GameOverRoot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/UI/UI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/EnemyScenes/Beetles/DungBeetle.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/PlayerScenes/Player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Effects/Shit.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Menus/PauseRoot.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/EnemyScenes/Beetles/DungHeap.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/EnemyScenes/Beetles/StagBeetle.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scripts/Etc/CameraShake.gd" type="Script" id=16]
 
 [node name="World" type="Node2D"]
 pause_mode = 2
 position = Vector2( 1, -7 )
 script = ExtResource( 1 )
+curState = 2
 
 [node name="TileMapWalls" type="TileMap" parent="."]
 z_index = 2
@@ -19,10 +28,18 @@ show_collision = true
 format = 1
 tile_data = PoolIntArray( -2949136, 1, 0, -2949135, 1, 0, -2949134, 1, 0, -2949133, 1, 0, -2949132, 1, 0, -2949131, 1, 0, -2949130, 1, 0, -2949129, 1, 0, -2949128, 1, 0, -2949127, 1, 0, -2949126, 1, 0, -2949125, 1, 0, -2949124, 1, 0, -2949123, 1, 0, -2949122, 1, 0, -2949121, 1, 0, -3014656, 1, 0, -3014655, 1, 0, -3014654, 1, 0, -3014653, 1, 0, -2883604, 1, 0, -2883603, 1, 0, -2883602, 1, 0, -2883601, 1, 0, -2949116, 1, 0, -2949115, 1, 0, -2949114, 1, 0, -2949113, 1, 0, -2949112, 1, 0, -2818070, 1, 0, -2818069, 1, 0, -2818068, 1, 0, -2883575, 1, 0, -2883574, 1, 0, -2883573, 1, 0, -2883572, 1, 0, -2883571, 1, 0, -2883570, 1, 0, -2883569, 1, 0, -2752535, 1, 0, -2752534, 1, 0, -2818033, 1, 0, -2818032, 1, 0, -2818031, 1, 0, -2818030, 1, 0, -2818029, 1, 0, -2818028, 1, 0, -2687000, 1, 0, -2752492, 1, 0, -2752491, 1, 0, -2752490, 1, 0, -2752489, 1, 0, -2752488, 1, 0, -2621465, 1, 0, -2686951, 1, 0, -2686950, 1, 0, -2555929, 1, 0, -2621413, 1, 0, -2621412, 1, 0, -2621411, 1, 0, -2490394, 1, 0, -2555874, 1, 0, -2555873, 1, 0, -2555872, 1, 0, -2424859, 1, 0, -2490335, 1, 0, -2490334, 1, 0, -2359323, 1, 0, -2424797, 1, 0, -2293787, 1, 0, -2359260, 1, 0, -2359259, 1, 0, -2228252, 1, 0, -2293723, 1, 0, -2293722, 1, 0, -2162716, 1, 0, -2228186, 1, 0, -2097180, 1, 0, -2162649, 1, 0, -2162648, 1, 0, -2031645, 1, 0, -2097112, 1, 0, -1966109, 1, 0, -2031576, 1, 0, -1900573, 1, 0, -1966040, 1, 0, -1835036, 1, 0, -1900504, 1, 0, -1769500, 1, 0, -1834968, 1, 0, -1703964, 1, 0, -1703963, 1, 0, -1769432, 1, 0, -1638427, 1, 0, -1703896, 1, 0, -1572891, 1, 0, -1638360, 1, 0, -1507355, 1, 0, -1507354, 1, 0, -1572824, 1, 0, -1441818, 1, 0, -1507288, 1, 0, -1376282, 1, 0, -1441752, 1, 0, -1310745, 1, 0, -1376216, 1, 0, -1245209, 1, 0, -1245208, 1, 0, -1310680, 1, 0, -1179672, 1, 0, -1245144, 1, 0, -1114135, 1, 0, -1179609, 1, 0, -1179608, 1, 0, -1048599, 1, 0, -1048598, 1, 0, -1114073, 1, 0, -983062, 1, 0, -1048537, 1, 0, -917525, 1, 0, -917524, 1, 0, -983001, 1, 0, -851988, 1, 0, -917465, 1, 0, -786451, 1, 0, -786450, 1, 0, -851930, 1, 0, -851929, 1, 0, -720913, 1, 0, -720912, 1, 0, -786394, 1, 0, -655375, 1, 0, -655374, 1, 0, -720859, 1, 0, -720858, 1, 0, -589838, 1, 0, -589837, 1, 0, -655324, 1, 0, -655323, 1, 0, -524300, 1, 0, -589789, 1, 0, -458763, 1, 0, -458762, 1, 0, -458761, 1, 0, -524255, 1, 0, -524254, 1, 0, -393224, 1, 0, -393223, 1, 0, -393222, 1, 0, -393221, 1, 0, -458721, 1, 0, -458720, 1, 0, -327685, 1, 0, -327684, 1, 0, -327683, 1, 0, -327682, 1, 0, -327681, 1, 0, -393216, 1, 0, -393188, 1, 0, -393187, 1, 0, -393186, 1, 0, -327680, 1, 0, -327679, 1, 0, -327678, 1, 0, -327677, 1, 0, -327660, 1, 0, -327659, 1, 0, -327658, 1, 0, -327657, 1, 0, -327656, 1, 0, -327655, 1, 0, -327654, 1, 0, -327653, 1, 0, -327652, 1, 0, -262141, 1, 0, -262125, 1, 0, -262124, 1, 0, -196605, 1, 0, -196589, 1, 0, -131069, 1, 0, -131068, 1, 0, -131053, 1, 0, -65532, 1, 0, -65518, 1, 0, -65517, 1, 0, 4, 1, 0, 18, 1, 0, 65541, 1, 0, 65554, 1, 0, 131077, 1, 0, 131089, 1, 0, 131090, 1, 0, 196613, 1, 0, 196625, 1, 0, 262150, 1, 0, 262161, 1, 0, 327686, 1, 0, 327696, 1, 0, 327697, 1, 0, 393222, 1, 0, 393232, 1, 0, 458758, 1, 0, 458767, 1, 0, 458768, 1, 0, 524294, 1, 0, 524302, 1, 0, 524303, 1, 0, 589830, 1, 0, 589837, 1, 0, 589838, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 655370, 1, 0, 655371, 1, 0, 655372, 1, 0, 655373, 1, 0 )
 
+[node name="ExtraTestTiles" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+show_collision = true
+collision_layer = 3
+collision_mask = 3
+format = 1
+tile_data = PoolIntArray( 65545, 1, 0, 65546, 1, 0, 65547, 1, 0, 65548, 1, 0, 262156, 1, 0, 327692, 1, 0 )
+
 [node name="UI" parent="." instance=ExtResource( 7 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 661, 447 )
+position = Vector2( 247, -1245 )
 current = true
 zoom = Vector2( 1.5, 1.5 )
 smoothing_enabled = true
@@ -32,8 +49,14 @@ maxTrauma = 0.15
 [node name="PauseRoot" parent="." instance=ExtResource( 11 )]
 visible = false
 
+[node name="VictoryRoot" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="GameOverRoot" parent="." instance=ExtResource( 6 )]
+visible = false
+
 [node name="Player" parent="." instance=ExtResource( 9 )]
-position = Vector2( 661, 447 )
+position = Vector2( 247, -1245 )
 
 [node name="GatlingL" parent="Player/Node2D/MechBody/WeaponsLeft" index="0"]
 visible = true
@@ -47,8 +70,36 @@ visible = true
 [node name="FlamesR" parent="Player/Node2D/MechBody/WeaponsRight" index="4"]
 visible = false
 
-[node name="RemoteTransform2D" parent="Player" index="4"]
+[node name="RemoteTransform2D" parent="Player" index="5"]
 remote_path = NodePath("../../Camera2D")
+
+[node name="Beetle" parent="." instance=ExtResource( 3 )]
+position = Vector2( 381, -358 )
+
+[node name="Beetle2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 960, -672 )
+
+[node name="EnemySrc" type="AudioStreamPlayer2D" parent="."]
+bus = "Sounds"
+
+[node name="DungBeetle" parent="." instance=ExtResource( 8 )]
+position = Vector2( 948, -106 )
+
+[node name="DungHeap" parent="." instance=ExtResource( 12 )]
+position = Vector2( 432, -1648 )
+
+[node name="Shit" parent="." instance=ExtResource( 10 )]
+position = Vector2( 89, -1326 )
+
+[node name="Shit2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 712, 307 )
+
+[node name="Shit3" parent="." instance=ExtResource( 10 )]
+position = Vector2( 907, 409 )
+
+[node name="StagBeetle" parent="." instance=ExtResource( 13 )]
+position = Vector2( 616, -1283 )
 
 [editable path="PauseRoot"]
 [editable path="Player"]
+[editable path="Player/Node2D/HoneyVision"]

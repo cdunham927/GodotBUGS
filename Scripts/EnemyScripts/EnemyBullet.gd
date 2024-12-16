@@ -51,9 +51,7 @@ func start(pos, dir, acc):
 	global_position = pos
 	#velocity = Vector2(0, speed).rotated(rotation)
 
-func _physics_process(delta):
-	position += transform.y * speed * delta
-	
+func _physics_process(delta):	
 	if !speedFalloff:
 		speed = lerp(speed, desiredSpd, delta * speedupRate)
 	
@@ -82,6 +80,8 @@ func _physics_process(delta):
 			scale.y -= delta * shrinkRate
 			if  scale.x <= 0.05:
 				queue_free()
+				
+	position += transform.y * speed * delta
 	
 #var velocity = Vector2()
 

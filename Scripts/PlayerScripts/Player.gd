@@ -18,6 +18,7 @@ export var spdLerpSpd = 50.0
 var curLerpSpd
 #export var boostLerpSpd = 50
 export var regSpd = 300
+export var shitSpd = 125
 export var forwardSpd = 300
 export var backwardSpd = 300
 export var sideSpd = 300
@@ -73,6 +74,18 @@ var curBoostTimer : float = 0
 
 var gameoverRoot
 
+var shitCount : int = 0
+export(float) var shitSpdRed = 50.0
+export(float) var shitDmg = 5.0
+export(float) var shitTimer = 3.0
+export(float) var minShit = 10.0
+export(float) var timeBetweenShitDmg = 10.0
+var shitDmgTimer = 0.0
+var curShitting : float = 0.0
+
+var webbed : bool = false
+export(int) var webMove = 4
+var curWebbing : int = 0
 
 export(String) var soundName = "MetalHit"
 var snd
@@ -152,7 +165,12 @@ func _physics_process(delta):
 	dashBar.value = lerp(dashBar.value, chargeTime, lerpSpd * delta)
 	
 	
-	spdToLerpTo = regSpd + boostAddition
+	if shitCount > 0:
+		spdToLerpTo = shitSpd + boostAddition
+		spdToLerpTo = clamp(spdToLerpTo, 0, 10000)
+	else:
+		spdToLerpTo = regSpd + boostAddition
+		spdToLerpTo = clamp(spdToLerpTo, 0, 10000)
 	#spdToLerpTo = backwardSpd
 	
 	if chargeTime <= 0:
@@ -203,9 +221,9 @@ func _physics_process(delta):
 	#		coll.kill()
 	
 # warning-ignore:return_value_discarded
-	if boosting == false:
+	if boosting == false and !webbed:
 		move_and_collide(move_vec * curSpd * delta)
-	if boost_vec != Vector2(0, 0):
+	if boost_vec != Vector2(0, 0) and !webbed:
 		 move_and_collide(boost_vec * boostSpd * delta)
 
 	#Fire status effect
@@ -229,6 +247,43 @@ func _physics_process(delta):
 	if honeyed <= 0:
 		honeySpriteL.hide()
 		honeySpriteR.hide()
+		
+	if shitCount > 0 and curShitting < minShit:
+		curShitting += delta
+		
+	if curShitting >= minShit and shitDmgTimer <= 0:
+		ShitDamage(shitDmg)
+		shitDmgTimer = timeBetweenShitDmg
+		$ShitTimer.start()
+		
+	if shitDmgTimer > 0:
+		shitDmgTimer -= delta
+		
+	if shitDmgTimer <= 0 and curShitting >= minShit:
+		ShitDamage(shitDmg)
+		if curShitting >= minShit:
+			shitDmgTimer = timeBetweenShitDmg
+	
+	if webbed:
+		#if move_vec.x != 0 or move_vec.y != 0:
+		#	curWebbing -= 1
+			
+		if Input.is_action_just_pressed("move_left"):
+			position.x -= 0.1
+			curWebbing -= 1
+		if Input.is_action_just_pressed("move_right"):
+			position.x += 0.1
+			curWebbing -= 1
+		if Input.is_action_just_pressed("move_up"):
+			position.y -= 0.1
+			curWebbing -= 1
+		if Input.is_action_just_pressed("move_down"):
+			position.y += 0.1
+			curWebbing -= 1
+			
+	if curWebbing <= 0:
+		webbed = false
+		$WebSprite.hide()
 
 func Boost(charge = 0.1):
 	#move_and_collide(move_vec * boostSpd)
@@ -251,6 +306,17 @@ func Damage(amt, pos = global_position):
 	
 	if hp <= 0:
 		Kill()
+
+func ShitDamage(amt, pos = global_position):
+	play_sound(snd, true)
+	hp -= amt
+	iframes = iframesTime
+		
+	play_anim("hit")
+	SpawnPart(pos)
+	
+	if hp <= 0:
+		Kill()
 		
 func GetHoneyed(amt = 25):
 	var newH = honeyed + amt
@@ -266,6 +332,18 @@ func GetHoneyed(amt = 25):
 		honeySpriteL.show()
 	else:
 		honeySpriteR.show()
+		
+func GetShit():
+	shitCount += 1
+		
+func RedShit():
+	if shitCount > 0:
+		shitCount -= 1
+		
+func Webbed():
+	webbed = true
+	curWebbing = webMove
+	$WebSprite.show()
 
 #Fire damage should start to overheat our weapons too
 ################
@@ -348,3 +426,7 @@ func play_sound(s = snd, pitched = false):
 		$PlayerSounds.pitch_scale = rand_range(pitchLow, pitchHigh)
 	$PlayerSounds.stream = s
 	$PlayerSounds.play()
+
+
+func _on_ShitTimer_timeout():
+	curShitting = 0

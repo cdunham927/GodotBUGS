@@ -29,7 +29,7 @@ scale = Vector2( 0.4, 0.7 )
 
 [node name="HoneyBall" parent="." instance=ExtResource( 3 )]
 
-[node name="Timer" type="Timer" parent="."]
+[node name="DisableTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
 autostart = true
@@ -37,4 +37,4 @@ autostart = true
 [connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Bullet_body_exited"]
 [connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="DisableTimer" to="." method="_on_Timer_timeout"]

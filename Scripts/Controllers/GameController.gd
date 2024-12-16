@@ -13,12 +13,9 @@ onready var gameStatusText = $UI/Label
 export(int) var numAntHills
 var deadHills : int = 0
 
-
-#Bee level variables
-
-#Beetle level variables
-
 #Spider level variables
+export(int) var numSpiders
+var deadSpiders : int = 0
 
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):
@@ -32,12 +29,12 @@ func _process(delta):
 				Victory()
 		GameStates.bee:
 			gameStatusText.text = "Kill Queen Bee"
-			
-			
 		GameStates.beetle:
-			pass
+			gameStatusText.text = "Destroy Spawner"
 		GameStates.spider:
-			pass
+			gameStatusText.text = "Destroy all Spiders"
+			if deadSpiders >= numSpiders:
+				Victory()
 		
 func Victory():
 	victoryMenu.show()
