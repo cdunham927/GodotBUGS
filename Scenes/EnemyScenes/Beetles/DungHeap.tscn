@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/DungHeap.gd" type="Script" id=1]
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=2]
 [ext_resource path="res://Scenes/EnemyScenes/Beetles/BeetleB.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Sprites/Etc/Circle.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Maps/BeetleTiles/Dung_of_beetle.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/EnemyScenes/Beetles/DungBeetle.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/EnemyScenes/Beetles/BeetleA.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Animations/Hit.tres" type="Animation" id=7]
@@ -65,9 +65,8 @@ scale = Vector2( 3, 3 )
 shape = SubResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
-self_modulate = Color( 0.324219, 0.195325, 0.144889, 1 )
 material = ExtResource( 2 )
-scale = Vector2( 3, 3 )
+scale = Vector2( 5, 5 )
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
