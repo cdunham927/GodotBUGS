@@ -34,6 +34,8 @@ export(PackedScene) var objToSpawn
 export var spawnsSecondObj =  false
 export(PackedScene) var secondObj
 
+export var dedDir : bool = true
+
 #var velocity = Vector2()
 
 func _ready():
@@ -44,10 +46,12 @@ func _ready():
 	
 func start(pos, dir, acc):
 	damaged = false
-	
 	desiredSpd = rand_range(spdSlow, spdFast)
 	rotation = dir
-	rotation_degrees = acc
+	if dedDir:
+		rotation_degrees = acc
+	else:
+		rotation_degrees += acc
 	global_position = pos
 	#velocity = Vector2(0, speed).rotated(rotation)
 

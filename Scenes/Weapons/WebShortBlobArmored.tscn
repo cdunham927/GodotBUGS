@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/WebShortBlob.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Effects/Spiderweb.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Particles/FireBall.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/Etc/Ball.png" type="Texture" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.0
+
+[node name="WebShortBlobArmored" type="Area2D"]
+pause_mode = 1
+script = ExtResource( 1 )
+spdSlow = 400.0
+spdFast = 401.0
+speedupRate = 0.1
+scaledRate = 1.0
+scaledRate2 = 1.0
+hitString = "Player"
+spawnsObj = true
+objToSpawn = ExtResource( 2 )
+dedDir = false
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+scale = Vector2( 0.5, 0.8 )
+
+[node name="FireBall" parent="." instance=ExtResource( 3 )]
+amount = 30
+explosiveness = 0.1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="DisableTimer" type="Timer" parent="."]
+wait_time = 7.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_Bullet_body_exited"]
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="DisableTimer" to="." method="_on_DisableTimer_timeout"]

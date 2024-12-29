@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Scenes/Weapons/WebShortBlob.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Weapons/WebShortBlobArmored.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/EnemyScenes/Legs/AntLeg.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Particles/Stun.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/EnemyScenes/Spiders/Cocoon.tscn" type="PackedScene" id=4]
@@ -93,7 +93,7 @@ maxHp = 700.0
 spd = 150
 timeBetweenAttacksSmall = 3.0
 timeBetweenAttacksBig = 5.0
-accuracy = 50.0
+accuracy = 60.0
 chaseCooldownSmall = 1.0
 chaseCooldownBig = 2.0
 walkTimeSmall = 1.0
@@ -102,9 +102,12 @@ stunParts = ExtResource( 3 )
 maxLegDist = 177.0
 coccoon = ExtResource( 4 )
 aoeBullet = ExtResource( 1 )
-AOEShots = 4
+AOEShots = 5
+tillWebAOE = 1
 rangedCoolsSmall = 2.0
 rangedCoolsBig = 4.0
+shotSep = 150.0
+retreatCools = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -1 )
@@ -195,5 +198,9 @@ position = Vector2( 27, 8 )
 [node name="LegUpd8" type="Position2D" parent="LegUpdaters"]
 position = Vector2( -23, 10 )
 
+[node name="RetreatTimer" type="Timer" parent="."]
+wait_time = 2.25
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="timeout" from="RetreatTimer" to="." method="_on_RetreatTimer_timeout"]

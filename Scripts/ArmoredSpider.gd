@@ -2,7 +2,6 @@ extends "res://Scripts/EnemyScripts/Enemy.gd"
 
 export(PackedScene) var coccoon
 export(PackedScene) var aoeBullet
-export(int) var numShots = 3
 export(int) var AOEShots = 3
 var dir : int = 1
 #export var turnSpd : float = 5
@@ -17,6 +16,9 @@ var curDistance : float = 0
 var midpoint : float
 export var rangedCoolsSmall : float = 1
 export var rangedCoolsBig : float = 1
+export var shotSep : float = 1
+export var retreatTime : float = 1
+export var retreatCools : float = 1
 
 func _ready():
 	curAttacks = 0
@@ -47,13 +49,14 @@ func Idle(d):
 		ChangeState(States.idle)
 		
 func Retreat(d):
-	if curStun <= 0:
+	if curStun <= 0 and retreatCools > 0:
 		var vec_to_player = global_position - player.global_position
 		vec_to_player = vec_to_player.normalized()
 		global_rotation = atan2(vec_to_player.y, vec_to_player.x) + 89.5
 		
-		if attackCools <= 0:
-			Attack()
+		move_and_collide(vec_to_player * spd * d)
+		
+		retreatCools -= d
 
 func Chase(d):
 	if curStun <= 0:
@@ -67,37 +70,42 @@ func Chase(d):
 	if curDistance < farthestRangedDistance and attackCools <= 0 and curStun <= 0:
 		ChangeState(States.attack)
 
-func RangedAttack():
+func SpawnCoccoon():
 	var a = coccoon.instance()
 	a.global_position = global_position
 	get_tree().current_scene.add_child(a)
 	attackCools = rand_range(rangedCoolsSmall, rangedCoolsBig)
-	ChangeState(States.retreat)
+	ChangeState(States.chase)
 	
-func AOEAttack():
-	var ind = accuracy / AOEShots
+func SprayWebFront():
+	var ind = shotSep / AOEShots
 	for i in range(AOEShots):
 		var b = aoeBullet.instance()
-		b.start(global_position, global_rotation + PI, (global_rotation + PI) - accuracy + (i * ind))
+		var vec = global_position - player.global_position
+		vec = vec.normalized()
+		b.start(global_position, atan2(vec.y, vec.x) + 89.5 ,  - accuracy + (i * ind))
 		b.atk = atk
 		get_tree().current_scene.add_child(b)
 	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+	$RetreatTimer.start()
+	retreatCools = retreatTime
+	ChangeState(States.retreat)
 
 func Attack():
 	if attackCools <= 0:
 		if curAttacks < tillWebAOE:
 			#print("ranged attack")
-			RangedAttack()
+			SprayWebFront()
 			curAttacks += 1
 			if anim != null:
 				anim.play("Idle", 1, 1)
-			ChangeState(States.chase)
-		else:
-			if anim != null:
-				anim.play("AttackIndicator", 1, 1)
-			#print("lunge attack")
-			AOEAttack()
-			curAttacks = 0
+			ChangeState(States.retreat)
+		#else:
+		#	if anim != null:
+		#		anim.play("AttackIndicator", 1, 1)
+		#	#print("lunge attack")
+		#	SpawnCoccoon()
+		#	curAttacks = 0
 
 func Animate():
 	if leg != null and legUpd != null:
@@ -135,3 +143,9 @@ func Animate():
 		if leg8.global_position.distance_to(upd8) > maxLegDist:
 			upd8 = legUpd8.global_position
 
+
+
+func _on_RetreatTimer_timeout():
+	ChangeState(States.chase)
+	SpawnCoccoon()
+	curAttacks = 0
