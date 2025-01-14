@@ -16,7 +16,6 @@ radius = 357.56
 pause_mode = 1
 position = Vector2( 526, 262 )
 script = ExtResource( 1 )
-hp = 300.0
 spawnAmount = 10
 enemy = ExtResource( 3 )
 

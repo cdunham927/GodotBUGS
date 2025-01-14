@@ -9,13 +9,24 @@ export(float) var dashTimeVariability = 1.0
 export(float) var waitTimeLow = 0.5
 export(float) var waitTimeHigh = 1.0
 var dir : float
+export var farthestRangedDistance : float = 250
+export var closestRangedDistance : float = 250
+var midpoint : float
+var curDistance : float = 0
 var dashCools : float
 
+var hasAdded = false
+
 func _ready():
+	if get_parent().numSpiders != null:
+		get_parent().numSpiders += 1
+	else:
+		get_parent().get_parent().numSpiders += 1
 	Setup()
 	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
 	curSpd = sideSpeed + rand_range(0, sideVariability)
 	randomize()
+	midpoint = (closestRangedDistance + farthestRangedDistance) / 2
 	
 	var x = rand_range(0, 1)
 	if x > 0.5:
@@ -65,27 +76,24 @@ func Chase(d):
 		#global_rotation = atan2(vec_to_player.y, vec_to_player.x) + 89.5
 		global_rotation = lerp_angle(global_rotation, atan2(vec_to_player.y, vec_to_player.x) + 89.5, lookAtSpd * d)
 		
-		var leftAngle = vec_to_player + Vector2.RIGHT
-		var rightAngle = vec_to_player - Vector2.RIGHT
 		
 		var dis = global_position.distance_to(player.global_position)
-		#if dis >= closestDistance:
-		#	move_and_collide(vec_to_player * spd * d)
+	
+		if dis > midpoint:
+			move_and_collide(vec_to_player * spd * d)
 		
 		if actualDashTime > 0:
 			actualDashTime -= d
-	
-			if dir > 0.5:
-				move_and_collide(leftAngle * curSpd * d)
-				#move_and_collide(Vector2(-position.x * sideSpeed * d, -position.y * sideSpeed * d))
-				#move_and_collide((vec_to_player * sideSpeed * d) + Vector2(-position.x * sideSpeed * d, 0))
-				pass
-			else:
-				move_and_collide(rightAngle * curSpd * d)
-				#move_and_collide(Vector2(position.x * sideSpeed * d, -position.y * sideSpeed * d))
-				#move_and_collide((vec_to_player * sideSpeed * d) + Vector2(position.x * sideSpeed * d, 0))
-				pass
 
+func Attack():
+	if attackCools <= 0:
+		JumpAttack()
+		if anim != null:
+			anim.play("Idle", 1, 1)
+		ChangeState(States.chase)
+
+func JumpAttack():
+	pass
 
 func _on_Timer_timeout():
 	if dir > 0.5:
@@ -97,3 +105,16 @@ func _on_Timer_timeout():
 	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
 	
 	$Timer.wait_time = rand_range(waitTimeLow, waitTimeHigh)
+
+
+
+func kill():
+	play_sound(snd, true)
+	if !hasAdded:
+		if get_parent().numSpiders != null:
+			get_parent().numSpiders -= 1
+		else:
+			get_parent().get_parent().numSpiders -= 1
+		hasAdded = true
+	SpawnBlood()
+	queue_free()

@@ -20,7 +20,13 @@ export var rangedCoolsBig : float = 1
 
 export(float) var accuracy2 = 0.0
 
+var hasAdded = false
+
 func _ready():
+	if get_parent().numSpiders != null:
+		get_parent().numSpiders += 1
+	else:
+		get_parent().get_parent().numSpiders += 1
 	curAttacks = 0
 	midpoint = (closestRangedDistance + farthestRangedDistance) / 2
 
@@ -140,3 +146,14 @@ func Animate():
 		if leg8.global_position.distance_to(upd8) > maxLegDist:
 			upd8 = legUpd8.global_position
 
+
+func kill():
+	play_sound(snd, true)
+	if !hasAdded:
+		if get_parent().numSpiders != null:
+			get_parent().numSpiders -= 1
+		else:
+			get_parent().get_parent().numSpiders -= 1
+		hasAdded = true
+	SpawnBlood()
+	queue_free()

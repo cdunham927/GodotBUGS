@@ -32,8 +32,8 @@ func _process(delta):
 		GameStates.beetle:
 			gameStatusText.text = "Destroy Spawner"
 		GameStates.spider:
-			gameStatusText.text = "Destroy all Spiders"
-			if deadSpiders >= numSpiders:
+			gameStatusText.text = "Destroy all " + str(numSpiders) + " spiders"
+			if numSpiders <= 0:
 				Victory()
 		
 func Victory():

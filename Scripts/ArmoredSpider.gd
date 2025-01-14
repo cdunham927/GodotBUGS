@@ -20,7 +20,13 @@ export var shotSep : float = 1
 export var retreatTime : float = 1
 export var retreatCools : float = 1
 
+var hasAdded = false
+
 func _ready():
+	if get_parent().numSpiders != null:
+		get_parent().numSpiders += 1
+	else:
+		get_parent().get_parent().numSpiders += 1
 	curAttacks = 0
 	midpoint = (closestRangedDistance + farthestRangedDistance) / 2
 
@@ -149,3 +155,15 @@ func _on_RetreatTimer_timeout():
 	ChangeState(States.chase)
 	SpawnCoccoon()
 	curAttacks = 0
+
+
+func kill():
+	play_sound(snd, true)
+	if !hasAdded:
+		if get_parent().numSpiders != null:
+			get_parent().numSpiders -= 1
+		else:
+			get_parent().get_parent().numSpiders -= 1
+		hasAdded = true
+	SpawnBlood()
+	queue_free()

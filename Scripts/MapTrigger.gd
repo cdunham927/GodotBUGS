@@ -2,15 +2,15 @@ extends Node2D
 
 var hasActivated = false
 export(NodePath) var nextArea
-export(NodePath) var previousArea
+#export(NodePath) var previousArea
 #export(Array, NodePath) var walls := []
 var next
-var prev
+#var prev
 
 func _ready():
 	hasActivated = false
 	next = get_node(nextArea)
-	prev = get_node(previousArea)
+	#prev = get_node(previousArea)
 	
 	for ch in next.get_children():
 		ch.paused = true

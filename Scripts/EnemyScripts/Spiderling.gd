@@ -11,7 +11,13 @@ export(float) var waitTimeHigh = 1.0
 var dir : float
 var dashCools : float
 
+var hasAdded = false
+
 func _ready():
+	if get_parent().numSpiders != null:
+		get_parent().numSpiders += 1
+	else:
+		get_parent().get_parent().numSpiders += 1
 	Setup()
 	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
 	curSpd = sideSpeed + rand_range(0, sideVariability)
@@ -97,3 +103,15 @@ func _on_Timer_timeout():
 	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
 	
 	$Timer.wait_time = rand_range(waitTimeLow, waitTimeHigh)
+
+
+func kill():
+	play_sound(snd, true)
+	if !hasAdded:
+		hasAdded = true
+		if get_parent().numSpiders != null:
+			get_parent().numSpiders -= 1
+		else:
+			get_parent().get_parent().numSpiders -= 1
+	SpawnBlood()
+	queue_free()

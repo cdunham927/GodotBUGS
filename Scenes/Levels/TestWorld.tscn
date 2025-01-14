@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Scenes/PlayerScenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/EnemyScenes/Bees/SpiralBee.tscn" type="PackedScene" id=2]
@@ -31,6 +31,8 @@
 [ext_resource path="res://Tiles/AntTilesActual.tres" type="TileSet" id=29]
 [ext_resource path="res://Tiles/SpiderTiles.tres" type="TileSet" id=30]
 [ext_resource path="res://Tiles/BeetleTiles.tres" type="TileSet" id=31]
+[ext_resource path="res://Scenes/EnemyScenes/Spiders/DaddyLongLegs.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Scenes/EnemyScenes/Spiders/WolfSpider.tscn" type="PackedScene" id=33]
 
 [node name="World" type="Node2D"]
 pause_mode = 2
@@ -164,6 +166,12 @@ position = Vector2( 1786, 414 )
 
 [node name="ArmoredSpider" parent="SpiderParent" instance=ExtResource( 25 )]
 position = Vector2( 1320, 443 )
+
+[node name="WolfSpider" parent="SpiderParent" instance=ExtResource( 33 )]
+position = Vector2( 1163, 580 )
+
+[node name="DaddyLongLegs" parent="SpiderParent" instance=ExtResource( 32 )]
+position = Vector2( 1088, 326 )
 
 [node name="Spiderweb" parent="." instance=ExtResource( 24 )]
 position = Vector2( 915, 509 )

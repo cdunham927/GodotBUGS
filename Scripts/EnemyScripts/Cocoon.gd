@@ -14,7 +14,18 @@ var hasSpawned = false
 onready var anim = $AnimationPlayer
 var blood = load("res://Scenes/Particles/Blood.tscn")
 	
+onready var src = get_node("/root/World/EnemySrc")
+export(String) var soundName = "Splat"
+var snd
+
+var hasAdded = false
+
 func _ready():
+	snd = load("res://Audio/SFX/" + soundName + ".mp3")
+	if get_parent().numSpiders != null:
+		get_parent().numSpiders += 1
+	else:
+		get_parent().get_parent().numSpiders += 1
 	hp = maxHp
 	hasSpawned = false
 	add_to_group("enemies")
@@ -78,7 +89,25 @@ func SpawnBlood():
 	#blood_instance.emitting = true
 	pass
 	
+export(float) var pitchLow = 0.8
+export(float) var pitchHigh = 1.3
+func play_sound(s = snd, pitched = false):
+	#if !canPlay:
+	#	canPlay = true
+	#	return
+	if pitched:
+		src.pitch_scale = rand_range(pitchLow, pitchHigh)
+	src.stream = s
+	src.play()
+
 func kill():
+	play_sound(snd, true)
+	if !hasAdded:
+		hasAdded = true
+		if get_parent().numSpiders != null:
+			get_parent().numSpiders -= 1
+		else:
+			get_parent().get_parent().numSpiders -= 1
 	SpawnBlood()
 	queue_free()
 	
@@ -93,7 +122,14 @@ func spawn_and_kill():
 			var randY = rand_range(-2, 2)
 			e.global_position = global_position + Vector2(randX, randY)
 			hasSpawned = true
-			pass
+			
+		if !hasAdded:
+			hasAdded = true
+			if get_parent().numSpiders != null:
+				get_parent().numSpiders -= 1
+			else:
+				get_parent().get_parent().numSpiders -= 1
+				
 	queue_free()
 
 func _on_Area2D_body_entered(body):
