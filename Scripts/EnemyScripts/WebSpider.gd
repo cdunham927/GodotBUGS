@@ -23,12 +23,15 @@ export(float) var accuracy2 = 0.0
 var hasAdded = false
 
 func _ready():
-	if get_parent().numSpiders != null:
-		get_parent().numSpiders += 1
-	else:
-		get_parent().get_parent().numSpiders += 1
 	curAttacks = 0
 	midpoint = (closestRangedDistance + farthestRangedDistance) / 2
+	GCSetup()
+
+func GCSetup():
+	if get_parent().get_parent() != null:
+		get_parent().get_parent().numSpiders += 1
+	else:
+		get_parent().get_parent().get_parent().numSpiders += 1
 
 func _process(delta):
 	if player != null:
@@ -75,7 +78,7 @@ func RangedAttack():
 	var b = bullet.instance()
 	b.start(global_position, global_rotation + PI, accuracy2)
 	b.atk = atk
-	get_tree().current_scene.add_child(b)
+	get_node("/root/World").add_child(b)
 	
 	attackCools = rand_range(rangedCoolsSmall, rangedCoolsBig)
 	
@@ -150,10 +153,10 @@ func Animate():
 func kill():
 	play_sound(snd, true)
 	if !hasAdded:
-		if get_parent().numSpiders != null:
-			get_parent().numSpiders -= 1
+		if get_parent().get_parent() != null:
+			get_parent().get_parent().numSpiders += 1
 		else:
-			get_parent().get_parent().numSpiders -= 1
+			get_parent().get_parent().get_parent().numSpiders += 1
 		hasAdded = true
 	SpawnBlood()
 	queue_free()

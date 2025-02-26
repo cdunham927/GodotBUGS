@@ -3,12 +3,12 @@
 [ext_resource path="res://Scripts/WolfSpider.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Hit.tres" type="Animation" id=2]
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=3]
-[ext_resource path="res://Sprites/Enemies/Spiderling (1).png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Enemies/Wolf_Spider.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/EnemyScenes/Legs/AntLeg.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Particles/Stun.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2, 5 )
+extents = Vector2( 11, 18.5 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -81,7 +81,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=5]
-radius = 357.56
+radius = 487.591
 
 [node name="WolfSpider" type="KinematicBody2D" groups=["enemies"]]
 pause_mode = 1
@@ -93,15 +93,20 @@ chaseCooldownBig = 2.0
 walkTimeSmall = 1.0
 walkTimeBig = 2.0
 stunParts = ExtResource( 6 )
+sideSpeed = 100.0
+sideVariability = 25.0
+dashTime = 0.5
+dashTimeVariability = 0.125
 farthestRangedDistance = 100.0
 closestRangedDistance = 75.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -2.5 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 3 )
-scale = Vector2( 0.2, 0.2 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
@@ -120,7 +125,6 @@ anims/move = SubResource( 4 )
 shape = SubResource( 5 )
 
 [node name="Legs" type="Node2D" parent="."]
-visible = false
 material = ExtResource( 3 )
 scale = Vector2( 0.25, 0.25 )
 
@@ -159,7 +163,6 @@ material = ExtResource( 3 )
 position = Vector2( -8, 12 )
 
 [node name="LegUpdaters" type="Node2D" parent="."]
-visible = false
 scale = Vector2( 0.25, 0.25 )
 
 [node name="LegUpd" type="Position2D" parent="LegUpdaters"]
@@ -189,6 +192,8 @@ position = Vector2( -22, 22 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="Stream" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

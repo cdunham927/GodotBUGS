@@ -26,7 +26,7 @@ export var deathEnemy: PackedScene
 
 onready var anim = $AnimationPlayer
 
-var blood = load("res://Scenes/Blood.tscn")
+var blood = load("res://Scenes/Particles/Blood.tscn")
 	
 func _ready():
 	hasSpawned = false

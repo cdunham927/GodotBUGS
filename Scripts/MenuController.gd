@@ -19,8 +19,8 @@ func _on_ContinueButton_pressed():
 	#This way hides the current scene
 	var game = world.instance()
 	get_tree().get_root().add_child(game)
-	queue_free()
-	#hide ()
+	#queue_free()
+	hide()
 	
 	#var game = world.instance()
 	#get_tree().get_root().add_child(game)

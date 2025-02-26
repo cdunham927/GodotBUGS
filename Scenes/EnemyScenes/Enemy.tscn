@@ -86,6 +86,7 @@ radius = 357.56
 pause_mode = 1
 z_index = 1
 script = ExtResource( 1 )
+soundNames = [ "BugScuttle", "BugScuttle2", "BugScuttle3", "BugScuttle4" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, 2.5 )
@@ -146,5 +147,9 @@ position = Vector2( -40, -24 )
 [node name="LegUpd4" type="Position2D" parent="LegUpdaters"]
 position = Vector2( -40, 8 )
 
+[node name="WalkTimer" type="Timer" parent="."]
+wait_time = 0.1
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="timeout" from="WalkTimer" to="." method="_on_WalkTimer_timeout"]

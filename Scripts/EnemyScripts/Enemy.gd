@@ -86,10 +86,29 @@ var inFire : bool = false
 export(float) var fireDmg = 1.75
 
 onready var src = get_node("/root/World/EnemySrc")
+onready var walkSrc = $Stream
 export(String) var soundName = "Splat"
 var snd
 
+var walkSnd
+export(String) var walkSoundName = "BugScuttle"
+export var soundNames = [ "BugScuttle",  ]
+var soundsA
+var soundsB
+var soundsC
+var soundsD
+var playingWalk : bool = false
+
 func _ready():
+	#if soundNames.size() > 1:
+	#	for i in soundNames:
+	#		sounds[i] = load("res://Audio/SFX/" + soundNames[i] + ".wav")
+	soundsA = load("res://Audio/SFX/" + soundNames[0] + ".wav")
+	soundsB = load("res://Audio/SFX/" + soundNames[1] + ".wav")
+	soundsC = load("res://Audio/SFX/" + soundNames[2] + ".wav")
+	soundsD = load("res://Audio/SFX/" + soundNames[3] + ".wav")
+	
+	walkSnd = load("res://Audio/SFX/" + walkSoundName + ".wav")
 	snd = load("res://Audio/SFX/" + soundName + ".mp3")
 	Setup()
 	
@@ -315,13 +334,32 @@ func _on_Area2D_body_exited(body):
 		ChangeState(States.patrol)
 		inSight = false
 	
-export(float) var pitchLow = 0.8
-export(float) var pitchHigh = 1.3
-func play_sound(s = snd, pitched = false):
+export(float) var pitchLow = 0.6
+export(float) var pitchHigh = 1.5
+func play_sound(s = snd, pitched = false, soundSrc = src):
 	#if !canPlay:
 	#	canPlay = true
 	#	return
 	if pitched:
-		src.pitch_scale = rand_range(pitchLow, pitchHigh)
-	src.stream = s
-	src.play()
+		soundSrc.pitch_scale = rand_range(pitchLow, pitchHigh)
+	soundSrc.stream = s
+	soundSrc.play()
+
+func _on_WalkTimer_timeout():
+	playingWalk = false
+
+func play_random_sound(pitched = false, soundSrc = src):
+	var randSnd = randi() % soundNames.size()
+	#print(randSnd)
+	if randSnd == 0:
+		soundSrc.stream = soundsA
+	elif randSnd == 1:
+		soundSrc.stream = soundsB
+	elif randSnd == 2:
+		soundSrc.stream = soundsC
+	else:
+		soundSrc.stream = soundsD
+	
+	if pitched:
+		soundSrc.pitch_scale = rand_range(pitchLow, pitchHigh)
+	soundSrc.play()

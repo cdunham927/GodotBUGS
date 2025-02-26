@@ -20,6 +20,7 @@ default_bus_layout="res://Audio/AudioBus.tres"
 
 [autoload]
 
+Save="*res://Scenes/SaveNode.tscn"
 Bullets="*res://addons/native_bullets/bullets.gdns"
 
 [display]

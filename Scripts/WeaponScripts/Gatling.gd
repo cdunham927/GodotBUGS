@@ -7,7 +7,8 @@ func Shoot():
 		play_sound(snd, true, soundR)
 	
 	var b = bullet.instance()
-	get_tree().current_scene.add_child(b)
+	#get_tree().current_scene.add_child(b)
+	get_node("/root/World").add_child(b)
 	b.start($Muzzle.global_position, $Muzzle.global_rotation, accuracy)
 	ShowFlash()
 	#b.Setup()
@@ -21,4 +22,4 @@ func Shoot():
 		mech.overheatR += incAmt
 	#gatlingOverheat += 1
 	
-	get_tree().current_scene.get_node("Camera2D").add_trauma(0.0375)
+	get_node("/root/World/Camera2D").add_trauma(0.0375)

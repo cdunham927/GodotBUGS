@@ -106,6 +106,8 @@ walkTimeBig = 2.0
 stunTime = 4.0
 stunThreshold = 4.0
 stunParts = ExtResource( 6 )
+walkSoundName = "BeeBuzz"
+soundNames = [ "BeeBuzz", "BeeBuzz2", "BeeBuzz3", "BeeBuzz4" ]
 explosion = ExtResource( 7 )
 honeySplat = ExtResource( 8 )
 smallerSplats = ExtResource( 9 )
@@ -195,6 +197,14 @@ shape = SubResource( 6 )
 wait_time = 0.5
 autostart = true
 
+[node name="WalkTimer" type="Timer" parent="."]
+wait_time = 0.93
+autostart = true
+
+[node name="Stream" type="AudioStreamPlayer2D" parent="."]
+volume_db = -6.0
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="WalkTimer" to="." method="_on_WalkTimer_timeout"]

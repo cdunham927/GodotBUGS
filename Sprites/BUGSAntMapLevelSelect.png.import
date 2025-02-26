@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/BUGSAntMapLevelSelect.png-4e54aa944abc4c30f3fdc6ed0e62abb4.image"
+
+[deps]
+
+source_file="res://Sprites/BUGSAntMapLevelSelect.png"
+dest_files=[ "res://.import/BUGSAntMapLevelSelect.png-4e54aa944abc4c30f3fdc6ed0e62abb4.image" ]
+
+[params]
+

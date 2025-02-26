@@ -76,3 +76,8 @@ func _on_Timer_timeout():
 	#curTurn = rand_range(-turnSpd, turnSpd)
 	#chaseCools = rand_range(walkTimeSmall, walkTimeBig)
 	ChangeState(States.idle)
+
+
+func _on_WalkTimer_timeout():
+	play_random_sound(true, walkSrc)
+

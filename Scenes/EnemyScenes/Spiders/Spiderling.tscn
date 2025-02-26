@@ -189,6 +189,9 @@ position = Vector2( -22, 22 )
 wait_time = 0.5
 autostart = true
 
+[node name="WalkTimer" type="Timer" parent="."]
+wait_time = 0.1
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

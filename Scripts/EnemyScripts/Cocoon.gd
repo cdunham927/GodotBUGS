@@ -20,18 +20,22 @@ var snd
 
 var hasAdded = false
 
+export(bool) var paused = false
+
 func _ready():
 	snd = load("res://Audio/SFX/" + soundName + ".mp3")
-	if get_parent().numSpiders != null:
-		get_parent().numSpiders += 1
-	else:
+	
+	if get_parent().get_parent() != null:
 		get_parent().get_parent().numSpiders += 1
+	else:
+		get_parent().get_parent().get_parent().numSpiders += 1
+		
 	hp = maxHp
 	hasSpawned = false
 	add_to_group("enemies")
 	player = get_node("/root/World/Player") 
 	#params: name, blend, play speed
-	#anim.play("move", 1, 2)
+	anim.play("Idle", 1, 2)
 	
 	#rotation_degrees = rand_range(0, 360)
 	
@@ -45,8 +49,12 @@ func play_anim(name):
 		anim.play(name)
 	
 func Damage(amt):
+	if paused:
+		return
+		
 	if anim != null:
-		play_anim("Hit")
+		anim.play("Hit", 1, 2)
+		
 	inSight = true
 	BloodSpray()
 	hp -= amt
@@ -64,6 +72,8 @@ func BloodSpray():
 	pass
 	
 func _process(delta):
+	if paused:
+		return
 	#if inSight and !hasSpawned:
 	#	$Timer.start()
 	
@@ -104,10 +114,10 @@ func kill():
 	play_sound(snd, true)
 	if !hasAdded:
 		hasAdded = true
-		if get_parent().numSpiders != null:
-			get_parent().numSpiders -= 1
-		else:
+		if get_parent().get_parent() != null:
 			get_parent().get_parent().numSpiders -= 1
+		else:
+			get_parent().get_parent().get_parent().numSpiders -= 1
 	SpawnBlood()
 	queue_free()
 	
@@ -116,8 +126,9 @@ func spawn_and_kill():
 	if !hasSpawned:
 		for i in spawnAmount:
 			var e = enemy.instance()
+			e.fromCocoon = true
 			e.Setup()
-			get_tree().current_scene.add_child(e)
+			get_node("/root/World").add_child(e)
 			var randX = rand_range(-2, 2)
 			var randY = rand_range(-2, 2)
 			e.global_position = global_position + Vector2(randX, randY)
@@ -125,10 +136,10 @@ func spawn_and_kill():
 			
 		if !hasAdded:
 			hasAdded = true
-			if get_parent().numSpiders != null:
-				get_parent().numSpiders -= 1
-			else:
+			if get_parent().get_parent().numSpiders != null:
 				get_parent().get_parent().numSpiders -= 1
+			else:
+				get_parent().get_parent().get_parent().numSpiders -= 1
 				
 	queue_free()
 

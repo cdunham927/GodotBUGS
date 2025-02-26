@@ -18,10 +18,10 @@ var curDistance : float = 0
 var hasAdded = false
 
 func _ready():
-	if get_parent().numSpiders != null:
-		get_parent().numSpiders += 1
-	else:
+	if get_parent().get_parent() != null:
 		get_parent().get_parent().numSpiders += 1
+	else:
+		get_parent().get_parent().get_parent().numSpiders += 1
 	Setup()
 	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
 	curSpd = sideSpeed + rand_range(0, sideVariability)
@@ -70,20 +70,35 @@ func Animate():
 			upd8 = legUpd8.global_position
 
 func Chase(d):
-	if curStun <= 0:
 		var vec_to_player = player.global_position - global_position
 		vec_to_player = vec_to_player.normalized()
 		#global_rotation = atan2(vec_to_player.y, vec_to_player.x) + 89.5
 		global_rotation = lerp_angle(global_rotation, atan2(vec_to_player.y, vec_to_player.x) + 89.5, lookAtSpd * d)
 		
-		
 		var dis = global_position.distance_to(player.global_position)
+		
+		var leftAngle = vec_to_player + Vector2.RIGHT
+		var rightAngle = vec_to_player - Vector2.RIGHT
 	
-		if dis > midpoint:
+		if dis > midpoint and actualDashTime <= 0:
 			move_and_collide(vec_to_player * spd * d)
 		
 		if actualDashTime > 0:
 			actualDashTime -= d
+		
+		if actualDashTime > 0:
+			actualDashTime -= d
+	
+			if dir > 0.5:
+				move_and_collide(leftAngle * curSpd * d)
+				#move_and_collide(Vector2(-position.x * sideSpeed * d, -position.y * sideSpeed * d))
+				#move_and_collide((vec_to_player * sideSpeed * d) + Vector2(-position.x * sideSpeed * d, 0))
+				pass
+			else:
+				move_and_collide(rightAngle * curSpd * d)
+				#move_and_collide(Vector2(position.x * sideSpeed * d, -position.y * sideSpeed * d))
+				#move_and_collide((vec_to_player * sideSpeed * d) + Vector2(position.x * sideSpeed * d, 0))
+				pass
 
 func Attack():
 	if attackCools <= 0:
@@ -111,10 +126,10 @@ func _on_Timer_timeout():
 func kill():
 	play_sound(snd, true)
 	if !hasAdded:
-		if get_parent().numSpiders != null:
-			get_parent().numSpiders -= 1
+		if get_parent().get_parent() != null:
+			get_parent().get_parent().numSpiders += 1
 		else:
-			get_parent().get_parent().numSpiders -= 1
+			get_parent().get_parent().get_parent().numSpiders += 1
 		hasAdded = true
 	SpawnBlood()
 	queue_free()

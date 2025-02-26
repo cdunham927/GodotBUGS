@@ -2,7 +2,7 @@ extends "res://Scripts/PlayerScripts/WeaponController.gd"
 
 func Shoot():
 	var b = bullet.instance()
-	get_tree().current_scene.add_child(b)
+	get_node("/root/World").add_child(b)
 	b.start($Muzzle.global_position, $Muzzle.global_rotation, accuracy)
 	ShowFlash()
 	#b.Setup()
@@ -17,7 +17,7 @@ func Shoot():
 		mech.overheatR += incAmt
 	#gatlingOverheat += 1
 	
-	get_tree().current_scene.get_node("Camera2D").add_trauma(0.225)
+	get_node("/root/World").get_node("Camera2D").add_trauma(0.225)
 
 func ShowFlash():
 	#flash.rotation_degrees = rand_range(0, 360)

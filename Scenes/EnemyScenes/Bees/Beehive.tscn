@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Sprites/Etc/Circle.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Maps/BeeTiles/Bee_Hive.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/EnemyScripts/EnemySpawner.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/EnemyScenes/Beetles/BeetleB.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/EnemyScenes/Ants/TurtleAnt.tscn" type="PackedScene" id=4]
@@ -8,7 +8,7 @@
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=6]
 
 [sub_resource type="CircleShape2D" id=6]
-radius = 25.005
+radius = 31.004
 
 [sub_resource type="Animation" id=7]
 length = 0.001

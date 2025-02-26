@@ -148,6 +148,8 @@ stunTime = 5.0
 stunThreshold = 5.0
 stunParts = ExtResource( 9 )
 maxLegDist = 42.0
+walkSoundName = "BeeBuzz"
+soundNames = [ "BeeBuzz", "BeeBuzz2", "BeeBuzz3", "BeeBuzz4" ]
 bullet = ExtResource( 6 )
 numShots = 4
 farthestRangedDistance = 300.0
@@ -207,6 +209,26 @@ material = ExtResource( 4 )
 position = Vector2( -6, -3 )
 flipped = false
 
+[node name="Leg5" parent="Legs" instance=ExtResource( 1 )]
+material = ExtResource( 4 )
+position = Vector2( -6, -3 )
+flipped = false
+
+[node name="Leg6" parent="Legs" instance=ExtResource( 1 )]
+material = ExtResource( 4 )
+position = Vector2( -6, -3 )
+flipped = false
+
+[node name="Leg7" parent="Legs" instance=ExtResource( 1 )]
+material = ExtResource( 4 )
+position = Vector2( -6, -3 )
+flipped = false
+
+[node name="Leg8" parent="Legs" instance=ExtResource( 1 )]
+material = ExtResource( 4 )
+position = Vector2( -6, -3 )
+flipped = false
+
 [node name="LegUpdaters" type="Node2D" parent="."]
 visible = false
 
@@ -220,6 +242,18 @@ position = Vector2( 30, 18 )
 position = Vector2( -40, -24 )
 
 [node name="LegUpd4" type="Position2D" parent="LegUpdaters"]
+position = Vector2( -40, 8 )
+
+[node name="LegUpd5" type="Position2D" parent="LegUpdaters"]
+position = Vector2( -40, 8 )
+
+[node name="LegUpd6" type="Position2D" parent="LegUpdaters"]
+position = Vector2( -40, 8 )
+
+[node name="LegUpd7" type="Position2D" parent="LegUpdaters"]
+position = Vector2( -40, 8 )
+
+[node name="LegUpd8" type="Position2D" parent="LegUpdaters"]
 position = Vector2( -40, 8 )
 
 [node name="Timer" type="Timer" parent="."]
@@ -243,9 +277,17 @@ one_shot = true
 [node name="Shadow" parent="." instance=ExtResource( 11 )]
 z_index = -1
 
+[node name="WalkTimer" type="Timer" parent="."]
+wait_time = 1.57
+autostart = true
+
+[node name="Stream" type="AudioStreamPlayer2D" parent="."]
+volume_db = -6.0
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="LungeStart" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="LungeStart" to="." method="_on_LungeStart_timeout"]
 [connection signal="body_entered" from="LungeArea" to="." method="_on_LungeArea_body_entered"]
+[connection signal="timeout" from="WalkTimer" to="." method="_on_WalkTimer_timeout"]

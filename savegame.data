@@ -1,0 +1,4 @@
+{"filename":"res://Scenes/SaveNode.tscn","finishedAnt":false,"finishedBee":false,"finishedBeetle":false,"finishedSpider":false,"masterVol":1,"musicVol":1,"parent":"/root","soundVol":1}
+{"filename":"res://Scenes/LevelSelectSaveNode.tscn","finishedAnt":false,"finishedBee":false,"finishedBeetle":false,"finishedSpider":false,"parent":"/root/LevelSelectRoot"}
+{"filename":"res://Scenes/PauseSaveNode.tscn","masterVol":1,"musicVol":1,"parent":"/root/LevelSelectRoot/PauseRoot","soundVol":1}
+{"filename":"res://Scenes/PauseSaveNode.tscn","masterVol":1,"musicVol":1,"parent":"/root/World/PauseRoot","soundVol":1}

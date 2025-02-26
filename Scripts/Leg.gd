@@ -18,6 +18,7 @@ var step_height = 20
 var step_rate = 0.25
 var step_time = 0.0
 
+
 func _ready():
 	len_upper = joint1.position.x
 	len_middle = joint2.position.x

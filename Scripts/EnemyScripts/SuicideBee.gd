@@ -152,3 +152,6 @@ func _on_Timer_timeout():
 	
 	$Timer.wait_time = rand_range(waitTimeLow, waitTimeHigh)
 
+
+func _on_WalkTimer_timeout():
+	play_random_sound(true, walkSrc)

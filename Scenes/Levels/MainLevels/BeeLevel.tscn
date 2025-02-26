@@ -70,74 +70,63 @@ visible = false
 position = Vector2( 642, 388 )
 scale = Vector2( 120.56, 1 )
 nextArea = NodePath("../MapPart1")
-previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger2" parent="." instance=ExtResource( 3 )]
 position = Vector2( -627, -851 )
 rotation = -1.21949
 scale = Vector2( 92.9408, 1.6977 )
 nextArea = NodePath("../MapPart2")
-previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger3" parent="." instance=ExtResource( 3 )]
 position = Vector2( -1920, -2943 )
 scale = Vector2( 97.4208, 1.6977 )
 nextArea = NodePath("../MapPart3")
-previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger4" parent="." instance=ExtResource( 3 )]
 position = Vector2( -3250, -2139 )
 rotation = -1.19426
 scale = Vector2( 92.9408, 1.6977 )
 nextArea = NodePath("../MapPart4")
-previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger5" parent="." instance=ExtResource( 3 )]
 position = Vector2( -4425, -4057 )
 scale = Vector2( 95.7808, 1.6977 )
 nextArea = NodePath("../MapPart5")
-previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger6" parent="." instance=ExtResource( 3 )]
 position = Vector2( -3380, -6117 )
 rotation = 0.984156
 scale = Vector2( 92.9408, 1.6977 )
 nextArea = NodePath("../MapPart6")
-previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger7" parent="." instance=ExtResource( 3 )]
 position = Vector2( -707, -5983 )
 rotation = -1.12825
 scale = Vector2( 69.5031, 1.6977 )
 nextArea = NodePath("../MapPart7")
-previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger8" parent="." instance=ExtResource( 3 )]
 position = Vector2( 2045, -5794 )
 rotation = 1.02344
 scale = Vector2( 92.9408, 1.6977 )
 nextArea = NodePath("../MapPart8")
-previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger9" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1912, -7500 )
 rotation = -1.178
 scale = Vector2( 92.9408, 1.6977 )
 nextArea = NodePath("../MapPart9")
-previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger10" parent="." instance=ExtResource( 3 )]
 position = Vector2( 4311, -6015 )
 rotation = -1.14782
 scale = Vector2( 92.9408, 1.6977 )
 nextArea = NodePath("../MapPart10")
-previousArea = NodePath("../MapPart1")
 
 [node name="MapTrigger11" parent="." instance=ExtResource( 3 )]
 position = Vector2( 5667, -4237 )
 scale = Vector2( 92.9408, 1.6977 )
 nextArea = NodePath("../MapPart11")
-previousArea = NodePath("../MapPart1")
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 604, 696 )

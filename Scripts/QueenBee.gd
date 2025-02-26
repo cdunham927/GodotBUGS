@@ -67,7 +67,7 @@ func _ready():
 	
 	if bossUI == null:
 		bossUI = get_node("/root/World2/BossUI")
-	bossUI.show()
+		bossUI.show()
 		
 	if healthbar == null:
 		healthbar = get_node("/root/World2/BossUI/BossHpBG/BossHpActual")
@@ -319,3 +319,8 @@ func SpawnWave3():
 	h.global_position = global_position
 	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 	waveSpawned3 = true
+
+
+func _on_WalkTimer_timeout():
+	play_random_sound(true, walkSrc)
+

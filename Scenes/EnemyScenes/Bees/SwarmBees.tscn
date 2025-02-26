@@ -115,6 +115,8 @@ atk = 15
 stunTime = 2.0
 stunThreshold = 2.0
 stunParts = ExtResource( 8 )
+walkSoundName = "BeeBuzz"
+soundNames = [ "BeeBuzz", "BeeBuzz2", "BeeBuzz3", "BeeBuzz4" ]
 spdIncrease = 15.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -311,6 +313,14 @@ position = Vector2( -40, 8 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 shape = SubResource( 8 )
 
+[node name="WalkTimer" type="Timer" parent="."]
+wait_time = 0.575
+autostart = true
+
+[node name="Stream" type="AudioStreamPlayer2D" parent="."]
+volume_db = -7.25
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Area2D2" to="." method="_on_Area2D2_body_entered"]
+[connection signal="timeout" from="WalkTimer" to="." method="_on_WalkTimer_timeout"]

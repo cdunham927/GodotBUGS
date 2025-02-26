@@ -23,10 +23,10 @@ export var retreatCools : float = 1
 var hasAdded = false
 
 func _ready():
-	if get_parent().numSpiders != null:
-		get_parent().numSpiders += 1
-	else:
+	if get_parent().get_parent() != null:
 		get_parent().get_parent().numSpiders += 1
+	else:
+		get_parent().get_parent().get_parent().numSpiders += 1
 	curAttacks = 0
 	midpoint = (closestRangedDistance + farthestRangedDistance) / 2
 
@@ -160,10 +160,10 @@ func _on_RetreatTimer_timeout():
 func kill():
 	play_sound(snd, true)
 	if !hasAdded:
-		if get_parent().numSpiders != null:
-			get_parent().numSpiders -= 1
+		if get_parent().get_parent() != null:
+			get_parent().get_parent().numSpiders += 1
 		else:
-			get_parent().get_parent().numSpiders -= 1
+			get_parent().get_parent().get_parent().numSpiders += 1
 		hasAdded = true
 	SpawnBlood()
 	queue_free()

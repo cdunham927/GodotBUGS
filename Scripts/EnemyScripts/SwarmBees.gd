@@ -52,3 +52,8 @@ func _on_Area2D2_body_entered(body):
 		body.Damage(totDmg)
 		#DamageChild(totDmg)
 		Damage(totDmg)
+
+
+func _on_WalkTimer_timeout():
+	play_random_sound(true, walkSrc)
+

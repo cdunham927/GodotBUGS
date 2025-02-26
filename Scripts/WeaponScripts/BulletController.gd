@@ -88,7 +88,7 @@ func SpawnPart(pos):
 	#Spawn particles
 	var s = sparkParts.instance()
 	s.emitting = true
-	get_tree().current_scene.add_child(s)
+	get_node("/root/World").add_child(s)
 	s.global_position = pos
 	#s.get_node("Timer").wait_time = stunTime
 
@@ -157,7 +157,7 @@ func SpawnBlood():
 	#blood particles
 	var blood_instance = bloodSpray.instance()
 	blood_instance.emitting = true
-	get_tree().current_scene.add_child(blood_instance)
+	get_node("/root/World").add_child(blood_instance)
 	blood_instance.global_position = global_position
 	#if (player != null):
 	#	blood_instance.rotation = global_position.angle_to_point(player.global_position)

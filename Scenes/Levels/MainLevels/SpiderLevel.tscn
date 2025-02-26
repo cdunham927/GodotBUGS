@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Controllers/GameController.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI/UI.tscn" type="PackedScene" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://Scenes/EnemyScenes/Spiders/DaddyLongLegs.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Tiles/AntTiles.tres" type="TileSet" id=12]
 [ext_resource path="res://Scenes/EnemyScenes/Spiders/Cocoon.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/EnemyScenes/Spiders/WebSpider.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/EnemyScenes/Spiders/ArmoredSpider.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/EnemyScenes/Spiders/Spiderling.tscn" type="PackedScene" id=16]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Spider_Tile.png 0"
@@ -159,7 +162,7 @@ scale = Vector2( 63.302, 1.6977 )
 nextArea = NodePath("../MapPart2")
 
 [node name="MapTrigger5" parent="." instance=ExtResource( 3 )]
-position = Vector2( -2881, 459 )
+position = Vector2( -2282, 621 )
 rotation = -1.34048
 scale = Vector2( 63.302, 1.6977 )
 nextArea = NodePath("../MapPart3")
@@ -242,77 +245,480 @@ visible = false
 [node name="RemoteTransform2D" parent="Player" index="5"]
 remote_path = NodePath("../../Camera2D")
 
-[node name="MapPart2" type="Node2D" parent="."]
-position = Vector2( -537, 1588 )
-
-[node name="MapPart3" type="Node2D" parent="."]
-position = Vector2( -3576, 396 )
-
-[node name="MapPart4" type="Node2D" parent="."]
-position = Vector2( -2320, 2817 )
-
-[node name="MapPart5" type="Node2D" parent="."]
-position = Vector2( -4639, 2715 )
-
-[node name="MapPart6" type="Node2D" parent="."]
-position = Vector2( -5578, 1606 )
-
-[node name="MapPart7" type="Node2D" parent="."]
-position = Vector2( 2393, 1474 )
-
-[node name="MapPart8" type="Node2D" parent="."]
-position = Vector2( 2469, 2472 )
-
-[node name="MapPart9" type="Node2D" parent="."]
-position = Vector2( 735, 2452 )
-
-[node name="MapPart10" type="Node2D" parent="."]
-position = Vector2( 1168, 3999 )
-
-[node name="MapPart11" type="Node2D" parent="."]
-position = Vector2( 2851, 4014 )
-
 [node name="MapPart1" type="Node2D" parent="."]
+visible = false
 position = Vector2( -507, 62 )
 
+[node name="WebSpider" parent="MapPart1" instance=ExtResource( 14 )]
+position = Vector2( 11, 138 )
+
+[node name="WebSpider2" parent="MapPart1" instance=ExtResource( 14 )]
+position = Vector2( 153, -177 )
+
+[node name="Cocoon" parent="MapPart1" instance=ExtResource( 13 )]
+position = Vector2( -98, -59 )
+
+[node name="WebSpider3" parent="MapPart1" instance=ExtResource( 14 )]
+position = Vector2( -498, 11 )
+
+[node name="WebSpider4" parent="MapPart1" instance=ExtResource( 14 )]
+position = Vector2( -685, -431 )
+
+[node name="MapPart2" type="Node2D" parent="."]
+visible = false
+position = Vector2( -537, 1588 )
+
+[node name="WolfSpider" parent="MapPart2" instance=ExtResource( 10 )]
+position = Vector2( 57, 273 )
+
+[node name="Cocoon" parent="MapPart2" instance=ExtResource( 13 )]
+position = Vector2( -440, -101 )
+
+[node name="WebSpider" parent="MapPart2" instance=ExtResource( 14 )]
+position = Vector2( 393, -67 )
+
+[node name="MapPart3" type="Node2D" parent="."]
+visible = false
+position = Vector2( -3576, 396 )
+
+[node name="Cocoon" parent="MapPart3" instance=ExtResource( 13 )]
+position = Vector2( 6, -15 )
+
+[node name="Cocoon2" parent="MapPart3" instance=ExtResource( 13 )]
+position = Vector2( 439, -1228 )
+
+[node name="ArmoredSpider" parent="MapPart3" instance=ExtResource( 15 )]
+position = Vector2( 683, 213 )
+
+[node name="WolfSpider" parent="MapPart3" instance=ExtResource( 10 )]
+position = Vector2( -373, -648 )
+
+[node name="WebSpider" parent="MapPart3" instance=ExtResource( 14 )]
+position = Vector2( 17, 807 )
+
+[node name="WebSpider2" parent="MapPart3" instance=ExtResource( 14 )]
+position = Vector2( 217, -543 )
+
+[node name="MapPart4" type="Node2D" parent="."]
+visible = false
+position = Vector2( -2320, 2817 )
+
+[node name="Cocoon" parent="MapPart4" instance=ExtResource( 13 )]
+position = Vector2( 467, 337 )
+
+[node name="DaddyLongLegs" parent="MapPart4" instance=ExtResource( 11 )]
+position = Vector2( -634, 61 )
+
+[node name="WebSpider" parent="MapPart4" instance=ExtResource( 14 )]
+position = Vector2( 81, 208 )
+
+[node name="DaddyLongLegs2" parent="MapPart4" instance=ExtResource( 11 )]
+position = Vector2( -314, -523 )
+
+[node name="WebSpider2" parent="MapPart4" instance=ExtResource( 14 )]
+position = Vector2( 436, -272 )
+
+[node name="MapPart5" type="Node2D" parent="."]
+visible = false
+position = Vector2( -4639, 2715 )
+
+[node name="Spiderling" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -168, -80 )
+
+[node name="Spiderling2" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -144, -38 )
+
+[node name="Spiderling3" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -244, -49 )
+
+[node name="Spiderling4" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -220, -115 )
+
+[node name="Spiderling5" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -107, -186 )
+
+[node name="Spiderling6" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 24, 11 )
+
+[node name="Spiderling7" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 48, 53 )
+
+[node name="Spiderling8" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -52, 42 )
+
+[node name="Spiderling9" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -28, -24 )
+
+[node name="Spiderling10" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 85, -95 )
+
+[node name="Spiderling11" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -590, -68 )
+
+[node name="Spiderling12" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -566, -26 )
+
+[node name="Spiderling13" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -666, -37 )
+
+[node name="Spiderling14" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -642, -103 )
+
+[node name="Spiderling15" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -529, -174 )
+
+[node name="Spiderling16" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -502, 232 )
+
+[node name="Spiderling17" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -478, 274 )
+
+[node name="Spiderling18" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -578, 263 )
+
+[node name="Spiderling19" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -554, 197 )
+
+[node name="Spiderling20" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -441, 126 )
+
+[node name="Spiderling21" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 259, -353 )
+
+[node name="Spiderling22" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 283, -311 )
+
+[node name="Spiderling23" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 183, -322 )
+
+[node name="Spiderling24" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 207, -388 )
+
+[node name="Spiderling25" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 320, -459 )
+
+[node name="Spiderling26" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 536, -559 )
+
+[node name="Spiderling27" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 560, -517 )
+
+[node name="Spiderling28" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 460, -528 )
+
+[node name="Spiderling29" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 484, -594 )
+
+[node name="Spiderling30" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 597, -665 )
+
+[node name="Spiderling31" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 338, 32 )
+
+[node name="Spiderling32" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 362, 74 )
+
+[node name="Spiderling33" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 262, 63 )
+
+[node name="Spiderling34" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 286, -3 )
+
+[node name="Spiderling35" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( 399, -74 )
+
+[node name="Spiderling36" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -239, 369 )
+
+[node name="Spiderling37" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -215, 411 )
+
+[node name="Spiderling38" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -315, 400 )
+
+[node name="Spiderling39" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -291, 334 )
+
+[node name="Spiderling40" parent="MapPart5" instance=ExtResource( 16 )]
+position = Vector2( -178, 263 )
+
+[node name="MapPart6" type="Node2D" parent="."]
+visible = false
+position = Vector2( -5578, 1606 )
+
+[node name="Cocoon" parent="MapPart6" instance=ExtResource( 13 )]
+position = Vector2( -297, -20 )
+
+[node name="Cocoon2" parent="MapPart6" instance=ExtResource( 13 )]
+position = Vector2( 501, -201 )
+
+[node name="ArmoredSpider" parent="MapPart6" instance=ExtResource( 15 )]
+position = Vector2( -286, 278 )
+
+[node name="ArmoredSpider2" parent="MapPart6" instance=ExtResource( 15 )]
+position = Vector2( 410, 131 )
+
+[node name="MapPart7" type="Node2D" parent="."]
+visible = false
+position = Vector2( 2393, 1474 )
+
+[node name="ArmoredSpider" parent="MapPart7" instance=ExtResource( 15 )]
+position = Vector2( -456, 37 )
+
+[node name="WebSpider" parent="MapPart7" instance=ExtResource( 14 )]
+position = Vector2( 82, -105 )
+
+[node name="WolfSpider" parent="MapPart7" instance=ExtResource( 10 )]
+position = Vector2( 503, 62 )
+
+[node name="MapPart8" type="Node2D" parent="."]
+visible = false
+position = Vector2( 2469, 2472 )
+
+[node name="Cocoon" parent="MapPart8" instance=ExtResource( 13 )]
+position = Vector2( -7, -10 )
+
+[node name="DaddyLongLegs" parent="MapPart8" instance=ExtResource( 11 )]
+position = Vector2( -352, 11 )
+
+[node name="ArmoredSpider" parent="MapPart8" instance=ExtResource( 15 )]
+position = Vector2( 368, -81 )
+
+[node name="MapPart9" type="Node2D" parent="."]
+visible = false
+position = Vector2( 735, 2452 )
+
+[node name="WebSpider" parent="MapPart9" instance=ExtResource( 14 )]
+position = Vector2( 845, 542 )
+
+[node name="WebSpider2" parent="MapPart9" instance=ExtResource( 14 )]
+position = Vector2( 537, 91 )
+
+[node name="ArmoredSpider" parent="MapPart9" instance=ExtResource( 15 )]
+position = Vector2( 134, 56 )
+
+[node name="DaddyLongLegs" parent="MapPart9" instance=ExtResource( 11 )]
+position = Vector2( -320, -144 )
+
+[node name="WolfSpider" parent="MapPart9" instance=ExtResource( 10 )]
+position = Vector2( -202, 173 )
+
+[node name="MapPart10" type="Node2D" parent="."]
+visible = false
+position = Vector2( 1168, 3999 )
+
+[node name="Spiderling" parent="MapPart10" instance=ExtResource( 16 )]
+position = Vector2( -499, -85 )
+
+[node name="Spiderling2" parent="MapPart10" instance=ExtResource( 16 )]
+position = Vector2( -470, -240 )
+
+[node name="Spiderling3" parent="MapPart10" instance=ExtResource( 16 )]
+position = Vector2( -315, -27 )
+
+[node name="Spiderling4" parent="MapPart10" instance=ExtResource( 16 )]
+position = Vector2( -759, -116 )
+
+[node name="Spiderling5" parent="MapPart10" instance=ExtResource( 16 )]
+position = Vector2( -439, 46 )
+
+[node name="Spiderling6" parent="MapPart10" instance=ExtResource( 16 )]
+position = Vector2( -226, -215 )
+
+[node name="Spiderling7" parent="MapPart10" instance=ExtResource( 16 )]
+position = Vector2( -607, -199 )
+
+[node name="DaddyLongLegs2" parent="MapPart10" instance=ExtResource( 11 )]
+position = Vector2( 142, 192 )
+
+[node name="MapPart11" type="Node2D" parent="."]
+visible = false
+position = Vector2( 2851, 4014 )
+
+[node name="Cocoon" parent="MapPart11" instance=ExtResource( 13 )]
+position = Vector2( 487, -225 )
+
+[node name="Cocoon2" parent="MapPart11" instance=ExtResource( 13 )]
+position = Vector2( -278, 601 )
+
+[node name="DaddyLongLegs" parent="MapPart11" instance=ExtResource( 11 )]
+position = Vector2( -480, 243 )
+
+[node name="DaddyLongLegs2" parent="MapPart11" instance=ExtResource( 11 )]
+position = Vector2( -163, -211 )
+
+[node name="ArmoredSpider" parent="MapPart11" instance=ExtResource( 15 )]
+position = Vector2( 117, 120 )
+
 [node name="MapPart12" type="Node2D" parent="."]
+visible = false
 position = Vector2( 2307, 282 )
 
-[node name="MapPart14" type="Node2D" parent="."]
-position = Vector2( 1518, -904 )
+[node name="Cocoon" parent="MapPart12" instance=ExtResource( 13 )]
+position = Vector2( 207, -44 )
 
-[node name="MapPart15" type="Node2D" parent="."]
-position = Vector2( 2930, -1127 )
+[node name="WebSpider" parent="MapPart12" instance=ExtResource( 14 )]
+position = Vector2( -46, -302 )
 
-[node name="MapPart16" type="Node2D" parent="."]
-position = Vector2( 4036, -1826 )
-
-[node name="MapPart17" type="Node2D" parent="."]
-position = Vector2( -337, -1207 )
-
-[node name="MapPart18" type="Node2D" parent="."]
-position = Vector2( -2151, -148 )
-
-[node name="MapPart19" type="Node2D" parent="."]
-position = Vector2( -1734, -1357 )
-
-[node name="MapPart20" type="Node2D" parent="."]
-position = Vector2( -2329, -2716 )
+[node name="WebSpider2" parent="MapPart12" instance=ExtResource( 14 )]
+position = Vector2( -281, 112 )
 
 [node name="MapPart13" type="Node2D" parent="."]
+visible = false
 position = Vector2( 3740, -573 )
+
+[node name="Cocoon" parent="MapPart13" instance=ExtResource( 13 )]
+position = Vector2( 881, 151 )
+
+[node name="ArmoredSpider" parent="MapPart13" instance=ExtResource( 15 )]
+position = Vector2( 79, 397 )
+
+[node name="WolfSpider" parent="MapPart13" instance=ExtResource( 10 )]
+position = Vector2( 387, -15 )
+
+[node name="MapPart14" type="Node2D" parent="."]
+visible = false
+position = Vector2( 1518, -904 )
+
+[node name="WebSpider" parent="MapPart14" instance=ExtResource( 14 )]
+position = Vector2( -194, 20 )
+
+[node name="WebSpider2" parent="MapPart14" instance=ExtResource( 14 )]
+position = Vector2( 350, -253 )
+
+[node name="MapPart15" type="Node2D" parent="."]
+visible = false
+position = Vector2( 2930, -1127 )
+
+[node name="Spiderling" parent="MapPart15" instance=ExtResource( 16 )]
+position = Vector2( -114, -164 )
+
+[node name="Spiderling2" parent="MapPart15" instance=ExtResource( 16 )]
+position = Vector2( 7, -189 )
+
+[node name="Spiderling3" parent="MapPart15" instance=ExtResource( 16 )]
+position = Vector2( 133, -172 )
+
+[node name="Spiderling4" parent="MapPart15" instance=ExtResource( 16 )]
+position = Vector2( -92, -45 )
+
+[node name="Spiderling5" parent="MapPart15" instance=ExtResource( 16 )]
+position = Vector2( 156, -23 )
+
+[node name="MapPart16" type="Node2D" parent="."]
+visible = false
+position = Vector2( 4036, -1826 )
+
+[node name="Cocoon" parent="MapPart16" instance=ExtResource( 13 )]
+position = Vector2( 8, 1 )
+
+[node name="WolfSpider" parent="MapPart16" instance=ExtResource( 10 )]
+position = Vector2( -492, -52 )
+
+[node name="WebSpider" parent="MapPart16" instance=ExtResource( 14 )]
+position = Vector2( 648, -244 )
+
+[node name="ArmoredSpider" parent="MapPart16" instance=ExtResource( 15 )]
+position = Vector2( 81, -229 )
+
+[node name="MapPart17" type="Node2D" parent="."]
+visible = false
+position = Vector2( -337, -1207 )
+
+[node name="WolfSpider" parent="MapPart17" instance=ExtResource( 10 )]
+position = Vector2( -204, -59 )
+
+[node name="DaddyLongLegs" parent="MapPart17" instance=ExtResource( 11 )]
+position = Vector2( 287, 74 )
+
+[node name="MapPart18" type="Node2D" parent="."]
+visible = false
+position = Vector2( -2151, -148 )
+
+[node name="DaddyLongLegs" parent="MapPart18" instance=ExtResource( 11 )]
+position = Vector2( 0, -41 )
+
+[node name="Cocoon" parent="MapPart18" instance=ExtResource( 13 )]
+position = Vector2( 245, 234 )
+
+[node name="MapPart19" type="Node2D" parent="."]
+visible = false
+position = Vector2( -1734, -1357 )
+
+[node name="Spiderling" parent="MapPart19" instance=ExtResource( 16 )]
+position = Vector2( -584, -337 )
+
+[node name="Spiderling2" parent="MapPart19" instance=ExtResource( 16 )]
+position = Vector2( -436, -393 )
+
+[node name="Spiderling3" parent="MapPart19" instance=ExtResource( 16 )]
+position = Vector2( -496, -285 )
+
+[node name="Spiderling4" parent="MapPart19" instance=ExtResource( 16 )]
+position = Vector2( -656, -449 )
+
+[node name="Spiderling5" parent="MapPart19" instance=ExtResource( 16 )]
+position = Vector2( -712, -273 )
+
+[node name="Spiderling6" parent="MapPart19" instance=ExtResource( 16 )]
+position = Vector2( 376, -57 )
+
+[node name="Spiderling7" parent="MapPart19" instance=ExtResource( 16 )]
+position = Vector2( 524, -113 )
+
+[node name="Spiderling8" parent="MapPart19" instance=ExtResource( 16 )]
+position = Vector2( 464, -5 )
+
+[node name="Spiderling9" parent="MapPart19" instance=ExtResource( 16 )]
+position = Vector2( 304, -169 )
+
+[node name="Spiderling10" parent="MapPart19" instance=ExtResource( 16 )]
+position = Vector2( 248, 7 )
+
+[node name="ArmoredSpider" parent="MapPart19" instance=ExtResource( 15 )]
+position = Vector2( 128, -365 )
+
+[node name="DaddyLongLegs" parent="MapPart19" instance=ExtResource( 11 )]
+position = Vector2( -136, 175 )
+
+[node name="MapPart20" type="Node2D" parent="."]
+visible = false
+position = Vector2( -2329, -2716 )
+
+[node name="Cocoon" parent="MapPart20" instance=ExtResource( 13 )]
+position = Vector2( -795, -24 )
+
+[node name="Cocoon2" parent="MapPart20" instance=ExtResource( 13 )]
+position = Vector2( 333, -320 )
+
+[node name="Cocoon3" parent="MapPart20" instance=ExtResource( 13 )]
+position = Vector2( -459, 456 )
+
+[node name="ArmoredSpider" parent="MapPart20" instance=ExtResource( 15 )]
+position = Vector2( -425, 94 )
+
+[node name="ArmoredSpider2" parent="MapPart20" instance=ExtResource( 15 )]
+position = Vector2( 1063, 242 )
+
+[node name="DaddyLongLegs" parent="MapPart20" instance=ExtResource( 11 )]
+position = Vector2( 587, 218 )
+
+[node name="WebSpider" parent="MapPart20" instance=ExtResource( 14 )]
+position = Vector2( 203, 330 )
 
 [node name="EnemySrc" type="AudioStreamPlayer2D" parent="."]
 bus = "Sounds"
 
-[node name="WolfSpider" parent="." instance=ExtResource( 10 )]
-position = Vector2( 355, 114 )
+[node name="Test" type="Node2D" parent="."]
 
-[node name="DaddyLongLegs" parent="." instance=ExtResource( 11 )]
+[node name="DaddyLongLegs" parent="Test" instance=ExtResource( 11 )]
 position = Vector2( 1046, 177 )
 
-[node name="Cocoon" parent="." instance=ExtResource( 13 )]
-position = Vector2( 1022, 391 )
+[node name="WolfSpider" parent="Test" instance=ExtResource( 10 )]
+position = Vector2( 355, 114 )
+
+[node name="Cocoon" parent="Test" instance=ExtResource( 13 )]
+position = Vector2( 661, 57 )
 
 [editable path="PauseRoot"]
 [editable path="Player"]

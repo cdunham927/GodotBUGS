@@ -13,11 +13,54 @@ var dashCools : float
 
 var hasAdded = false
 
-func _ready():
-	if get_parent().numSpiders != null:
-		get_parent().numSpiders += 1
+var fromCocoon : bool = false
+
+func SetNumSpiders():
+	if fromCocoon:
+		if get_parent() != null:
+			get_parent().numSpiders += 1
 	else:
-		get_parent().get_parent().numSpiders += 1
+		if get_parent().get_parent() != null:
+			get_parent().get_parent().numSpiders += 1
+		else:
+			get_parent().get_parent().get_parent().numSpiders += 1
+	
+func Setup():
+	if legUpd != null:
+		upd1 = legUpd.global_position
+	if legUpd2 != null:
+		upd2 = legUpd2.global_position
+	if legUpd3 != null:
+		upd3 = legUpd3.global_position
+	if legUpd4 != null:
+		upd4 = legUpd4.global_position
+	if legUpd5 != null:
+		upd5 = legUpd5.global_position
+	if legUpd6 != null:
+		upd6 = legUpd6.global_position
+	if legUpd7 != null:
+		upd7 = legUpd7.global_position
+	if legUpd8 != null:
+		upd8 = legUpd8.global_position
+	
+	hp = maxHp
+	curState = States.idle
+	set_player()
+	add_to_group("enemies")
+	#params: name, blend, play speed
+	
+	if (anim != null):
+		anim.play("idle", 1, 2)
+	
+	rotation_degrees = rand_range(0, 360)
+	
+	chaseCools = rand_range(walkTimeSmall, walkTimeBig)
+	resetChaseCools = rand_range(chaseCooldownSmall, chaseCooldownBig)
+	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+ 
+	SetNumSpiders()
+
+func _ready():
 	Setup()
 	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
 	curSpd = sideSpeed + rand_range(0, sideVariability)
@@ -109,9 +152,13 @@ func kill():
 	play_sound(snd, true)
 	if !hasAdded:
 		hasAdded = true
-		if get_parent().numSpiders != null:
-			get_parent().numSpiders -= 1
+		if fromCocoon:
+			if get_parent() != null:
+				get_parent().numSpiders -= 1
 		else:
-			get_parent().get_parent().numSpiders -= 1
+			if get_parent().get_parent() != null:
+				get_parent().get_parent().numSpiders -= 1
+			else:
+				get_parent().get_parent().get_parent().numSpiders -= 1
 	SpawnBlood()
 	queue_free()

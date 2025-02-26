@@ -386,7 +386,7 @@ func SpawnPart(pos):
 	#Spawn particles
 	var s = sparkParts.instance()
 	s.emitting = true
-	get_tree().current_scene.add_child(s)
+	get_node("/root/World").add_child(s)
 	s.global_position = pos
 	#s.get_node("Timer").wait_time = stunTime
 

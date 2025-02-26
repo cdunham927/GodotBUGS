@@ -4,7 +4,7 @@ func Shoot():
 	var b = bullet.instance()
 	b.global_position = $Muzzle.global_position
 	b.rotation = $Muzzle.global_rotation
-	get_tree().current_scene.add_child(b)
+	get_node("/root/World").add_child(b)
 	ShowFlash()
 	curShotTime = timeBetweenShots
 	if leftWeapon:
@@ -13,7 +13,7 @@ func Shoot():
 		mech.overheatR += incAmt
 	#gatlingOverheat += 1
 	
-	get_tree().current_scene.get_node("Camera2D").add_trauma(0.325)
+	get_node("/root/World").get_node("Camera2D").add_trauma(0.325)
 
 func ShowFlash():
 	#flash.rotation_degrees = rand_range(0, 360)

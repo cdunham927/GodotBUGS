@@ -112,7 +112,6 @@ func Shoot():
 func Animate():
 	pass
 
-
 func _on_Timer_timeout():
 	ResetLunging()
 	
@@ -126,3 +125,8 @@ func _on_LungeArea_body_entered(body):
 		#hp -= 1
 		#if hp <= 0:
 		#	Disable()
+
+
+func _on_WalkTimer_timeout():
+	play_random_sound(true, walkSrc)
+
