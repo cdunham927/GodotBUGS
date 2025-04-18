@@ -1,17 +1,17 @@
 extends "res://Scripts/EnemyScripts/Enemy.gd"
 
-export(float) var sideSpeed = 1.0
-export(float) var sideVariability = 1.0
+@export var sideSpeed: float = 1.0
+@export var sideVariability: float = 1.0
 var curSpd
-export(float) var dashTime = 1.0
+@export var dashTime: float = 1.0
 var actualDashTime
-export(float) var dashTimeVariability = 1.0
-export(float) var waitTimeLow = 0.5
-export(float) var waitTimeHigh = 1.0
+@export var dashTimeVariability: float = 1.0
+@export var waitTimeLow: float = 0.5
+@export var waitTimeHigh: float = 1.0
 var dir : float
 var dashCools : float
-export var farthestRangedDistance : float = 250
-export var closestRangedDistance : float = 250
+@export var farthestRangedDistance : float = 250
+@export var closestRangedDistance : float = 250
 var midpoint : float
 var curDistance : float = 0
 
@@ -23,12 +23,12 @@ func _ready():
 	else:
 		get_parent().get_parent().get_parent().numSpiders += 1
 	Setup()
-	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
-	curSpd = sideSpeed + rand_range(0, sideVariability)
+	actualDashTime = dashTime + randf_range(0, dashTimeVariability)
+	curSpd = sideSpeed + randf_range(0, sideVariability)
 	randomize()
 	midpoint = (closestRangedDistance + farthestRangedDistance) / 2
 	
-	var x = rand_range(0, 1)
+	var x = randf_range(0, 1)
 	if x > 0.5:
 		dir = 1
 	else:
@@ -117,10 +117,10 @@ func _on_Timer_timeout():
 	else:
 		dir = 1
 		
-	curSpd = sideSpeed + rand_range(0, sideVariability)
-	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
+	curSpd = sideSpeed + randf_range(0, sideVariability)
+	actualDashTime = dashTime + randf_range(0, dashTimeVariability)
 	
-	$Timer.wait_time = rand_range(waitTimeLow, waitTimeHigh)
+	$Timer.wait_time = randf_range(waitTimeLow, waitTimeHigh)
 
 
 func kill():

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220161__gameaudio__teleport-morphy.wav-d3857faf4d67fcb44df2326d5fe3292d.sample"
+type="AudioStreamWAV"
+uid="uid://blr0yjm34swo6"
+path="res://.godot/imported/220161__gameaudio__teleport-morphy.wav-d3857faf4d67fcb44df2326d5fe3292d.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220161__gameaudio__teleport-morphy.wav"
-dest_files=[ "res://.import/220161__gameaudio__teleport-morphy.wav-d3857faf4d67fcb44df2326d5fe3292d.sample" ]
+dest_files=["res://.godot/imported/220161__gameaudio__teleport-morphy.wav-d3857faf4d67fcb44df2326d5fe3292d.sample"]
 
 [params]
 

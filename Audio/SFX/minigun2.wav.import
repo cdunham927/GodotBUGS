@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/minigun2.wav-81af022e50b44a8063692b55508e3a5c.sample"
+type="AudioStreamWAV"
+uid="uid://gugnv6ijyduq"
+path="res://.godot/imported/minigun2.wav-81af022e50b44a8063692b55508e3a5c.sample"
 
 [deps]
 
 source_file="res://Audio/SFX/minigun2.wav"
-dest_files=[ "res://.import/minigun2.wav-81af022e50b44a8063692b55508e3a5c.sample" ]
+dest_files=["res://.godot/imported/minigun2.wav-81af022e50b44a8063692b55508e3a5c.sample"]
 
 [params]
 

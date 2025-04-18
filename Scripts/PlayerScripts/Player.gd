@@ -1,35 +1,35 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 #HP
-export(float) var maxHp = 100.0
+@export var maxHp: float = 100.0
 var hp = 100
 
 #Stamina vars
 var stamina : float = 0
-export(float) var maxStamina
-export(float) var boostStaminaVal = 15.0
-export(float) var staminaDecAmt
-export(float) var staminaRecAmt
+@export var maxStamina: float
+@export var boostStaminaVal: float = 15.0
+@export var staminaDecAmt: float
+@export var staminaRecAmt: float
 
 #Speed vars
 var curSpd
-export var spdToLerpTo = 50.0
-export var spdLerpSpd = 50.0
+@export var spdToLerpTo = 50.0
+@export var spdLerpSpd = 50.0
 var curLerpSpd
 #export var boostLerpSpd = 50
-export var regSpd = 300
-export var shitSpd = 125
-export var forwardSpd = 300
-export var backwardSpd = 300
-export var sideSpd = 300
+@export var regSpd = 300
+@export var shitSpd = 125
+@export var forwardSpd = 300
+@export var backwardSpd = 300
+@export var sideSpd = 300
 
 #UI
-export(float) var lerpSpd = 15.0
-onready var healthbar = get_node("/root/World/UI/Health")
-onready var staminabar = get_node("/root/World/UI/Stamina2/Stamina")
-onready var dashBar = get_node("/root/World/UI/DashBich")
+@export var lerpSpd: float = 15.0
+@onready var healthbar = get_node("/root/World/UI/Health")
+@onready var staminabar = get_node("/root/World/UI/Stamina2/Stamina")
+@onready var dashBar = get_node("/root/World/UI/DashBich")
 
-export var iframesTime : float = 0.3
+@export var iframesTime : float = 0.3
 var iframes : float = 0
 
 var move_vec : Vector2
@@ -37,57 +37,57 @@ var controller_aim : Vector2
 var boost_vec : Vector2
 
 #Spark hit particles
-export(PackedScene) var sparkParts
-export(PackedScene) var honeyParts
+@export var sparkParts: PackedScene
+@export var honeyParts: PackedScene
 
 #Animation
-onready var anim = $AnimationPlayer
+@onready var anim = $AnimationPlayer
 
 #Status effects
 #Fire
 var inFire : bool = false
-export(float) var fireDmg = 1.75
-export(float) var overheatAmt = 1
-export(float) var fireThreshold
+@export var fireDmg: float = 1.75
+@export var overheatAmt: float = 1
+@export var fireThreshold: float
 var curFire : float = 0.0
 #Honey
 var honeyed : float = 0.0
-export(float) var honeyRed = 1.0
-export(float) var honeyShotRed = 10.0
-export(float) var maxHoney = 100.0
-onready var honeySpriteL = $Node2D/MechBody/HoneyL
-onready var honeySpriteR = $Node2D/MechBody/HoneyR
-onready var honeyVision = $Node2D/HoneyVision
+@export var honeyRed: float = 1.0
+@export var honeyShotRed: float = 10.0
+@export var maxHoney: float = 100.0
+@onready var honeySpriteL = $Node2D/MechBody/HoneyL
+@onready var honeySpriteR = $Node2D/MechBody/HoneyR
+@onready var honeyVision = $Node2D/HoneyVision
 
 #Charge dash variables
-onready var tim = $Node2D/MechBody/Timer
-export var boostSpd = 500
+@onready var tim = $Node2D/MechBody/Timer
+@export var boostSpd = 500
 var chargeTime : float = 0.0
 var boostTimer : float = 0.0
-export(float) var maxCharge = 3.0
-export(float) var timeBetweenDashes = 3.0
-export(float) var curInBetweenDashTime = 3.0
+@export var maxCharge: float = 3.0
+@export var timeBetweenDashes: float = 3.0
+@export var curInBetweenDashTime: float = 3.0
 var boostAddition : float = 0.0
-export(float) var timeToCharge = 33.34
+@export var timeToCharge: float = 33.34
 var boosting : bool = false
 var curBoostTimer : float = 0
 
 var gameoverRoot
 
 var shitCount : int = 0
-export(float) var shitSpdRed = 50.0
-export(float) var shitDmg = 5.0
-export(float) var shitTimer = 3.0
-export(float) var minShit = 10.0
-export(float) var timeBetweenShitDmg = 10.0
+@export var shitSpdRed: float = 50.0
+@export var shitDmg: float = 5.0
+@export var shitTimer: float = 3.0
+@export var minShit: float = 10.0
+@export var timeBetweenShitDmg: float = 10.0
 var shitDmgTimer = 0.0
 var curShitting : float = 0.0
 
 var webbed : bool = false
-export(int) var webMove = 4
+@export var webMove: int = 4
 var curWebbing : int = 0
 
-export(String) var soundName = "MetalHit"
+@export var soundName: String = "MetalHit"
 var snd
 
 func _ready():
@@ -307,6 +307,21 @@ func Damage(amt, pos = global_position):
 	if hp <= 0:
 		Kill()
 
+func AOEDamage(amt, pos = global_position, pushSpd = 10.0):
+	if iframes <= 0:
+		play_sound(snd, true)
+		hp -= amt
+		iframes = iframesTime
+		
+		play_anim("hit")
+		SpawnPart(pos)
+		
+		var pushVec = global_position - pos
+		move_and_collide(pushVec * pushSpd)
+	
+	if hp <= 0:
+		Kill()
+
 func ShitDamage(amt, pos = global_position):
 	play_sound(snd, true)
 	hp -= amt
@@ -327,7 +342,7 @@ func GetHoneyed(amt = 25):
 		
 	if honeySpriteL.is_visible_in_tree() or honeySpriteR.is_visible_in_tree():
 		return
-	var rand = rand_range(0, 1)
+	var rand = randf_range(0, 1)
 	if rand > 0.5:
 		honeySpriteL.show()
 	else:
@@ -376,7 +391,7 @@ func play_anim(name):
 	anim.play(name)
 	
 func SpawnHoneyPart(pos):
-	var s = honeyParts.instance()
+	var s = honeyParts.instantiate()
 	s.emitting = true
 	get_tree().current_scene.add_child(s)
 	s.global_position = pos
@@ -384,7 +399,7 @@ func SpawnHoneyPart(pos):
 
 func SpawnPart(pos):
 	#Spawn particles
-	var s = sparkParts.instance()
+	var s = sparkParts.instantiate()
 	s.emitting = true
 	get_node("/root/World").add_child(s)
 	s.global_position = pos
@@ -416,14 +431,14 @@ func Kill():
 func _on_Timer_timeout():
 	boosting = false
 	
-export(float) var pitchLow = 0.8
-export(float) var pitchHigh = 1.3
+@export var pitchLow: float = 0.8
+@export var pitchHigh: float = 1.3
 func play_sound(s = snd, pitched = false):
 	#if !canPlay:
 	#	canPlay = true
 	#	return
 	if pitched:
-		$PlayerSounds.pitch_scale = rand_range(pitchLow, pitchHigh)
+		$PlayerSounds.pitch_scale = randf_range(pitchLow, pitchHigh)
 	$PlayerSounds.stream = s
 	$PlayerSounds.play()
 

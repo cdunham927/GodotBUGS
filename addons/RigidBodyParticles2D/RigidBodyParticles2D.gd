@@ -9,30 +9,30 @@ signal shot_ended
 
 ## EXPORTED VARIABLES
 
-export (bool)        var emitting = true setget set_emitting, get_emitting
-export (int)         var amount = 8
-export (float, 1)    var amount_random = 0
-export (PackedScene) var particle_scene
-export (bool)        var one_shot = false
-export (float, 1)    var explosiveness = 0
-export (String)      var tracker_name = "ParticleTracker"
-export (Shape2D)     var emission_shape
+@export var emitting: bool = true: get = get_emitting, set = set_emitting
+@export var amount: int = 8
+@export var amount_random = 0 # (float, 1)
+@export var particle_scene: PackedScene
+@export var one_shot: bool = false
+@export var explosiveness = 0 # (float, 1)
+@export var tracker_name: String = "ParticleTracker"
+@export var emission_shape: Shape2D
 
-export (float)    var lifetime = 2
-export (float, 1) var lifetime_random = 0
+@export var lifetime: float = 2
+@export var lifetime_random = 0 # (float, 1)
 
-export (float)            var impulse = 200
-export (float, 1)         var impulse_random = 0
-export (float, -360, 360) var impulse_angle_degrees = 0
-export (float, -360, 360) var impulse_spread_degrees = 0
+@export var impulse: float = 200
+@export var impulse_random = 0 # (float, 1)
+@export var impulse_angle_degrees = 0 # (float, -360, 360)
+@export var impulse_spread_degrees = 0 # (float, -360, 360)
 
-export (float)            var force = 0
-export (float, 1)         var force_random = 0
-export (float, -360, 360) var force_angle_degrees = 0
-export (float, -360, 360) var force_spread_degrees = 0
+@export var force: float = 0
+@export var force_random = 0 # (float, 1)
+@export var force_angle_degrees = 0 # (float, -360, 360)
+@export var force_spread_degrees = 0 # (float, -360, 360)
 
-export (float, -360, 360) var initial_rotation_degrees = 0
-export (float, 1)         var initial_rotation_degrees_random  = 0
+@export var initial_rotation_degrees = 0 # (float, -360, 360)
+@export var initial_rotation_degrees_random  = 0 # (float, 1)
 
 ## SETGET METHODS
 
@@ -45,7 +45,7 @@ func get_emitting():
 ## PRIVATE VARIABLES
 
 var _iteration  = 0
-onready var _tracker_scene = load("res://addons/RigidBodyParticles2D/ParticleTracker.tscn")
+@onready var _tracker_scene = load("res://addons/RigidBodyParticles2D/ParticleTracker.tscn")
 var _capsule_circle_frac
 
 ## per shot state variables
@@ -58,7 +58,7 @@ var _shot_started = false
 func _ready():
 	randomize()
 
-	$ShotTimer.connect("timeout", self, "_on_shot_timer_timeout")
+	$ShotTimer.connect("timeout", Callable(self, "_on_shot_timer_timeout"))
 	$ShotTimer.one_shot = one_shot
 	$ShotTimer.start(lifetime)
 
@@ -91,7 +91,7 @@ func _physics_process(delta):
 
 	for i in frame_emit_count:
 
-		var particle = particle_scene.instance()
+		var particle = particle_scene.instantiate()
 		if _iteration == 0 && particle.get_class() != 'RigidBody2D':
 			printerr("Error: Root node of 'Particle Scene' must be a 'RigidBody2D', not '"
 				+ particle.get_class() + "'")
@@ -168,7 +168,7 @@ func _randomize(value, randomness):
 
 func _initialize_particle_tracker(p):
 
-	var tracker       = _tracker_scene.instance()
+	var tracker       = _tracker_scene.instantiate()
 	tracker.name      = tracker_name
 	tracker.particle  = p
 	p.add_child(tracker)

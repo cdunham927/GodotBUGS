@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220210__gameaudio__bonk-click-wdeny-feel.wav-3cccfd1411ec2b27a845335120672dcb.sample"
+type="AudioStreamWAV"
+uid="uid://bb11wfed1vv1w"
+path="res://.godot/imported/220210__gameaudio__bonk-click-wdeny-feel.wav-3cccfd1411ec2b27a845335120672dcb.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220210__gameaudio__bonk-click-wdeny-feel.wav"
-dest_files=[ "res://.import/220210__gameaudio__bonk-click-wdeny-feel.wav-3cccfd1411ec2b27a845335120672dcb.sample" ]
+dest_files=["res://.godot/imported/220210__gameaudio__bonk-click-wdeny-feel.wav-3cccfd1411ec2b27a845335120672dcb.sample"]
 
 [params]
 

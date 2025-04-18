@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Squirt.wav-6f81e769b82f02f8928b1f1ec8f2be3d.sample"
+type="AudioStreamWAV"
+uid="uid://pagckp1bnd2t"
+path="res://.godot/imported/Squirt.wav-6f81e769b82f02f8928b1f1ec8f2be3d.sample"
 
 [deps]
 
 source_file="res://Audio/SFX/Squirt.wav"
-dest_files=[ "res://.import/Squirt.wav-6f81e769b82f02f8928b1f1ec8f2be3d.sample" ]
+dest_files=["res://.godot/imported/Squirt.wav-6f81e769b82f02f8928b1f1ec8f2be3d.sample"]
 
 [params]
 

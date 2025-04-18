@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/521377__jarusca__rocket-launch.mp3-da8d3af6d2807acdd9645fb18ab931ce.mp3str"
+uid="uid://bmusvh4xxkry3"
+path="res://.godot/imported/521377__jarusca__rocket-launch.mp3-da8d3af6d2807acdd9645fb18ab931ce.mp3str"
 
 [deps]
 
 source_file="res://Audio/SFX/521377__jarusca__rocket-launch.mp3"
-dest_files=[ "res://.import/521377__jarusca__rocket-launch.mp3-da8d3af6d2807acdd9645fb18ab931ce.mp3str" ]
+dest_files=["res://.godot/imported/521377__jarusca__rocket-launch.mp3-da8d3af6d2807acdd9645fb18ab931ce.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

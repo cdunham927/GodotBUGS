@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 
 # Indicates the need for library initialization.
@@ -36,7 +36,7 @@ func _init() -> void:
 	_register_setting(is_need_to_initialize_lib_setting + ".debug", true)
 	
 	var f = File.new()
-	if (Engine.editor_hint\
+	if (Engine.is_editor_hint()\
 			or bool(ProjectSettings.get_setting(is_need_to_initialize_lib_setting)))\
 			and f.file_exists("res://addons/debug_draw_3d/libs/debug_draw_3d.gdns"):
 		_debug_draw_3d = load("res://addons/debug_draw_3d/libs/debug_draw_3d.gdns").new()
@@ -60,7 +60,7 @@ func _register_setting(name, default_value):
 	ProjectSettings.add_property_info({"name": name, "type": TYPE_BOOL})
 
 func _enter_tree() -> void:
-	if !Engine.editor_hint and _debug_draw_3d:
+	if !Engine.is_editor_hint() and _debug_draw_3d:
 		if !_debug_draw_3d.get_singleton():
 			add_child(_debug_draw_3d)
 
@@ -78,63 +78,63 @@ func get_singleton() -> Node:
 ### Parameters
 
 ## Recall all calls from DebugDraw3D instance to its singleton if needed
-var recall_to_singleton: bool setget set_recall_to_singleton, is_recall_to_singleton
+var recall_to_singleton: bool: get = is_recall_to_singleton, set = set_recall_to_singleton
 
 ## Enable or disable all debug draw
-var debug_enabled: bool setget set_debug_enabled, is_debug_enabled
+var debug_enabled: bool: get = is_debug_enabled, set = set_debug_enabled
 
 ## Freezing 3d debugging instances
-var freeze_3d_render: bool setget set_freeze_3d_render, is_freeze_3d_render
+var freeze_3d_render: bool: get = is_freeze_3d_render, set = set_freeze_3d_render
 
 ## Debug for debug...
-var visible_instance_bounds: bool setget set_visible_instance_bounds, is_visible_instance_bounds
+var visible_instance_bounds: bool: get = is_visible_instance_bounds, set = set_visible_instance_bounds
 
 ## Geometry culling based on camera frustum.
 ## It is not recommended to use with the current implementation.
-var use_frustum_culling: bool setget set_use_frustum_culling, is_use_frustum_culling
+var use_frustum_culling: bool: get = is_use_frustum_culling, set = set_use_frustum_culling
 
 ## Force use camera placed on edited scene.
 ## Usable for editor.
-var force_use_camera_from_scene: bool setget set_force_use_camera_from_scene, is_force_use_camera_from_scene
+var force_use_camera_from_scene: bool: get = is_force_use_camera_from_scene, set = set_force_use_camera_from_scene
 
 ## Base offset for all graphs
-var graphs_base_offset: Vector2 setget set_graphs_base_offset, get_graphs_base_offset
+var graphs_base_offset: Vector2: get = get_graphs_base_offset, set = set_graphs_base_offset
 
 ## Layers on which the geometry will be displayed
-var geometry_render_layers: int setget set_geometry_render_layers, get_geometry_render_layers
+var geometry_render_layers: int: get = get_geometry_render_layers, set = set_geometry_render_layers
 
 ## Position of text block
-var text_block_position: int setget set_text_block_position, get_text_block_position
+var text_block_position: int: get = get_text_block_position, set = set_text_block_position
 
 ## Offset from the corner selected in 'text_block_position'
-var text_block_offset: Vector2 setget set_text_block_offset, get_text_block_offset
+var text_block_offset: Vector2: get = get_text_block_offset, set = set_text_block_offset
 
 ## Text padding for each line
-var text_padding: Vector2 setget set_text_padding, get_text_padding
+var text_padding: Vector2: get = get_text_padding, set = set_text_padding
 
 ## How long text remain shown after being invoked.
-var text_default_duration: float setget set_text_default_duration, get_text_default_duration
+var text_default_duration: float: get = get_text_default_duration, set = set_text_default_duration
 
 ## Default color of the text
-var text_foreground_color: Color setget set_text_foreground_color, get_text_foreground_color
+var text_foreground_color: Color: get = get_text_foreground_color, set = set_text_foreground_color
 
 ## Background color of the text
-var text_background_color: Color setget set_text_background_color, get_text_background_color
+var text_background_color: Color: get = get_text_background_color, set = set_text_background_color
 
 ## Custom text Font
-var text_custom_font: Font setget set_text_custom_font, get_text_custom_font
+var text_custom_font: Font: get = get_text_custom_font, set = set_text_custom_font
 
 ## Default color of line with hit
-var line_hit_color: Color setget set_line_hit_color, get_line_hit_color
+var line_hit_color: Color: get = get_line_hit_color, set = set_line_hit_color
 
 ## Default color of line after hit
-var line_after_hit_color: Color setget set_line_after_hit_color, get_line_after_hit_color
+var line_after_hit_color: Color: get = get_line_after_hit_color, set = set_line_after_hit_color
 
 ## Custom 'Viewport' to use for frustum culling.
-var custom_viewport: Viewport setget set_custom_viewport, get_custom_viewport
+var custom_viewport: SubViewport: get = get_custom_viewport, set = set_custom_viewport
 
 ## Custom 'CanvasItem' to draw on it. Set to 'null' to disable.
-var custom_canvas: CanvasItem setget set_custom_canvas, get_custom_canvas
+var custom_canvas: CanvasItem: get = get_custom_canvas, set = set_custom_canvas
 
 
 ### Draw Functions
@@ -169,7 +169,7 @@ func draw_sphere(position: Vector3, radius: float = 0.5, color: Color = empty_co
 ## transform: Transform of the Sphere
 ## color: Sphere color
 ## duration: Duration of existence in seconds
-func draw_sphere_xf(transform: Transform, color: Color = empty_color, duration: float = 0) -> void:
+func draw_sphere_xf(transform: Transform3D, color: Color = empty_color, duration: float = 0) -> void:
 	if _debug_draw_3d: _debug_draw_3d.draw_sphere_xf(transform, color, duration)
 
 ## Draw sphere with higher lines count
@@ -184,14 +184,14 @@ func draw_sphere_hd(position: Vector3, radius: float = 0.5, color: Color = empty
 ## transform: Transform of the sphere
 ## color: Sphere color
 ## duration: Duration of existence in seconds
-func draw_sphere_hd_xf(transform: Transform, color: Color = empty_color, duration: float = 0) -> void:
+func draw_sphere_hd_xf(transform: Transform3D, color: Color = empty_color, duration: float = 0) -> void:
 	if _debug_draw_3d: _debug_draw_3d.draw_sphere_hd_xf(transform, color, duration)
 
 ## Draw vertical cylinder
 ## transform: Transform of the Cylinder
 ## color: Cylinder color
 ## duration: Duration of existence in seconds
-func draw_cylinder(transform: Transform, color: Color = empty_color, duration: float = 0) -> void:
+func draw_cylinder(transform: Transform3D, color: Color = empty_color, duration: float = 0) -> void:
 	if _debug_draw_3d: _debug_draw_3d.draw_cylinder(transform, color, duration)
 
 ## Draw box
@@ -208,7 +208,7 @@ func draw_box(position: Vector3, size: Vector3, color: Color = empty_color, is_b
 ## color: Box color
 ## is_box_centered: Use 'transform' as the center of the box, not as the bottom corner
 ## duration: Duration of existence in seconds
-func draw_box_xf(transform: Transform, color: Color = empty_color, is_box_centered: bool = true, duration: float = 0) -> void:
+func draw_box_xf(transform: Transform3D, color: Color = empty_color, is_box_centered: bool = true, duration: float = 0) -> void:
 	if _debug_draw_3d: _debug_draw_3d.draw_box_xf(transform, color, is_box_centered, duration)
 
 ## Draw AABB
@@ -262,7 +262,7 @@ func draw_line(a: Vector3, b: Vector3, color: Color = empty_color, duration: flo
 ## lines: Array of line points. 1 line = 2 Vector3. The size of the array must be even.
 ## color: Lines color
 ## duration: Duration of existence in seconds
-func draw_lines(lines: PoolVector3Array, color: Color = empty_color, duration: float = 0) -> void:
+func draw_lines(lines: PackedVector3Array, color: Color = empty_color, duration: float = 0) -> void:
 	if _debug_draw_3d: _debug_draw_3d.draw_lines(lines, color, duration)
 
 ## Draw ray
@@ -278,14 +278,14 @@ func draw_ray(origin: Vector3, direction: Vector3, length: float, color: Color =
 ## path: Sequence of points
 ## color: Lines Color
 ## duration: Duration of existence in seconds
-func draw_line_path(path: PoolVector3Array, color: Color = empty_color, duration: float = 0) -> void:
+func draw_line_path(path: PackedVector3Array, color: Color = empty_color, duration: float = 0) -> void:
 	if _debug_draw_3d: _debug_draw_3d.draw_line_path(path, color, duration)
 
 ## Draw arrow
 ## Transform: Transform of the Arrow
 ## color: Arrow color
 ## duration: Duration of existence in seconds
-func draw_arrow(transform: Transform, color: Color = empty_color, duration: float = 0) -> void:
+func draw_arrow(transform: Transform3D, color: Color = empty_color, duration: float = 0) -> void:
 	if _debug_draw_3d: _debug_draw_3d.draw_arrow(transform, color, duration)
 
 ## Draw line with arrow
@@ -315,7 +315,7 @@ func draw_arrow_ray(origin: Vector3, direction: Vector3, length: float, color: C
 ## arrow_size: Size of the arrow
 ## absolute_size: Is the 'arrowSize' absolute or relative to the length of the line?
 ## duration: Duration of existence in seconds
-func draw_arrow_path(path: PoolVector3Array, color: Color = empty_color, arrow_size: float = 0.75, absolute_size: bool = true, duration: float = 0) -> void:
+func draw_arrow_path(path: PackedVector3Array, color: Color = empty_color, arrow_size: float = 0.75, absolute_size: bool = true, duration: float = 0) -> void:
 	if _debug_draw_3d: _debug_draw_3d.draw_arrow_path(path, color, arrow_size, absolute_size, duration)
 
 ## Draw a sequence of points connected by lines with billboard squares
@@ -324,7 +324,7 @@ func draw_arrow_path(path: PoolVector3Array, color: Color = empty_color, arrow_s
 ## lines_color: Color of lines
 ## size: Size of squares
 ## duration: Duration of existence in seconds
-func draw_point_path(path: PoolVector3Array, size: float = 0.25, points_color: Color = empty_color, lines_color: Color = empty_color, duration: float = 0) -> void:
+func draw_point_path(path: PackedVector3Array, size: float = 0.25, points_color: Color = empty_color, lines_color: Color = empty_color, duration: float = 0) -> void:
 	if _debug_draw_3d: _debug_draw_3d.draw_point_path(path, size, points_color, lines_color, duration)
 
 ## Draw a square that will always be turned towards the camera
@@ -340,14 +340,14 @@ func draw_square(position: Vector3, size: float = 0.2, color: Color = empty_colo
 ## color: Color
 ## size: Size of squares
 ## duration: Duration of existence in seconds
-func draw_points(points: PoolVector3Array, size: float = 0.25, color: Color = empty_color, duration: float = 0) -> void:
+func draw_points(points: PackedVector3Array, size: float = 0.25, color: Color = empty_color, duration: float = 0) -> void:
 	if _debug_draw_3d: _debug_draw_3d.draw_points(points, size, color, duration)
 
 ## Draw 3 intersecting lines with the given transformations
 ## transform: Transform of lines
 ## color: Color
 ## duration: Duration of existence in seconds
-func draw_position(transform: Transform, color: Color = empty_color, duration: float = 0) -> void:
+func draw_position(transform: Transform3D, color: Color = empty_color, duration: float = 0) -> void:
 	if _debug_draw_3d: _debug_draw_3d.draw_position(transform, color, duration)
 
 ## Draw 3 lines with the given transformations and arrows at the ends
@@ -355,7 +355,7 @@ func draw_position(transform: Transform, color: Color = empty_color, duration: f
 ## color: Color
 ## is_centered: If 'true', then the lines will intersect in the center of the transform
 ## duration: Duration of existence in seconds
-func draw_gizmo(transform: Transform, color: Color = empty_color, is_centered: bool = false, duration: float = 0) -> void:
+func draw_gizmo(transform: Transform3D, color: Color = empty_color, is_centered: bool = false, duration: float = 0) -> void:
 	if _debug_draw_3d: _debug_draw_3d.draw_gizmo(transform, color, is_centered, duration)
 
 ## Draw simple grid with given size and subdivision
@@ -375,14 +375,14 @@ func draw_grid(origin: Vector3, x_size: Vector3, y_size: Vector3, subdivision: V
 ## color: Lines color
 ## is_centered: Draw lines relative to origin
 ## duration: Duration of existence in seconds
-func draw_grid_xf(transform: Transform, subdivision: Vector2, color: Color = empty_color, is_centered: bool = true, duration: float = 0) -> void:
+func draw_grid_xf(transform: Transform3D, subdivision: Vector2, color: Color = empty_color, is_centered: bool = true, duration: float = 0) -> void:
 	if _debug_draw_3d: _debug_draw_3d.draw_grid_xf(transform, subdivision, color, is_centered, duration)
 
 ## Draw camera frustum area
 ## camera: Camera node
 ## color: Color
 ## duration: Duration of existence in seconds
-func draw_camera_frustum(camera: Camera, color: Color = empty_color, duration: float = 0) -> void:
+func draw_camera_frustum(camera: Camera3D, color: Color = empty_color, duration: float = 0) -> void:
 	if _debug_draw_3d: _debug_draw_3d.draw_camera_frustum(camera, color, duration)
 
 ## Draw camera frustum area
@@ -451,9 +451,9 @@ func get_graph_config(title: String) -> GraphParameters:
 	else: return null
 
 ## Get all graph names
-func get_graph_names() -> PoolStringArray:
+func get_graph_names() -> PackedStringArray:
 	if _debug_draw_3d: return _debug_draw_3d.get_graph_names()
-	else: return PoolStringArray()
+	else: return PackedStringArray()
 
 
 ### Parameters Setget's
@@ -580,7 +580,7 @@ func get_line_after_hit_color() -> Color:
 func set_custom_viewport(val):
 	if _debug_draw_3d: _debug_draw_3d.custom_viewport = val
 
-func get_custom_viewport() -> Viewport:
+func get_custom_viewport() -> SubViewport:
 	if _debug_draw_3d: return _debug_draw_3d.custom_viewport
 	else: return null
 
@@ -598,55 +598,55 @@ func get_custom_canvas() -> CanvasItem:
 
 
 class GraphParameters:
-	var orig_ref : Reference
-	func _init(ref : Reference) -> void:
+	var orig_ref : RefCounted
+	func _init(ref : RefCounted) -> void:
 		orig_ref = ref
 	
 	## Is Graph enabled
-	var enabled: bool setget set_enabled, is_enabled
+	var enabled: bool: get = is_enabled, set = set_enabled
 	
 	## Draw Graph title
-	var show_title: bool setget set_show_title, is_show_title
+	var show_title: bool: get = is_show_title, set = set_show_title
 	
 	## Switch between frame time and FPS modes
 	## Only for FPS Graphs
-	var frametime_mode: bool setget set_frametime_mode, is_frametime_mode
+	var frametime_mode: bool: get = is_frametime_mode, set = set_frametime_mode
 	
 	## Draw a graph line aligned vertically in the center
-	var centered_graph_line: bool setget set_centered_graph_line, is_centered_graph_line
+	var centered_graph_line: bool: get = is_centered_graph_line, set = set_centered_graph_line
 	
 	## Sets the text visibility *GraphTextFlags*
-	var show_text_flags: int setget set_show_text_flags, get_show_text_flags
+	var show_text_flags: int: get = get_show_text_flags, set = set_show_text_flags
 	
 	## The size of the graph.
-	var size: Vector2 setget set_size, get_size
+	var size: Vector2: get = get_size, set = set_size
 	
 	## The size of the buffer where the values are stored.
-	var buffer_size: int setget set_buffer_size, get_buffer_size
+	var buffer_size: int: get = get_buffer_size, set = set_buffer_size
 	
 	## Offset from the corner selected in position
-	var offset: Vector2 setget set_offset, get_offset
+	var offset: Vector2: get = get_offset, set = set_offset
 	
 	## FPS Graph position *BlockPosition*
-	var position: int setget set_position, get_position
+	var position: int: get = get_position, set = set_position
 	
 	## Graph line color
-	var line_color: Color setget set_line_color, get_line_color
+	var line_color: Color: get = get_line_color, set = set_line_color
 	
 	## Color of the info text
-	var text_color: Color setget set_text_color, get_text_color
+	var text_color: Color: get = get_text_color, set = set_text_color
 	
 	## Background color
-	var background_color: Color setget set_background_color, get_background_color
+	var background_color: Color: get = get_background_color, set = set_background_color
 	
 	## Border color
-	var border_color: Color setget set_border_color, get_border_color
+	var border_color: Color: get = get_border_color, set = set_border_color
 	
 	## Border color
-	var text_suffix: String setget set_text_suffix, get_text_suffix
+	var text_suffix: String: get = get_text_suffix, set = set_text_suffix
 	
 	## Custom Font
-	var custom_font: Font setget set_custom_font, get_custom_font
+	var custom_font: Font: get = get_custom_font, set = set_custom_font
 	
 	
 	func set_enabled(val):

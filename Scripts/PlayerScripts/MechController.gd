@@ -1,47 +1,47 @@
-extends Sprite
+extends Sprite2D
 
-export var offsetZ : float = 85
+@export var offsetZ : float = 85
 #All our weapons are parent gameobjects that get hidden and shown when in and out of use
-onready var weaponChildrenLeft = $WeaponsLeft.get_children()
-onready var weaponChildrenRight = $WeaponsRight.get_children()
+@onready var weaponChildrenLeft = $WeaponsLeft.get_children()
+@onready var weaponChildrenRight = $WeaponsRight.get_children()
 
-export(float) var rotationConstraint
+@export var rotationConstraint: float
 
-export var unlockedLeft = [ true, true, true ]
-export var unlockedRight = [ true, true, true ]
+@export var unlockedLeft = [ true, true, true ]
+@export var unlockedRight = [ true, true, true ]
 var curLeft := 0
 var curRight := 0
 var lastWeaponLeft := 0
 var lastWeaponRight := 0
 
-export var rotSpd : float = 15
+@export var rotSpd : float = 15
 var controller : bool = false
 
 var overheatL : float = 0.0
 var overheatR : float = 0.0
 
-export(float) var recoveryModifier = 3.0
-export(float) var recoveryModifierIncrease = 2
-export(float) var recovModLerp = 0.5
-export(float) var curRecovMod = 0.25
-export(float) var curRecovModR = 0.25
-export(float) var recoverTime
+@export var recoveryModifier: float = 3.0
+@export var recoveryModifierIncrease: float = 2
+@export var recovModLerp: float = 0.5
+@export var curRecovMod: float = 0.25
+@export var curRecovModR: float = 0.25
+@export var recoverTime: float
 var recoverL : float = 0.0
 var recoverR : float = 0.0
 
-onready var overheatUI = get_node("/root/World/UI/EquippedWeaponLeftActualBichPls")
-onready var overheatUI2 = get_node("/root/World/UI/EquippedWeaponRightActualBichPls")
-onready var weaponLeftLabel = get_node("/root/World/UI/EquippedWeaponLeftActualBichPls/EquippedLabel")
-onready var weaponRightLabel = get_node("/root/World/UI/EquippedWeaponRightActualBichPls/EquippedLabel")
+@onready var overheatUI = get_node("/root/World/UI/EquippedWeaponLeftActualBichPls")
+@onready var overheatUI2 = get_node("/root/World/UI/EquippedWeaponRightActualBichPls")
+@onready var weaponLeftLabel = get_node("/root/World/UI/EquippedWeaponLeftActualBichPls/EquippedLabel")
+@onready var weaponRightLabel = get_node("/root/World/UI/EquippedWeaponRightActualBichPls/EquippedLabel")
 
-export(Color) var goodColor
-export(Color) var overheatColor
+@export var goodColor: Color
+@export var overheatColor: Color
 
 var tilNotShootingL : float = 0.1
 var tilNotShootingR : float = 0.1
 
-onready var src = $MechSounds
-export(String) var overheatSnd = "SteamOverheat"
+@onready var src = $MechSounds
+@export var overheatSnd: String = "SteamOverheat"
 var snd
 var playedOverheat : bool = false
 
@@ -168,13 +168,13 @@ func _process(delta):
 	#mechArm1.rotation_degrees = clamp(atan2(look_vec.y, look_vec.x), global_rotation - rotationConstraint, global_rotation + rotationConstraint)
 	#mechArm2.rotation_degrees = clamp(atan2(look_vec.y, look_vec.x), global_rotation - rotationConstraint, global_rotation + rotationConstraint)
 
-export(float) var pitchLow = 0.8
-export(float) var pitchHigh = 1.3
+@export var pitchLow: float = 0.8
+@export var pitchHigh: float = 1.3
 func play_sound(s = snd, pitched = false):
 	#if !canPlay:
 	#	canPlay = true
 	#	return
 	if pitched:
-		src.pitch_scale = rand_range(pitchLow, pitchHigh)
+		src.pitch_scale = randf_range(pitchLow, pitchHigh)
 	src.stream = s
 	src.play()

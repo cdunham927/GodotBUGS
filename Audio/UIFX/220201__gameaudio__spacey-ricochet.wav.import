@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220201__gameaudio__spacey-ricochet.wav-bfdc6e87a58b5a9e308737cd8a65fa33.sample"
+type="AudioStreamWAV"
+uid="uid://cvgj1rq8klc52"
+path="res://.godot/imported/220201__gameaudio__spacey-ricochet.wav-bfdc6e87a58b5a9e308737cd8a65fa33.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220201__gameaudio__spacey-ricochet.wav"
-dest_files=[ "res://.import/220201__gameaudio__spacey-ricochet.wav-bfdc6e87a58b5a9e308737cd8a65fa33.sample" ]
+dest_files=["res://.godot/imported/220201__gameaudio__spacey-ricochet.wav-bfdc6e87a58b5a9e308737cd8a65fa33.sample"]
 
 [params]
 

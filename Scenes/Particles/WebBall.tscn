@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/Particles/WebBall.gd" type="Script" id=1]
 [ext_resource path="res://Gradients/HoneySplat.tres" type="Gradient" id=2]
-[ext_resource path="res://Sprites/Particles/circle_05.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Particles/circle_05.png" type="Texture2D" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 1

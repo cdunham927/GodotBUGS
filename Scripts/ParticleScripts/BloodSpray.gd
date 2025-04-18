@@ -1,7 +1,7 @@
 extends CPUParticles2D
 
-export(float) var colorLerp
-export(Color) var endColor
+@export var colorLerp: float
+@export var endColor: Color
 
 func _on_Timer_timeout():
 	#emitting = false

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/SteamOverheat.wav-f22919447bedbad30b8000854f0d7b71.sample"
+type="AudioStreamWAV"
+uid="uid://j0yju0ipqi72"
+path="res://.godot/imported/SteamOverheat.wav-f22919447bedbad30b8000854f0d7b71.sample"
 
 [deps]
 
 source_file="res://Audio/SFX/SteamOverheat.wav"
-dest_files=[ "res://.import/SteamOverheat.wav-f22919447bedbad30b8000854f0d7b71.sample" ]
+dest_files=["res://.godot/imported/SteamOverheat.wav-f22919447bedbad30b8000854f0d7b71.sample"]
 
 [params]
 

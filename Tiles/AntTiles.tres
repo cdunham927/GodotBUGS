@@ -1,10 +1,10 @@
 [gd_resource type="TileSet" load_steps=4 format=2]
 
-[ext_resource path="res://Sprites/Maps/AntTiles/Ant_Tile.png" type="Texture" id=1]
-[ext_resource path="res://Sprites/Maps/WallBlack.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Maps/AntTiles/Ant_Tile.png" type="Texture2D" id=1]
+[ext_resource path="res://Sprites/Maps/WallBlack.png" type="Texture2D" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 99, 98, 0, 98, 0, 0, 99, 0 )
+points = PackedVector2Array( 99, 98, 0, 98, 0, 0, 99, 0 )
 
 [resource]
 0/name = "Ant_Tile.png 0"

@@ -1,13 +1,13 @@
 extends Area2D
 
 #lerp sprite
-onready var spr = get_parent()
+@onready var spr = get_parent()
 
 var spawnPos : Vector2
-export(float) var lerpSpd = 10.0
-export(float) var lerpVariation = 0.1
+@export var lerpSpd: float = 10.0
+@export var lerpVariation: float = 0.1
 
-export(float) var maxHp = 35.0
+@export var maxHp: float = 35.0
 var hp : float = 0.0
 
 # Called when the node enters the scene tree for the first time.
@@ -16,7 +16,7 @@ func _ready():
 	get_parent().get_parent().get_parent().hp += maxHp
 	#print("Parent hp: ", get_parent().get_parent().get_parent().hp)
 	
-	lerpSpd = lerpSpd + rand_range(0, lerpVariation)
+	lerpSpd = lerpSpd + randf_range(0, lerpVariation)
 	spawnPos = position
 
 func _process(delta):

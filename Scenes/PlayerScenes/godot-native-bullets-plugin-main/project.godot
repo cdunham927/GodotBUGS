@@ -6,7 +6,7 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 _global_script_classes=[ {
 "base": "Resource",
@@ -88,7 +88,7 @@ gdscript/warnings/return_value_discarded=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/native_bullets/plugin.cfg" )
+enabled=PackedStringArray( "res://addons/native_bullets/plugin.cfg" )
 
 [gdnative]
 
@@ -101,7 +101,7 @@ singletons=[  ]
 
 [physics]
 
-2d/thread_model=2
+2d/run_on_thread=2
 2d/use_bvh=false
 
 [rendering]
@@ -110,4 +110,4 @@ quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 quality/shadows/filter_mode=0
 batching/parameters/batch_buffer_size=65535
-environment/default_clear_color=Color( 0.905882, 0.694118, 0.521569, 1 )
+environment/defaults/default_clear_color=Color( 0.905882, 0.694118, 0.521569, 1 )

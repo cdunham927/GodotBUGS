@@ -1,22 +1,22 @@
 extends Node2D
 
-export var yspd = 10
+@export var yspd = 10
 var curYSpd
 var curXSpd
-export var lerpSpd = 3
-export var rotLerpSpd = 3
+@export var lerpSpd = 3
+@export var rotLerpSpd = 3
 var curRot = 3
-export var xspd = 5
-export var rotSpd = 15
-export var randRot = false
+@export var xspd = 5
+@export var rotSpd = 15
+@export var randRot = false
 var randDir = 1
 
-export var lPel = false
+@export var lPel = false
 
-export var spawnsObj =  false
-export(PackedScene) var objToSpawn
+@export var spawnsObj =  false
+@export var objToSpawn: PackedScene
 
-export var hitString = ""
+@export var hitString = ""
 
 func _ready():
 	curXSpd = xspd
@@ -44,9 +44,9 @@ func _process(delta):
 		#position.x += curXSpd * delta
 		#$Sprite.rotation_degrees += curRot * delta
 	if randRot:
-		$Sprite.rotation_degrees += curRot * delta * randDir
+		$Sprite2D.rotation_degrees += curRot * delta * randDir
 	else:
-		$Sprite.rotation_degrees += curRot * delta
+		$Sprite2D.rotation_degrees += curRot * delta
 	position -= transform.y * curYSpd * delta
 	position -= transform.x * curXSpd * delta * xDir
 	#position -= moveDir * delta
@@ -72,7 +72,7 @@ func _on_Area2D_area_entered(area):
 		queue_free()
 
 func SpawnObj():
-	var o = objToSpawn.instance()
+	var o = objToSpawn.instantiate()
 	o.hitString = hitString
 	o.global_position = global_position
 	get_tree().current_scene.add_child(o)

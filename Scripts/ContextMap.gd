@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 #var dir = [ Vector2(0, -1), Vector2(1, -1), Vector2(1, 0), Vector2(1, 1),
 #Vector2(0, 1), Vector2(-1, 1), Vector2(-1, 0), Vector2(-1, -1),  ]
@@ -7,11 +7,11 @@ extends KinematicBody2D
 #var danger = [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
 
 
-export var max_speed = 350
-export var steer_force = 0.1
-export var look_ahead = 100
-export var num_rays = 8
-export var weight = 5.0
+@export var max_speed = 350
+@export var steer_force = 0.1
+@export var look_ahead = 100
+@export var num_rays = 8
+@export var weight = 5.0
 
 # context array
 var ray_directions = []
@@ -43,7 +43,7 @@ func context_move():
 	set_danger()
 	choose_direction()
 	var desired_velocity = chosen_dir.rotated(rotation) * max_speed
-	velocity = velocity.linear_interpolate(desired_velocity, steer_force)
+	velocity = velocity.lerp(desired_velocity, steer_force)
 	rotation = velocity.angle()
 
 func set_interest():

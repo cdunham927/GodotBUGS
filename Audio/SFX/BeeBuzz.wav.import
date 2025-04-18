@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/BeeBuzz.wav-6d18b76cb3f8356127afcf7bf18cd513.sample"
+type="AudioStreamWAV"
+uid="uid://cxinmykrtrpwp"
+path="res://.godot/imported/BeeBuzz.wav-6d18b76cb3f8356127afcf7bf18cd513.sample"
 
 [deps]
 
 source_file="res://Audio/SFX/BeeBuzz.wav"
-dest_files=[ "res://.import/BeeBuzz.wav-6d18b76cb3f8356127afcf7bf18cd513.sample" ]
+dest_files=["res://.godot/imported/BeeBuzz.wav-6d18b76cb3f8356127afcf7bf18cd513.sample"]
 
 [params]
 

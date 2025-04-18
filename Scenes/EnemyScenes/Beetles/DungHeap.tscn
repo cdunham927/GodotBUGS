@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/DungHeap.gd" type="Script" id=1]
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=2]
 [ext_resource path="res://Scenes/EnemyScenes/Beetles/BeetleB.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Sprites/Maps/BeetleTiles/Dung_of_beetle.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Maps/BeetleTiles/Dung_of_beetle.png" type="Texture2D" id=4]
 [ext_resource path="res://Scenes/EnemyScenes/Beetles/DungBeetle.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/EnemyScenes/Beetles/BeetleA.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Animations/Hit.tres" type="Animation" id=7]
@@ -15,14 +15,14 @@ radius = 25.005
 [sub_resource type="Animation" id=7]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:material")
+tracks/0/path = NodePath("Sprite2D:material")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ ExtResource( 2 ) ]
 }
@@ -30,14 +30,14 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=8]
 resource_name = "idle"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:material")
+tracks/0/path = NodePath("Sprite2D:material")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.1 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 2 ) ]
 }
@@ -46,16 +46,24 @@ tracks/0/keys = {
 radius = 1366.18
 
 [node name="DungHeap" type="Area2D" groups=["enemies"]]
-pause_mode = 1
+process_mode = 1
+scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
 hp = 12500.0
+maxHp = 12500.0
+hpLerp = 1.0
+hpBGLerp = 9.0
 maxToSpawn = 3
+lowHpMaxToSpawn = 5
 spawnTimeLow = 5.0
 spawnTimeBig = 10.0
+lowHpSpawnTimeLow = 4.25
+lowHpSpawnTimeBig = 7.0
+spawnChanceA = 0.33
 dungBeetle = ExtResource( 5 )
 beetleA = ExtResource( 6 )
 beetleB = ExtResource( 3 )
-spawnChanceD = 0.15
+spawnChanceD = 0.225
 stagBeetle = ExtResource( 8 )
 shrinkAmt = 0.001
 
@@ -64,7 +72,7 @@ position = Vector2( 0, -0.5 )
 scale = Vector2( 3, 3 )
 shape = SubResource( 6 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource( 2 )
 scale = Vector2( 5, 5 )
 texture = ExtResource( 4 )

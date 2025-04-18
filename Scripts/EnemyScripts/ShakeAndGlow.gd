@@ -2,32 +2,32 @@ extends Node2D
 
 var startPos : Vector2 = Vector2(0, 0)
 var localPos : Vector2 = Vector2(0, 0)
-export(float) var dis = 1.0
-export(float) var spd = 10.0
+@export var dis: float = 1.0
+@export var spd: float = 10.0
 var spdRand = 5.0
 var n : float = 0.0
-export(bool) var offset = false
+@export var offset: bool = false
 var randDegree : float = 0.0
 var disRand : float = 0.0
-export(float) var degreeVariability = 360.0
-export(float) var speedVariability = 5.0
-export(float) var distanceVariability = 5.0
-export(float) var spdIncrease = 2.0
-export(float) var clrIncrease = 15.0
+@export var degreeVariability: float = 360.0
+@export var speedVariability: float = 5.0
+@export var distanceVariability: float = 5.0
+@export var spdIncrease: float = 2.0
+@export var clrIncrease: float = 15.0
 var opposite : bool = false
 
 
 func _ready():
 	randomize()
-	var o = rand_range(0, 1)
+	var o = randf_range(0, 1)
 	if o > 0.5:
 		opposite = true
 	else:
 		opposite = false
 		
-	spdRand = rand_range(0, speedVariability)
-	randDegree = rand_range(0, degreeVariability)
-	disRand = rand_range(0, distanceVariability)
+	spdRand = randf_range(0, speedVariability)
+	randDegree = randf_range(0, degreeVariability)
+	disRand = randf_range(0, distanceVariability)
 	startPos = global_position
 	localPos = position
 
@@ -36,15 +36,15 @@ func _process(delta):
 	if spd > 0:
 		var col = 0.0
 		col = lerp(col, 1.0, spd / clrIncrease)
-		$Sprite.material.set_shader_param("mix_amount", col)
+		$Sprite2D.material.set_shader_parameter("mix_amount", col)
 		
 		if opposite:
 			if offset:
-				position = Vector2(startPos.x + ((dis + disRand) * sin(deg2rad(delta + randDegree) + (n * (spd + spdRand)))), startPos.y + ((dis + disRand) * cos(deg2rad(delta + randDegree) + (n * spd))))
+				position = Vector2(startPos.x + ((dis + disRand) * sin(deg_to_rad(delta + randDegree) + (n * (spd + spdRand)))), startPos.y + ((dis + disRand) * cos(deg_to_rad(delta + randDegree) + (n * spd))))
 			else:
-				position = Vector2(localPos.x + ((dis + disRand) * sin(deg2rad(delta) + (n * (spd + spdRand)))), localPos.y + ((dis + disRand) * cos(deg2rad(delta) + (n * spd))))
+				position = Vector2(localPos.x + ((dis + disRand) * sin(deg_to_rad(delta) + (n * (spd + spdRand)))), localPos.y + ((dis + disRand) * cos(deg_to_rad(delta) + (n * spd))))
 		else:
 			if offset:
-				position = Vector2(startPos.x - ((dis + disRand) * sin(deg2rad(delta + randDegree) + (n * (spd + spdRand)))), startPos.y - ((dis + disRand) * cos(deg2rad(delta + randDegree) + (n * spd))))
+				position = Vector2(startPos.x - ((dis + disRand) * sin(deg_to_rad(delta + randDegree) + (n * (spd + spdRand)))), startPos.y - ((dis + disRand) * cos(deg_to_rad(delta + randDegree) + (n * spd))))
 			else:
-				position = Vector2(localPos.x - ((dis + disRand) * sin(deg2rad(delta) + (n * (spd + spdRand)))), localPos.y - ((dis + disRand) * cos(deg2rad(delta) + (n * spd))))
+				position = Vector2(localPos.x - ((dis + disRand) * sin(deg_to_rad(delta) + (n * (spd + spdRand)))), localPos.y - ((dis + disRand) * cos(deg_to_rad(delta) + (n * spd))))

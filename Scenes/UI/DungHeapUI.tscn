@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/Etc/WallWhite.png" type="Texture2D" id=1]
+[ext_resource path="res://Fonts/BossFont.tres" type="FontFile" id=2]
+
+[sub_resource type="Theme" id=1]
+
+[node name="DungHeapUI" type="CanvasLayer"]
+layer = 2
+
+[node name="BossHpBG" type="TextureProgressBar" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 40.0
+offset_right = 250.0
+offset_bottom = 65.0
+custom_minimum_size = Vector2( 300, 25 )
+theme = SubResource( 1 )
+max_value = 1000.0
+step = 0.1
+value = 800.0
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 1 )
+tint_under = Color( 0, 0, 0, 1 )
+tint_progress = Color( 0.470588, 0.113725, 0.113725, 1 )
+nine_patch_stretch = true
+
+[node name="BossHpActual" type="TextureProgressBar" parent="BossHpBG"]
+offset_right = 500.0
+offset_bottom = 25.0
+custom_minimum_size = Vector2( 300, 25 )
+theme = SubResource( 1 )
+max_value = 1000.0
+step = 0.1
+value = 580.0
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 1 )
+tint_under = Color( 0, 0, 0, 0 )
+tint_progress = Color( 0.768627, 0.129412, 0.137255, 1 )
+nine_patch_stretch = true
+
+[node name="EquippedLabel" type="Label" parent="BossHpBG"]
+offset_top = -37.0
+offset_right = 500.0
+offset_bottom = -11.0
+custom_minimum_size = Vector2( 184, 16 )
+theme_override_colors/font_color = Color( 1, 1, 0.243137, 1 )
+theme_override_colors/font_shadow_color = Color( 0, 0, 0, 1 )
+theme_override_constants/shadow_offset_x = 5
+theme_override_fonts/font = ExtResource( 2 )
+text = "Dung Heap"
+align = 1
+valign = 1
+uppercase = true

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220203__gameaudio__casual-death-loose.wav-97388de931819f1be51eba23fd166637.sample"
+type="AudioStreamWAV"
+uid="uid://b1qtw1sh5dnis"
+path="res://.godot/imported/220203__gameaudio__casual-death-loose.wav-97388de931819f1be51eba23fd166637.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220203__gameaudio__casual-death-loose.wav"
-dest_files=[ "res://.import/220203__gameaudio__casual-death-loose.wav-97388de931819f1be51eba23fd166637.sample" ]
+dest_files=["res://.godot/imported/220203__gameaudio__casual-death-loose.wav-97388de931819f1be51eba23fd166637.sample"]
 
 [params]
 

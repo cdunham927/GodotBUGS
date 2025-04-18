@@ -1,17 +1,16 @@
 extends Node
 
-export(float) var masterVol = 1.0
-export(float) var soundVol = 1.0
-export(float) var musicVol = 1.0
-export(bool) var finishedAnt = false
-export(bool) var finishedBee = false
-export(bool) var finishedBeetle = false
-export(bool) var finishedSpider = false
-
+@export var masterVol: float = 1.0
+@export var soundVol: float = 1.0
+@export var musicVol: float = 1.0
+@export var finishedAnt: bool = false
+@export var finishedBee: bool = false
+@export var finishedBeetle: bool = false
+@export var finishedSpider: bool = false
 
 func save():
 	var save_dict = {
-		"filename" : get_filename(),
+		"filename" : get_scene_file_path(),
 		"parent" : get_parent().get_path(),
 		"masterVol" : masterVol,
 		"musicVol" : musicVol,

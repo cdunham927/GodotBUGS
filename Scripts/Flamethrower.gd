@@ -1,8 +1,11 @@
 extends "res://Scripts/PlayerScripts/WeaponController.gd"
 
 func Shoot():
-	$Area2D.monitoring = true
-	$FlamethrowerFire2.emitting = true
+	#$Area2D.monitoring = true
+	#$FlamethrowerFire2.emitting = true
+	
+	#$RigidFlamethrower.emit = true
+	
 	#ShowFlash()
 	#curShotTime = timeBetweenShots
 	if leftWeapon:
@@ -10,7 +13,7 @@ func Shoot():
 	else:
 		mech.overheatR += incAmt
 	
-	get_tree().current_scene.get_node("Camera2D").add_trauma(0.01)
+	get_node("/root/World/Camera2D").add_trauma(0.001)
 	
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("enemies"):
@@ -43,8 +46,12 @@ func _process(delta):
 				ShootHoney()
 		#Left weapon stop shooting
 		if leftWeapon and Input.is_action_just_released("attack"):
-			$Area2D.monitoring = false
-			$FlamethrowerFire2.emitting = false
+			#$Area2D.monitoring = false
+			#$FlamethrowerFire2.emitting = false
+			
+	
+			#$RigidFlamethrower.emit = false
+			
 			mech.tilNotShootingL = tilNotShootingMin
 		#Right weapon start shooting
 		if leftWeapon == false and Input.is_action_pressed("attacktwo") and curShotTime <= 0 and mech.recoverR <= 0:

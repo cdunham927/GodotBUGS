@@ -1,7 +1,7 @@
 extends Node2D
 
-export var sprites = [ preload("res://Sprites/Splats/splat00.png") ]
-onready var player
+@export var sprites = [ preload("res://Sprites/Splats/splat00.png") ]
+@onready var player
 
 func _ready():
 	player = get_parent().get_parent()
@@ -18,4 +18,4 @@ func _process(delta):
 
 func Shuffle():
 	sprites.shuffle()
-	$Sprite.texture = sprites[0]
+	$Sprite2D.texture = sprites[0]

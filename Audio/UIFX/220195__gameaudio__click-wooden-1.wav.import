@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220195__gameaudio__click-wooden-1.wav-50785062e46d7b476703622e49d2163a.sample"
+type="AudioStreamWAV"
+uid="uid://bpssopowgn86j"
+path="res://.godot/imported/220195__gameaudio__click-wooden-1.wav-50785062e46d7b476703622e49d2163a.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220195__gameaudio__click-wooden-1.wav"
-dest_files=[ "res://.import/220195__gameaudio__click-wooden-1.wav-50785062e46d7b476703622e49d2163a.sample" ]
+dest_files=["res://.godot/imported/220195__gameaudio__click-wooden-1.wav-50785062e46d7b476703622e49d2163a.sample"]
 
 [params]
 

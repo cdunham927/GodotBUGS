@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220157__gameaudio__spacey-quick-1.wav-1fe45409a54cc47c2f5db5801dcb8204.sample"
+type="AudioStreamWAV"
+uid="uid://dxk527ckduelm"
+path="res://.godot/imported/220157__gameaudio__spacey-quick-1.wav-1fe45409a54cc47c2f5db5801dcb8204.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220157__gameaudio__spacey-quick-1.wav"
-dest_files=[ "res://.import/220157__gameaudio__spacey-quick-1.wav-1fe45409a54cc47c2f5db5801dcb8204.sample" ]
+dest_files=["res://.godot/imported/220157__gameaudio__spacey-quick-1.wav-1fe45409a54cc47c2f5db5801dcb8204.sample"]
 
 [params]
 

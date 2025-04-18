@@ -1,13 +1,13 @@
 extends Node2D
 
-export var hitString = ""
-export var atk = 10.0
-export var stunAmt = 1.5
+@export var hitString = ""
+@export var atk = 10.0
+@export var stunAmt = 1.5
 
-export(float) var colorLerp
-export(Color) var endColor
+@export var colorLerp: float
+@export var endColor: Color
 
-export(PackedScene) var bloodSpray
+@export var bloodSpray: PackedScene
 
 #export var spawnsObj =  false
 #export(PackedScene) var objToSpawn

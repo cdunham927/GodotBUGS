@@ -2,14 +2,14 @@ extends "res://Scripts/PlayerScripts/WeaponController.gd"
 
 func Shoot():
 	if leftWeapon:
-		play_sound(snd, true, soundL)
+		play_sound(snd, true, soundL, soundL2)
 	else:
-		play_sound(snd, true, soundR)
+		play_sound(snd, true, soundR, soundR2)
 	
-	var b = bullet.instance()
+	var b = bullet.instantiate()
 	#get_tree().current_scene.add_child(b)
 	get_node("/root/World").add_child(b)
-	b.start($Muzzle.global_position, $Muzzle.global_rotation, accuracy)
+	b.start(Callable($Muzzle.global_position, $Muzzle.global_rotation).bind(accuracy))
 	ShowFlash()
 	#b.Setup()
 	#b.transform = $Muzzle.global_transform

@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=2 format=2]
 
-[sub_resource type="StreamTexture" id=1]
+[sub_resource type="CompressedTexture2D" id=1]
 load_path = "res://.import/TestTiles.png-402fd55b1fdb897096c281a22ed9fdf6.stex"
 
 [resource]

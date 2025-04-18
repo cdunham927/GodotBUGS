@@ -1,30 +1,28 @@
 extends Area2D
 
-export(float) var hp = 1.0
-export(float) var atk = 1.0
+@export var hp: float = 1.0
+@export var atk: float = 1.0
 var lowDmgLimit : float
-export(float) var lowDmgPercent
-export(bool) var damageFalloff = false
-export(float) var falloffAmt = 3.0
+@export var lowDmgPercent: float
+@export var damageFalloff: bool = false
+@export var falloffAmt: float = 3.0
 var curAtk : float
 var speed = 75.0
 var startSpd = 75.0
-export var spdSlow : float = 50
-export var spdFast : float = 100
+@export var spdSlow : float = 50
+@export var spdFast : float = 100
 
 var damaged = false
 
-export(float) var knockback
+@export var knockback: float
 
-export(PackedScene) var bloodSpray
+@export var bloodSpray: PackedScene
 
 #Spark hit particles
-export(PackedScene) var sparkParts
-
-#var velocity = Vector2()
+@export var sparkParts: PackedScene
 
 func RandomizeSpeed():
-	startSpd = rand_range(spdSlow, spdFast)
+	startSpd = randf_range(spdSlow, spdFast)
 	speed = startSpd
 
 func _ready():
@@ -34,9 +32,9 @@ func _ready():
 func start(pos, dir, acc):
 	damaged = false
 	
-	speed = rand_range(spdSlow, spdFast)
+	speed = randf_range(spdSlow, spdFast)
 	rotation = dir
-	rotation_degrees += rand_range(-acc, acc)
+	rotation_degrees += randf_range(-acc, acc)
 	global_position = pos
 	#velocity = Vector2(0, speed).rotated(rotation)
 
@@ -86,7 +84,7 @@ func Disable():
 	
 func SpawnPart(pos):
 	#Spawn particles
-	var s = sparkParts.instance()
+	var s = sparkParts.instantiate()
 	s.emitting = true
 	get_node("/root/World").add_child(s)
 	s.global_position = pos
@@ -114,7 +112,7 @@ func _on_Bullet_body_entered(body):
 func _on_Bullet_area_entered(area):
 	if area.is_in_group("turtle"):
 		#deflect bullet
-		rotation_degrees += rand_range(140, 210)
+		rotation_degrees += randf_range(140, 210)
 		if !damaged:
 			#print("Damaged by: ", curAtk / 4)
 			area.get_parent().Damage(curAtk / 4)

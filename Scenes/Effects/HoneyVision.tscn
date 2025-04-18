@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/HoneyVision.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Splats/splat00.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Splats/splat12.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Splats/splat10.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Splats/splat05.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Splats/splat00.png" type="Texture2D" id=2]
+[ext_resource path="res://Sprites/Splats/splat12.png" type="Texture2D" id=3]
+[ext_resource path="res://Sprites/Splats/splat10.png" type="Texture2D" id=4]
+[ext_resource path="res://Sprites/Splats/splat05.png" type="Texture2D" id=5]
 [ext_resource path="res://Shaders/HoneyShader.tres" type="Material" id=6]
-[ext_resource path="res://Sprites/Splats/splat16.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Splats/splat02.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Splats/splat16.png" type="Texture2D" id=7]
+[ext_resource path="res://Sprites/Splats/splat02.png" type="Texture2D" id=9]
 
 [node name="HoneyVision" type="Node2D"]
 modulate = Color( 1, 1, 1, 0.49 )
@@ -15,6 +15,6 @@ scale = Vector2( 3, 3 )
 script = ExtResource( 1 )
 sprites = [ ExtResource( 2 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 7 ) ]
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource( 6 )
 texture = ExtResource( 3 )

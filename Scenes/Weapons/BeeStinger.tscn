@@ -1,20 +1,20 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/EnemyScripts/EnemyBullet.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Enemies/Bee_stinger.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Enemies/Bee_stinger.png" type="Texture2D" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3, 6.5 )
 
 [node name="EnemyBullet" type="Area2D"]
-pause_mode = 1
+process_mode = 1
 scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
 atk = 40.0
 spdSlow = 150.0
 spdFast = 300.0
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 2 )
 
@@ -22,10 +22,10 @@ texture = ExtResource( 2 )
 position = Vector2( 0, 0.5 )
 shape = SubResource( 1 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2( 0, 4.76837e-07 )
 scale = Vector2( 0.4, 0.7 )
 
 [connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Bullet_body_exited"]
-[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
+[connection signal="viewport_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

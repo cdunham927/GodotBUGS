@@ -1,7 +1,7 @@
 extends CPUParticles2D
 
-export(float) var colorLerp
-export(Color) var endColor
+@export var colorLerp: float
+@export var endColor: Color
 
 func _process(delta):
 	color = lerp(color, endColor, colorLerp * delta)

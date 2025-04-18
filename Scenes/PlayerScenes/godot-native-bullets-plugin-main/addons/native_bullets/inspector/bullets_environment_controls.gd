@@ -1,4 +1,4 @@
-tool
+@tool
 extends HBoxContainer
 
 
@@ -12,13 +12,13 @@ var icon_data: TextureRect
 
 
 func _ready():
-	icon_collisions = $Icons/CollisionShape
+	icon_collisions = $Icons/CollisionShape3D
 	icon_viewport = $Icons/ViewportAsActive
 	icon_rotating = $Icons/Rotating
 	icon_data = $Icons/Data
 	
 	icon_collisions.texture = editor_theme.get_icon("Area2D", "EditorIcons")
-	icon_viewport.texture = editor_theme.get_icon("ViewportContainer", "EditorIcons")
+	icon_viewport.texture = editor_theme.get_icon("SubViewportContainer", "EditorIcons")
 	icon_rotating.texture = editor_theme.get_icon("ToolRotate", "EditorIcons")
 	icon_data.texture = editor_theme.get_icon("FileList", "EditorIcons")
 	
@@ -37,7 +37,7 @@ func _draw():
 	icon_collisions.visible = not (object.bullet_kits[index] == null or not object.bullet_kits[index].collisions_enabled)
 	icon_viewport.visible = not (object.bullet_kits[index] == null or not object.bullet_kits[index].use_viewport_as_active_rect)
 	icon_rotating.visible = not (object.bullet_kits[index] == null or not object.bullet_kits[index].rotate)
-	icon_data.visible = not (object.bullet_kits[index] == null or object.bullet_kits[index].data.empty())
+	icon_data.visible = not (object.bullet_kits[index] == null or object.bullet_kits[index].data.is_empty())
 
 
 func _on_move_up_pressed():
@@ -52,7 +52,7 @@ func _on_move_up_pressed():
 	object.pools_sizes.insert(index - 1, pool_size)
 	object.z_indices.insert(index - 1, z_index)
 	
-	object.property_list_changed_notify()
+	object.notify_property_list_changed()
 
 
 func _on_move_down_pressed():
@@ -67,7 +67,7 @@ func _on_move_down_pressed():
 	object.pools_sizes.insert(index + 1, pool_size)
 	object.z_indices.insert(index + 1, z_index)
 	
-	object.property_list_changed_notify()
+	object.notify_property_list_changed()
 
 
 func _on_delete_pressed():
@@ -75,4 +75,4 @@ func _on_delete_pressed():
 	object.pools_sizes.remove(index)
 	object.z_indices.remove(index)
 	
-	object.property_list_changed_notify()
+	object.notify_property_list_changed()

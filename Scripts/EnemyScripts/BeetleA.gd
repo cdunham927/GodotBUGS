@@ -1,10 +1,10 @@
 extends "res://Scripts/EnemyScripts/Enemy.gd"
 
-export(int) var numShots = 3
+@export var numShots: int = 3
 
-export var turnSpd : float = 5
+@export var turnSpd : float = 5
 var curTurn : float
-export(PackedScene) var bullet
+@export var bullet: PackedScene
 
 func Animate():
 	if leg != null and legUpd != null:
@@ -35,7 +35,7 @@ func Chase(d):
 		move_and_collide(vec_to_player * spd * d)
 		
 	if chaseCools <= 0:
-		resetChaseCools = rand_range(chaseCooldownSmall, chaseCooldownBig)
+		resetChaseCools = randf_range(chaseCooldownSmall, chaseCooldownBig)
 		ChangeState(States.idle)
 		#chaseCools = rand_range(walkTimeSmall, walkTimeBig)
 		
@@ -47,9 +47,9 @@ func Chase(d):
 		
 func Idle(d):
 	if resetChaseCools <= 0:
-		curTurn = rand_range(-turnSpd, turnSpd)
+		curTurn = randf_range(-turnSpd, turnSpd)
 		#print("Resetting chase timer")
-		chaseCools = rand_range(walkTimeSmall, walkTimeBig)
+		chaseCools = randf_range(walkTimeSmall, walkTimeBig)
 		ChangeState(States.chase)
 		
 	if resetChaseCools > 0:
@@ -61,11 +61,11 @@ func Idle(d):
 func Attack():
 	for i in range(numShots):
 		Shoot()
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+	attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 
 func Shoot():
-	var b = bullet.instance()
-	b.start(global_position, global_rotation, accuracy)
+	var b = bullet.instantiate()
+	b.start(Callable(global_position, global_rotation).bind(accuracy))
 	b.atk = atk
 	get_tree().current_scene.add_child(b)
 	b.show()

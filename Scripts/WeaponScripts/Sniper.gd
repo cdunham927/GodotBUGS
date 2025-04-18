@@ -1,9 +1,21 @@
 extends "res://Scripts/PlayerScripts/WeaponController.gd"
 
+func _ready():
+	playerParent = get_parent().get_parent().get_parent().get_parent()
+	snd = load("res://Audio/SFX/" + soundName + ".wav")
+	snd3 = load("res://Audio/SFX/" + squirt + ".wav")
+	if self.is_visible_in_tree():
+		Activate()
+
 func Shoot():
-	var b = bullet.instance()
+	if leftWeapon:
+		play_sound(snd, true, soundL, soundL2)
+	else:
+		play_sound(snd, true, soundR, soundR2)
+		
+	var b = bullet.instantiate()
 	get_node("/root/World").add_child(b)
-	b.start($Muzzle.global_position, $Muzzle.global_rotation, accuracy)
+	b.start(Callable($Muzzle.global_position, $Muzzle.global_rotation).bind(accuracy))
 	ShowFlash()
 	#b.Setup()
 	#world.add_child(b)

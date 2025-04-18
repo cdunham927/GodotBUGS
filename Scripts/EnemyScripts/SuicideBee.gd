@@ -1,50 +1,50 @@
 extends "res://Scripts/EnemyScripts/Enemy.gd"
 
-export(PackedScene) var explosion
-export(PackedScene) var honeySplat
-export(PackedScene) var smallerSplats
-export(int) var extraSplats = 4
+@export var explosion: PackedScene
+@export var honeySplat: PackedScene
+@export var smallerSplats: PackedScene
+@export var extraSplats: int = 4
 var extras
 
-export var turnSpd : float = 5
+@export var turnSpd : float = 5
 var curTurn : float
 var canShoot : bool = true
 
 #Ranged attack stuff
-export(PackedScene) var honeyBullet
-export(int) var numShots = 3
-export var farthestRangedDistance : float = 250
-export var closestRangedDistance : float = 250
+@export var honeyBullet: PackedScene
+@export var numShots: int = 3
+@export var farthestRangedDistance : float = 250
+@export var closestRangedDistance : float = 250
 var curDistance : float = 0
 var midpoint : float
-export var rangedCoolsSmall : float = 1
-export var rangedCoolsBig : float = 1
+@export var rangedCoolsSmall : float = 1
+@export var rangedCoolsBig : float = 1
 
-export(float) var sideSpeed = 1.0
-export(float) var sideVariability = 1.0
+@export var sideSpeed: float = 1.0
+@export var sideVariability: float = 1.0
 var curSpd
-export(float) var dashTime = 1.0
+@export var dashTime: float = 1.0
 var actualDashTime : float = 0.0
-export(float) var dashTimeVariability = 1.0
-export(float) var waitTimeLow = 0.5
-export(float) var waitTimeHigh = 1.0
+@export var dashTimeVariability: float = 1.0
+@export var waitTimeLow: float = 0.5
+@export var waitTimeHigh: float = 1.0
 var dir : float
 var dir2 : float
 var dashCools : float
 
 func _ready():
 	var dif = farthestRangedDistance - closestRangedDistance
-	midpoint = closestRangedDistance + rand_range(0, dif)
+	midpoint = closestRangedDistance + randf_range(0, dif)
 
 func Animate():
 	pass
 	
 func Attack():
 	#Spawn honey
-	var h = honeySplat.instance()
+	var h = honeySplat.instantiate()
 	get_tree().current_scene.add_child(h)
 	h.global_position = global_position
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+	attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 	
 func Idle(d):
 	if canShoot:
@@ -55,8 +55,8 @@ func Idle(d):
 		resetChaseCools -= d
 		
 	if resetChaseCools <= 0:
-		curTurn = rand_range(-turnSpd, turnSpd)
-		chaseCools = rand_range(walkTimeSmall, walkTimeBig)
+		curTurn = randf_range(-turnSpd, turnSpd)
+		chaseCools = randf_range(walkTimeSmall, walkTimeBig)
 		ChangeState(States.patrol)
 	
 		
@@ -93,11 +93,11 @@ func Chase(d):
 func RangedAttack():
 	for i in range(numShots):
 		Shoot()
-	attackCools = rand_range(rangedCoolsSmall, rangedCoolsBig)
+	attackCools = randf_range(rangedCoolsSmall, rangedCoolsBig)
 	
 func Shoot():
-	var b = honeyBullet.instance()
-	b.start(global_position, global_rotation + PI, accuracy)
+	var b = honeyBullet.instantiate()
+	b.start(Callable(global_position, global_rotation + PI).bind(accuracy))
 	b.atk = atk
 	get_tree().current_scene.add_child(b)
 
@@ -106,7 +106,7 @@ func Patrol(d):
 	move_and_collide(-global_transform.y * spd * d)
 		
 	if chaseCools <= 0:
-		resetChaseCools = rand_range(chaseCooldownSmall, chaseCooldownBig)
+		resetChaseCools = randf_range(chaseCooldownSmall, chaseCooldownBig)
 		canShoot = true
 		ChangeState(States.idle)
 		
@@ -115,19 +115,19 @@ func Patrol(d):
 
 func Explode():
 	#Spawn explosion
-	var e = explosion.instance()
+	var e = explosion.instantiate()
 	get_tree().current_scene.add_child(e)
 	e.global_position = global_position
 	
 	#Spawn honey
-	var h = honeySplat.instance()
+	var h = honeySplat.instantiate()
 	get_tree().current_scene.add_child(h)
 	h.global_position = global_position
 	
 	#Spawn extra honey
 	extras = (randi() % extraSplats) + 1
 	for i in extras:
-		var ex = smallerSplats.instance()
+		var ex = smallerSplats.instantiate()
 		get_tree().current_scene.add_child(ex)
 		ex.global_position = global_position
 	
@@ -140,17 +140,17 @@ func _on_Timer_timeout():
 		dir2 = -1
 		
 	var dif = farthestRangedDistance - closestRangedDistance
-	midpoint = closestRangedDistance + rand_range(0, dif)
+	midpoint = closestRangedDistance + randf_range(0, dif)
 	
 	if dir > 0.5:
 		dir = -1
 	else:
 		dir = 1
 		
-	curSpd = sideSpeed + rand_range(0, sideVariability)
-	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
+	curSpd = sideSpeed + randf_range(0, sideVariability)
+	actualDashTime = dashTime + randf_range(0, dashTimeVariability)
 	
-	$Timer.wait_time = rand_range(waitTimeLow, waitTimeHigh)
+	$Timer.wait_time = randf_range(waitTimeLow, waitTimeHigh)
 
 
 func _on_WalkTimer_timeout():

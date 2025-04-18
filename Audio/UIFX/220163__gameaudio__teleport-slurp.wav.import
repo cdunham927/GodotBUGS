@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220163__gameaudio__teleport-slurp.wav-ce4c40e7777a3b49051e7069c523a700.sample"
+type="AudioStreamWAV"
+uid="uid://bfqktavit2th4"
+path="res://.godot/imported/220163__gameaudio__teleport-slurp.wav-ce4c40e7777a3b49051e7069c523a700.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220163__gameaudio__teleport-slurp.wav"
-dest_files=[ "res://.import/220163__gameaudio__teleport-slurp.wav-ce4c40e7777a3b49051e7069c523a700.sample" ]
+dest_files=["res://.godot/imported/220163__gameaudio__teleport-slurp.wav-ce4c40e7777a3b49051e7069c523a700.sample"]
 
 [params]
 

@@ -1,19 +1,65 @@
 extends CanvasLayer
 
 #onready var menu = load("res://menu.tscn").instance()
-onready var world = load("res://Scenes/Levels/Overworld.tscn")
-onready var antLevel = load("res://Scenes/Levels/MainLevels/AntLevel.tscn")
-onready var beetleLevel = load("res://Scenes/Levels/MainLevels/BeetleLevel.tscn")
-onready var beeLevel = load("res://Scenes/Levels/MainLevels/BeeLevel.tscn")
-onready var spiderLevel = load("res://Scenes/Levels/MainLevels/SpiderLevel.tscn")
+@onready var world = load("res://Scenes/Levels/Overworld.tscn")
+@onready var antLevel = load("res://Scenes/Levels/MainLevels/AntLevel.tscn")
+@onready var beetleLevel = load("res://Scenes/Levels/MainLevels/BeetleLevel.tscn")
+@onready var beeLevel = load("res://Scenes/Levels/MainLevels/BeeLevel.tscn")
+@onready var spiderLevel = load("res://Scenes/Levels/MainLevels/SpiderLevel.tscn")
 
 var menuSwitch = preload("res://Audio/UIFX/220168__gameaudio__button-spacey-confirm.wav")
 var click = preload("res://Audio/UIFX/220175__gameaudio__pop-click.wav")
-export var canPlay : bool = false
+@export var canPlay : bool = false
+
+@export var finishedAnt: bool
+@export var finishedBee: bool
+@export var finishedBeetle: bool
+@export var finishedSpider: bool
+
+var savePath = "user://savegame.dat"
+@onready var par = get_node("/root/World/PauseRoot")
+
+@onready var antText = $MenuParent/HBoxContainer/BG2/MenuOptions/ContinueButton
+@onready var beeText = $MenuParent/HBoxContainer/BG2/MenuOptions/OptionsButton
+@onready var beetleText = $MenuParent/HBoxContainer/BG2/MenuOptions/NewGameButton
+@onready var spiderText = $MenuParent/HBoxContainer/BG2/MenuOptions/QuitButton
+@onready var antFinishText = $MenuParent/HBoxContainer/BG2/MenuOptions/ContinueButton/RichTextLabel
+@onready var beeFinishText = $MenuParent/HBoxContainer/BG2/MenuOptions/OptionsButton/RichTextLabel3
+@onready var beetleFinishText = $MenuParent/HBoxContainer/BG2/MenuOptions/NewGameButton/RichTextLabel2
+@onready var spiderFinishText = $MenuParent/HBoxContainer/BG2/MenuOptions/QuitButton/RichTextLabel4
+
+var curLevel = 0
+
+func ShowProgress():
+	if finishedAnt:
+		antText.text = ""
+		antFinishText.show()
+	else:
+		antText.text = "Ants"
+		antFinishText.hide()
+	if finishedBeetle:
+		beetleText.text = ""
+		beetleFinishText.show()
+	else:
+		beetleText.text = "Beetles"
+		beetleFinishText.hide()
+	if finishedBee:
+		beeText.text = ""
+		beeFinishText.show()
+	else:
+		beeText.text = "Bees"
+		beeFinishText.hide()
+	if finishedSpider:
+		spiderText.text = ""
+		spiderFinishText.show()
+	else:
+		spiderText.text = "Spiders"
+		spiderFinishText.hide()
 
 func _on_ContinueButton_pressed():
 	#Ant Level
-	var game = antLevel.instance()
+	var game = antLevel.instantiate()
+	curLevel = 0
 	get_tree().get_root().add_child(game)
 	#queue_free()
 	hide()
@@ -22,38 +68,37 @@ func _on_ContinueButton_pressed():
 
 func _on_NewGameButton_pressed():
 	#Beetle Level
-	var game = beetleLevel.instance()
+	var game = beetleLevel.instantiate()
+	curLevel = 1
 	get_tree().get_root().add_child(game)
-	queue_free()
-	
-	
+	hide()
 	play_sound(click, true)
 
 func _on_OptionsButton_pressed():
 	#Bee Level
-	var game = beeLevel.instance()
+	var game = beeLevel.instantiate()
+	curLevel = 2
 	get_tree().get_root().add_child(game)
-	queue_free()
-	
-	
+	hide()
 	play_sound(click, true)
 
 func _on_QuitButton_pressed():
 	#Spider Level
-	var game = spiderLevel.instance()
+	var game = spiderLevel.instantiate()
+	curLevel = 3
 	get_tree().get_root().add_child(game)
-	get_parent().save_game()
+	#get_parent().save_game()
+	hide()
 	play_sound(click, true)
-	queue_free()
 	
-export(float) var pitchLow = 0.8
-export(float) var pitchHigh = 1.3
+@export var pitchLow: float = 0.8
+@export var pitchHigh: float = 1.3
 func play_sound(snd, pitched = false):
 	if !canPlay:
 		canPlay = true
 		return
 	if pitched:
-		$MenuParent/AudioStreamPlayer.pitch_scale = rand_range(pitchLow, pitchHigh)
+		$MenuParent/AudioStreamPlayer.pitch_scale = randf_range(pitchLow, pitchHigh)
 	$MenuParent/AudioStreamPlayer.stream = snd
 	$MenuParent/AudioStreamPlayer.play()
 
@@ -69,69 +114,61 @@ func _on_OptionsButton_focus_entered():
 func _on_QuitButton_focus_entered():
 	play_sound(menuSwitch, true)
 
-# Note: This can be called from anywhere inside the tree. This function is
-# path independent.
-# Go through everything in the persist category and ask them to return a
-# dict of relevant variables.
+func _ready():
+	load_game()
+	ShowProgress()
+
 func save_game():
-	var save_game = File.new()
-	save_game.open("res://savegame.data", File.WRITE)
-	var save_nodes = get_tree().get_nodes_in_group("Persist")
-	for node in save_nodes:
-		# Check the node is an instanced scene so it can be instanced again during load.
-		if node.filename.empty():
-			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
-			continue
-
-		# Check the node has a save function.
-		if !node.has_method("save"):
-			print("persistent node '%s' is missing a save() function, skipped" % node.name)
-			continue
-
-		# Call the node's save function.
-		var node_data = node.call("save")
-
-		# Store the save dictionary as a new line in the save file.
-		save_game.store_line(to_json(node_data))
-	save_game.close()
+	var data = {
+		"finishedAnt" : finishedAnt,
+		"finishedBee" : finishedBee,
+		"finishedBeetle" : finishedBeetle,
+		"finishedSpider" : finishedSpider,
+	}
 	
-# Note: This can be called from anywhere inside the tree. This function
-# is path independent.
+	var save_game = File.new()
+	var error = save_game.open(savePath, File.WRITE)
+	if error == OK:
+		save_game.store_var(data)
+		
+		#print(save_game)
+		
+		save_game.close()
+		
+
+func delete_game():
+	var data = {
+		"finishedAnt" : false,
+		"finishedBee" : false,
+		"finishedBeetle" : false,
+		"finishedSpider" : false,
+	}
+	finishedAnt = false
+	finishedBee = false
+	finishedBeetle = false
+	finishedSpider = false
+	
+	var save_game = File.new()
+	var error = save_game.open(savePath, File.WRITE)
+	if error == OK:
+		save_game.store_var(data)
+		
+		print(save_game)
+		
+		save_game.close()
+
 func load_game():
 	var save_game = File.new()
-	if not save_game.file_exists("res://savegame.data"):
-		print("No save found from menu")
-		return # Error! We don't have a save to load.
-
-	# We need to revert the game state so we're not cloning objects
-	# during loading. This will vary wildly depending on the needs of a
-	# project, so take care with this step.
-	# For our example, we will accomplish this by deleting saveable objects.
-	var save_nodes = get_tree().get_nodes_in_group("Persist")
-	for i in save_nodes:
-		i.queue_free()
-
-	# Load the file line by line and process that dictionary to restore
-	# the object it represents.
-	save_game.open("res://savegame.data", File.READ)
-	while save_game.get_position() < save_game.get_len():
-		# Get the saved dictionary from the next line in the save file
-		var node_data = parse_json(save_game.get_line())
-
-		# Firstly, we need to create the object and add it to the tree and set its position.
-		var new_object = load(node_data["filename"]).instance()
-		get_node(node_data["parent"]).add_child(new_object)
-		#new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
-
-		# Now we set the remaining variables.
-		for i in node_data.keys():
-			if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
-				continue
-			new_object.set(i, node_data[i])
-
-	save_game.close()
-
-
-func _on_Timer_timeout():
-	#load_game()
-	pass
+	if save_game.file_exists(savePath):
+		var error = save_game.open(savePath, File.READ)
+		if error == OK:
+			var player_data = save_game.get_var()
+			
+			finishedAnt = player_data["finishedAnt"]
+			finishedBee = player_data["finishedBee"]
+			finishedBeetle = player_data["finishedBeetle"]
+			finishedSpider = player_data["finishedSpider"]
+		
+			#par.LoadSettings(self)
+			
+			save_game.close()

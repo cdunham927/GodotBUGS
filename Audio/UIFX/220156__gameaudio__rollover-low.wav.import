@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220156__gameaudio__rollover-low.wav-c293739d24fd7ee905837364e37f5347.sample"
+type="AudioStreamWAV"
+uid="uid://bc01mb5wgjxue"
+path="res://.godot/imported/220156__gameaudio__rollover-low.wav-c293739d24fd7ee905837364e37f5347.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220156__gameaudio__rollover-low.wav"
-dest_files=[ "res://.import/220156__gameaudio__rollover-low.wav-c293739d24fd7ee905837364e37f5347.sample" ]
+dest_files=["res://.godot/imported/220156__gameaudio__rollover-low.wav-c293739d24fd7ee905837364e37f5347.sample"]
 
 [params]
 

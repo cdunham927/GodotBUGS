@@ -1,6 +1,6 @@
 extends PathFollow2D
 
-export var runSpd = 20
+@export var runSpd = 20
 var player
 var active : bool = false
 var parentWaypoint
@@ -16,7 +16,7 @@ func _process(delta):
 	if player != null and active:
 		set_offset(get_offset() + runSpd * delta)
 		
-		if unit_offset == 1:
+		if progress_ratio == 1:
 			parentWaypoint.moving = false
 			#parentWaypoint.currentWaypoint = null
 			active = false

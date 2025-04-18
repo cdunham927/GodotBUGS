@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220171__gameaudio__flourish-spacey-1.wav-fd4699ede720949b9fa19fa6640a1964.sample"
+type="AudioStreamWAV"
+uid="uid://c13ufcyvtoeya"
+path="res://.godot/imported/220171__gameaudio__flourish-spacey-1.wav-fd4699ede720949b9fa19fa6640a1964.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220171__gameaudio__flourish-spacey-1.wav"
-dest_files=[ "res://.import/220171__gameaudio__flourish-spacey-1.wav-fd4699ede720949b9fa19fa6640a1964.sample" ]
+dest_files=["res://.godot/imported/220171__gameaudio__flourish-spacey-1.wav-fd4699ede720949b9fa19fa6640a1964.sample"]
 
 [params]
 

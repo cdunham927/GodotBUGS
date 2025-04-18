@@ -1,15 +1,15 @@
-extends Position2D
+extends Marker2D
 
 const MIN_DIST = 25
-onready var joint1 = $Joint1
-onready var joint2 = $Joint1/Joint2
-onready var hand = $Joint1/Joint2/Hand
+@onready var joint1 = $Joint1
+@onready var joint2 = $Joint1/Joint2
+@onready var hand = $Joint1/Joint2/Hand
 
 var len_upper = 0
 var len_middle = 0
 var len_lower = 0
 
-export var flipped = true
+@export var flipped = true
 
 var goal_pos = Vector2()
 var int_pos = Vector2()
@@ -25,9 +25,9 @@ func _ready():
 	len_lower = hand.position.x
 
 	if flipped:
-		$Sprite.flip_h = true
-		joint1.get_node("Sprite").flip_h = true
-		joint2.get_node("Sprite").flip_h = true
+		$Sprite2D.flip_h = true
+		joint1.get_node("Sprite2D").flip_h = true
+		joint2.get_node("Sprite2D").flip_h = true
 
 func step(g_pos):
 	if goal_pos == g_pos:
@@ -50,9 +50,9 @@ func _process(delta):
 	var target_pos = Vector2()
 	var t = step_time / step_rate
 	if t < 0.5:
-		target_pos = start_pos.linear_interpolate(int_pos, t / 0.5)
+		target_pos = start_pos.lerp(int_pos, t / 0.5)
 	elif t < 1.0:
-		target_pos = int_pos.linear_interpolate(goal_pos, (t - 0.5) / 0.5)
+		target_pos = int_pos.lerp(goal_pos, (t - 0.5) / 0.5)
 	else:
 		target_pos = goal_pos
 	update_ik(target_pos)

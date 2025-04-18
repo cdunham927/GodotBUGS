@@ -1,24 +1,24 @@
 extends "res://Scripts/EnemyScripts/Enemy.gd"
 
-export(PackedScene) var coccoon
-export(PackedScene) var aoeBullet
-export(int) var AOEShots = 3
+@export var coccoon: PackedScene
+@export var aoeBullet: PackedScene
+@export var AOEShots: int = 3
 var dir : int = 1
 #export var turnSpd : float = 5
 var curTurn : float
 var canShoot : bool = true
 
-export var tillWebAOE : int = 2
+@export var tillWebAOE : int = 2
 var curAttacks : int = 0
-export var farthestRangedDistance : float = 250
-export var closestRangedDistance : float = 250
+@export var farthestRangedDistance : float = 250
+@export var closestRangedDistance : float = 250
 var curDistance : float = 0
 var midpoint : float
-export var rangedCoolsSmall : float = 1
-export var rangedCoolsBig : float = 1
-export var shotSep : float = 1
-export var retreatTime : float = 1
-export var retreatCools : float = 1
+@export var rangedCoolsSmall : float = 1
+@export var rangedCoolsBig : float = 1
+@export var shotSep : float = 1
+@export var retreatTime : float = 1
+@export var retreatCools : float = 1
 
 var hasAdded = false
 
@@ -51,7 +51,7 @@ func Idle(d):
 		
 	if resetChaseCools <= 0:
 		#curTurn = rand_range(-turnSpd, turnSpd)
-		chaseCools = rand_range(walkTimeSmall, walkTimeBig)
+		chaseCools = randf_range(walkTimeSmall, walkTimeBig)
 		ChangeState(States.idle)
 		
 func Retreat(d):
@@ -77,22 +77,22 @@ func Chase(d):
 		ChangeState(States.attack)
 
 func SpawnCoccoon():
-	var a = coccoon.instance()
+	var a = coccoon.instantiate()
 	a.global_position = global_position
 	get_tree().current_scene.add_child(a)
-	attackCools = rand_range(rangedCoolsSmall, rangedCoolsBig)
+	attackCools = randf_range(rangedCoolsSmall, rangedCoolsBig)
 	ChangeState(States.chase)
 	
 func SprayWebFront():
 	var ind = shotSep / AOEShots
 	for i in range(AOEShots):
-		var b = aoeBullet.instance()
+		var b = aoeBullet.instantiate()
 		var vec = global_position - player.global_position
 		vec = vec.normalized()
-		b.start(global_position, atan2(vec.y, vec.x) + 89.5 ,  - accuracy + (i * ind))
+		b.start(Callable(global_position, atan2(vec.y, vec.x) + 89.5).bind(- accuracy + (i * ind)))
 		b.atk = atk
 		get_tree().current_scene.add_child(b)
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+	attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 	$RetreatTimer.start()
 	retreatCools = retreatTime
 	ChangeState(States.retreat)

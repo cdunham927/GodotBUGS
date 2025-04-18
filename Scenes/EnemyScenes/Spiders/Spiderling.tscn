@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Animations/Hit.tres" type="Animation" id=1]
-[ext_resource path="res://Sprites/Enemies/Spiderling (1).png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Enemies/Spiderling (1).png" type="Texture2D" id=2]
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=3]
 [ext_resource path="res://Scripts/EnemyScripts/Spiderling.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/EnemyScenes/Legs/AntLeg.tscn" type="PackedScene" id=5]
@@ -13,26 +13,26 @@ extents = Vector2( 2, 5 )
 [sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:material")
+tracks/1/path = NodePath("Sprite2D:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ ExtResource( 3 ) ]
 }
@@ -40,14 +40,14 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=3]
 resource_name = "idle"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:material")
+tracks/0/path = NodePath("Sprite2D:material")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.1 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 3 ) ]
 }
@@ -56,26 +56,26 @@ tracks/0/keys = {
 resource_name = "move"
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 0 ), Vector2( 1, 0 ), Vector2( 2, 0 ), Vector2( 3, 0 ), Vector2( 4, 0 ), Vector2( 5, 0 ), Vector2( 6, 0 ), Vector2( 6, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:material")
+tracks/1/path = NodePath("Sprite2D:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.1 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 3 ) ]
 }
@@ -83,8 +83,8 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=5]
 radius = 357.56
 
-[node name="Spiderling" type="KinematicBody2D" groups=["enemies"]]
-pause_mode = 1
+[node name="Spiderling" type="CharacterBody2D" groups=["enemies"]]
+process_mode = 1
 z_index = 1
 script = ExtResource( 4 )
 maxHp = 100.0
@@ -98,14 +98,14 @@ dashTimeVariability = 0.075
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource( 3 )
 scale = Vector2( 0.038, 0.038 )
 texture = ExtResource( 2 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( 0, -50 )
+target_position = Vector2( 0, -50 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Hit = ExtResource( 1 )
@@ -161,28 +161,28 @@ position = Vector2( -8, 12 )
 visible = false
 scale = Vector2( 0.25, 0.25 )
 
-[node name="LegUpd" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( 26, -22 )
 
-[node name="LegUpd2" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd2" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( 26, -2 )
 
-[node name="LegUpd3" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd3" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( 26, 10 )
 
-[node name="LegUpd4" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd4" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( 26, 22 )
 
-[node name="LegUpd5" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd5" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( -22, -22 )
 
-[node name="LegUpd6" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd6" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( -22, -2 )
 
-[node name="LegUpd7" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd7" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( -22, 10 )
 
-[node name="LegUpd8" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd8" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( -22, 22 )
 
 [node name="Timer" type="Timer" parent="."]
@@ -191,6 +191,9 @@ autostart = true
 
 [node name="WalkTimer" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="Stream" type="AudioStreamPlayer2D" parent="."]
+volume_db = -8.75
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

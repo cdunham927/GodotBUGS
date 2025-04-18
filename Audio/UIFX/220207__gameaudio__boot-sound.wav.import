@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220207__gameaudio__boot-sound.wav-c9e877a85530c6337bc5c026f2927709.sample"
+type="AudioStreamWAV"
+uid="uid://b18wn20f7kq2x"
+path="res://.godot/imported/220207__gameaudio__boot-sound.wav-c9e877a85530c6337bc5c026f2927709.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220207__gameaudio__boot-sound.wav"
-dest_files=[ "res://.import/220207__gameaudio__boot-sound.wav-c9e877a85530c6337bc5c026f2927709.sample" ]
+dest_files=["res://.godot/imported/220207__gameaudio__boot-sound.wav-c9e877a85530c6337bc5c026f2927709.sample"]
 
 [params]
 

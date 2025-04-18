@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220187__gameaudio__loosedeny-casual-1.wav-fbcfc5c801f56637efff354ffbebfa88.sample"
+type="AudioStreamWAV"
+uid="uid://b7x7knhtcfc3s"
+path="res://.godot/imported/220187__gameaudio__loosedeny-casual-1.wav-fbcfc5c801f56637efff354ffbebfa88.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220187__gameaudio__loosedeny-casual-1.wav"
-dest_files=[ "res://.import/220187__gameaudio__loosedeny-casual-1.wav-fbcfc5c801f56637efff354ffbebfa88.sample" ]
+dest_files=["res://.godot/imported/220187__gameaudio__loosedeny-casual-1.wav-fbcfc5c801f56637efff354ffbebfa88.sample"]
 
 [params]
 

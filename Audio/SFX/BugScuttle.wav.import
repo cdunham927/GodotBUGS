@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/BugScuttle.wav-2b16608009e0f4606c3cccf4812a70a8.sample"
+type="AudioStreamWAV"
+uid="uid://bukuwersg3plp"
+path="res://.godot/imported/BugScuttle.wav-2b16608009e0f4606c3cccf4812a70a8.sample"
 
 [deps]
 
 source_file="res://Audio/SFX/BugScuttle.wav"
-dest_files=[ "res://.import/BugScuttle.wav-2b16608009e0f4606c3cccf4812a70a8.sample" ]
+dest_files=["res://.godot/imported/BugScuttle.wav-2b16608009e0f4606c3cccf4812a70a8.sample"]
 
 [params]
 

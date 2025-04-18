@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220176__gameaudio__confirm-click-spacey.wav-ce9ec6362a3f8c8b8f59cc3dce5487f5.sample"
+type="AudioStreamWAV"
+uid="uid://d2qt6t1k7no1o"
+path="res://.godot/imported/220176__gameaudio__confirm-click-spacey.wav-ce9ec6362a3f8c8b8f59cc3dce5487f5.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220176__gameaudio__confirm-click-spacey.wav"
-dest_files=[ "res://.import/220176__gameaudio__confirm-click-spacey.wav-ce9ec6362a3f8c8b8f59cc3dce5487f5.sample" ]
+dest_files=["res://.godot/imported/220176__gameaudio__confirm-click-spacey.wav-ce9ec6362a3f8c8b8f59cc3dce5487f5.sample"]
 
 [params]
 

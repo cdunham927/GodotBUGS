@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220162__gameaudio__teleport-high.wav-cb2416e76a289c3ee22c63544373730b.sample"
+type="AudioStreamWAV"
+uid="uid://3vk6oo0q0mqi"
+path="res://.godot/imported/220162__gameaudio__teleport-high.wav-cb2416e76a289c3ee22c63544373730b.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220162__gameaudio__teleport-high.wav"
-dest_files=[ "res://.import/220162__gameaudio__teleport-high.wav-cb2416e76a289c3ee22c63544373730b.sample" ]
+dest_files=["res://.godot/imported/220162__gameaudio__teleport-high.wav-cb2416e76a289c3ee22c63544373730b.sample"]
 
 [params]
 

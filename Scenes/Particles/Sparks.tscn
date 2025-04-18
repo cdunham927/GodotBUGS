@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Stun.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Particles/star_07.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Particles/star_07.png" type="Texture2D" id=2]
 
 [sub_resource type="Curve" id=2]
 min_value = -200.0
@@ -41,9 +41,14 @@ scale_amount_random = 0.05
 scale_amount_curve = SubResource( 1 )
 color = Color( 1, 1, 0, 1 )
 script = ExtResource( 1 )
+soundName = "MetalImpact"
+pitchLow = 0.8
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.225
 autostart = true
+
+[node name="Stream" type="AudioStreamPlayer2D" parent="."]
+volume_db = -1.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

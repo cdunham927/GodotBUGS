@@ -1,9 +1,9 @@
 extends "res://Scripts/EnemyScripts/Enemy.gd"
 
-export(PackedScene) var fireBlob
-export(int) var numShots = 3
+@export var fireBlob: PackedScene
+@export var numShots: int = 3
 var dir : int = 1
-export var turnSpd : float = 5
+@export var turnSpd : float = 5
 var curTurn : float
 var canShoot : bool = true
 	
@@ -24,7 +24,7 @@ func Chase(d):
 		#move_and_collide(-global_transform.y * spd * d)
 		
 		if chaseCools <= 0:
-			resetChaseCools = rand_range(chaseCooldownSmall, chaseCooldownBig)
+			resetChaseCools = randf_range(chaseCooldownSmall, chaseCooldownBig)
 			canShoot = true
 			ChangeState(States.idle)
 		
@@ -68,7 +68,7 @@ func Patrol(d):
 		#move_and_collide(-global_transform.y * spd * d)
 		
 		if chaseCools <= 0:
-			resetChaseCools = rand_range(chaseCooldownSmall, chaseCooldownBig)
+			resetChaseCools = randf_range(chaseCooldownSmall, chaseCooldownBig)
 			canShoot = true
 			ChangeState(States.idle)
 		
@@ -86,13 +86,13 @@ func Idle(d):
 			resetChaseCools -= d
 		
 		if resetChaseCools <= 0:
-			curTurn = rand_range(-turnSpd, turnSpd)
-			chaseCools = rand_range(walkTimeSmall, walkTimeBig)
+			curTurn = randf_range(-turnSpd, turnSpd)
+			chaseCools = randf_range(walkTimeSmall, walkTimeBig)
 			ChangeState(States.patrol)
 
 func Attack():
 	Shoot()
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+	attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 
 func Shoot():
 	#Aim vaguely towards the player
@@ -100,8 +100,8 @@ func Shoot():
 	vec_to_player = vec_to_player.normalized()
 	var rot = atan2(vec_to_player.y, vec_to_player.x) + 89.5
 	
-	var b = fireBlob.instance()
-	b.start(global_position, rot, accuracy)
+	var b = fireBlob.instantiate()
+	b.start(Callable(global_position, rot).bind(accuracy))
 	b.atk = atk
 	get_tree().current_scene.add_child(b)
 

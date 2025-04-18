@@ -1,7 +1,7 @@
 extends Node2D
 
-export(float) var maxDeg
-export(float) var rotSpd
+@export var maxDeg: float
+@export var rotSpd: float
 var left : bool = false
 
 #Rotate

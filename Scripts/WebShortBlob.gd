@@ -1,40 +1,40 @@
 extends Area2D
 
-export(float) var hp = 1.0
-export(float) var atk = 1.0
+@export var hp: float = 1.0
+@export var atk: float = 1.0
 var lowDmgLimit : float
-export(float) var lowDmgPercent
-export(bool) var damageFalloff = false
-export(bool) var speedFalloff = false
-export(float) var falloffAmt = 3.0
+@export var lowDmgPercent: float
+@export var damageFalloff: bool = false
+@export var speedFalloff: bool = false
+@export var falloffAmt: float = 3.0
 var curAtk : float
 var speed = 75.0
 var startSpd = 75.0
-export var spdSlow : float = 50
-export var spdFast : float = 100
-export(float) var speedupRate = 5.0
-export(float) var slowdownRate = 5.0
+@export var spdSlow : float = 50
+@export var spdFast : float = 100
+@export var speedupRate: float = 5.0
+@export var slowdownRate: float = 5.0
 var desiredSpd : float
 
 var damaged = false
 
-export(float) var knockback
+@export var knockback: float
 
-export(bool) var shrink = false
-export(float) var shrinkRate = 5.0
-export(float) var scaledRate = 5.0
-export(float) var scaledRate2 = 5.0
+@export var shrink: bool = false
+@export var shrinkRate: float = 5.0
+@export var scaledRate: float = 5.0
+@export var scaledRate2: float = 5.0
 var startScale
 
-onready var timer = $Timer
+@onready var timer = $Timer
 
-export var hitString = ""
-export var spawnsObj =  false
-export(PackedScene) var objToSpawn
-export var spawnsSecondObj =  false
-export(PackedScene) var secondObj
+@export var hitString = ""
+@export var spawnsObj =  false
+@export var objToSpawn: PackedScene
+@export var spawnsSecondObj =  false
+@export var secondObj: PackedScene
 
-export var dedDir : bool = true
+@export var dedDir : bool = true
 
 #var velocity = Vector2()
 
@@ -46,7 +46,7 @@ func _ready():
 	
 func start(pos, dir, acc):
 	damaged = false
-	desiredSpd = rand_range(spdSlow, spdFast)
+	desiredSpd = randf_range(spdSlow, spdFast)
 	rotation = dir
 	if dedDir:
 		rotation_degrees = acc
@@ -59,7 +59,7 @@ func _physics_process(delta):
 	position += transform.y * desiredSpd * delta
 
 func RandomizeSpeed():
-	startSpd = rand_range(spdSlow, spdFast)
+	startSpd = randf_range(spdSlow, spdFast)
 	speed = startSpd
 	
 #func _on_VisibilityNotifier2D_viewport_exited(viewport):
@@ -83,12 +83,12 @@ func _on_Bullet_body_entered(body):
 			Disable()
 
 func SpawnObj():
-	var o = objToSpawn.instance()
+	var o = objToSpawn.instantiate()
 	o.global_position = global_position
 	get_tree().current_scene.add_child(o)
 
 func SpawnSecondObj():
-	var o = secondObj.instance()
+	var o = secondObj.instantiate()
 	o.global_position = global_position
 	get_tree().current_scene.add_child(o)
 

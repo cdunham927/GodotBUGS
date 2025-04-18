@@ -3,44 +3,46 @@ extends Node2D
 #enum weapons { gatlinggun, flamethrower, teslacannon, revolver, canonball, shotgun }
 #export var state = weapons[0]
 var playerParent
-export(String) var weaponName = "" 
-export(PackedScene) var bullet
+@export var weaponName: String = "" 
+@export var bullet: PackedScene
 
-export(float) var timeBetweenShots = 0.2
+@export var timeBetweenShots: float = 0.2
 var curShotTime : float = 0
-onready var flash = $Flash
+@onready var flash = $Flash
 var flashTimer : float = 0
 var shooting : bool = false
 
-onready var mech = get_parent().get_parent()
-export(bool) var leftWeapon = false
-onready var overheatUI = get_node("/root/World/UI/EquippedWeaponLeftActualBichPls")
-onready var overheatUI2 = get_node("/root/World/UI/EquippedWeaponRightActualBichPls")
+@onready var mech = get_parent().get_parent()
+@export var leftWeapon: bool = false
+@onready var overheatUI = get_node("/root/World/UI/EquippedWeaponLeftActualBichPls")
+@onready var overheatUI2 = get_node("/root/World/UI/EquippedWeaponRightActualBichPls")
 #export(float) var overheatTotal = 25.0
-export(float) var incAmt = 0.5
+@export var incAmt: float = 0.5
 
-export(float) var lerpSpd = 15.0
+@export var lerpSpd: float = 15.0
 
-export(float) var tilNotShootingMin = 0.25
+@export var tilNotShootingMin: float = 0.25
 
-export(float) var accuracy
+@export var accuracy: float
 
 var active := false
 
-onready var soundL = get_node("/root/World/Player/Node2D/MechBody/WeaponsLSounds")
-onready var soundR = get_node("/root/World/Player/Node2D/MechBody/WeaponsRSounds")
-export(String) var soundName = "minigun2"
+@onready var soundL = get_node("/root/World/Player/Node2D/MechBody/WeaponsLSounds")
+@onready var soundL2 = get_node("/root/World/Player/Node2D/MechBody/WeaponsLSounds2")
+@onready var soundR = get_node("/root/World/Player/Node2D/MechBody/WeaponsRSounds")
+@onready var soundR2 = get_node("/root/World/Player/Node2D/MechBody/WeaponsRSounds2")
+@export var soundName: String = "minigun"
 #export(String) var overheatSnd = "SteamOverheat"
-export(String) var squirt = "Squirt"
+@export var squirt: String = "Squirt"
 var snd
 #var snd2
 var snd3
 var playedOverheat : bool = false
 
 #Honey sprites
-onready var honeyL = get_node("/root/World/Player/Node2D/MechBody/HoneyL")
-onready var honeyR = get_node("/root/World/Player/Node2D/MechBody/HoneyR")
-export(float) var honeyRed = 20.0
+@onready var honeyL = get_node("/root/World/Player/Node2D/MechBody/HoneyL")
+@onready var honeyR = get_node("/root/World/Player/Node2D/MechBody/HoneyR")
+@export var honeyRed: float = 20.0
 
 func _ready():
 	playerParent = get_parent().get_parent().get_parent().get_parent()
@@ -129,24 +131,32 @@ func Shoot():
 	
 func ShootHoney():
 	if leftWeapon:
-		play_sound(snd3, true, soundL)
+		play_sound(snd3, true, soundL, soundL2)
 	else:
-		play_sound(snd3, true, soundR)
+		play_sound(snd3, true, soundR, soundR2)
 	curShotTime = timeBetweenShots
 	playerParent.HoneyShot(flash.global_position, honeyRed)
 
 func ShowFlash():
-	flash.rotation_degrees = rand_range(0, 360)
+	flash.rotation_degrees = randf_range(0, 360)
 	flash.show()
 	flashTimer = 0.05
 	
-export(float) var pitchLow = 0.8
-export(float) var pitchHigh = 1.3
-func play_sound(s = snd, pitched = false, player = soundL):
+@export var pitchLow: float = 0.8
+@export var pitchHigh: float = 1.3
+func play_sound(s = snd, pitched = false, player = soundL, player2 = soundL2):
 	#if !canPlay:
 	#	canPlay = true
 	#	return
-	if pitched:
-		player.pitch_scale = rand_range(pitchLow, pitchHigh)
-	player.stream = s
-	player.play()
+	if !player.is_playing():
+		if pitched:
+			player.pitch_scale = randf_range(pitchLow, pitchHigh)
+		else:
+			player.pitch_scale = 1.0
+		player.stream = s
+		player.play()
+	else:
+		if pitched:
+			player2.pitch_scale = randf_range(pitchLow, pitchHigh)
+		player2.stream = s
+		player2.play()

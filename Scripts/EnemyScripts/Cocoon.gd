@@ -1,26 +1,26 @@
 extends Area2D
 
-export(float) var maxHp = 250
+@export var maxHp: float = 250
 var hp = 250
  
 var player = null
 var inSight : bool = false
 
-export(int) var spawnAmount = 5
+@export var spawnAmount: int = 5
  
-export var enemy: PackedScene
+@export var enemy: PackedScene
 
 var hasSpawned = false
-onready var anim = $AnimationPlayer
+@onready var anim = $AnimationPlayer
 var blood = load("res://Scenes/Particles/Blood.tscn")
 	
-onready var src = get_node("/root/World/EnemySrc")
-export(String) var soundName = "Splat"
+@onready var src = get_node("/root/World/EnemySrc")
+@export var soundName: String = "Splat"
 var snd
 
 var hasAdded = false
 
-export(bool) var paused = false
+@export var paused: bool = false
 
 func _ready():
 	snd = load("res://Audio/SFX/" + soundName + ".mp3")
@@ -82,7 +82,7 @@ func _process(delta):
 	pass
 	
 func SpawnEnemy():
-	var e = enemy.instance()
+	var e = enemy.instantiate()
 	e.Setup()
 	get_tree().current_scene.add_child(e)
 	e.global_position = global_position
@@ -99,14 +99,14 @@ func SpawnBlood():
 	#blood_instance.emitting = true
 	pass
 	
-export(float) var pitchLow = 0.8
-export(float) var pitchHigh = 1.3
+@export var pitchLow: float = 0.8
+@export var pitchHigh: float = 1.3
 func play_sound(s = snd, pitched = false):
 	#if !canPlay:
 	#	canPlay = true
 	#	return
 	if pitched:
-		src.pitch_scale = rand_range(pitchLow, pitchHigh)
+		src.pitch_scale = randf_range(pitchLow, pitchHigh)
 	src.stream = s
 	src.play()
 
@@ -125,12 +125,12 @@ func spawn_and_kill():
 	#SpawnBlood()
 	if !hasSpawned:
 		for i in spawnAmount:
-			var e = enemy.instance()
+			var e = enemy.instantiate()
 			e.fromCocoon = true
 			e.Setup()
 			get_node("/root/World").add_child(e)
-			var randX = rand_range(-2, 2)
-			var randY = rand_range(-2, 2)
+			var randX = randf_range(-2, 2)
+			var randY = randf_range(-2, 2)
 			e.global_position = global_position + Vector2(randX, randY)
 			hasSpawned = true
 			

@@ -1,13 +1,13 @@
 extends "res://Scripts/EnemyScripts/Enemy.gd"
 
-export(float) var sideSpeed = 1.0
-export(float) var sideVariability = 1.0
+@export var sideSpeed: float = 1.0
+@export var sideVariability: float = 1.0
 var curSpd
-export(float) var dashTime = 1.0
+@export var dashTime: float = 1.0
 var actualDashTime
-export(float) var dashTimeVariability = 1.0
-export(float) var waitTimeLow = 0.5
-export(float) var waitTimeHigh = 1.0
+@export var dashTimeVariability: float = 1.0
+@export var waitTimeLow: float = 0.5
+@export var waitTimeHigh: float = 1.0
 var dir : float
 var dashCools : float
 
@@ -52,21 +52,21 @@ func Setup():
 	if (anim != null):
 		anim.play("idle", 1, 2)
 	
-	rotation_degrees = rand_range(0, 360)
+	rotation_degrees = randf_range(0, 360)
 	
-	chaseCools = rand_range(walkTimeSmall, walkTimeBig)
-	resetChaseCools = rand_range(chaseCooldownSmall, chaseCooldownBig)
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+	chaseCools = randf_range(walkTimeSmall, walkTimeBig)
+	resetChaseCools = randf_range(chaseCooldownSmall, chaseCooldownBig)
+	attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
  
 	SetNumSpiders()
 
 func _ready():
 	Setup()
-	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
-	curSpd = sideSpeed + rand_range(0, sideVariability)
+	actualDashTime = dashTime + randf_range(0, dashTimeVariability)
+	curSpd = sideSpeed + randf_range(0, sideVariability)
 	randomize()
 	
-	var x = rand_range(0, 1)
+	var x = randf_range(0, 1)
 	if x > 0.5:
 		dir = 1
 	else:
@@ -142,10 +142,10 @@ func _on_Timer_timeout():
 	else:
 		dir = 1
 		
-	curSpd = sideSpeed + rand_range(0, sideVariability)
-	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
+	curSpd = sideSpeed + randf_range(0, sideVariability)
+	actualDashTime = dashTime + randf_range(0, dashTimeVariability)
 	
-	$Timer.wait_time = rand_range(waitTimeLow, waitTimeHigh)
+	$Timer.wait_time = randf_range(waitTimeLow, waitTimeHigh)
 
 
 func kill():

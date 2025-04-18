@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220185__gameaudio__space-drill.wav-10dfdde93b653c47092c8b3bddadaa40.sample"
+type="AudioStreamWAV"
+uid="uid://by4xsr1pp4ei7"
+path="res://.godot/imported/220185__gameaudio__space-drill.wav-10dfdde93b653c47092c8b3bddadaa40.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220185__gameaudio__space-drill.wav"
-dest_files=[ "res://.import/220185__gameaudio__space-drill.wav-10dfdde93b653c47092c8b3bddadaa40.sample" ]
+dest_files=["res://.godot/imported/220185__gameaudio__space-drill.wav-10dfdde93b653c47092c8b3bddadaa40.sample"]
 
 [params]
 

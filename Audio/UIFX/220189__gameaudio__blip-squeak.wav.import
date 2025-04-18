@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220189__gameaudio__blip-squeak.wav-789e222ec1736e98307e3b5385a338a6.sample"
+type="AudioStreamWAV"
+uid="uid://tl08yxwu0nkt"
+path="res://.godot/imported/220189__gameaudio__blip-squeak.wav-789e222ec1736e98307e3b5385a338a6.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220189__gameaudio__blip-squeak.wav"
-dest_files=[ "res://.import/220189__gameaudio__blip-squeak.wav-789e222ec1736e98307e3b5385a338a6.sample" ]
+dest_files=["res://.godot/imported/220189__gameaudio__blip-squeak.wav-789e222ec1736e98307e3b5385a338a6.sample"]
 
 [params]
 

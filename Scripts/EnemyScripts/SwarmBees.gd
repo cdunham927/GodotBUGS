@@ -1,11 +1,11 @@
 extends "res://Scripts/EnemyScripts/Enemy.gd"
 
-export(float) var spdIncrease = 50.0
+@export var spdIncrease: float = 50.0
 
 func _ready():
 	Setup()
 	
-	hp = $SpriteParent/Sprite/LilBeeBich.maxHp * $SpriteParent.get_child_count()
+	hp = $SpriteParent/Sprite2D/LilBeeBich.maxHp * $SpriteParent.get_child_count()
 
 func Animate():
 	pass

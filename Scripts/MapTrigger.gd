@@ -1,7 +1,7 @@
 extends Node2D
 
 var hasActivated = false
-export(NodePath) var nextArea
+@export var nextArea: NodePath
 #export(NodePath) var previousArea
 #export(Array, NodePath) var walls := []
 var next

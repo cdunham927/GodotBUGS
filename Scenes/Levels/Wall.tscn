@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Sprites/Etc/WallWhite.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Etc/WallWhite.png" type="Texture2D" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24.5, 24.5 )
@@ -15,6 +15,6 @@ shape = SubResource( 1 )
 disabled = true
 one_way_collision = true
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )

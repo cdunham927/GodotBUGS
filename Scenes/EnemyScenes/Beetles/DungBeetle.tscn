@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/EnemyScenes/Legs/BeetleBLeg.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Animations/Hit.tres" type="Animation" id=5]
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=6]
-[ext_resource path="res://Sprites/Enemies/Round_Beetle_2NoLegs.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Enemies/Round_Beetle_2NoLegs.png" type="Texture2D" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 19.5 )
@@ -14,26 +14,26 @@ extents = Vector2( 20, 19.5 )
 [sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:material")
+tracks/1/path = NodePath("Sprite2D:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ ExtResource( 6 ) ]
 }
@@ -44,8 +44,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ ExtResource( 6 ) ]
 }
@@ -53,14 +53,14 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=3]
 resource_name = "idle"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:material")
+tracks/0/path = NodePath("Sprite2D:material")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.1 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 6 ) ]
 }
@@ -71,8 +71,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 6 ) ]
 }
@@ -81,26 +81,26 @@ tracks/1/keys = {
 resource_name = "move"
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 0 ), Vector2( 1, 0 ), Vector2( 2, 0 ), Vector2( 3, 0 ), Vector2( 4, 0 ), Vector2( 5, 0 ), Vector2( 6, 0 ), Vector2( 6, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:material")
+tracks/1/path = NodePath("Sprite2D:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.1 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 6 ) ]
 }
@@ -108,8 +108,8 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=5]
 radius = 357.56
 
-[node name="DungBeetle" type="KinematicBody2D" groups=["enemies"]]
-pause_mode = 1
+[node name="DungBeetle" type="CharacterBody2D" groups=["enemies"]]
+process_mode = 1
 z_index = 1
 script = ExtResource( 2 )
 maxHp = 350.0
@@ -126,7 +126,7 @@ bullet = ExtResource( 1 )
 position = Vector2( 0, -0.5 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource( 6 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 7 )
@@ -165,16 +165,16 @@ flipped = false
 
 [node name="LegUpdaters" type="Node2D" parent="."]
 
-[node name="LegUpd" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( 18, -22 )
 
-[node name="LegUpd2" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd2" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( -22, 36 )
 
-[node name="LegUpd3" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd3" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( -18, -22 )
 
-[node name="LegUpd4" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd4" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( 18, 36 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220169__gameaudio__spacey-cricket-click.wav-51b710ea593f613c0859cb1c577fffd6.sample"
+type="AudioStreamWAV"
+uid="uid://cewcoqegn2sai"
+path="res://.godot/imported/220169__gameaudio__spacey-cricket-click.wav-51b710ea593f613c0859cb1c577fffd6.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220169__gameaudio__spacey-cricket-click.wav"
-dest_files=[ "res://.import/220169__gameaudio__spacey-cricket-click.wav-51b710ea593f613c0859cb1c577fffd6.sample" ]
+dest_files=["res://.godot/imported/220169__gameaudio__spacey-cricket-click.wav-51b710ea593f613c0859cb1c577fffd6.sample"]
 
 [params]
 

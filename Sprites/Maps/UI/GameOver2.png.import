@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://rvyma1wjhvh4"
+path="res://.godot/imported/GameOver2.png-36faf6052c21fae37fc1ed94daa95f09.image"
+
+[deps]
+
+source_file="res://Sprites/Maps/UI/GameOver2.png"
+dest_files=["res://.godot/imported/GameOver2.png-36faf6052c21fae37fc1ed94daa95f09.image"]
+
+[params]
+

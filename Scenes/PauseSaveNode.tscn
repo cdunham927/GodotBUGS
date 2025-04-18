@@ -5,3 +5,6 @@
 
 [node name="PauseSaveNode" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+masterVol = 0.5
+soundVol = 0.5
+musicVol = 0.5

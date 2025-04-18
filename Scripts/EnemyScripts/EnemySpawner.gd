@@ -1,30 +1,30 @@
 extends Area2D
 
-export(float) var hp = 4
+@export var hp: float = 4
  
 #onready var anim = $AnimationPlayer
  
 var player = null
 var inSight : bool = false
 
-export var maxToSpawn : int = 1
-export(float) var spawnTimeLow
-export(float) var spawnTimeBig
+@export var maxToSpawn : int = 1
+@export var spawnTimeLow: float
+@export var spawnTimeBig: float
 var curSpawns : float
  
 #Stuff for projectile enemies
-export var enemy: PackedScene
+@export var enemy: PackedScene
 #export var poolName = ""
 #onready var bulletPool = get_node("/root/World/" + poolName)
 #onready var world = get_node("/root/World")
 #export(float) var accuracy
 
-export(bool) var paused = false
-export var spawnsOnDeath = false
+@export var paused: bool = false
+@export var spawnsOnDeath = false
 var hasSpawned = false
-export var deathEnemy: PackedScene
+@export var deathEnemy: PackedScene
 
-onready var anim = $AnimationPlayer
+@onready var anim = $AnimationPlayer
 
 var blood = load("res://Scenes/Particles/Blood.tscn")
 	
@@ -48,7 +48,7 @@ func _process(delta):
 			curSpawns -= delta
 		
 		if curSpawns <= 0:
-			curSpawns = rand_range(spawnTimeLow, spawnTimeBig)
+			curSpawns = randf_range(spawnTimeLow, spawnTimeBig)
 		
 			var toSpawnNow = (randi() % maxToSpawn)
 			for i in toSpawnNow:
@@ -78,7 +78,7 @@ func BloodSpray():
 	pass
 	
 func SpawnEnemy():
-	var e = enemy.instance()
+	var e = enemy.instantiate()
 	e.Setup()
 	get_tree().current_scene.add_child(e)
 	e.global_position = global_position
@@ -94,7 +94,7 @@ func SpawnBlood():
 func kill():
 	#SpawnBlood()
 	if spawnsOnDeath and !hasSpawned:
-		var e = deathEnemy.instance()
+		var e = deathEnemy.instantiate()
 		e.Setup()
 		get_tree().current_scene.add_child(e)
 		e.global_position = global_position

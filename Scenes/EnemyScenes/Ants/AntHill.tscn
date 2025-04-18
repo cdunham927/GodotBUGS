@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Themes/HpTheme.tres" type="StyleBox" id=1]
 [ext_resource path="res://Scripts/EnemyScripts/AntHill.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/Splats/splat12.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Enemies/Legs/Ant/Ant_Hill.png" type="Texture2D" id=3]
 
 [sub_resource type="CircleShape2D" id=6]
 radius = 111.253
@@ -14,12 +14,12 @@ radius = 357.56
 bg_color = Color( 0, 0, 0, 1 )
 
 [node name="AntHill" type="Area2D" groups=["enemies"]]
-pause_mode = 1
+process_mode = 1
 position = Vector2( 526, 262 )
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.427451, 0.219608, 0.219608, 0.952941 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2( 5, 5 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -35,16 +35,16 @@ shape = SubResource( 5 )
 wait_time = 5.0
 
 [node name="UIHolder" type="Control" parent="."]
-margin_left = -69.0
-margin_top = -162.0
-margin_right = -29.0
-margin_bottom = -122.0
+offset_left = -69.0
+offset_top = -162.0
+offset_right = -29.0
+offset_bottom = -122.0
 
 [node name="HP" type="ProgressBar" parent="UIHolder"]
-margin_right = 150.0
-margin_bottom = 14.0
-custom_styles/fg = ExtResource( 1 )
-custom_styles/bg = SubResource( 7 )
+offset_right = 150.0
+offset_bottom = 14.0
+theme_override_styles/fg = ExtResource( 1 )
+theme_override_styles/bg = SubResource( 7 )
 max_value = 250.0
 value = 50.0
 percent_visible = false

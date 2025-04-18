@@ -1,21 +1,23 @@
 extends "res://Scripts/EnemyScripts/Enemy.gd"
 
-export(float) var sideSpeed = 1.0
-export(float) var sideVariability = 1.0
+@export var sideSpeed: float = 1.0
+@export var sideVariability: float = 1.0
 var curSpd
-export(float) var dashTime = 1.0
+@export var dashTime: float = 1.0
 var actualDashTime
-export(float) var dashTimeVariability = 1.0
-export(float) var waitTimeLow = 0.5
-export(float) var waitTimeHigh = 1.0
+@export var dashTimeVariability: float = 1.0
+@export var waitTimeLow: float = 0.5
+@export var waitTimeHigh: float = 1.0
 var dir : float
-export var farthestRangedDistance : float = 250
-export var closestRangedDistance : float = 250
+@export var farthestRangedDistance : float = 250
+@export var closestRangedDistance : float = 250
 var midpoint : float
 var curDistance : float = 0
 var dashCools : float
 
 var hasAdded = false
+
+@export var pushSpd: float = 10.0
 
 func _ready():
 	if get_parent().get_parent() != null:
@@ -23,12 +25,14 @@ func _ready():
 	else:
 		get_parent().get_parent().get_parent().numSpiders += 1
 	Setup()
-	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
-	curSpd = sideSpeed + rand_range(0, sideVariability)
+	actualDashTime = dashTime + randf_range(0, dashTimeVariability)
+	curSpd = sideSpeed + randf_range(0, sideVariability)
 	randomize()
 	midpoint = (closestRangedDistance + farthestRangedDistance) / 2
 	
-	var x = rand_range(0, 1)
+	attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+	
+	var x = randf_range(0, 1)
 	if x > 0.5:
 		dir = 1
 	else:
@@ -108,7 +112,6 @@ func Chase(d):
 		#global_rotation = atan2(vec_to_player.y, vec_to_player.x) + 89.5
 		global_rotation = lerp_angle(global_rotation, atan2(vec_to_player.y, vec_to_player.x) + 89.5, lookAtSpd * d)
 		
-		
 		var dis = global_position.distance_to(player.global_position)
 	
 		if dis > midpoint:
@@ -122,13 +125,15 @@ func Chase(d):
 
 func Attack():
 	if attackCools <= 0:
+		#$ExitJumpTimer.start()
+		$TeleportTimer.start()
 		JumpAttack()
-		ChangeState(States.chase)
+		#ChangeState(States.chase)
 
 func JumpAttack():
 	if anim != null:
 		anim.play("Jump", 1, 1)
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+	attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 
 func _on_Timer_timeout():
 	if dir > 0.5:
@@ -136,12 +141,10 @@ func _on_Timer_timeout():
 	else:
 		dir = 1
 		
-	curSpd = sideSpeed + rand_range(0, sideVariability)
-	actualDashTime = dashTime + rand_range(0, dashTimeVariability)
+	curSpd = sideSpeed + randf_range(0, sideVariability)
+	actualDashTime = dashTime + randf_range(0, dashTimeVariability)
 	
-	$Timer.wait_time = rand_range(waitTimeLow, waitTimeHigh)
-
-
+	$Timer.wait_time = randf_range(waitTimeLow, waitTimeHigh)
 
 func kill():
 	play_sound(snd, true)
@@ -153,3 +156,32 @@ func kill():
 		hasAdded = true
 	SpawnBlood()
 	queue_free()
+
+
+func _on_Area2D_body_entered(body):
+	if body.name == "Player":
+		$Area2D.monitoring = false
+		inSight = true
+		ChangeState(States.chase)
+
+func _on_ExitJumpTimer_timeout():
+	#anim.play("idle")
+	ChangeState(States.chase)
+
+func _on_AOEArea_area_entered(area):
+	#print(body.name)
+	if area.name == "Player":
+		print("Hit player area")
+		area.AOEDamage(atk, global_position, pushSpd)
+		$AOEArea.monitoring = false
+
+func _on_AOEArea_body_entered(body):
+	#print(body.name)
+	if body.name == "Player":
+		#print("Hit player body")
+		body.AOEDamage(atk, global_position, pushSpd)
+		$AOEArea.monitoring = false
+
+func _on_TeleportTimer_timeout():
+	global_position = player.global_position
+	#$AOEArea.monitoring = false

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220182__gameaudio__computer-beep-2.wav-5083e59a1ebfaa998677f56c52380341.sample"
+type="AudioStreamWAV"
+uid="uid://q0vaic5lp3ee"
+path="res://.godot/imported/220182__gameaudio__computer-beep-2.wav-5083e59a1ebfaa998677f56c52380341.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220182__gameaudio__computer-beep-2.wav"
-dest_files=[ "res://.import/220182__gameaudio__computer-beep-2.wav-5083e59a1ebfaa998677f56c52380341.sample" ]
+dest_files=["res://.godot/imported/220182__gameaudio__computer-beep-2.wav-5083e59a1ebfaa998677f56c52380341.sample"]
 
 [params]
 

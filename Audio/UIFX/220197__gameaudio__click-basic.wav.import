@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220197__gameaudio__click-basic.wav-731ba48fa3808f4defe1d319f3ff2a8e.sample"
+type="AudioStreamWAV"
+uid="uid://bbojywh688web"
+path="res://.godot/imported/220197__gameaudio__click-basic.wav-731ba48fa3808f4defe1d319f3ff2a8e.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220197__gameaudio__click-basic.wav"
-dest_files=[ "res://.import/220197__gameaudio__click-basic.wav-731ba48fa3808f4defe1d319f3ff2a8e.sample" ]
+dest_files=["res://.godot/imported/220197__gameaudio__click-basic.wav-731ba48fa3808f4defe1d319f3ff2a8e.sample"]
 
 [params]
 

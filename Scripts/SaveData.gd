@@ -2,7 +2,7 @@ extends Node
 
 func save():
 	var save_dict = {
-		"filename" : get_filename(),
+		"filename" : get_scene_file_path(),
 		"parent" : get_parent().get_path(),
 	}
 	return save_dict
@@ -16,7 +16,7 @@ func save_game():
 	var save_nodes = get_tree().get_nodes_in_group("Persist")
 	for i in save_nodes:
 		var node_data = i.call("save");
-		save_game.store_line(to_json(node_data))
+		save_game.store_line(JSON.new().stringify(node_data))
 	save_game.close()
 	
 	
@@ -35,9 +35,11 @@ func load_game():
 	# Load the file line by line and process that dictionary to restore the object it represents
 	save_game.open("user://savegame.save", File.READ)
 	while not save_game.eof_reached():
-		var current_line = parse_json(save_game.get_line())
+		var test_json_conv = JSON.new()
+		test_json_conv.parse(save_game.get_line())
+		var current_line = test_json_conv.get_data()
 		# First we need to create the object and add it to the tree and set its position.
-		var new_object = load(current_line["filename"]).instance()
+		var new_object = load(current_line["filename"]).instantiate()
 		get_node(current_line["parent"]).add_child(new_object)
 		new_object.position = Vector2(current_line["pos_x"], current_line["pos_y"])
 		# Now we set the remaining variables.

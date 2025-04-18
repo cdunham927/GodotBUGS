@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220177__gameaudio__quick-ui-or-event-deep.wav-220fd010136581637863f6c1ee4d2c2b.sample"
+type="AudioStreamWAV"
+uid="uid://d1a5y67nc6m6o"
+path="res://.godot/imported/220177__gameaudio__quick-ui-or-event-deep.wav-220fd010136581637863f6c1ee4d2c2b.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220177__gameaudio__quick-ui-or-event-deep.wav"
-dest_files=[ "res://.import/220177__gameaudio__quick-ui-or-event-deep.wav-220fd010136581637863f6c1ee4d2c2b.sample" ]
+dest_files=["res://.godot/imported/220177__gameaudio__quick-ui-or-event-deep.wav-220fd010136581637863f6c1ee4d2c2b.sample"]
 
 [params]
 

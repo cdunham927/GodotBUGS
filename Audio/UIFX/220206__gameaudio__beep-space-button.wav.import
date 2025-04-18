@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220206__gameaudio__beep-space-button.wav-fe64e8f7e59f290bf37118dd6c0b82c6.sample"
+type="AudioStreamWAV"
+uid="uid://chks68uxohur8"
+path="res://.godot/imported/220206__gameaudio__beep-space-button.wav-fe64e8f7e59f290bf37118dd6c0b82c6.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220206__gameaudio__beep-space-button.wav"
-dest_files=[ "res://.import/220206__gameaudio__beep-space-button.wav-fe64e8f7e59f290bf37118dd6c0b82c6.sample" ]
+dest_files=["res://.godot/imported/220206__gameaudio__beep-space-button.wav-fe64e8f7e59f290bf37118dd6c0b82c6.sample"]
 
 [params]
 

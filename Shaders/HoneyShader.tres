@@ -1,13 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bpb16sa73btrw"]
 
-[ext_resource path="res://Shaders/HoneySplat.gdshader" type="Shader" id=1]
-[ext_resource path="res://Gradients/HoneySplat.tres" type="Gradient" id=2]
+[ext_resource type="Shader" path="res://Shaders/HoneySplat.gdshader" id="1"]
+[ext_resource type="Gradient" path="res://Gradients/HoneySplat.tres" id="2"]
 
-[sub_resource type="GradientTexture" id=1]
-gradient = ExtResource( 2 )
+[sub_resource type="GradientTexture2D" id="1"]
+gradient = ExtResource("2")
 width = 256
 
 [resource]
-shader = ExtResource( 1 )
-shader_param/mix_amount = 1.0
-shader_param/gradient = SubResource( 1 )
+shader = ExtResource("1")
+shader_parameter/mix_amount = 1.0
+shader_parameter/gradient = SubResource("1")

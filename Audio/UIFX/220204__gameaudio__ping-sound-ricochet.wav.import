@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220204__gameaudio__ping-sound-ricochet.wav-3e87c01852de27097b84eb9be29c5c8d.sample"
+type="AudioStreamWAV"
+uid="uid://p1j87au0g5qi"
+path="res://.godot/imported/220204__gameaudio__ping-sound-ricochet.wav-3e87c01852de27097b84eb9be29c5c8d.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220204__gameaudio__ping-sound-ricochet.wav"
-dest_files=[ "res://.import/220204__gameaudio__ping-sound-ricochet.wav-3e87c01852de27097b84eb9be29c5c8d.sample" ]
+dest_files=["res://.godot/imported/220204__gameaudio__ping-sound-ricochet.wav-3e87c01852de27097b84eb9be29c5c8d.sample"]
 
 [params]
 

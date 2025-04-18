@@ -1,11 +1,11 @@
 extends Area2D
 
-export(float) var honeyAmt = 25.0
-export(float) var spd = 50.0
-export var moves : bool = false
+@export var honeyAmt: float = 25.0
+@export var spd: float = 50.0
+@export var moves : bool = false
 
-export var sprites = [ preload("res://Sprites/Splats/splat00.png") ]
-onready var player
+@export var sprites = [ preload("res://Sprites/Splats/splat00.png") ]
+@onready var player
 
 func _ready():
 	player = get_parent().get_parent()
@@ -13,7 +13,7 @@ func _ready():
 	
 func Shuffle():
 	sprites.shuffle()
-	$Sprite.texture = sprites[0]
+	$Sprite2D.texture = sprites[0]
 
 
 func _on_HoneySplat_body_entered(body):

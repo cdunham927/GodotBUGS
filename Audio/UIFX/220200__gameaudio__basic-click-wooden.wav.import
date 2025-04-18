@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220200__gameaudio__basic-click-wooden.wav-87ba54330f3260f9ccc0a29a77689a9f.sample"
+type="AudioStreamWAV"
+uid="uid://cc5v4kdsecd5j"
+path="res://.godot/imported/220200__gameaudio__basic-click-wooden.wav-87ba54330f3260f9ccc0a29a77689a9f.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220200__gameaudio__basic-click-wooden.wav"
-dest_files=[ "res://.import/220200__gameaudio__basic-click-wooden.wav-87ba54330f3260f9ccc0a29a77689a9f.sample" ]
+dest_files=["res://.godot/imported/220200__gameaudio__basic-click-wooden.wav-87ba54330f3260f9ccc0a29a77689a9f.sample"]
 
 [params]
 

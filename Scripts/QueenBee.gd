@@ -1,63 +1,63 @@
 extends "res://Scripts/EnemyScripts/Enemy.gd"
 
-onready var bossUI = get_node("/root/World/BossUI")
-onready var healthbar = get_node("/root/World/BossUI/BossHpBG")
-onready var healthbarBG = get_node("/root/World/BossUI/BossHpBG/BossHpActual")
-export var hpLerp : float = 2
-export var hpBGLerp : float = 7
+@onready var bossUI = get_node("/root/World/BossUI")
+@onready var healthbar = get_node("/root/World/MapPart11/BossUI/BossHpBG")
+@onready var healthbarBG = get_node("/root/World/MapPart11/BossUI/BossHpBG/BossHpActual")
+@export var hpLerp : float = 2
+@export var hpBGLerp : float = 7
 
 #export(PackedScene) var explosion
-export(PackedScene) var honeySplat
-export(PackedScene) var smallerSplats
-export(int) var extraSplats = 4
+@export var honeySplat: PackedScene
+@export var smallerSplats: PackedScene
+@export var extraSplats: int = 4
 var extras
 
-export var turnSpd : float = 5
+@export var turnSpd : float = 5
 var curTurn : float
 var canShoot : bool = true
 
 #Ranged attack stuff
-export(PackedScene) var honeyBullet
-export(int) var numShots = 3
-export(int) var minShots = 3
-export(int) var maxShots = 3
-export var farthestRangedDistance : float = 250
-export var closestRangedDistance : float = 250
+@export var honeyBullet: PackedScene
+@export var numShots: int = 3
+@export var minShots: int = 3
+@export var maxShots: int = 3
+@export var farthestRangedDistance : float = 250
+@export var closestRangedDistance : float = 250
 var curDistance : float = 0
 var midpoint : float
-export var rangedCoolsSmall : float = 1
-export var rangedCoolsBig : float = 1
+@export var rangedCoolsSmall : float = 1
+@export var rangedCoolsBig : float = 1
 
-export(float) var sideSpeed = 1.0
-export(float) var sideVariability = 1.0
+@export var sideSpeed: float = 1.0
+@export var sideVariability: float = 1.0
 var curSpd
-export(float) var dashTime = 1.0
+@export var dashTime: float = 1.0
 var actualDashTime
-export(float) var dashTimeVariability = 1.0
-export(float) var waitTimeLow = 0.5
-export(float) var waitTimeHigh = 1.0
+@export var dashTimeVariability: float = 1.0
+@export var waitTimeLow: float = 0.5
+@export var waitTimeHigh: float = 1.0
 var dir : float
 var dir2 : float
 var dashCools : float
 
 var spinAttackCools : float = 0.0
-export(float) var spinCooldown = 0.75
-export(float) var spinSpd
+@export var spinCooldown: float = 0.75
+@export var spinSpd: float
 
-export(float) var dmgToSpawnEnemy
-export(PackedScene) var wave1
+@export var dmgToSpawnEnemy: float
+@export var wave1: PackedScene
 var waveSpawned1 : bool = false
-export(float) var dmgToSpawnEnemy2
-export(PackedScene) var wave2
+@export var dmgToSpawnEnemy2: float
+@export var wave2: PackedScene
 var waveSpawned2 : bool = false
-export(float) var dmgToSpawnEnemy3
-export(PackedScene) var wave3
+@export var dmgToSpawnEnemy3: float
+@export var wave3: PackedScene
 var waveSpawned3 : bool = false
 
 #Attack variation
-export var numRangedAttacksSmall : int = 2
-export var numRangedAttacksBig : int = 4
-export var curRangedAttacks : int = 2
+@export var numRangedAttacksSmall : int = 2
+@export var numRangedAttacksBig : int = 4
+@export var curRangedAttacks : int = 2
 var curRanged : int = 0
 
 var gc
@@ -65,9 +65,9 @@ var gc
 func _ready():
 	gc = get_parent()
 	
-	if bossUI == null:
-		bossUI = get_node("/root/World2/BossUI")
-		bossUI.show()
+	#if bossUI == null:
+	#	bossUI = get_node("/root/World/BossUI")
+	#	bossUI.show()
 		
 	if healthbar == null:
 		healthbar = get_node("/root/World2/BossUI/BossHpBG/BossHpActual")
@@ -82,7 +82,7 @@ func _ready():
 		healthbarBG.max_value = maxHp
 		
 	var dif = farthestRangedDistance - closestRangedDistance
-	midpoint = closestRangedDistance + rand_range(0, dif)
+	midpoint = closestRangedDistance + randf_range(0, dif)
 	
 	curRangedAttacks = (randi() % (numRangedAttacksBig - numRangedAttacksSmall)) + numRangedAttacksSmall
 	numShots = (randi() % (maxShots - minShots)) + minShots
@@ -103,7 +103,7 @@ func _process(delta):
 		#	$Timer.start()
 		$Timer.start()
 			
-		attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+		attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 		#ChangeState(States.attack)
 		
 	if spinAttackCools > 0 and curStun <= 0:
@@ -118,7 +118,7 @@ func Attack():
 
 	for i in range(numShots):
 		Shoot()
-	attackCools = rand_range(rangedCoolsSmall, rangedCoolsBig)
+	attackCools = randf_range(rangedCoolsSmall, rangedCoolsBig)
 	
 func DoubleAttack():
 	if curRanged < curRangedAttacks:
@@ -134,13 +134,13 @@ func DoubleAttack():
 func HoneyAttack():
 	#Spawn honey
 	for x in $HoneyPositions.get_children():
-		var h = honeySplat.instance()
+		var h = honeySplat.instantiate()
 		get_tree().current_scene.add_child(h)
 		h.global_position = x.global_position
-		var sh = smallerSplats.instance()
+		var sh = smallerSplats.instantiate()
 		get_tree().current_scene.add_child(sh)
 		sh.global_position = x.global_position
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+	attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 	
 func Idle(d):
 	#if canShoot and attackCools <= 0:
@@ -151,8 +151,8 @@ func Idle(d):
 		resetChaseCools -= d
 		
 	if resetChaseCools <= 0:
-		curTurn = rand_range(-turnSpd, turnSpd)
-		chaseCools = rand_range(walkTimeSmall, walkTimeBig)			
+		curTurn = randf_range(-turnSpd, turnSpd)
+		chaseCools = randf_range(walkTimeSmall, walkTimeBig)			
 		ChangeState(States.patrol)
 		
 		
@@ -196,11 +196,11 @@ func Chase(d):
 func RangedAttack():
 	for i in range(numShots):
 		Shoot()
-	attackCools = rand_range(rangedCoolsSmall, rangedCoolsBig)
+	attackCools = randf_range(rangedCoolsSmall, rangedCoolsBig)
 	
 func Shoot():
-	var b = honeyBullet.instance()
-	b.start(global_position, global_rotation + PI, accuracy)
+	var b = honeyBullet.instantiate()
+	b.start(Callable(global_position, global_rotation + PI).bind(accuracy))
 	b.atk = atk
 	get_tree().current_scene.add_child(b)
 
@@ -289,8 +289,8 @@ func Damage(amt):
 func kill():
 	play_sound(snd, true)
 	SpawnBlood()
-	if bossUI == null:
-		bossUI = get_node("/root/World2/BossUI")
+	#if bossUI == null:
+	#	bossUI = get_node("/root/World2/BossUI")
 	bossUI.hide()
 	
 	gc.Victory()
@@ -298,26 +298,26 @@ func kill():
 	queue_free()
 	
 func SpawnWave1():
-	var h = wave1.instance()
+	var h = wave1.instantiate()
 	get_tree().current_scene.add_child(h)
 	h.global_position = global_position
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+	attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 	waveSpawned1 = true
 	
 func SpawnWave2():
 	#Spawn honey
-	var h = wave2.instance()
+	var h = wave2.instantiate()
 	get_tree().current_scene.add_child(h)
 	h.global_position = global_position
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+	attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 	waveSpawned2 = true
 	
 func SpawnWave3():
 	#Spawn honey
-	var h = wave3.instance()
+	var h = wave3.instantiate()
 	get_tree().current_scene.add_child(h)
 	h.global_position = global_position
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+	attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 	waveSpawned3 = true
 
 

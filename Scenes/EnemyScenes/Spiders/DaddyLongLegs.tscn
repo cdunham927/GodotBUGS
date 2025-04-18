@@ -1,39 +1,42 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/DaddyLongLegs.gd" type="Script" id=1]
-[ext_resource path="res://Animations/Hit.tres" type="Animation" id=2]
+[ext_resource path="res://Animations/DaddyIdle.tres" type="Animation" id=2]
 [ext_resource path="res://Materials/NoOutline.tres" type="Material" id=3]
-[ext_resource path="res://Sprites/Enemies/Daddy_Long_Legs.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Enemies/Daddy_Long_Legs.png" type="Texture2D" id=4]
 [ext_resource path="res://Scenes/EnemyScenes/Legs/AntLeg.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Particles/Stun.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Shadow.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Sprites/Etc/Circle.png" type="Texture2D" id=8]
+[ext_resource path="res://Animations/DaddyHit.tres" type="Animation" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9, 14 )
 
 [sub_resource type="Animation" id=6]
 resource_name = "Jump"
+length = 6.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:scale")
+tracks/0/path = NodePath("Sprite2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.1, 0.3, 0.4, 5.2, 5.3, 5.5, 5.6 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.2, 0.2 ), Vector2( 0.6, 0.6 ), Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ) ]
+"values": [ Vector2( 0.2, 0.2 ), Vector2( 0.6, 0.6 ), Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ), Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ), Vector2( 0.6, 0.6 ), Vector2( 0.2, 0.2 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:material")
+tracks/1/path = NodePath("Sprite2D:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 3 ) ]
 }
@@ -44,10 +47,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.3, 1.4, 1.5, 2, 2.1, 5.2, 5.6 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.1, 0.1 ), Vector2( 0.2, 0.2 ) ]
+"values": [ Vector2( 0.2, 0.2 ), Vector2( 0.15, 0.15 ), Vector2( 0.1, 0.1 ), Vector2( 1e-05, 1e-05 ), Vector2( 1e-05, 1e-05 ), Vector2( 0.1, 0.1 ), Vector2( 0.2, 0.2 ), Vector2( 0.2, 0.2 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CollisionShape2D:disabled")
@@ -56,36 +59,84 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.3, 6 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite2D:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PackedFloat32Array( 0, 0.3, 5.3 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), null, ExtResource( 4 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AttackIndicator:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PackedFloat32Array( 0, 2.5, 3, 3.5, 4.1, 4.6, 5.1, 5.6, 6 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.72549, 0.0745098, 0.0745098, 0 ), Color( 0.72549, 0.0745098, 0.0745098, 0 ), Color( 0.72549, 0.0745098, 0.0745098, 1 ), Color( 0.72549, 0.0745098, 0.0745098, 0 ), Color( 0.72549, 0.0745098, 0.0745098, 1 ), Color( 0.72549, 0.0745098, 0.0745098, 0 ), Color( 0.72549, 0.0745098, 0.0745098, 1 ), Color( 0.72549, 0.0745098, 0.0745098, 0 ), Color( 0.72549, 0.0745098, 0.0745098, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AttackIndicator:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PackedFloat32Array( 0, 6 ),
+"transitions": PackedFloat32Array( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AOEArea/AOECollider:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PackedFloat32Array( 0, 5.4, 5.7 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
 }
 
 [sub_resource type="Animation" id=7]
 resource_name = "Land"
 length = 2.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:material")
+tracks/0/path = NodePath("Sprite2D:material")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 3 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:scale")
+tracks/1/path = NodePath("Sprite2D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1.4, 1.5, 1.6, 2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 1.4, 1.5, 1.6, 2 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ), Vector2( 0.6, 0.6 ), Vector2( 0.2, 0.2 ) ]
 }
@@ -96,8 +147,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.4, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 1.4, 2 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0.1, 0.1 ), Vector2( 0.2, 0.2 ), Vector2( 0.2, 0.2 ) ]
 }
@@ -108,8 +159,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 1.6 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ true, false ]
 }
@@ -117,38 +168,38 @@ tracks/3/keys = {
 [sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:material")
+tracks/1/path = NodePath("Sprite2D:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ ExtResource( 3 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:scale")
+tracks/2/path = NodePath("Sprite2D:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector2( 0.2, 0.2 ) ]
 }
@@ -159,8 +210,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector2( 0.1, 0.1 ) ]
 }
@@ -171,90 +222,126 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
-
-[sub_resource type="Animation" id=3]
-resource_name = "idle"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:material")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 3 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite2D:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
-"values": [ Vector2( 0.2, 0.2 ) ]
+"values": [ ExtResource( 4 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AOEArea/AOECollider:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Shadow:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AttackIndicator:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ Color( 0.72549, 0.0745098, 0.0745098, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AttackIndicator:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ) ]
 }
 
 [sub_resource type="Animation" id=4]
 resource_name = "move"
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 0 ), Vector2( 1, 0 ), Vector2( 2, 0 ), Vector2( 3, 0 ), Vector2( 4, 0 ), Vector2( 5, 0 ), Vector2( 6, 0 ), Vector2( 6, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:material")
+tracks/1/path = NodePath("Sprite2D:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.1 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 3 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:scale")
+tracks/2/path = NodePath("Sprite2D:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector2( 0.2, 0.2 ) ]
 }
 
+[sub_resource type="CircleShape2D" id=8]
+radius = 24.4131
+
 [sub_resource type="CircleShape2D" id=5]
 radius = 624.029
 
-[node name="DaddyLongLegs" type="KinematicBody2D" groups=["enemies"]]
-pause_mode = 1
+[node name="DaddyLongLegs" type="CharacterBody2D" groups=["enemies"]]
+process_mode = 1
+scale = Vector2( 2.5, 2.5 )
 z_index = 1
 script = ExtResource( 1 )
 maxHp = 300.0
-timeBetweenAttacksSmall = 1.5
-timeBetweenAttacksBig = 1.6
+timeBetweenAttacksSmall = 9.0
+timeBetweenAttacksBig = 14.0
 chaseCooldownSmall = 1.0
 chaseCooldownBig = 2.0
 walkTimeSmall = 1.0
@@ -262,26 +349,36 @@ walkTimeBig = 2.0
 stunParts = ExtResource( 6 )
 farthestRangedDistance = 350.0
 closestRangedDistance = 450.0
+pushSpd = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource( 3 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 4 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( 0, -50 )
+target_position = Vector2( 0, -50 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Hit = ExtResource( 2 )
+anims/Hit = ExtResource( 9 )
 anims/Jump = SubResource( 6 )
 anims/Land = SubResource( 7 )
 anims/RESET = SubResource( 2 )
-anims/idle = SubResource( 3 )
+anims/idle = ExtResource( 2 )
 anims/move = SubResource( 4 )
+next/Hit = "idle"
+next/Jump = "idle"
+
+[node name="AOEArea" type="Area2D" parent="."]
+scale = Vector2( 1, 1 )
+priority = 1.0
+
+[node name="AOECollider" type="CollisionShape2D" parent="AOEArea"]
+shape = SubResource( 8 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -331,28 +428,28 @@ position = Vector2( -8, 12 )
 visible = false
 scale = Vector2( 0.25, 0.25 )
 
-[node name="LegUpd" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( 26, -22 )
 
-[node name="LegUpd2" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd2" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( 26, -2 )
 
-[node name="LegUpd3" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd3" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( 26, 10 )
 
-[node name="LegUpd4" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd4" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( 26, 22 )
 
-[node name="LegUpd5" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd5" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( -22, -22 )
 
-[node name="LegUpd6" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd6" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( -22, -2 )
 
-[node name="LegUpd7" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd7" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( -22, 10 )
 
-[node name="LegUpd8" type="Position2D" parent="LegUpdaters"]
+[node name="LegUpd8" type="Marker2D" parent="LegUpdaters"]
 position = Vector2( -22, 22 )
 
 [node name="Timer" type="Timer" parent="."]
@@ -363,13 +460,33 @@ autostart = true
 scale = Vector2( 0.1, 0.1 )
 z_index = -1
 
+[node name="AttackIndicator" type="Sprite2D" parent="."]
+modulate = Color( 0.72549, 0.0745098, 0.0745098, 1 )
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 8 )
+
 [node name="WalkTimer" type="Timer" parent="."]
 wait_time = 0.93
 
 [node name="Stream" type="AudioStreamPlayer2D" parent="."]
-volume_db = -7.5
+volume_db = -7.0
 
+[node name="ExitJumpTimer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[node name="TeleportTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="area_entered" from="AOEArea" to="." method="_on_AOEArea_area_entered"]
+[connection signal="body_entered" from="AOEArea" to="." method="_on_AOEArea_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="WalkTimer" to="." method="_on_WalkTimer_timeout"]
+[connection signal="timeout" from="ExitJumpTimer" to="." method="_on_ExitJumpTimer_timeout"]
+[connection signal="timeout" from="TeleportTimer" to="." method="_on_ExitJumpTimer_timeout"]
+[connection signal="timeout" from="TeleportTimer" to="." method="_on_TeleportTimer_timeout"]
+
+[editable path="Shadow"]

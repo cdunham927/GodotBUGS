@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220160__gameaudio__teleport-staticky.wav-ed97b7d0cca149b527851d61236670a7.sample"
+type="AudioStreamWAV"
+uid="uid://71boujffhq3m"
+path="res://.godot/imported/220160__gameaudio__teleport-staticky.wav-ed97b7d0cca149b527851d61236670a7.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220160__gameaudio__teleport-staticky.wav"
-dest_files=[ "res://.import/220160__gameaudio__teleport-staticky.wav-ed97b7d0cca149b527851d61236670a7.sample" ]
+dest_files=["res://.godot/imported/220160__gameaudio__teleport-staticky.wav-ed97b7d0cca149b527851d61236670a7.sample"]
 
 [params]
 

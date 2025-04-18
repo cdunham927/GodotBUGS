@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220211__gameaudio__button-casual-event.wav-bd5bca195f6f9ec030dc90b9111a9e00.sample"
+type="AudioStreamWAV"
+uid="uid://cpbrpqc6quu2t"
+path="res://.godot/imported/220211__gameaudio__button-casual-event.wav-bd5bca195f6f9ec030dc90b9111a9e00.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220211__gameaudio__button-casual-event.wav"
-dest_files=[ "res://.import/220211__gameaudio__button-casual-event.wav-bd5bca195f6f9ec030dc90b9111a9e00.sample" ]
+dest_files=["res://.godot/imported/220211__gameaudio__button-casual-event.wav-bd5bca195f6f9ec030dc90b9111a9e00.sample"]
 
 [params]
 

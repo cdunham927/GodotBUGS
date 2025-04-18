@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Sprites/Weapons/AmmoSprites.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Weapons/AmmoSprites.png" type="Texture2D" id=1]
 [ext_resource path="res://Scripts/WeaponScripts/BulletController.gd" type="Script" id=2]
 
 
@@ -8,14 +8,14 @@
 extents = Vector2( 4, 10 )
 
 [node name="Bullet" type="Area2D"]
-pause_mode = 1
+process_mode = 1
 script = ExtResource( 2 )
 hp = 99.0
 atk = 70.0
 spdSlow = 1450.0
 spdFast = 1750.0
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 35, 3.85, 9.5, 20 )
@@ -23,9 +23,9 @@ region_rect = Rect2( 35, 3.85, 9.5, 20 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 scale = Vector2( 0.5, 0.8 )
 
 [connection signal="body_entered" from="." to="." method="_on_PiercingBullet_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_PiercingBullet_body_exited"]
-[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
+[connection signal="viewport_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220209__gameaudio__teleport-space-morph.wav-417eec71c05325350080e79073629462.sample"
+type="AudioStreamWAV"
+uid="uid://ctipieyttnwku"
+path="res://.godot/imported/220209__gameaudio__teleport-space-morph.wav-417eec71c05325350080e79073629462.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220209__gameaudio__teleport-space-morph.wav"
-dest_files=[ "res://.import/220209__gameaudio__teleport-space-morph.wav-417eec71c05325350080e79073629462.sample" ]
+dest_files=["res://.godot/imported/220209__gameaudio__teleport-space-morph.wav-417eec71c05325350080e79073629462.sample"]
 
 [params]
 

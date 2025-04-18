@@ -7,7 +7,7 @@
 radius = 8.0
 
 [node name="StationaryFire" type="Area2D"]
-pause_mode = 1
+process_mode = 1
 scale = Vector2( 3, 3 )
 script = ExtResource( 3 )
 

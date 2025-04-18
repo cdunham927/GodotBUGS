@@ -1,7 +1,7 @@
 extends "res://Scripts/PlayerScripts/WeaponController.gd"
 
 func Shoot():
-	var b = bullet.instance()
+	var b = bullet.instantiate()
 	b.global_position = $Muzzle.global_position
 	b.rotation = $Muzzle.global_rotation
 	get_node("/root/World").add_child(b)

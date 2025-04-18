@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220165__gameaudio__spacey-teleport-rip-2.wav-16bb01920fd18d0da622f7d646a8c207.sample"
+type="AudioStreamWAV"
+uid="uid://c0n2g0mip3ac4"
+path="res://.godot/imported/220165__gameaudio__spacey-teleport-rip-2.wav-16bb01920fd18d0da622f7d646a8c207.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220165__gameaudio__spacey-teleport-rip-2.wav"
-dest_files=[ "res://.import/220165__gameaudio__spacey-teleport-rip-2.wav-16bb01920fd18d0da622f7d646a8c207.sample" ]
+dest_files=["res://.godot/imported/220165__gameaudio__spacey-teleport-rip-2.wav-16bb01920fd18d0da622f7d646a8c207.sample"]
 
 [params]
 

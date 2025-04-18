@@ -1,24 +1,24 @@
 extends "res://Scripts/EnemyScripts/Enemy.gd"
 
-export(PackedScene) var bullet
-export(PackedScene) var aoeBullet
-export(int) var numShots = 3
-export(int) var AOEShots = 3
+@export var bullet: PackedScene
+@export var aoeBullet: PackedScene
+@export var numShots: int = 3
+@export var AOEShots: int = 3
 var dir : int = 1
 #export var turnSpd : float = 5
 var curTurn : float
 var canShoot : bool = true
 
-export var tillWebAOE : int = 2
+@export var tillWebAOE : int = 2
 var curAttacks : int = 0
-export var farthestRangedDistance : float = 250
-export var closestRangedDistance : float = 250
+@export var farthestRangedDistance : float = 250
+@export var closestRangedDistance : float = 250
 var curDistance : float = 0
 var midpoint : float
-export var rangedCoolsSmall : float = 1
-export var rangedCoolsBig : float = 1
+@export var rangedCoolsSmall : float = 1
+@export var rangedCoolsBig : float = 1
 
-export(float) var accuracy2 = 0.0
+@export var accuracy2: float = 0.0
 
 var hasAdded = false
 
@@ -54,7 +54,7 @@ func Idle(d):
 		
 	if resetChaseCools <= 0:
 		#curTurn = rand_range(-turnSpd, turnSpd)
-		chaseCools = rand_range(walkTimeSmall, walkTimeBig)
+		chaseCools = randf_range(walkTimeSmall, walkTimeBig)
 		ChangeState(States.idle)
 
 func Chase(d):
@@ -70,26 +70,26 @@ func Chase(d):
 		ChangeState(States.attack)
 
 func RangedAttack():
-	var a = bullet.instance()
-	a.start(global_position, global_rotation + PI, -accuracy2)
+	var a = bullet.instantiate()
+	a.start(Callable(global_position, global_rotation + PI).bind(-accuracy2))
 	a.atk = atk
 	get_tree().current_scene.add_child(a)
 	
-	var b = bullet.instance()
-	b.start(global_position, global_rotation + PI, accuracy2)
+	var b = bullet.instantiate()
+	b.start(Callable(global_position, global_rotation + PI).bind(accuracy2))
 	b.atk = atk
 	get_node("/root/World").add_child(b)
 	
-	attackCools = rand_range(rangedCoolsSmall, rangedCoolsBig)
+	attackCools = randf_range(rangedCoolsSmall, rangedCoolsBig)
 	
 func AOEAttack():
-	var randAngle = rand_range(0, 360)
+	var randAngle = randf_range(0, 360)
 	for i in range(AOEShots):
-		var b = aoeBullet.instance()
-		b.start(global_position, global_rotation + PI, (i * accuracy) + randAngle)
+		var b = aoeBullet.instantiate()
+		b.start(Callable(global_position, global_rotation + PI).bind((i * accuracy) + randAngle))
 		b.atk = atk
 		get_tree().current_scene.add_child(b)
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+	attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 
 func Attack():
 	if attackCools <= 0:
@@ -108,8 +108,8 @@ func Attack():
 			curAttacks = 0
 
 func Shoot():
-	var b = bullet.instance()
-	b.start(global_position, global_rotation + PI, accuracy)
+	var b = bullet.instantiate()
+	b.start(Callable(global_position, global_rotation + PI).bind(accuracy))
 	b.atk = atk
 	get_tree().current_scene.add_child(b)
 

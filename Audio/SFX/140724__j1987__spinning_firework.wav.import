@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/140724__j1987__spinning_firework.wav-3f8aa3e18e0de994c5e67e2a01adaac9.sample"
+type="AudioStreamWAV"
+uid="uid://cisnaup3gf05e"
+path="res://.godot/imported/140724__j1987__spinning_firework.wav-3f8aa3e18e0de994c5e67e2a01adaac9.sample"
 
 [deps]
 
 source_file="res://Audio/SFX/140724__j1987__spinning_firework.wav"
-dest_files=[ "res://.import/140724__j1987__spinning_firework.wav-3f8aa3e18e0de994c5e67e2a01adaac9.sample" ]
+dest_files=["res://.godot/imported/140724__j1987__spinning_firework.wav-3f8aa3e18e0de994c5e67e2a01adaac9.sample"]
 
 [params]
 

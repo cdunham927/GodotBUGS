@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220167__gameaudio__button-deny-spacey.wav-96d7f68275a40a0becbab3750026c7c2.sample"
+type="AudioStreamWAV"
+uid="uid://d14ssvq4hlvlx"
+path="res://.godot/imported/220167__gameaudio__button-deny-spacey.wav-96d7f68275a40a0becbab3750026c7c2.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220167__gameaudio__button-deny-spacey.wav"
-dest_files=[ "res://.import/220167__gameaudio__button-deny-spacey.wav-96d7f68275a40a0becbab3750026c7c2.sample" ]
+dest_files=["res://.godot/imported/220167__gameaudio__button-deny-spacey.wav-96d7f68275a40a0becbab3750026c7c2.sample"]
 
 [params]
 

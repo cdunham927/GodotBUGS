@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220184__gameaudio__win-spacey.wav-10f444511d5bf32b7063b40f384883ef.sample"
+type="AudioStreamWAV"
+uid="uid://b74vy54oepcmr"
+path="res://.godot/imported/220184__gameaudio__win-spacey.wav-10f444511d5bf32b7063b40f384883ef.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220184__gameaudio__win-spacey.wav"
-dest_files=[ "res://.import/220184__gameaudio__win-spacey.wav-10f444511d5bf32b7063b40f384883ef.sample" ]
+dest_files=["res://.godot/imported/220184__gameaudio__win-spacey.wav-10f444511d5bf32b7063b40f384883ef.sample"]
 
 [params]
 

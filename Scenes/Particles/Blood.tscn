@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Sprites/Etc/Circle.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Etc/Circle.png" type="Texture2D" id=1]
 [ext_resource path="res://Scripts/ParticleScripts/Blood.gd" type="Script" id=2]
 [ext_resource path="res://Gradients/BloodColorRamp.tres" type="Gradient" id=3]
 
 [node name="Blood" type="CPUParticles2D"]
-pause_mode = 1
+process_mode = 1
 position = Vector2( 336, 184 )
 amount = 28
 lifetime = 0.25

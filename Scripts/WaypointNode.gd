@@ -2,16 +2,16 @@ extends Node2D
 
 var player
 
-onready var leftWaypoint = $Path2DL/PathFollowerL
-onready var rightWaypoint = $Path2DR/PathFollowerR
-onready var upperWaypoint = $Path2DU/PathFollowerU
-onready var lowerWaypoint = $Path2DD/PathFollowerD
+@onready var leftWaypoint = $Path2DL/PathFollowerL
+@onready var rightWaypoint = $Path2DR/PathFollowerR
+@onready var upperWaypoint = $Path2DU/PathFollowerU
+@onready var lowerWaypoint = $Path2DD/PathFollowerD
 
-export var currentWaypoint = false
+@export var currentWaypoint = false
 
-export(PackedScene) var levelToLoad
+@export var levelToLoad: PackedScene
 
-export var moving : bool = false
+@export var moving : bool = false
 
 func _ready():
 	player = get_node("/root/World/OverworldPlayer")
@@ -73,7 +73,7 @@ func _on_Area2D_body_entered(body):
 		currentWaypoint = true
 
 func LoadLevel():
-	var l = levelToLoad.instance()
+	var l = levelToLoad.instantiate()
 	get_node("/root").add_child(l)
 	var w = get_node("/root/World")
 	w.queue_free()

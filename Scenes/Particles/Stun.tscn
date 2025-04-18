@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Sprites/Particles/star_09.png" type="Texture" id=1]
-[ext_resource path="res://Sprites/Particles/twirl_01.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Particles/star_09.png" type="Texture2D" id=1]
+[ext_resource path="res://Sprites/Particles/twirl_01.png" type="Texture2D" id=2]
 [ext_resource path="res://Gradients/StunGradient.tres" type="Gradient" id=3]
 [ext_resource path="res://Scripts/Stun.gd" type="Script" id=4]
 
@@ -41,5 +41,7 @@ color_ramp = ExtResource( 3 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 7.0
 autostart = true
+
+[node name="Stream" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

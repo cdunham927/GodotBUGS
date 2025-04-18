@@ -14,14 +14,14 @@ func _on_Button2_pressed():
 	play_sound(click, true)
 	get_tree().quit()
 
-export(float) var pitchLow = 0.8
-export(float) var pitchHigh = 1.3
+@export var pitchLow: float = 0.8
+@export var pitchHigh: float = 1.3
 func play_sound(snd, pitched = false):
 	if !canPlay:
 		canPlay = true
 		return
 	if pitched:
-		$AudioStreamPlayer.pitch_scale = rand_range(pitchLow, pitchHigh)
+		$AudioStreamPlayer.pitch_scale = randf_range(pitchLow, pitchHigh)
 	$AudioStreamPlayer.stream = snd
 	$AudioStreamPlayer.play()
 

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/MetalSwitch.wav-8eb4566805cf2221ed3f94ec38f9a01a.sample"
+type="AudioStreamWAV"
+uid="uid://urw8yvhmqnv8"
+path="res://.godot/imported/MetalSwitch.wav-8eb4566805cf2221ed3f94ec38f9a01a.sample"
 
 [deps]
 
 source_file="res://Audio/SFX/MetalSwitch.wav"
-dest_files=[ "res://.import/MetalSwitch.wav-8eb4566805cf2221ed3f94ec38f9a01a.sample" ]
+dest_files=["res://.godot/imported/MetalSwitch.wav-8eb4566805cf2221ed3f94ec38f9a01a.sample"]
 
 [params]
 

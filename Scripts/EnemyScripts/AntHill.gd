@@ -1,22 +1,22 @@
 extends Area2D
 
-export(float) var maxHp = 250
+@export var maxHp: float = 250
 var hp
  
 var player = null
 var inSight : bool = false
 
-export(int) var spawnAmount = 5
+@export var spawnAmount: int = 5
  
-export var enemy: PackedScene
+@export var enemy: PackedScene
 
 var hasSpawned = false
-onready var anim = $AnimationPlayer
+@onready var anim = $AnimationPlayer
 var blood = load("res://Scenes/Particles/Blood.tscn")
 
-onready var hpBar = $UIHolder/HP
+@onready var hpBar = $UIHolder/HP
 
-export(float) var lerpSpd = 15.0;
+@export var lerpSpd: float = 15.0;
 	
 func _ready():
 	hp = maxHp
@@ -53,7 +53,7 @@ func Damage(amt):
 		kill()
 	
 func SpawnEnemy():
-	var e = enemy.instance()
+	var e = enemy.instantiate()
 	e.Setup()
 	get_tree().current_scene.add_child(e)
 	e.global_position = global_position

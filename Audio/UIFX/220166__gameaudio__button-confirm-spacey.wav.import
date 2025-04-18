@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220166__gameaudio__button-confirm-spacey.wav-18e1895017997b6d0eea8b8e9c9f07a8.sample"
+type="AudioStreamWAV"
+uid="uid://dgmj8xt0eu55l"
+path="res://.godot/imported/220166__gameaudio__button-confirm-spacey.wav-18e1895017997b6d0eea8b8e9c9f07a8.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220166__gameaudio__button-confirm-spacey.wav"
-dest_files=[ "res://.import/220166__gameaudio__button-confirm-spacey.wav-18e1895017997b6d0eea8b8e9c9f07a8.sample" ]
+dest_files=["res://.godot/imported/220166__gameaudio__button-confirm-spacey.wav-18e1895017997b6d0eea8b8e9c9f07a8.sample"]
 
 [params]
 

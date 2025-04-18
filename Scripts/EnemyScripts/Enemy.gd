@@ -1,13 +1,13 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-export(bool) var paused = false
-export(float) var maxHp = 4
+@export var paused: bool = false
+@export var maxHp: float = 4
 var hp = 4
-export var spd = 200
-export var atk = 5
+@export var spd = 200
+@export var atk = 5
  
-onready var raycast = $RayCast2D
-onready var anim = $AnimationPlayer
+@onready var raycast = $RayCast2D
+@onready var anim = $AnimationPlayer
  
 var player = null
 var inSight : bool = false
@@ -15,22 +15,22 @@ var inSight : bool = false
 enum States { idle, patrol, chase, attack, retreat, death }
 var curState : int = States.idle
 
-export(float) var timeBetweenAttacksSmall
-export(float) var timeBetweenAttacksBig
+@export var timeBetweenAttacksSmall: float
+@export var timeBetweenAttacksBig: float
 var attackCools : float
  
-export(float) var accuracy
+@export var accuracy: float
 
-export(float) var chaseCooldownSmall
-export(float) var chaseCooldownBig
-export(float) var walkTimeSmall
-export(float) var walkTimeBig
+@export var chaseCooldownSmall: float
+@export var chaseCooldownBig: float
+@export var walkTimeSmall: float
+@export var walkTimeBig: float
 var chaseCools : float
 var resetChaseCools : float
 
 #Make the enemies not aim directly at the player(more natural movement?)
-export(float) var aimOffset
-export(float) var aimOffsetTimer
+@export var aimOffset: float
+@export var aimOffsetTimer: float
 var curAimOffsetTimer : float
 var curAimOffset : float
 
@@ -39,33 +39,33 @@ var blood = load("res://Scenes/Particles/Blood.tscn")
 #Current stun time
 var curStun = 0.0
 #How long we're stunned
-export(float) var stunTime = 7.0
+@export var stunTime: float = 7.0
 #How many hits we're at currently
 var stunDur = 0.0
 #How many hits we take before we get stunned
-export(float) var stunThreshold = 3.0
+@export var stunThreshold: float = 3.0
 #Stun particles
-export(PackedScene) var stunParts
+@export var stunParts: PackedScene
 
-export(float) var flashMinDmg = 5.0
+@export var flashMinDmg: float = 5.0
 
 #procedural animation stuff
-onready var leg = $Legs/Leg
-onready var leg2 = $Legs/Leg2
-onready var leg3 = $Legs/Leg3
-onready var leg4 = $Legs/Leg4
-onready var leg5 = $Legs/Leg5
-onready var leg6 = $Legs/Leg6
-onready var leg7 = $Legs/Leg7
-onready var leg8 = $Legs/Leg8
-onready var legUpd = $LegUpdaters/LegUpd
-onready var legUpd2 = $LegUpdaters/LegUpd2
-onready var legUpd3 = $LegUpdaters/LegUpd3
-onready var legUpd4 = $LegUpdaters/LegUpd4
-onready var legUpd5 = $LegUpdaters/LegUpd5
-onready var legUpd6 = $LegUpdaters/LegUpd6
-onready var legUpd7 = $LegUpdaters/LegUpd7
-onready var legUpd8 = $LegUpdaters/LegUpd8
+@onready var leg = $Legs/Leg
+@onready var leg2 = $Legs/Leg2
+@onready var leg3 = $Legs/Leg3
+@onready var leg4 = $Legs/Leg4
+@onready var leg5 = $Legs/Leg5
+@onready var leg6 = $Legs/Leg6
+@onready var leg7 = $Legs/Leg7
+@onready var leg8 = $Legs/Leg8
+@onready var legUpd = $LegUpdaters/LegUpd
+@onready var legUpd2 = $LegUpdaters/LegUpd2
+@onready var legUpd3 = $LegUpdaters/LegUpd3
+@onready var legUpd4 = $LegUpdaters/LegUpd4
+@onready var legUpd5 = $LegUpdaters/LegUpd5
+@onready var legUpd6 = $LegUpdaters/LegUpd6
+@onready var legUpd7 = $LegUpdaters/LegUpd7
+@onready var legUpd8 = $LegUpdaters/LegUpd8
 
 var upd1 : Vector2
 var upd2 : Vector2
@@ -76,23 +76,26 @@ var upd6 : Vector2
 var upd7 : Vector2
 var upd8 : Vector2
 
-export var maxLegDist : float = 2
+@export var maxLegDist : float = 2
 
-export(float) var closestDistance = 10.0
-export(float) var lookAtSpd = 10.0
+@export var closestDistance: float = 10.0
+@export var lookAtSpd: float = 10.0
 
 #Status effects
 var inFire : bool = false
-export(float) var fireDmg = 1.75
+@export var fireDmg: float = 1.75
 
-onready var src = get_node("/root/World/EnemySrc")
-onready var walkSrc = $Stream
-export(String) var soundName = "Splat"
+@onready var src = get_node("/root/World/EnemySrc")
+@onready var walkSrc = $Stream
+@export var soundName: String = "Splat"
 var snd
 
 var walkSnd
-export(String) var walkSoundName = "BugScuttle"
-export var soundNames = [ "BugScuttle",  ]
+@export var walkSoundName: String = "BugScuttle"
+@export var soundNames = [ "BugScuttle",  "BugScuttle2", "BugScuttle3", "BugScuttle4" ]
+@export var dmgSounds = [ "Squish",  "Squish2" ]
+var dmgSndA
+var dmgSndB
 var soundsA
 var soundsB
 var soundsC
@@ -107,6 +110,9 @@ func _ready():
 	soundsB = load("res://Audio/SFX/" + soundNames[1] + ".wav")
 	soundsC = load("res://Audio/SFX/" + soundNames[2] + ".wav")
 	soundsD = load("res://Audio/SFX/" + soundNames[3] + ".wav")
+	
+	dmgSndA = load("res://Audio/SFX/" + dmgSounds[0] + ".wav")
+	dmgSndB = load("res://Audio/SFX/" + dmgSounds[1] + ".wav")
 	
 	walkSnd = load("res://Audio/SFX/" + walkSoundName + ".wav")
 	snd = load("res://Audio/SFX/" + soundName + ".mp3")
@@ -145,11 +151,11 @@ func Setup():
 	if (anim != null):
 		anim.play("idle", 1, 2)
 	
-	rotation_degrees = rand_range(0, 360)
+	rotation_degrees = randf_range(0, 360)
 	
-	chaseCools = rand_range(walkTimeSmall, walkTimeBig)
-	resetChaseCools = rand_range(chaseCooldownSmall, chaseCooldownBig)
-	attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+	chaseCools = randf_range(walkTimeSmall, walkTimeBig)
+	resetChaseCools = randf_range(chaseCooldownSmall, chaseCooldownBig)
+	attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
  
 func _physics_process(delta):
 	if paused:
@@ -166,7 +172,7 @@ func _physics_process(delta):
 		
 	if curAimOffsetTimer <= 0:
 		curAimOffsetTimer = aimOffsetTimer
-		curAimOffset = rand_range(-aimOffset, aimOffset)
+		curAimOffset = randf_range(-aimOffset, aimOffset)
 		
 	if curStun > 0:
 		curStun -= delta
@@ -175,7 +181,7 @@ func _physics_process(delta):
 	if stunDur >= stunThreshold:
 		
 		#Spawn particles
-		var s = stunParts.instance()
+		var s = stunParts.instantiate()
 		s.emitting = true
 		add_child(s)
 		#get_tree().current_scene.add_child(s)
@@ -209,7 +215,7 @@ func _physics_process(delta):
 		var coll = raycast.get_collider()
 		if coll.name == "Player" and player.iframes <= 0 and attackCools <= 0:
 			#print("Hitting player")
-			attackCools = rand_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
+			attackCools = randf_range(timeBetweenAttacksSmall, timeBetweenAttacksBig)
 			coll.Damage(atk, coll.global_position)
 			
 	if inFire:
@@ -253,7 +259,9 @@ func Damage(amt):
 		play_anim("Hit")
 	if curState == States.idle or curState == States.patrol:
 		ChangeState(States.chase)
+		
 	hp -= amt
+	play_random_dmg_sound(true)
 	
 	if hp <= 0:
 		kill()
@@ -267,7 +275,9 @@ func FireDamage():
 		play_anim("Hit")
 	if curState == States.idle or curState == States.patrol:
 		ChangeState(States.chase)
+		
 	hp -= fireDmg
+	play_random_dmg_sound(true)
 	
 	if hp <= 0:
 		kill()
@@ -334,21 +344,21 @@ func _on_Area2D_body_exited(body):
 		ChangeState(States.patrol)
 		inSight = false
 	
-export(float) var pitchLow = 0.6
-export(float) var pitchHigh = 1.5
+@export var pitchLow: float = 0.6
+@export var pitchHigh: float = 1.5
 func play_sound(s = snd, pitched = false, soundSrc = src):
 	#if !canPlay:
 	#	canPlay = true
 	#	return
 	if pitched:
-		soundSrc.pitch_scale = rand_range(pitchLow, pitchHigh)
+		soundSrc.pitch_scale = randf_range(pitchLow, pitchHigh)
 	soundSrc.stream = s
 	soundSrc.play()
 
 func _on_WalkTimer_timeout():
 	playingWalk = false
 
-func play_random_sound(pitched = false, soundSrc = src):
+func play_random_sound(pitched = false, soundSrc = walkSrc):
 	var randSnd = randi() % soundNames.size()
 	#print(randSnd)
 	if randSnd == 0:
@@ -361,5 +371,17 @@ func play_random_sound(pitched = false, soundSrc = src):
 		soundSrc.stream = soundsD
 	
 	if pitched:
-		soundSrc.pitch_scale = rand_range(pitchLow, pitchHigh)
+		soundSrc.pitch_scale = randf_range(pitchLow, pitchHigh)
+	soundSrc.play()
+
+func play_random_dmg_sound(pitched = false, soundSrc = src):
+	var randSnd = randi() % dmgSounds.size()
+	#print(randSnd)
+	if randSnd == 0:
+		soundSrc.stream = dmgSndA
+	else:
+		soundSrc.stream = dmgSndB
+	
+	if pitched:
+		soundSrc.pitch_scale = randf_range(pitchLow, pitchHigh)
 	soundSrc.play()

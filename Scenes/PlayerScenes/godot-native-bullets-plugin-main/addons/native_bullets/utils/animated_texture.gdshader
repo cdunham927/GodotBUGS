@@ -7,7 +7,7 @@ uniform float frame_duration : hint_range(0.001, 16.0) = 0.1;
 uniform int texture_h_frames : hint_range(1, 128) = 1;
 uniform int texture_v_frames : hint_range(1, 128) = 1;
 uniform bool looping = true;
-uniform vec4 modulate : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 modulate : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 
 void vertex() {
 	float h_frames = float(texture_h_frames);

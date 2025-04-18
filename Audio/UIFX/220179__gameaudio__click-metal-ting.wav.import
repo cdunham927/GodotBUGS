@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220179__gameaudio__click-metal-ting.wav-70d74a0b468a8a406698a8704bfbdf36.sample"
+type="AudioStreamWAV"
+uid="uid://beajcvlmi06ar"
+path="res://.godot/imported/220179__gameaudio__click-metal-ting.wav-70d74a0b468a8a406698a8704bfbdf36.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220179__gameaudio__click-metal-ting.wav"
-dest_files=[ "res://.import/220179__gameaudio__click-metal-ting.wav-70d74a0b468a8a406698a8704bfbdf36.sample" ]
+dest_files=["res://.godot/imported/220179__gameaudio__click-metal-ting.wav-70d74a0b468a8a406698a8704bfbdf36.sample"]
 
 [params]
 

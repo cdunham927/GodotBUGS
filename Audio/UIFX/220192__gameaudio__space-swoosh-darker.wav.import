@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/220192__gameaudio__space-swoosh-darker.wav-087b3571fdec9bdaa4b4ff765c5d0d1b.sample"
+type="AudioStreamWAV"
+uid="uid://c0oimyctqcfqw"
+path="res://.godot/imported/220192__gameaudio__space-swoosh-darker.wav-087b3571fdec9bdaa4b4ff765c5d0d1b.sample"
 
 [deps]
 
 source_file="res://Audio/UIFX/220192__gameaudio__space-swoosh-darker.wav"
-dest_files=[ "res://.import/220192__gameaudio__space-swoosh-darker.wav-087b3571fdec9bdaa4b4ff765c5d0d1b.sample" ]
+dest_files=["res://.godot/imported/220192__gameaudio__space-swoosh-darker.wav-087b3571fdec9bdaa4b4ff765c5d0d1b.sample"]
 
 [params]
 

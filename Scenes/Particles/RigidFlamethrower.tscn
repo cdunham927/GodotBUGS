@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/RigidBodyParticles2D/RigidBodyParticles2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Particles/RigidParticle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Particles/RigidFlamethrower.gd" type="Script" id=3]
+
+[node name="RigidFlamethrower" type="Node2D"]
+position = Vector2( 258, 110 )
+script = ExtResource( 3 )
+
+[node name="RigidBodyParticles2D" parent="." instance=ExtResource( 1 )]
+rotation = 1.57079
+amount = 75
+particle_scene = ExtResource( 2 )
+lifetime = 1.5
+lifetime_random = 0.5
+impulse = 400.0
+impulse_random = 0.35
+impulse_angle_degrees = 2.0
+force_random = 1.0
+force_angle_degrees = 90.0
+force_spread_degrees = 90.0
+initial_rotation_degrees = 45.0
